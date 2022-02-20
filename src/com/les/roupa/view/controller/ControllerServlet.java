@@ -12,27 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.les.roupa.view.command.ICommand;
 import com.les.roupa.view.helper.IViewHelper;
-import com.les.roupa.core.dao.impl.ProdutoDAO;
 import com.les.roupa.core.dominio.EntidadeDominio;
-import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.view.command.impl.AlterarCommand;
 import com.les.roupa.view.command.impl.ConsultarCommand;
 import com.les.roupa.view.command.impl.ExcluirCommand;
 import com.les.roupa.view.command.impl.SalvarCommand;
-import com.les.roupa.view.helper.impl.CarrinhoHelper;
-import com.les.roupa.view.helper.impl.CartaoCreditoHelper;
 import com.les.roupa.view.helper.impl.ClienteHelper;
-import com.les.roupa.view.helper.impl.CupomCarrinhoHelper;
-import com.les.roupa.view.helper.impl.CupomHelper;
-import com.les.roupa.view.helper.impl.DetalheProdutoHelper;
 import com.les.roupa.view.helper.impl.EnderecoHelper;
-import com.les.roupa.view.helper.impl.EstoqueHelper;
-import com.les.roupa.view.helper.impl.GraficoAnaliseHelper;
 import com.les.roupa.view.helper.impl.LoginHelper;
-import com.les.roupa.view.helper.impl.PedidoHelper;
-import com.les.roupa.view.helper.impl.PedidoTrocaHelper;
-import com.les.roupa.view.helper.impl.ProdutoHelper;
 
 /**
  * Responsável por processar todas as requisições feita pelo usuario,
@@ -62,17 +50,6 @@ public class ControllerServlet extends HttpServlet {
 		viewHelper.put("/eCommerce_roupa/cadastro", new ClienteHelper());
 		viewHelper.put("/eCommerce_roupa/cadastroEndereco", new EnderecoHelper());
 		viewHelper.put("/eCommerce_roupa/login", new LoginHelper());
-		viewHelper.put("/eCommerce_roupa/cadastroCartao", new CartaoCreditoHelper());
-		viewHelper.put("/eCommerce_roupa/cadastroProduto", new ProdutoHelper());
-		viewHelper.put("/eCommerce_roupa/detalheProduto", new DetalheProdutoHelper());
-		viewHelper.put("/eCommerce_roupa/carrinho", new CarrinhoHelper());
-		viewHelper.put("/eCommerce_roupa/pedido", new PedidoHelper());
-		viewHelper.put("/eCommerce_roupa/itemPedido", new PedidoHelper());
-		viewHelper.put("/eCommerce_roupa/cupom", new CupomHelper());
-		viewHelper.put("/eCommerce_roupa/cupomCarrinho", new CupomCarrinhoHelper());
-		viewHelper.put("/eCommerce_roupa/trocaPedido", new PedidoTrocaHelper());
-		viewHelper.put("/eCommerce_roupa/estoque", new EstoqueHelper());
-		viewHelper.put("/eCommerce_roupa/graficoAnalise", new GraficoAnaliseHelper());
 	}
 	
 	// Servlet Principal do sistema

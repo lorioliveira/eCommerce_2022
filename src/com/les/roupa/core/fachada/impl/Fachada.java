@@ -6,90 +6,34 @@ import java.util.List;
 import java.util.Map;
 
 import com.les.roupa.core.dao.IDAO;
-import com.les.roupa.core.dao.impl.CarrinhoDAO;
-import com.les.roupa.core.dao.impl.CartaoCreditoDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
-import com.les.roupa.core.dao.impl.CupomCarrinhoDAO;
-import com.les.roupa.core.dao.impl.CupomDAO;
-import com.les.roupa.core.dao.impl.EnderecoDAO;
-import com.les.roupa.core.dao.impl.EstoqueDAO;
-import com.les.roupa.core.dao.impl.GraficoAnaliseDAO;
-import com.les.roupa.core.dao.impl.LoginDAO;
-import com.les.roupa.core.dao.impl.PedidoDAO;
-import com.les.roupa.core.dao.impl.PedidoTrocaDAO;
-import com.les.roupa.core.dao.impl.ProdutoDAO;
 import com.les.roupa.core.fachada.IFachada;
-import com.les.roupa.core.dominio.Carrinho;
-import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
-import com.les.roupa.core.dominio.Cupom;
-import com.les.roupa.core.dominio.CupomCarrinho;
-import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
-import com.les.roupa.core.dominio.Estoque;
-import com.les.roupa.core.dominio.GraficoAnalise;
-import com.les.roupa.core.dominio.Pedido;
-import com.les.roupa.core.dominio.PedidoTroca;
-import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
 import com.les.roupa.core.strategy.impl.ValidarCPF_Alt;
-import com.les.roupa.core.strategy.impl.ValidarCVV;
-import com.les.roupa.core.strategy.impl.ValidarCVV_Alt;
-import com.les.roupa.core.strategy.impl.ValidarCategoria;
-import com.les.roupa.core.strategy.impl.ValidarCidade;
-import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
-import com.les.roupa.core.strategy.impl.ValidarDatasGraficoAnalise;
-import com.les.roupa.core.strategy.impl.ValidarDescricao;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
 import com.les.roupa.core.strategy.impl.ValidarEmail;
-import com.les.roupa.core.strategy.impl.ValidarEntradaEstoque;
-import com.les.roupa.core.strategy.impl.ValidarEstado;
-import com.les.roupa.core.strategy.impl.ValidarEstado_Alt;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmail;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmailSenha;
-import com.les.roupa.core.strategy.impl.ValidarFoto;
 import com.les.roupa.core.strategy.impl.ValidarGenero;
 import com.les.roupa.core.strategy.impl.ValidarGenero_Alt;
-import com.les.roupa.core.strategy.impl.ValidarGrupoPrecificacao;
 import com.les.roupa.core.strategy.impl.ValidarNome;
-import com.les.roupa.core.strategy.impl.ValidarNomeCartao;
-import com.les.roupa.core.strategy.impl.ValidarNomeCartao_Alt;
-import com.les.roupa.core.strategy.impl.ValidarNomeProduto;
 import com.les.roupa.core.strategy.impl.ValidarNome_Alt;
-import com.les.roupa.core.strategy.impl.ValidarNumeroCartao;
-import com.les.roupa.core.strategy.impl.ValidarNumeroCartao_Alt;
-import com.les.roupa.core.strategy.impl.ValidarNumero;
-import com.les.roupa.core.strategy.impl.ValidarNumero_Alt;
-import com.les.roupa.core.strategy.impl.ValidarPais;
-import com.les.roupa.core.strategy.impl.ValidarPais_Alt;
-import com.les.roupa.core.strategy.impl.ValidarPrecoCompra;
-import com.les.roupa.core.strategy.impl.ValidarPrecoVenda;
-import com.les.roupa.core.strategy.impl.ValidarQtdeProduto;
-import com.les.roupa.core.strategy.impl.ValidarSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaConfSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaLogin;
 import com.les.roupa.core.strategy.impl.ValidarStatus;
-import com.les.roupa.core.strategy.impl.ValidarStatusProduto;
-import com.les.roupa.core.strategy.IStrategy;
-import com.les.roupa.core.strategy.impl.ValidarBairro;
-import com.les.roupa.core.strategy.impl.ValidarBairro_Alt;
-import com.les.roupa.core.strategy.impl.ValidarBandeiraCartao;
-import com.les.roupa.core.strategy.impl.ValidarCEP;
-import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
-import com.les.roupa.core.strategy.impl.ValidarLogradouro;
-import com.les.roupa.core.strategy.impl.ValidarLogradouro_Alt;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
-import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
-import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
-import com.les.roupa.core.strategy.impl.ValidarValorOperacaoCarrinho;
+import com.les.roupa.core.strategy.IStrategy;
+
 
 /**
- * Classe Fachada
+ * Classe Fachada 
  * @author Lorena Oliveira
 */
 
@@ -118,36 +62,36 @@ public class Fachada implements IFachada {
 	
 	/* ---- ENDERECO -----*/
 	/* ---- Salvar Novo Endereço ---- */
-	ValidarCEP vcep = new ValidarCEP();
-	ValidarLogradouro vLogradouro = new ValidarLogradouro();
-	ValidarNumero vNumero = new ValidarNumero();
-	ValidarBairro vBairro = new ValidarBairro();
-	ValidarCidade vCidade = new ValidarCidade();
-	ValidarEstado vEstado = new ValidarEstado();
-	ValidarPais vPais = new ValidarPais();
-	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
+//	ValidarCEP vcep = new ValidarCEP();
+//	ValidarLogradouro vLogradouro = new ValidarLogradouro();
+//	ValidarNumero vNumero = new ValidarNumero();
+//	ValidarBairro vBairro = new ValidarBairro();
+//	ValidarCidade vCidade = new ValidarCidade();
+//	ValidarEstado vEstado = new ValidarEstado();
+//	ValidarPais vPais = new ValidarPais();
+//	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
 	
 	/* ---- Alterar um Endereço Salvo ------ */
-	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
-	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
-	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
-	ValidarNumero_Alt vNumAlterado = new ValidarNumero_Alt();
-	ValidarCidade_Alt vCidadeAlterado = new ValidarCidade_Alt();
-	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
-	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
-	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
-	
+//	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
+//	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
+//	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
+//	ValidarNumero_Alt vNumAlterado = new ValidarNumero_Alt();
+//	ValidarCidade_Alt vCidadeAlterado = new ValidarCidade_Alt();
+//	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
+//	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
+//	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
+//	
 	
 	/* ---- CARTAO DE CREDITO -----*/
 	/* ----- Salvar Novo Cartão ---- */
-	ValidarNumeroCartao vNumCartao = new ValidarNumeroCartao();
-	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
-	ValidarCVV vCVV = new ValidarCVV();
-	ValidarNomeCartao vNomeCartao = new ValidarNomeCartao();
-	
-	ValidarNomeCartao_Alt vNomeCartaoAlterado = new ValidarNomeCartao_Alt();
-	ValidarCVV_Alt vCVVAlterado = new ValidarCVV_Alt();
-	ValidarNumeroCartao_Alt vNumCartaoAlterado = new ValidarNumeroCartao_Alt();
+//	ValidarNumeroCartao vNumCartao = new ValidarNumeroCartao();
+//	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
+//	ValidarCVV vCVV = new ValidarCVV();
+//	ValidarNomeCartao vNomeCartao = new ValidarNomeCartao();
+//	
+//	ValidarNomeCartao_Alt vNomeCartaoAlterado = new ValidarNomeCartao_Alt();
+//	ValidarCVV_Alt vCVVAlterado = new ValidarCVV_Alt();
+//	ValidarNumeroCartao_Alt vNumCartaoAlterado = new ValidarNumeroCartao_Alt();
 		
 	
 	/* ---- LOGIN -----*/
@@ -156,27 +100,27 @@ public class Fachada implements IFachada {
 	ValidarSenhaLogin vSenhaLogin = new ValidarSenhaLogin();
 	
 	/* ---- PRODUTO -----*/
-	ValidarNomeProduto vNomeProduto = new ValidarNomeProduto();
-	ValidarCategoria vCategoria = new ValidarCategoria();
-	ValidarPrecoCompra vPrecoCompra = new ValidarPrecoCompra();
-	ValidarPrecoVenda vPrecoVenda = new ValidarPrecoVenda();
-	ValidarDtCadastro vDtCadastro = new ValidarDtCadastro();
-	ValidarFoto vFoto = new ValidarFoto();
-	ValidarQtdeProduto vQtde = new ValidarQtdeProduto();
-	ValidarDescricao vDescricao = new ValidarDescricao();
-	ValidarStatusProduto vStatusProduto = new ValidarStatusProduto();
-	ValidarGrupoPrecificacao vGrupoPrecificacao = new ValidarGrupoPrecificacao();	
+//	ValidarNomeProduto vNomeProduto = new ValidarNomeProduto();
+//	ValidarCategoria vCategoria = new ValidarCategoria();
+//	ValidarPrecoCompra vPrecoCompra = new ValidarPrecoCompra();
+//	ValidarPrecoVenda vPrecoVenda = new ValidarPrecoVenda();
+//	ValidarDtCadastro vDtCadastro = new ValidarDtCadastro();
+//	ValidarFoto vFoto = new ValidarFoto();
+//	ValidarQtdeProduto vQtde = new ValidarQtdeProduto();
+//	ValidarDescricao vDescricao = new ValidarDescricao();
+//	ValidarStatusProduto vStatusProduto = new ValidarStatusProduto();
+//	ValidarGrupoPrecificacao vGrupoPrecificacao = new ValidarGrupoPrecificacao();	
 	
 	/* --- CARRINHO --- */
-	ValidarValorOperacaoCarrinho vValorQtdeCarrinho = new ValidarValorOperacaoCarrinho();
+	//ValidarValorOperacaoCarrinho vValorQtdeCarrinho = new ValidarValorOperacaoCarrinho();
 	
 	/* --- ESTOQUE - ENTRADA E SAIDA --- */
-	ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
-	ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
+	//ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
+	//ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
 	
 	
 	/* --- GRAFICO --- */
-	ValidarDatasGraficoAnalise vGrafico = new ValidarDatasGraficoAnalise();
+	//ValidarDatasGraficoAnalise vGrafico = new ValidarDatasGraficoAnalise();
 	
 	/* ------------------------------------------------------------ */
 	
@@ -266,17 +210,17 @@ public class Fachada implements IFachada {
 		// Criando instancias dos DAOS a serem utilizados,
 		// adicionando cada dado no MAP indexado pelo nome da classe
 		daos.put(Cliente.class.getName(), new ClienteDAO());
-		daos.put(Endereco.class.getName(), new EnderecoDAO());
-		daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
-		daos.put(Usuario.class.getName(), new LoginDAO());
-		daos.put(Produto.class.getName(), new ProdutoDAO());
-		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
-		daos.put(Pedido.class.getName(), new PedidoDAO());
-		daos.put(Cupom.class.getName(), new CupomDAO());
-		daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
-		daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
-		daos.put(Estoque.class.getName(), new EstoqueDAO());
-		daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
+		//daos.put(Endereco.class.getName(), new EnderecoDAO());
+		//daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
+		//daos.put(Usuario.class.getName(), new LoginDAO());
+		//daos.put(Produto.class.getName(), new ProdutoDAO());
+		//daos.put(Carrinho.class.getName(), new CarrinhoDAO());
+		//daos.put(Pedido.class.getName(), new PedidoDAO());
+		//daos.put(Cupom.class.getName(), new CupomDAO());
+		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
+		//daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
+		//daos.put(Estoque.class.getName(), new EstoqueDAO());
+		//daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
 		/* ----- Adicionando as Strategy's na lista do Cliente ----- */
 		
@@ -305,39 +249,39 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do Endereço ----- */
 		
 		/* ----- SALVAR ----- */
-		regrasSalvarEndereco.add(vcep);
-		regrasSalvarEndereco.add(vLogradouro);
-		regrasSalvarEndereco.add(vNumero);
-		regrasSalvarEndereco.add(vBairro);
-		regrasSalvarEndereco.add(vCidade);
-		regrasSalvarEndereco.add(vEstado);
-		regrasSalvarEndereco.add(vPais);
-		regrasSalvarEndereco.add(vTipoResidencia);
-		
-		/* ----- ALTERAR ----- */
-		regrasAlterarEndereco.add(vCEPAlterado);
-		regrasAlterarEndereco.add(vLogradouroAlterado);
-		regrasAlterarEndereco.add(vNumAlterado);
-		regrasAlterarEndereco.add(vBairroAlterado);
-		regrasAlterarEndereco.add(vCidadeAlterado);
-		regrasAlterarEndereco.add(vEstadoAlterado);
-		regrasAlterarEndereco.add(vPaisAlterado);
-		regrasAlterarEndereco.add(vTipoResidenciaAlterado);
+//		regrasSalvarEndereco.add(vcep);
+//		regrasSalvarEndereco.add(vLogradouro);
+//		regrasSalvarEndereco.add(vNumero);
+//		regrasSalvarEndereco.add(vBairro);
+//		regrasSalvarEndereco.add(vCidade);
+//		regrasSalvarEndereco.add(vEstado);
+//		regrasSalvarEndereco.add(vPais);
+//		regrasSalvarEndereco.add(vTipoResidencia);
+//		
+//		/* ----- ALTERAR ----- */
+//		regrasAlterarEndereco.add(vCEPAlterado);
+//		regrasAlterarEndereco.add(vLogradouroAlterado);
+//		regrasAlterarEndereco.add(vNumAlterado);
+//		regrasAlterarEndereco.add(vBairroAlterado);
+//		regrasAlterarEndereco.add(vCidadeAlterado);
+//		regrasAlterarEndereco.add(vEstadoAlterado);
+//		regrasAlterarEndereco.add(vPaisAlterado);
+//		regrasAlterarEndereco.add(vTipoResidenciaAlterado);
 		
 		/* ---------------------------------------------------------- */
 		
 		/* --- Adicionando as Strategy's do Cartao de Credito ------- */
 		
 		/* ----- SALVAR ----- */
-		regrasSalvarCartaoCredito.add(vNumCartao);
-		regrasSalvarCartaoCredito.add(vBandeiraCartao);
-		regrasSalvarCartaoCredito.add(vCVV);
-		regrasSalvarCartaoCredito.add(vNomeCartao);
-		
-		/* ----- ALTERAR ----- */
-		regrasAlterarCartaoCredito.add(vNumCartaoAlterado);
-		regrasAlterarCartaoCredito.add(vCVVAlterado);
-		regrasAlterarCartaoCredito.add(vNomeCartaoAlterado);
+//		regrasSalvarCartaoCredito.add(vNumCartao);
+//		regrasSalvarCartaoCredito.add(vBandeiraCartao);
+//		regrasSalvarCartaoCredito.add(vCVV);
+//		regrasSalvarCartaoCredito.add(vNomeCartao);
+//		
+//		/* ----- ALTERAR ----- */
+//		regrasAlterarCartaoCredito.add(vNumCartaoAlterado);
+//		regrasAlterarCartaoCredito.add(vCVVAlterado);
+//		regrasAlterarCartaoCredito.add(vNomeCartaoAlterado);
 		
 		/* ---------------------------------------------------------- */
 		
@@ -353,21 +297,21 @@ public class Fachada implements IFachada {
 		/* ---------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do Produto ----- */
-		regrasAlterarProduto.add(vNomeProduto);
-		regrasAlterarProduto.add(vCategoria);
-		regrasAlterarProduto.add(vPrecoCompra);
-		regrasAlterarProduto.add(vPrecoVenda);
-		regrasAlterarProduto.add(vDtCadastro);
-		regrasAlterarProduto.add(vFoto);
-		//regrasAlterarProduto.add(vQtde);
-		regrasAlterarProduto.add(vDescricao);
-		regrasAlterarProduto.add(vStatusProduto);
-		regrasAlterarProduto.add(vGrupoPrecificacao);
+//		regrasAlterarProduto.add(vNomeProduto);
+//		regrasAlterarProduto.add(vCategoria);
+//		regrasAlterarProduto.add(vPrecoCompra);
+//		regrasAlterarProduto.add(vPrecoVenda);
+//		regrasAlterarProduto.add(vDtCadastro);
+//		regrasAlterarProduto.add(vFoto);
+//		//regrasAlterarProduto.add(vQtde);
+//		regrasAlterarProduto.add(vDescricao);
+//		regrasAlterarProduto.add(vStatusProduto);
+//		regrasAlterarProduto.add(vGrupoPrecificacao);
 		
 		/* ---------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do Carrinho ----- */
-		regrasAlterarCarrinho.add(vValorQtdeCarrinho);
+		//regrasAlterarCarrinho.add(vValorQtdeCarrinho);
 		
 		/* ---------------------------------------------------------- */
 		
@@ -377,15 +321,15 @@ public class Fachada implements IFachada {
 		
 		/* ----- Adicionando as Strategy's na lista do Estoque ----- */
 		/* ----- SALVAR ----- */
-		regrasSalvarEstoque.add(vEntradaEstoque);
-		regrasSalvarEstoque.add(vSaidaEstoque);
+		//regrasSalvarEstoque.add(vEntradaEstoque);
+		//regrasSalvarEstoque.add(vSaidaEstoque);
 		
 		/* ---------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do Grafico ----- */
 		
 		/* ----- CONSULTAR ----- */
-		regrasConsultarGrafico.add(vGrafico);
+		//regrasConsultarGrafico.add(vGrafico);
 		/* ---------------------------------------------------------- */
 		
 		
@@ -529,17 +473,17 @@ public class Fachada implements IFachada {
 		
 		/* ----- REGRAS GERAIS ----- */
 		regrasGeral.put(Cliente.class.getName(), regrasCliente);
-		regrasGeral.put(Endereco.class.getName(), regrasEndereco);
-		regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
+		//regrasGeral.put(Endereco.class.getName(), regrasEndereco);
+		//regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
 		regrasGeral.put(Usuario.class.getName(), regrasLogin);
-		regrasGeral.put(Produto.class.getName(), regrasProduto);
-		regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
-		regrasGeral.put(Pedido.class.getName(), regrasPedido);
-		regrasGeral.put(Cupom.class.getName(), regrasCupom);
-		regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
-		regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
-		regrasGeral.put(Estoque.class.getName(), regrasEstoque);
-		regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
+		//regrasGeral.put(Produto.class.getName(), regrasProduto);
+		//regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
+		//regrasGeral.put(Pedido.class.getName(), regrasPedido);
+		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
+		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
+		//regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
+		//regrasGeral.put(Estoque.class.getName(), regrasEstoque);
+		//regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
 		/* -------------------------- */
 	}
 

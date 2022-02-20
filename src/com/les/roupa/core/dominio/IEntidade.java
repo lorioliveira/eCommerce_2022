@@ -1,7 +1,7 @@
 package com.les.roupa.core.dominio;
 
 /**
- * Interface entidade
+ * Interface Entidade
  */
 public interface IEntidade {
 

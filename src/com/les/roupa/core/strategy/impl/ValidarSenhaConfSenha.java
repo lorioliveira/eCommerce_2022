@@ -23,13 +23,13 @@ public class ValidarSenhaConfSenha implements IStrategy {
 			else if (cliente.getUsuario().getSenha().length() < 8) {
 				return ("Favor insira uma senha com no minimo 8 caracteres.<br>");
 			}
-			else if (cliente.getUsuario().getConfSenha() == null || cliente.getUsuario().getConfSenha().equals("")) {
+			else if (cliente.getUsuario().getConfirmarSenha() == null || cliente.getUsuario().getConfirmarSenha().equals("")) {
 				return ("Favor insira a senha novamente.<br>");
 			}
-			else if (cliente.getUsuario().getConfSenha().length() < 8) {
+			else if (cliente.getUsuario().getConfirmarSenha().length() < 8) {
 				return ("Favor insira a mesma senha, com no minimo 8 caracteres.<br>");
 			}
-			else if (!cliente.getUsuario().getSenha().equals(cliente.getUsuario().getConfSenha())) {
+			else if (!cliente.getUsuario().getSenha().equals(cliente.getUsuario().getConfirmarSenha())) {
 				return ("As senhas digitadas não se correspondem. Insira novamente.<br>");
 			}
 			else {

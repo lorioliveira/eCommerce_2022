@@ -90,7 +90,7 @@ public class EnderecoHelper implements IViewHelper {
 			endereco.setTipoEnd(tipoEndereco);		
 			endereco.setIdCliente(idCliente);
 			endereco.setAlteraEndereco(alteraEndereco);
-			endereco.setDt_cadastro(dataAtual);
+			endereco.setData_cadastro(dataAtual);
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
@@ -125,7 +125,7 @@ public class EnderecoHelper implements IViewHelper {
 			endereco.setObservacoes(observacoes);
 			endereco.setTipoEnd(tipoEndereco);
 			endereco.setAlteraEndereco(alteraEndereco);
-			endereco.setDt_cadastro(dataAtual);
+			endereco.setData_cadastro(dataAtual);
 			
 			endereco.setIdCliente(idCliente);
 			

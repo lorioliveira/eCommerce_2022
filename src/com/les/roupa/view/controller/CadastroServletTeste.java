@@ -43,12 +43,12 @@ public class CadastroServletTeste extends HttpServlet {
 			
 			usuario.setEmail(request.getParameter("email"));
 			usuario.setSenha(request.getParameter("senha"));
-			usuario.setConfSenha(request.getParameter("confsenha"));
+			usuario.setConfirmarSenha(request.getParameter("confsenha"));
 			cliente.setUsuario(usuario);
 			
 			cliente.setNome(request.getParameter("nome"));
 			cliente.setCpf(request.getParameter("cpf"));
-			cliente.setDt_nasc(request.getParameter("dt_nasc"));
+			cliente.setData_Nascimento(request.getParameter("dt_nasc"));
 			cliente.setTelefone(request.getParameter("telefone"));
 			/*cliente.setCep(request.getParameter("cep"));
 			cliente.setLogradouro(request.getParameter("logradouro"));
@@ -73,7 +73,7 @@ public class CadastroServletTeste extends HttpServlet {
 				writer.println("<li>Senha: " + usuario.getSenha() + "</li>");
 				writer.println("<li>Nome: " + cliente.getNome() + "</li>");
 				writer.println("<li>CPF: " + cliente.getCpf() + "</li>");
-				writer.println("<li>Data Nascimento: " + cliente.getDt_nasc() + "</li>");
+				writer.println("<li>Data Nascimento: " + cliente.getData_Nascimento() + "</li>");
 				writer.println("<li>Telefone: " + cliente.getTelefone() + "</li>");
 				/*writer.println("<li>CEP: " + cliente.getCep() + "</li>");
 				writer.println("<li>Logradouro: " + cliente.getLogradouro() + "</li>");
@@ -97,7 +97,7 @@ public class CadastroServletTeste extends HttpServlet {
 				writer.println("<li>Senha: " + usuario.getSenha() + "</li>");
 				writer.println("<li>Nome: " + cliente.getNome() + "</li>");
 				writer.println("<li>CPF: " + cliente.getCpf() + "</li>");
-				writer.println("<li>Data Nascimento: " + cliente.getDt_nasc() + "</li>");
+				writer.println("<li>Data Nascimento: " + cliente.getData_Nascimento() + "</li>");
 				writer.println("<li>Telefone: " + cliente.getTelefone() + "</li>");
 				/*writer.println("<li>CEP: " + cliente.getCep() + "</li>");
 				writer.println("<li>Logradouro: " + cliente.getLogradouro() + "</li>");

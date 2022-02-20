@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 /**
  * Classe para fazer a conexão com o banco de dados
+ *  @author Lorena Oliveira
+ *  18/02/2022
+ *  
  */
 public class Conexao {
 	

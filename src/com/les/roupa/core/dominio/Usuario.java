@@ -1,13 +1,15 @@
 package com.les.roupa.core.dominio;
 
 /**
- * Classe para representar o Usuario
+ * Classe para representar o Usuario (Cliente/Pessoa)
+ * @author Lorena Oliveira
  */
+
 public class Usuario extends EntidadeDominio {
 	private String email;
 	private String senha;
-	private String confSenha;
-	private String tipo;
+	private String confirmarSenha;
+	private String tipoCliente;
 	private String nome;
 	
 	/* Email */
@@ -34,22 +36,22 @@ public class Usuario extends EntidadeDominio {
 	}
 	
 	/* Confirmar Senha*/
-	public String getConfSenha() {
-		if (confSenha == null || confSenha.equals("")) {
-            return null;
-        }
-		return confSenha;
+	public String getConfirmarSenha() {
+		return confirmarSenha;
 	}
-	public void setConfSenha(String confSenha) {
-		this.confSenha = confSenha;
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 	
+	
 	/* Tipo de Cliente - se é admin ou cliente*/
-	public String getTipo() {
-		return tipo;
+	public String getTipoCliente() {
+		return tipoCliente;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
 	
 	/* Nome */
@@ -59,7 +61,4 @@ public class Usuario extends EntidadeDominio {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-	
 }

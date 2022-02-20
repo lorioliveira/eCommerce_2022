@@ -42,7 +42,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			stmt.setString(9,endereco.getObservacoes());
 			stmt.setString(10,endereco.getTipoEnd());
 			stmt.setString(11,endereco.getIdCliente());
-			stmt.setString(12,endereco.getDt_cadastro());
+			stmt.setString(12,endereco.getData_cadastro());
 			
 			// executa
 			stmt.execute();
@@ -85,7 +85,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				stmt.setString(8,endereco.getTipoResidencia());
 				stmt.setString(9,endereco.getObservacoes());
 				stmt.setString(10,endereco.getTipoEnd());
-				stmt.setString(11,endereco.getDt_cadastro());
+				stmt.setString(11,endereco.getData_cadastro());
 				stmt.setString(12,endereco.getId());
 				
 				stmt.execute();
@@ -154,7 +154,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				end.setObservacoes(rs.getString("observacoes"));
 				end.setId(rs.getString("id"));
 				end.setTipoEnd(rs.getString("tipoEndereco"));
-				end.setDt_cadastro(rs.getString("dt_cadastro"));
+				end.setData_cadastro(rs.getString("dt_cadastro"));
 				
 				
 				// adicionando o objeto à lista de Enderecos criado acima
@@ -196,7 +196,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				end.setTipoResidencia(rs.getString("tipoResidencia"));
 				end.setObservacoes(rs.getString("observacoes"));
 				end.setTipoEnd(rs.getString("tipoEndereco"));
-				end.setDt_cadastro(rs.getString("dt_cadastro"));
+				end.setData_cadastro(rs.getString("dt_cadastro"));
 
 				
 				// adicionando o objeto à lista de Endereco criado acima
@@ -239,7 +239,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				end.setObservacoes(rs.getString("observacoes"));
 				end.setTipoEnd(rs.getString("tipoEndereco"));
 				end.setIdCliente(rs.getString("id_cliente"));
-				end.setDt_cadastro(rs.getString("dt_cadastro"));
+				end.setData_cadastro(rs.getString("dt_cadastro"));
 
 				
 				// adicionando o objeto à lista de Endereco criado acima

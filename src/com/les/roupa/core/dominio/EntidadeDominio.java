@@ -1,11 +1,12 @@
 package com.les.roupa.core.dominio;
 
 /**
- * Classe entidade dominio
+ * Classe Entidade Dominio
+ * @author Lorena Oliveira
  */
 public class EntidadeDominio implements IEntidade {
 	private String id;
-	private String dt_cadastro;
+	private String data_cadastro;
 	
 	
 	public String getId() {
@@ -14,10 +15,12 @@ public class EntidadeDominio implements IEntidade {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDt_cadastro() {
-		return dt_cadastro;
+	
+	public String getData_cadastro() {
+		return data_cadastro;
 	}
-	public void setDt_cadastro(String dt_cadastro) {
-		this.dt_cadastro = dt_cadastro;
+	public void setData_cadastro(String data_cadastro) {
+		this.data_cadastro = data_cadastro;
 	}
+	
 }

@@ -75,19 +75,19 @@ public class ClienteHelper implements IViewHelper {
 			// Atribuindo os valores capturados do HTML para o cliente
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
-			usuario.setConfSenha(confsenha);
+			usuario.setConfirmarSenha(confsenha);
 			cliente.setUsuario(usuario);
 			
 			
 			cliente.setNome(nome);
 			cliente.setCpf(cpf);
-			cliente.setDt_nasc(dt_nasc);
+			cliente.setData_Nascimento(dt_nasc);
 			cliente.setTelefone(telefone);
 			cliente.setGenero(genero);
 			cliente.setStatus(status);
 			cliente.setTipo(tipo);
 			cliente.setAlteraCliente(alteraCliente);
-			cliente.setDt_cadastro(dataAtual);
+			cliente.setData_cadastro(dataAtual);
 			
 		}
 		
@@ -113,19 +113,19 @@ public class ClienteHelper implements IViewHelper {
 			// Atribuindo os valores capturados do HTML para o cliente
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
-			usuario.setConfSenha(confsenha);
+			usuario.setConfirmarSenha(confsenha);
 			cliente.setUsuario(usuario);
 						
 			cliente.setId(id);
 			cliente.setNome(nome);
 			cliente.setCpf(cpf);
-			cliente.setDt_nasc(dt_nasc);
+			cliente.setData_Nascimento(dt_nasc);
 			cliente.setTelefone(telefone);
 			cliente.setGenero(genero);
 			cliente.setAlteraCliente(alteraCliente);
 			cliente.setStatus(status);
 			
-			cliente.setDt_cadastro(dataAtual);
+			cliente.setData_cadastro(dataAtual);
 
 		}
 		
