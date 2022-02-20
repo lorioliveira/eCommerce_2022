@@ -24,7 +24,7 @@ public class ValidarEmail implements IStrategy {
 			else {
 				return null;
 			}
-		}// se o "alteraCliente" é igual a 0, passa reto da validação
+		}// se o "alteraCliente" Ã© igual a 0, passa reto da validaÃ§Ã£o
 		else {
 			return null;
 		}

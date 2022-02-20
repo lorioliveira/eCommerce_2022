@@ -76,9 +76,9 @@ public class ValidarCPF implements IStrategy {
 				            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
 				                 return(null);
 				            else 
-				            	return("CPF invalido! Insira um CPF válido <br>");
+				            	return("CPF invalido! Insira um CPF valido <br>");
 				        } catch (InputMismatchException erro) {
-				        	return("CPF invalido! Insira um CPF válido<br>");
+				        	return("CPF invalido! Insira um CPF valido<br>");
 				        }
 					}
 			}

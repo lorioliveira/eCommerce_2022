@@ -120,7 +120,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>E-mail</label>
-                                        <input class="form-control" type="email" name="email" placeholder="E-mail" required>
+                                        <input class="form-control" type="email" name="email" placeholder="E-mail" >
                                     </div>
                                     <div class="col-md-5">
                                         <label>Senha</label>

@@ -24,7 +24,7 @@ public class ValidarDtCadastro implements IStrategy {
 		
 		dataAtual = dateFormat.format(date);
 		
-		entidade.setData_cadastro(dataAtual);
+		entidade.setData_Cadastro(dataAtual);
 		
 		return null;
 	}

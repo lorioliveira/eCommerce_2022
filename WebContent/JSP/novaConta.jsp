@@ -160,9 +160,12 @@
                                     <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8">
                                 </div>
                                 <div class="col-md-9">
-                                    <button class="btn"><a href="login.jsp"><i class="fa fa-user-check"></i> Criar Conta</a></button>
+                                    <button type="submit" class="btn" name="operacao" value="SALVAR"><i class="fa fa-user-check"></i> Criar Conta</button>
                                 </div>
                             </div>
+                            <input type="hidden" name="alteraCliente" value="0"/>
+                            <input type="hidden" name="status" value="ativo"/>
+                            <input type="hidden" name="tipoCliente" value="cliente"/>
                         </form> 
                     </div>
                 </div>    

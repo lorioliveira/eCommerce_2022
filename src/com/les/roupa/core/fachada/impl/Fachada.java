@@ -48,7 +48,7 @@ public class Fachada implements IFachada {
 	/* ---- CLIENTE -----*/
 	ValidarEmail vEmail = new ValidarEmail();
 	ValidarNome vNome = new ValidarNome();
-	ValidarCPF vCPF = new ValidarCPF();
+	//ValidarCPF vCPF = new ValidarCPF();
 	ValidarDataNascimento vDt_nasc = new ValidarDataNascimento();
 	ValidarTelefone vTelefone = new ValidarTelefone();
 	ValidarGenero vGenero = new ValidarGenero();
@@ -227,7 +227,7 @@ public class Fachada implements IFachada {
 		
 		/* ----- SALVAR ----- */
 		regrasSalvarCliente.add(vNome);
-		regrasSalvarCliente.add(vCPF);
+		//regrasSalvarCliente.add(vCPF);
 		regrasSalvarCliente.add(vEmail);
 		regrasSalvarCliente.add(vExisteEmail);
 		regrasSalvarCliente.add(vSenha);

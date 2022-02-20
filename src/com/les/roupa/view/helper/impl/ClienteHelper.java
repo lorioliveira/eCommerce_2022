@@ -175,7 +175,7 @@ public class ClienteHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request, response);
+				request.getRequestDispatcher("/JSP/login.jsp").forward(request, response);
 			}
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
