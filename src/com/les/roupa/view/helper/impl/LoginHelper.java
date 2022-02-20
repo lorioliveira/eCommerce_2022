@@ -22,7 +22,7 @@ public class LoginHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operacao foi acionada
 		String operacao = request.getParameter("operacao");
 		
         String email = null;
@@ -62,7 +62,7 @@ public class LoginHelper implements IViewHelper {
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operacao foi acionada
 		String operacao = request.getParameter("operacao");
 		
 		// Usa para escrever na tela
@@ -77,11 +77,11 @@ public class LoginHelper implements IViewHelper {
 				
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
-				// salva na sessão o objeto "usuarioLogado", recebendo o valor de "usuario"
+				// salva na sessï¿½o o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
 //				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
-				// salva na sessão o objeto "itensPedidoTroca", para quando for clicado no botão de "Solicitar Troca",
+				// salva na sessï¿½o o objeto "itensPedidoTroca", para quando for clicado no botï¿½o de "Solicitar Troca",
 				// da tela do detalhes do pedido, ele poder adicionar os itens do pedido selecionados para gerar um pedido de troca
 //				sessao.setAttribute("itensPedidoTroca", itensPedidoTroca);
 				
@@ -93,8 +93,8 @@ public class LoginHelper implements IViewHelper {
 				}
 			} 
 			else {
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
-				// Guarda a mensagem que veio da Strategy na variável para que 
+				// pendura o "resultado" na requisiï¿½ï¿½o para poder mandar para o arquivo .JSP
+				// Guarda a mensagem que veio da Strategy na variï¿½vel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR LOGIN!");
@@ -112,12 +112,12 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Requisição do form de nova conta e redirecionada para tela de login
+				// Requisiï¿½ï¿½o do form de nova conta e redirecionada para tela de login
 				request.getRequestDispatcher("JSP/login.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variável para que 
+				// Guarda a mensagem que veio da Strategy na variï¿½vel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR LOGIN!");
@@ -135,12 +135,12 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-			// Requisição de alteracao de senha
+			// Requisiï¿½ï¿½o de alteracao de senha
 			request.getRequestDispatcher("JSP/perfil.jsp").forward(request, response);
 		}
 		else {
 			// mostra as mensagens de ERRO se houver
-			// Guarda a mensagem que veio da Strategy na variável para que 
+			// Guarda a mensagem que veio da Strategy na variï¿½vel para que 
 			// seja exibida na tela 'tela-mensagem.jsp'
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
         	System.out.println("ERRO PARA ALTERAR LOGIN!");
@@ -159,22 +159,22 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Limpa a sessão - Sair
+				// Limpa a sessï¿½o - Sair
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				//sessao.removeAttribute("usuarioLogado"); // remove somente 1 atributo criado
 				sessao.invalidate(); // destroi o cookie JSESSIONID inteiro e cria outro
 				
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisiï¿½ï¿½o para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
 				request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request, response);
 			}
 			else {
-				// se tiver alguma mensagem da Strategy, irá redirecionar para a tela de Login do mesmo jeito
+				// se tiver alguma mensagem da Strategy, irï¿½ redirecionar para a tela de Login do mesmo jeito
 				// Redireciona para o arquivo .jsp
-				// Guarda a mensagem que veio da Strategy na variável para que 
+				// Guarda a mensagem que veio da Strategy na variï¿½vel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR LOGIN!");

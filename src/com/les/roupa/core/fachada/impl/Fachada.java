@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.les.roupa.core.dao.IDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
+import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
@@ -42,7 +43,7 @@ public class Fachada implements IFachada {
 	private Resultado resultado;
 	private static Map<String, IDAO> daos;
 
-	/* ------------ Declaração de TODAS as Strategy's ------------ */
+	/* ------------ Declaraï¿½ï¿½o de TODAS as Strategy's ------------ */
 	
 	/* ---- CLIENTE -----*/
 	ValidarEmail vEmail = new ValidarEmail();
@@ -61,7 +62,7 @@ public class Fachada implements IFachada {
 
 	
 	/* ---- ENDERECO -----*/
-	/* ---- Salvar Novo Endereço ---- */
+	/* ---- Salvar Novo Endereï¿½o ---- */
 //	ValidarCEP vcep = new ValidarCEP();
 //	ValidarLogradouro vLogradouro = new ValidarLogradouro();
 //	ValidarNumero vNumero = new ValidarNumero();
@@ -71,7 +72,7 @@ public class Fachada implements IFachada {
 //	ValidarPais vPais = new ValidarPais();
 //	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
 	
-	/* ---- Alterar um Endereço Salvo ------ */
+	/* ---- Alterar um Endereï¿½o Salvo ------ */
 //	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
 //	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
 //	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
@@ -83,7 +84,7 @@ public class Fachada implements IFachada {
 //	
 	
 	/* ---- CARTAO DE CREDITO -----*/
-	/* ----- Salvar Novo Cartão ---- */
+	/* ----- Salvar Novo Cartï¿½o ---- */
 //	ValidarNumeroCartao vNumCartao = new ValidarNumeroCartao();
 //	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
 //	ValidarCVV vCVV = new ValidarCVV();
@@ -124,7 +125,7 @@ public class Fachada implements IFachada {
 	
 	/* ------------------------------------------------------------ */
 	
-	/* ------------ Declaração das Listas de Strategy's dos Dominios ------------ */
+	/* ------------ Declaraï¿½ï¿½o das Listas de Strategy's dos Dominios ------------ */
 	/* ------------ SALVAR ------------ */
 	List<IStrategy> regrasSalvarCliente = new ArrayList<>();
 	List<IStrategy> regrasSalvarEndereco = new ArrayList<>();
@@ -182,7 +183,7 @@ public class Fachada implements IFachada {
 	
 	/* -------------------------------------------------------------------------- */
 	
-	/* ------------ Declaração dos MAP's das Regras de Negócios dos Dominios ------------ */
+	/* ------------ Declaraï¿½ï¿½o dos MAP's das Regras de Negï¿½cios dos Dominios ------------ */
 	Map<String, List<IStrategy>> regrasCliente = new HashMap<>();
 	Map<String, List<IStrategy>> regrasEndereco = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCartaoCredito = new HashMap<>();
@@ -198,7 +199,7 @@ public class Fachada implements IFachada {
 	
 	/* ----------------------------------------------------------------------------------- */
 	
-	/* ------------ Declaração da Regra de Negócio Geral ------------ */
+	/* ------------ Declaraï¿½ï¿½o da Regra de Negï¿½cio Geral ------------ */
 	Map<String, Map<String, List<IStrategy>>> regrasGeral = new HashMap<>();
 	/* --------------------------------------------------------------- */
 
@@ -212,7 +213,7 @@ public class Fachada implements IFachada {
 		daos.put(Cliente.class.getName(), new ClienteDAO());
 		//daos.put(Endereco.class.getName(), new EnderecoDAO());
 		//daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
-		//daos.put(Usuario.class.getName(), new LoginDAO());
+		daos.put(Usuario.class.getName(), new LoginDAO());
 		//daos.put(Produto.class.getName(), new ProdutoDAO());
 		//daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		//daos.put(Pedido.class.getName(), new PedidoDAO());
@@ -246,7 +247,7 @@ public class Fachada implements IFachada {
 		/* ---------------------------------------------------------- */
 
 		
-		/* ----- Adicionando as Strategy's na lista do Endereço ----- */
+		/* ----- Adicionando as Strategy's na lista do Endereï¿½o ----- */
 		
 		/* ----- SALVAR ----- */
 //		regrasSalvarEndereco.add(vcep);
@@ -345,7 +346,7 @@ public class Fachada implements IFachada {
 		regrasCliente.put("EXCLUIR", regrasExcluirCliente);
 		/* -------------------------------------- */
 
-		/* ----- REGRAS DA ENTIDADE ENDEREÇO ----- */
+		/* ----- REGRAS DA ENTIDADE ENDEREï¿½O ----- */
 		/* ----- SALVAR ----- */
 		regrasEndereco.put("SALVAR", regrasSalvarEndereco);
 		/* ----- CONSULTAR ----- */
@@ -497,7 +498,7 @@ public class Fachada implements IFachada {
 		String msg = executarRegras(entidade, "SALVAR");
 
 		if (msg == null || msg == "") {
-			// Obtém o DAO correspondente ao nome do pacote com o nome da classe,
+			// Obtï¿½m o DAO correspondente ao nome do pacote com o nome da classe,
 			// que esta dentro do HashMap do "daos"
 			IDAO dao = daos.get(nmClasse);
 			try {
@@ -509,7 +510,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Não foi possível Salvar o registro!");
+				resultado.setMensagem("Nï¿½o foi possï¿½vel Salvar o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -536,7 +537,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Não foi possível Alterar o registro!");
+				resultado.setMensagem("Nï¿½o foi possï¿½vel Alterar o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -563,7 +564,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Não foi possível Excluir o registro!");
+				resultado.setMensagem("Nï¿½o foi possï¿½vel Excluir o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -585,7 +586,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(dao.consultar(entidade));
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Não foi possível Consulta o registro!");
+				resultado.setMensagem("Nao foi possivel Consultar o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -593,7 +594,7 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	// Método para executar as regras de negocio / Strategy
+	// Mï¿½todo para executar as regras de negocio / Strategy
 	private String executarRegras(EntidadeDominio entidade, String operacao) {
 		String msg = "";
 
@@ -603,10 +604,10 @@ public class Fachada implements IFachada {
 		// com o nome da classe, ele pega o MAP com as suas respectivas regras de dominio (exemplo: regrasCliente),
 		Map<String, List<IStrategy>> regrasDaEntidade = regrasGeral.get(nmClasse);
 		
-		// depois ele pega a "operação"que deseja ser realizada (exemplo: "salvar")
+		// depois ele pega a "operaï¿½ï¿½o"que deseja ser realizada (exemplo: "salvar")
 		List<IStrategy> regrasDaOperacao = regrasDaEntidade.get(operacao);
 		
-		// para cada "regra" em "regrasDaOperacao", ele irá chamar as Strategy's 
+		// para cada "regra" em "regrasDaOperacao", ele irï¿½ chamar as Strategy's 
 		// que estiver dentro da lista (exemplo: regrasSalvarCliente)
 		for (IStrategy regra : regrasDaOperacao) {
 			String resultado = regra.validar(entidade);

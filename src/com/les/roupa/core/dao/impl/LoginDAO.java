@@ -20,26 +20,27 @@ public class LoginDAO extends AbstractJdbcDAO {
 		openConnection();
 		
 		String sql = "insert into cliente "+
-				"(nome,cpf,dt_nasc,genero,telefone,email,senha,status,tipo)" +
-				"values (?,?,?,?,?,?,?,?,?)";
+				"(nome,cpf,data_Nascimento,genero,telefone,email,senha,status,tipoCliente, data_Cadastro)" +
+				"values (?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			Cliente cliente = (Cliente) entidade;
 			Usuario usuario = cliente.getUsuario();
 			
-			// prepared statement para inserção
+			// prepared statement para inserï¿½ï¿½o
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			// seta os valores
 			stmt.setString(1,cliente.getNome());
 			stmt.setString(2,cliente.getCpf());
-			stmt.setString(3,cliente.getDt_nasc());
+			stmt.setString(3,cliente.getData_Nascimento());
 			stmt.setString(4,cliente.getGenero());
 			stmt.setString(5,cliente.getTelefone());
 			stmt.setString(6,usuario.getEmail());
 			stmt.setString(7,usuario.getSenha());
 			stmt.setString(8,cliente.getStatus());
-			stmt.setString(9,cliente.getTipo());
+			stmt.setString(9,cliente.getTipoCliente());
+			stmt.setString(10,cliente.getData_Cadastro());
 			
 			// executa
 			stmt.execute();
@@ -57,7 +58,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 	public void alterar (EntidadeDominio entidade) {
 		openConnection();
 		
-		String sql = "update cliente set nome=?, cpf=?, dt_nasc=?, genero=?, "
+		String sql = "update cliente set nome=?, cpf=?, data_Nascimento=?, genero=?, "
 				+ "telefone=?, email=?, senha=?, status=? where id=?";
 		
 		try {
@@ -70,7 +71,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				
 				stmt.setString(1,cliente.getNome());
 				stmt.setString(2,cliente.getCpf());
-				stmt.setString(3,cliente.getDt_nasc());
+				stmt.setString(3,cliente.getData_Nascimento());
 				stmt.setString(4,cliente.getGenero());
 				stmt.setString(5,cliente.getTelefone());
 				stmt.setString(6,usuario.getEmail());
@@ -119,10 +120,10 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuario.setId(rs.getString("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));;
-				usuario.setTipo(rs.getString("tipo"));
+				usuario.setTipoCliente(rs.getString("tipoCliente"));
 				usuario.setNome(rs.getString("nome"));
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto na lista
 				usuarios.add(usuario);
 			}
 				
@@ -139,9 +140,9 @@ public class LoginDAO extends AbstractJdbcDAO {
 	
 	/**
 	 * Metodo para consultar o Usuario
-	 * função criada para consultar o Login após acessar o sistema,
-	 * quando a Fachada realizar a função de consulta, esta função de Consultar será chamada para
-	 * poder fazer o setEntidades do Resultado, com isso feito, será salvo esse Login em sessão no arquivo LoginHelper.
+	 * funcaoo criada para consultar o Login ao s acessar o sistema,
+	 * quando a Fachada realizar a funcaoo de consulta, esta funcao de Consultar sera chamada para
+	 * poder fazer o setEntidades do Resultado, com isso feito, sera salvo esse Login em sessao arquivo LoginHelper.
 	 * @param entidade
 	 */
 	@Override
@@ -163,9 +164,9 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuarioItem.setNome(rs.getString("nome"));
 				usuarioItem.setEmail(rs.getString("email"));
 				usuarioItem.setSenha(rs.getString("senha"));
-				usuarioItem.setTipo(rs.getString("tipo"));
+				usuarioItem.setTipoCliente(rs.getString("tipoCliente"));
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto a lista
 				usuarios.add(usuarioItem);
 			}
 				
@@ -201,7 +202,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				cliente.setId(rs.getString("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
-				cliente.setDt_nasc(rs.getString("dt_nasc"));
+				cliente.setData_Nascimento(rs.getString("data_Nascimento"));
 				cliente.setGenero(rs.getString("genero"));
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setStatus(rs.getString("status"));
@@ -212,7 +213,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				cliente.setUsuario(usuario);
 				
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto ï¿½ lista
 				clientes.add(cliente);
 			}
 			rs.close();
@@ -245,9 +246,9 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuarioItem.setEmail(rs.getString("email"));
 				usuarioItem.setSenha(rs.getString("senha"));
 				usuarioItem.setNome(rs.getString("nome"));
-				usuarioItem.setTipo(rs.getString("tipo"));
+				usuarioItem.setTipoCliente(rs.getString("tipoCliente"));
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto ï¿½ lista
 				usuarios.add(usuarioItem);
 			}
 				

@@ -4,10 +4,8 @@ import com.les.roupa.core.strategy.IStrategy;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
-
-
 /**
- * Classe para validar o campo data nascimento do cliente
+ * Classe para validar o campo Data de Nascimento do Cliente
  */
 public class ValidarDataNascimento implements IStrategy {
 

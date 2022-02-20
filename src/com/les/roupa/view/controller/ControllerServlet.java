@@ -23,7 +23,7 @@ import com.les.roupa.view.helper.impl.EnderecoHelper;
 import com.les.roupa.view.helper.impl.LoginHelper;
 
 /**
- * Responsável por processar todas as requisições feita pelo usuario,
+ * Responsï¿½vel por processar todas as requisiï¿½ï¿½es feita pelo usuario,
  * configurado conforme o arquivo web.xml
  * @author Lorena Oliveira
  */
@@ -47,9 +47,9 @@ public class ControllerServlet extends HttpServlet {
 		// Mapa das Views
 		viewHelper = new HashMap<String, IViewHelper>();
 		
-		viewHelper.put("/eCommerce_roupa/cadastro", new ClienteHelper());
-		viewHelper.put("/eCommerce_roupa/cadastroEndereco", new EnderecoHelper());
-		viewHelper.put("/eCommerce_roupa/login", new LoginHelper());
+		viewHelper.put("/eCommerce/cadastro", new ClienteHelper());
+		viewHelper.put("/eCommerce/cadastroEndereco", new EnderecoHelper());
+		viewHelper.put("/eCommerce/login", new LoginHelper());
 	}
 	
 	// Servlet Principal do sistema
@@ -61,13 +61,13 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-        // Obtém a operação que será executada
+        // Obtï¿½m a operaï¿½ï¿½o que serï¿½ executada
         String operacao = request.getParameter("operacao");
         
-        // Obtém a uri que invocou esta servlet
+        // Obtï¿½m a uri que invocou esta servlet
         String uri = request.getRequestURI();
         
-        // Obtém uma viewhelper indexado pela uri que invocou esta servlet
+        // Obtï¿½m uma viewhelper indexado pela uri que invocou esta servlet
         IViewHelper vh = viewHelper.get(uri);
         
         // O View Helper retorna a entidade especifica para a tela que chamou esta servlet
@@ -76,13 +76,13 @@ public class ControllerServlet extends HttpServlet {
         // Recupera o command correspondente com a operacao
         ICommand command = commands.get(operacao);
         
-        // Executa o command que chamará a fachada para executar a operação requisitada
-        // o retorno é uma instância da classe resultado que pode conter mensagens de erro
+        // Executa o command que chamarï¿½ a fachada para executar a operaï¿½ï¿½o requisitada
+        // o retorno ï¿½ uma instï¿½ncia da classe resultado que pode conter mensagens de erro
         // ou entidades de retorno
         Resultado resultado = command.execute(entidade);
         
-        // Executa o método setView do view helper específico para definir como deverá ser apresentado
-        // o resultado para o usuário
+        // Executa o mï¿½todo setView do view helper especï¿½fico para definir como deverï¿½ ser apresentado
+        // o resultado para o usuï¿½rio
         vh.setView(resultado, request, response);
 	}
 	

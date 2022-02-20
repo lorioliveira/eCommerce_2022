@@ -8,16 +8,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
+        <meta charset="utf-8">
         <title>Mirror Fashion</title>
-        
-       	<meta charset="utf-8">
-       	
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">	
+        <meta content="eCommerce HTML Template Free Download" name="description">
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="../favicon.ico">
+        <link href="../img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -50,31 +48,41 @@
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         
-        <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
-        <div class="nav">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                            <a href="login.jsp" class="nav-item nav-link active">Home</a>
+      <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+      <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        <a href="../login.jsp" class="nav-item nav-link active">Home</a>
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                            <div class="dropdown-menu">
+                                <a href="../login.jsp" class="dropdown-item">Login</a>
+                            </div>
                         </div>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </div>
+    </div>
        <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
         
-        <!-- Inicio da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola-->
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
         <div class="bottom-bar">
             <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="login.jsp">
+                        <a href="../login.jsp">
                         <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -97,58 +105,70 @@
             </div>
             </div>
         </div>
-        <!--- Fim da div contendo logo, barra de pesquisa e botao Minha Sacola -->       
+        <!--- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->       
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Entre ou Registre-se</li>
+                    <li class="breadcrumb-item active">Criar nova conta</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Inicio do Login -->
-        <form action="http://localhost:8080/eCommerce/login" method="post">
-            <div class="login">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="login-form">
+        <!-- Inicio de Registrar nova conta -->
+        <div class="registrar__novaconta">
+            <div class="container-novaconta">
+                <div class="col-lg-9">   
+                    <div class="register-form">
+                        <form action="http://localhost:8080/eCommerce/cadastro">
+                            <h4>Crie sua conta para acessar a loja </h4><br>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label>E-mail</label>
-                                        <input class="form-control" type="email" name="email" placeholder="E-mail" required>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label>Senha</label>
-                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8" placeholder="Senha">
-                                    </div>
-                                    
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btnEntrar" name="operacao" value="CONSULTAR"><i class="fa fa-door-open"></i> Entrar</button>
-                                    </div>
+                                <div class="col-md-3">
+                                    <label>Nome</label>
+                                    <input class="form-control" type="text" name="nome" placeholder="Nome">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>CPF</label>
+                                    <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF apenas números" maxlength="14"  required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gênero: </label></br>
+                                    <input type="radio" name="genero" value="feminino" required>   <i class="fa fa-female"></i>   Feminino
+                                    <input type="radio" name="genero" value="masculino" class="espacamento_genero" required>       <i class="fa fa-male"></i>   Masculino 
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Telefone</label>
+                                    <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Telefone" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label> Data de Nascimento</label>
+                                    <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" placeholder="Data de Nascimento" >
+                            </div>
+                                <div class="col-md-6">
+                                    <label>E-mail</label>
+                                    <input class="form-control" name="email" type="email" placeholder="E-mail" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Senha</label>
+                                    <input class="form-control" type="password" name="senha" placeholder="Senha" min="8">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Confirme a Senha</label>
+                                    <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8">
+                                </div>
+                                <div class="col-md-9">
+                                    <button class="btn"><a href="login.jsp"><i class="fa fa-user-check"></i> Criar Conta</a></button>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Criar nova conta -->
-                        <div class="col-lg-4">
-                            <div class="login-form divNovaConta_Login">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p>Ou registre-se aqui</p>
-                                        <a href="novaConta.jsp"><button class="btn"><i class="fa fa-user-plus"></i> Nova conta</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form> 
                     </div>
-                </div>
+                </div>    
             </div>
-        </form>
-        <!-- Fim do Login -->
+        </div>
+        <!-- Login End -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -159,7 +179,7 @@
                             <h2>Contato</h2>
                             <div class="contact-info">
                                 <p><i class="fa fa-map-marker"></i>Mogi das Cruzes - SP</p>
-                                <p><i class="fa fa-envelope"></i>Lorena Oliveira </p>
+                                <p><i class="fa fa-envelope"></i>Lorena Oliveira</p>
                                 <p><i class="fa fa-phone"></i>+55 11 91234-5678</p>
                             </div>
                         </div>
@@ -200,7 +220,7 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="Payment Method" />
+                            <img src="../img/payment-method.png" alt="metodo_pagamento_MF" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -221,7 +241,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -243,5 +263,6 @@
         
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
+        <script src="../js/all.js"></script>
     </body>
 </html>

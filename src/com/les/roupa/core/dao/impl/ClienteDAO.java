@@ -17,7 +17,7 @@ import com.les.roupa.core.dominio.Usuario;
 public class ClienteDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Método para SALVAR o Cliente
+	 * Mï¿½todo para SALVAR o Cliente
 	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
@@ -31,7 +31,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			Cliente cliente = (Cliente) entidade;
 			Usuario usuario = cliente.getUsuario();
 			
-			// prepared statement para inserção
+			// prepared statement para insercao do cliente no banco
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			// seta os valores
@@ -105,12 +105,12 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		try {
 			Cliente cliente = (Cliente) entidade;
 			
-			// Exclui os endereços relacionados ao cliente
+			// Exclui os endereï¿½os relacionados ao cliente
 			PreparedStatement stmt = connection.prepareStatement("delete from endereco where id_cliente=?");
 			stmt.setString(1, cliente.getId());
 			stmt.executeUpdate();
 			
-			// Exclui os cartões de credito relacionados ao cliente
+			// Exclui os cartï¿½es de credito relacionados ao cliente
 			stmt = connection.prepareStatement("delete from cartaoCredito where id_cliente=?");
 			stmt.setString(1, cliente.getId());
 			stmt.executeUpdate();
@@ -140,7 +140,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
-				// criando o objeto Cliente, onde também possui dados do Usuário
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
@@ -161,7 +161,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				
 				cliente.setUsuario(usuario);
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto a lista
 				clientes.add(cliente);
 			}
 			rs.close();
@@ -186,7 +186,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
-				// criando o objeto Cliente, onde também possui dados do Usuário
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
@@ -206,7 +206,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				
 				cliente.setUsuario(usuario);
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto a lista
 				clientes.add(cliente);
 			}
 			rs.close();
@@ -219,7 +219,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Método para Listar somente Cliente -- ADMIN
+	 * Mï¿½todo para Listar somente Cliente -- ADMIN
 	 * @param entidade
 	 * @return
 	 */
@@ -231,7 +231,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
-				// criando o objeto Cliente, onde também possui dados do Usuário
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
 				
@@ -250,7 +250,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				
 				cliente.setUsuario(usuario);
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto a lista
 				clientes.add(cliente);
 			}
 			rs.close();
@@ -263,7 +263,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Método para Listar/Verificar o status do Usuario (ativo/inativo) -- ADMIN
+	 * Mï¿½todo para Listar/Verificar o status do Usuario (ativo/inativo) -- ADMIN
 	 * @param entidade
 	 * @return
 	 */
@@ -277,7 +277,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			
 			List<Cliente> clientes = new ArrayList<>();
 			while (rs.next()) {
-				// criando o objeto Cliente, onde também possui dados do Usuário
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
@@ -298,7 +298,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				
 				cliente.setUsuario(usuario);
 				
-				// adicionando o objeto à lista
+				// adicionando o objeto a lista
 				clientes.add(cliente);
 			}
 				
