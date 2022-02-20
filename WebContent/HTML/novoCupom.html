@@ -2,29 +2,30 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>Mirror Fashion</title>
+        <title>Mirror Fashion - Admin</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
-
+    
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-
+    
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+            rel="stylesheet">
+    
         <!-- Biblioteca CSS - Bootstrap -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/slick/slick.css" rel="stylesheet">
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
-
+    
         <!-- CSS Principal do Projeto -->
         <link href="css/style.css" rel="stylesheet">
     </head>
-
+    
     <body>
-         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
+        <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -40,104 +41,127 @@
             </div>
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
-        
+    
+    
         <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
         <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="#" class="navbar-brand">MENU</a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+    
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="login.html" class="nav-item nav-link active">Home</a>
+                            <a href="indexAdm.html" class="nav-item nav-link">Home</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="indexAdm.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <div class="dropdown-menu">
+                                    <a href="login.html" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
-       <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
-        
-        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
+        <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta-->
+    
+    
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         <div class="bottom-bar">
             <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <!-- LOGO -->
-                    <div class="logo">
-                        <a href="login.html">
-                        <img src="img/mir.svg" alt="Logo Mirror Fashion" >
-                        </a>
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="indexAdm.html">
+                                <img src="img/mir.svg" alt="Logo Mirror Fashion">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <div class="search">
+                            <input type="text" placeholder="Procuro por ...">
+                            <button><i class="fa fa-search"></i></button>
+                        </div> -->
+                    </div>
+                    <div class="col-md-2">
+                        <div class="user">
+                            <h6>Bem Vindo(a) Admin</h6>
+                            <!-- <a href="cart.html" class="btn cart">
+                                Minha Sacola <i class="fas fa-shopping-bag"></i>
+                                </a> -->
+                        </div>
                     </div>
                 </div>
-                <!-- BARRA DE PESQUISA -->
-                <div class="col-md-6">
-                    <div class="search">
-                        <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
-                    </div>
-                </div>
-                <!-- MINHA SACOLA -->
-                <div class="col-md-2">
-                    <div class="user">
-                        <a href="" class="btn cart">
-                        Minha Sacola <i class="fas fa-shopping-bag"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
-        <!--- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->       
+        <!-- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Entre ou Registre-se</li>
+                    <li class="breadcrumb-item"><a href="indexAdm.html">Minha Conta</a></li>
+                    <li class="breadcrumb-item active">Criar novo cupom</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Início do Login -->
-        <div class="login">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="login-form">
+        <!-- Inicio de Registrar nova conta -->
+        <div class="registrar__novaconta">
+            <div class="container-novaconta">
+                <div class="col-lg-9">   
+                    <div class="register-form">
+                        <h4>Cadastro de Cupom </h4><br>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <label>E-mail</label>
-                                    <input class="form-control" type="email" placeholder="E-mail">
-                                </div>
-                                <div class="col-md-5">
-                                    <label>Senha</label>
-                                    <input class="form-control" type="password" placeholder="Senha">
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <button class="btn btnEntrar"><i class="fa fa-door-open"></i> Entrar</button>
-                                </div>
+                            <div class="col-md-4">
+                                <label>Nome</label>
+                                <input class="form-control" type="text" placeholder="Nome">
                             </div>
-                        </div>
-                    </div>
-                    <!-- Criar nova conta -->
-                    <div class="col-lg-4">
-                        <div class="login-form divNovaConta_Login">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>Ou registre-se aqui</p>
-                                    <a href="novaConta.html"><button class="btn"><i class="fa fa-user-plus"></i> Nova conta</button></a>
-                                </div>
+                            <div class="col-md-4">
+                                <label>Tipo Cupom</label>
+                                <select class="form-control" name="grupoPrecificacao">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Troca">Troca</option>
+                                    <option value="Devolucao">Devolução</option>
+                                    <option value="Promocional">Promocional</option>
+                                    <option value="Carteira">Carteira</option>
+                                </select>
                             </div>
-                        </div>
+                            <div class="col-md-4">
+                                <label>Valor R$ </label>
+                                <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" >
+                            </div>
+                            <div class="col-md-4">
+                                <label> Cliente Vinculado</label>
+                                <select class="clienteVinculado form-control" name="clienteVinculado">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Nome">Nome</option>
+                                </select>
+                           </div>
+                            <div class="col-md-4">
+                                <label>Utilizado</label>
+                                <select class="form-control" name="grupoPrecificacao">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Nao">Não</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <a href="login.html"></a><button class="btn btnSalvarCupom"><i class="fa fa-plus"></i> Criar </button></a>
+                            </div>
+                        </div> 
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
-        <!-- Fim do Login -->
+        <!-- Login End -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -148,7 +172,7 @@
                             <h2>Contato</h2>
                             <div class="contact-info">
                                 <p><i class="fa fa-map-marker"></i>Mogi das Cruzes - SP</p>
-                                <p><i class="fa fa-envelope"></i>Lorena Oliveira </p>
+                                <p><i class="fa fa-envelope"></i>Lorena Oliveira</p>
                                 <p><i class="fa fa-phone"></i>+55 11 91234-5678</p>
                             </div>
                         </div>
@@ -210,7 +234,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.html">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="indexAdm.html">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -232,5 +256,6 @@
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/all.js"></script>
     </body>
 </html>

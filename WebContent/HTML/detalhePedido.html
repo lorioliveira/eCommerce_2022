@@ -41,16 +41,27 @@
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         
-        <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+      <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
         <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="#" class="navbar-brand">MENU</a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="login.html" class="nav-item nav-link active">Home</a>
+                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                            <a href="produtos.html" class="nav-item nav-link">Produtos</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <div class="dropdown-menu">
+                                    <a href="login.html" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -65,7 +76,7 @@
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="login.html">
+                        <a href="index.html">
                         <img src="img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -80,7 +91,7 @@
                 <!-- MINHA SACOLA -->
                 <div class="col-md-2">
                     <div class="user">
-                        <a href="" class="btn cart">
+                        <a href="carrinho.html" class="btn cart">
                         Minha Sacola <i class="fas fa-shopping-bag"></i>
                         </a>
                     </div>
@@ -95,41 +106,102 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Entre ou Registre-se</li>
+                    <li class="breadcrumb-item"><a href="#">Minha Conta</a></li>
+                    <li class="breadcrumb-item"><a href="minhaConta.html">Meus Pedidos</a></li>
+                    <li class="breadcrumb-item active">Detalhe do Pedido</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Início do Login -->
-        <div class="login">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="login-form">
+        <!-- Início dos dados do Pedido -->
+        <div class="registrar__novaconta">
+            <div class="container-novaconta">
+                <div class="col-lg-9">   
+                    <div class="register-form">
+                        <h6 class="titulo__registrarnovaconta">Detalhe do Pedido nº ###### - Data: ####-##-## </h6>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <label>E-mail</label>
-                                    <input class="form-control" type="email" placeholder="E-mail">
+                                <div class="col-md-4">
+                                    <label>Total Produtos </label>
+                                    <span> R$ 900,00</span>
+                                    <br>
+                                    <label>Frete</label>
+                                    <span> R$ 900,00</span>
+                                    <br>
+                                    <label>Desconto</label>
+                                    <span class="valorDesconto"> R$ 900,00</span>
+                                    <br>
+                                    <label>Total:</label>
+                                    <span> R$ 900,00</span>
                                 </div>
                                 <div class="col-md-5">
-                                    <label>Senha</label>
-                                    <input class="form-control" type="password" placeholder="Senha">
+                                    <label>Cartao</label>
+                                    <p>lorena s oliveira - (Mastercard / 2028-07)</p>
+                                    <p>R$ 980,00</p>
                                 </div>
                                 
-                                <div class="col-md-12">
-                                    <button class="btn btnEntrar"><i class="fa fa-door-open"></i> Entrar</button>
+                                <div class="col-md-3">
+                                    <label>Entrega</label>
+                                    <p>Rodovia BR-324 km 18,5 nº s/n</p>
+                                    <p>Salvador - BA</p>
+                                    <p>CEP 43700-050</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Criar nova conta -->
-                    <div class="col-lg-4">
-                        <div class="login-form divNovaConta_Login">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>Ou registre-se aqui</p>
-                                    <a href="novaConta.html"><button class="btn"><i class="fa fa-user-plus"></i> Nova conta</button></a>
+            <!-- Fim dos dados do Pedido -->
+
+                     <!-- Início dos produtos do Pedido - TABELA -->
+                    <div class="col-lg-9">
+                        <div class="login-form">
+                            <div class="row div__novaconta">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Produto</th>
+                                                <th>Valor Produto</th>
+                                                <th>Qtde.</th>
+                                                <th>Status</th>
+                                                <th>Qtde. Troca</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$29</td>
+                                                <td>1</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$23</td>
+                                                <td>3</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$39</td>
+                                                <td>2</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$13</td>
+                                                <td>4</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <button class="btn btnQtdeTroca">Realizar Troca</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +282,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.html">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="index.html">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
