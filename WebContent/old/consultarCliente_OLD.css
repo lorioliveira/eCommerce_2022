@@ -1,0 +1,18 @@
+#button_alterar {
+    background-color: #8AF754;
+    border-radius: 5px;
+    width: 60px;
+}
+
+#btnConsultarPedidos{
+    background-color: #80ffff;
+    border-radius:5px;
+    width: 60px;
+}
+
+#button_excluir{
+    background-color: #FF8651;
+    border-radius: 5px;
+ width: 60px;
+ 
+ }

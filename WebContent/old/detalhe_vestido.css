@@ -1,0 +1,463 @@
+
+/* BLUSA AMARELA - VERDE - PRETO*/
+
+/* -----------------MENU E CABEÇALHO------------------------------------------- */
+
+.sacola {
+	background: url(../img/sacola_1.png) no-repeat top right;
+
+	font-size: 14px;
+	padding-right: 35px;
+	text-align: right;
+	width: 59px;
+
+	position: absolute;
+	
+}
+.menu-departamentos li li a:before {
+    content: '\2741';
+}
+
+a{
+	text-decoration: none;
+	color:#003366;
+}
+
+ a:hover {
+	color: #007dc6;
+	text-decoration:none;
+}
+
+a:active {
+	color: #867dc6;
+	text-decoration:none;
+}
+
+header {
+	position: relative;
+}
+
+.menu-opcoes {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	text-decoration: none;
+}
+
+.menu-opcoes ul {
+	font-size: 15px;
+	text-decoration:none; 
+}
+
+.menu-opcoes ul li {
+	display: inline;
+	margin-left: 20px; 
+	text-decoration:none; 
+}
+
+.menu-opcoes a {
+	color: #003366;
+	text-decoration:none; 
+}
+/*  ---------------------------------------------------------------- */
+/*  pagina 105  */
+
+/*Adicionando estados nos links */
+
+.menu-opcoes a:hover {
+	color: #007dc6;
+	text-decoration:none; 
+}
+.menu-opcoes a:active {
+	color: #867dc6;
+	text-decoration:none; 
+}
+
+
+/*  ---------------------------------------------------------------- */
+
+
+.container {
+	margin: 0 auto;
+  	margin-top: 0px;
+	width: 940px;
+	text-decoration: none;
+}
+
+/* MENU DOS DEPARTAMENTOS */
+
+.busca input {
+	border-radius: 5px; /* deixar a caixinha arredondada*/
+	vertical-align: middle;
+}
+
+.busca input [type=search] {
+	width: 170px;
+}
+
+input{
+	font: 1em sans-serif;
+}
+
+.destaque {
+	margin-top: 10px;
+}
+.busca {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+
+}
+
+.busca,
+.menu-departamentos {
+	background-color: #dcdcdc;
+	/*font-weight: bold;*/
+	/*text-transform: capitalize lowercase;*/
+	float: left;
+	margin-right: 10px;
+	width: 230px;
+	position: static;
+
+}
+
+.busca h2,
+.busca form,
+.menu-depertamentos h2 {
+	margin: 10px;
+	margin-left: 4px;
+}
+
+.menu-departamentos {
+	clear: left;
+	margin-top: 5px;
+}
+
+.menu-departamentos li {
+	list-style-type: none; /* faz com que não apareça o símbolo que mostra que é uma lista sabe */
+	background-color: white;
+	margin-bottom: 1px;
+	padding: 5px 5px;
+
+}
+
+.menu-departamentos a {
+	color: #202930;
+	text-decoration: none;
+}
+
+/* COR QUE FICA QUANDO PASSA MOUSE ENCIMA DOS LINKS DOS DEPARTAMENTOS*/
+/* COR DE QUANDO O MOUSE PASSA ENCIMA */
+.menu-departamentos a:hover{
+	color: #550BA8
+}
+
+/*ADICIONANDO ESTILO - COMO OS LINKS SE COMPORTAM NO MENU DOS DEPARTAMENTOS */
+.menu-departamentos li ul {
+	display: none;
+	margin-top: 3px;
+	margin-left: -10px;
+}
+.menu-departamentos li:hover ul {
+	display: block;
+	position: absolute;
+
+	background-color: #FFFFFF;
+}
+
+.menu-departamentos ul ul li {
+	background-color: #dcdcdc;
+}
+
+.painel h2:before {
+content: '\27BE'; /* muda o icone que fica ao lado do titulo*/
+padding-right: 50px;
+opacity: 0.4;
+}
+
+.menu-departamentos ul li ul {
+	display: none;
+}
+
+.menu-departamentos ul li:hover ul {
+	display: block;
+}
+.menu-departamentos ul li ul li {
+	background-color: #dcdcdc;
+}
+.menu-departamentos li li a:before {
+	content: '\2741';
+	padding-right: 3px;
+}
+
+/*FIM DAS ALTERAÇÕES */
+
+
+
+
+/*--------------------------------------------------------------------*/
+/*Primeiro, vamos desenhar as bolinhas coloridas com pseudo-elementos do CSS3 usando um truque com
+bordas redondas infinitas: */
+
+
+.cores label:after {
+	content: '';
+	display: block;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+}
+label[for=rosa]:after {
+	background-color: #F499E0;
+}
+label[for=verde]:after {
+	background-color: #376926;
+}
+label[for=vermelho]:after {
+	background-color: #B22424;
+}
+/*Próximo passo é estilizar a bolinha atualmente selecionada usando pseudo-classe :checked: */
+
+.cores input:checked + label:after {
+	border: 6px solid rgba(0,0,0,0.3);
+}
+
+/*Repare como a borda da bolinha selecionada aumenta o tamanho total da bolinha por causa do box model
+padrão. Uma solução é trocar o box model com a propriedade box-sizing:
+*/
+.cores label:after {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/* um estilo para quando passar o mouse em cima da bolinha, como mostrar
+uma borda mais leve*/
+.cores label:hover:after {
+	border: 6px solid rgba(0,0,0,0.1);
+}
+
+/*Agora que temos as bolinhas coloridas visuais configuradas, a bolinha do input radio é desnecessária.
+Esconda-a:*/
+.cores input[type=radio] {
+	display: none;
+}
+/*Para fechar a funcionalidade de escolha das cores, falta apenas exibir apenas a imagem 
+atualmente selecionada. Outra forma de falar isso é que devemos esconder as imagens dos 
+radios não selecionados. Podemos usar um seletor avançado para isso:*/
+
+.cores input:not(:checked) + label img {
+	display: none;
+}
+
+/*vamos implementar o posicionamento correto das bolinhas lado a lado. 
+Para isso, use position:absolute já que seus tamanhos são conhecidos:*/
+.cores label:after {
+	position: absolute;
+	border:6px solid rgba(0,0,0,0);
+	transition: 1s;
+}
+/*As bolinhas vão ser posicionadas com relação ao fieldset cores, então ele precisa estar posicionado. O
+padding superior é para abrir espaço para as bolinhas:*/
+
+.cores {
+	position: relative;
+	padding-top: 80px;
+}
+
+/* Cada bolinha é um label:after, basta posicioná-las absolutamente: */
+.cores label:after {
+	position: absolute;
+	top: 30px;
+}
+
+/*As bolinhas ficaram sobrepostas na esquerda. Para corrigir, basta colocar uma coordenada left diferente
+para cada uma:*/
+
+label[for=verde]:after {
+	left: 0;
+}
+label[for=rosa]:after {
+	left: 60px;
+}
+label[for=azul]:after {
+	left: 120px;
+}
+
+/*Uma forma de corrigir o problema anterior é garantir que ela nunca passe o tamanho do pai com
+max-width:*/
+.cores label img {
+	display: block;
+	max-width: 100%;
+}
+
+/*CONFIGURAÇÃO PARA TODOS PRODUTOS */
+.produto {
+	color: #333;
+	line-height: 1.3;
+	/*margin-top: 2em;*/
+	/*position: relative;*/
+	clear: right;
+
+	padding-left: 60%;
+	text-align: center;
+}
+
+.produto div{
+	/*margin-left: 60%;*/
+	width: 300px;
+}
+
+
+/* POSIÇÃO QUE A IMAGEM DO PRODUTO FICA ENTRE O MENU DOS DEPARTAMENTOS E OS DADOS COM COR, TAMANHO ETC */
+.produto img {
+	margin-left: 260px;
+	margin-top: 20px;
+	/*position: static;*/
+}
+
+/*.produto img {
+	margin-left: 460px;
+	margin-top: 150px;
+	width: 300px;
+}*/
+
+.produto h1 {
+	font-size: 1.8em;
+	font-weight: bold;
+}
+
+.produto p {
+	font-size: 1.2em;
+	font-style: italic;
+	margin-bottom: 1em;
+}
+/*legenda*/
+.produto legend {
+	display: block;
+	font: bold 0.9em/2.5 Arial;
+	text-transform: uppercase;
+}
+/*botão de comprar*/
+.comprar {
+	background: #91bd3c;
+	/*border: none;*/
+	color: #333;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	box-shadow: 0 1px 3px #777;
+	display: block;
+	padding: 0.5em 1em;
+	margin-left: 110px;
+	/*margin: 1em 0;*/
+	text-align: center;
+}
+/*------------------------------------------------------------------------*/
+.cores {
+	position: static;
+	padding: 0;
+	width: 200px;
+}
+.cores label img {
+/* imagem se posiciona absolutamente à esquerda com relação ao .produto */
+	
+	top: 0;
+	left: 0;
+}
+.cores label:after {
+/* as bolinhas coloridas tinham posição absoluta.
+não precisamos mais, basta flutuar uma do lado da outra */
+	position: sticky;
+	float: left;
+}
+
+/*---------------------------------------------------------------------------------*/
+.cores label img {
+	max-width: 30%;
+	max-height: 100%;
+	position: absolute;
+}
+
+.cores label:after {
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+/*------------------------------------------------------------------------------*/
+/* Parte de escolher tamanho*/
+
+fieldset {
+	display: inline-block;
+	vertical-align: top;
+
+	margin: 1em 0;
+	min-width: 200px;
+	width: 45%;
+}
+
+#tamanho {
+	width: 190px;
+}
+
+
+/*----------------------------------------------------------------------*/
+/*Descricao*/
+.detalhes {
+	margin-left: 20px;
+}
+
+.detalhes h2{
+	font-size: 1.5em;
+	margin-bottom: 5px;
+	/*width: 400px;*/
+	padding-top: 20px;
+	margin-left: 90px;
+}
+
+.detalhes p {
+	margin: 1em 2em 0 0;
+	font-size: 1em;
+	line-height: 1.5;
+	max-width: 36em;
+	width: 450px;
+	float: left;
+
+}
+
+/*TABELA*/
+#tabela{
+
+	padding-left: 40px;
+}
+
+table {
+	border-spacing: 0.2em;
+	border-collapse: separate;
+	position: static;
+
+	padding-bottom: 10px;
+}
+thead {
+	background-color: #999;
+}
+thead th {
+	font-weight: bold;
+	padding: 0.3em 1em;
+	text-align: center;
+}
+td {
+	padding: 0.3em;
+}
+tr:nth-child(2n) {
+	background-color: #ccc;
+}
+td:first-child {
+	font-style: italic;
+}
+/*--------------------------------------------------------------------------*/
+/*PRODUTO BACK*/
+.produto-back {
+	background-color: #F2F2F2;
+	margin-top: 5px;
+	border-top: 1px solid #ccc;
+	}
+.cores label img {
+	border: 2px solid #ccc;
+}

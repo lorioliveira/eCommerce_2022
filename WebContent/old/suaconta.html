@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Mirror Fashion</title>
+	
+	 <link rel="stylesheet" type="text/css" href="../css/suaconta.css"> 
+	<meta charset="utf-8">
+</head>
+	<header class="container">
+		<h1><a href="../HTML/index.html"><img src="../img/logo.png" alt="Mirror Fashion"></a></h1>
+		<p class="sacola"><a href="../HTML/carrinho.html">Minha Sacola</a></p>
+
+		<nav class="menu-opcoes" class="links">
+			<ul>
+				<li><a href="../HTML/index.html">Home</a></li>
+				<li><a href="../HTML/produtos.html">Produtos</a></li>
+				<li><a href="../HTML/suaconta.html">Sua Conta</a></li>
+			
+			</ul>		
+		</nav>
+	</header>
+<body>
+	<!-- CONTAINER - DESTAQUE - PARTE PRINCIPAL-->
+	<div class="container destaque">
+			<section class="menu-departamentos">
+				<h2 style="margin-left: 5px;">Sua Conta</h2>
+					<nav>
+							<li><a href="../HTML/suaconta.html">Meus Dados</a>
+								<ul>
+									<li><a href="../HTML/meusenderecos.html">Endereços</a></li>
+									<li><a href="../HTML/meusdados.html">Cartões e Cupons</a></li>
+									<li><a href="../HTML/alterarsenha.html">Alterar Senha</a></li>
+								</ul>
+							</li>
+							
+							<li><a href="">Meus Pedidos</a></li> 
+							<li onclick="sair()"> <a href="../HTML/login.html">Sair</a>
+							<!-- ALERTA QUANDO SAIR DA CONTA -->
+					    <script>
+					    	function sair(){
+					    		alert("Você saiu com sucesso! Volte em breve!");
+					    	}
+					    </script></li>
+					</nav>
+			</section> 
+			<!-- FIM DA SEÇÃO SUA CONTA -->
+
+
+		<!-- DADOS PARA LOGAR NA CONTA  -->
+		<form class="formulario" action="..\mirrorfashion\index.html" method="post">
+			<p>Aqui vai ficar todos os dados do cliente, e ela navegará pelo menu ao lado</p>
+			<!-- <div>
+				<label for="email">E-mail: </label> <input type="email" id="email"name="e-mail" placeholder="digite seu e-mail aqui"/> 
+				!-- <label for="senha">Senha: </label> <input type="senha" id="senha" /> --
+				<label for="email">Senha: </label> <input type="password" name="senha" id="senha" value="" accesskey="S" />
+			</div>
+		    <div class="button_suaconta">
+		    	<button type="submit" onclick="logar()"><a href="index.html"> Entrar </a></button>
+		    	<button type="submit" id="novaconta"><a href="..\mirrorfashion\nova_conta.html"> Criar nova conta </a></button>
+		    </div> -->
+
+		    <!-- FIM DO ALERTA -->
+		</form>
+	</div>
+	<!-- FIM DOS DADOS DE LOGIN -->
+
+
+<!-- RODAPÉ -->
+<footer>
+	<div class="container">
+		<a href="../HTML/index.html">
+			<img src="../img/logo-rodape.png" alt="Logo Mirror Fashion"></a>
+		<ul class="social">
+			<li><a href="http://facebook.com/mirrorfashion">Facebook</a></li>
+			<li><a href="http://twitter.com/mirrorfashion">Twitter</a></li>
+			<li><a href="http://plus.google.com/mirrorfashion">Google+</a></li>
+		</ul>
+	</div>
+</footer>
+<!-- FIM DO RODAPÉ -->
+
+</body>
+</html>

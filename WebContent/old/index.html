@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet"  href="../css/estilos.css">
+        <title>Mirror Fashion</title>
+        <meta name="viewport" content="width=device-width">
+        <!-- FAVICON -->
+        <link rel="shortcut icon" href="../favicon.ico">
+    </head>
+    <header class="container">
+        <h1><a href="../HTML/index.html"><img src="../img/logo.png" alt="Mirror Fashion"></a></h1>
+        <p class="sacola"><a href="../HTML/carrinho.html">Minha Sacola</a></p>
+        <nav class="menu-opcoes" class="links">
+            <ul>
+                <li><a href="../HTML/index.html">Home</a></li>
+                <li><a href="../HTML/produtos.html">Produtos</a></li>
+                <li><a href="../HTML/perfil.html">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+    <body>
+        <!-- CONTAINER - DESTAQUE - PARTE PRINCIPAL-->
+        <div class="container destaque">
+            <!-- SEÇÃO DE BUSCA -->
+            <section class="busca">
+                <form action="../HTML/produtos" id="form-busca">
+                    <input type="search" name="q" id="q" placeholder="Buscar"> <input type="image" src="../img/busca.png" href="" >
+                </form>
+            </section>
+            <!--FiM DA SEÇÃO BUSCA -->
+            <!--Seção dos Departamentos -->
+            <section class="menu-departamentos">
+                <h2 style="margin-left: 5px;"> Categorias</h2>
+                <nav>
+                    <li>
+                        <a href="../HTML/blusas.html">Blusas</a>
+                        <ul>
+                            <li><a href="../HTML/mangacomprida.html">Manga Comprida</a></li>
+                            <li><a href="../HTML/mangacurta.html">Manga Curta</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../HTML/calcas.html">Calças</a></li>
+                    <li><a href="../HTML/vestidos.html">Vestidos</a></li>
+                </nav>
+            </section>
+            <!-- FIM DA SEÇÃO DEPARTAMENTOS -->
+            <!-- SLIDES DE BANNERS -->
+            <!-- Na apostila, só mostra a class com pause, mas na vdd tem que colocar o play tbm, ai funciona.	 OUTRA COISA: SÓ FUNCIONA 100% QUANDO COLOCA A VÍRGULA!!  -->
+            <a href="../HTML/produtos.html"> <img src="../img/Clothingindustry.png"></a>
+            <a href="" class="play, pause"></a>
+            <!-- FIM DOS SLIDES DE BANNERS -->
+        </div>
+        <!-- FIM CONTAINER DESTAQUE -->
+        <!-- RODAPÉ -->
+        <footer>
+            <div class="container">
+                <a href="../HTML/index.html">
+                <img src="../img/logo-rodape.png" alt="Logo Mirror Fashion"></a>
+                <li id="copy">&copy; Copyright - Todos os direitos protegidos - 2021</li>
+                <ul class="social">
+                    <li>
+                        <a href="http://plus.google.com/mirrorfashion">Google+</a>
+                    </li>
+                    <li>
+                        <a href="http://twitter.com/mirrorfashion">Twitter</a>
+                    </li>
+                    <li>
+                        <a href="http://facebook.com/mirrorfashion">Facebook</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <!-- FIM DO RODAPÉ -->
+        <!-- Referenciando o arquivo JS no index.html -->
+        <script src="../js/home.js"> </script>
+    </body>
+</html>

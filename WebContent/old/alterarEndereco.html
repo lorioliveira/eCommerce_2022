@@ -1,0 +1,144 @@
+<!-- ADMIN -->			
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<title>Mirror Fashion</title>
+
+		 <link rel="stylesheet" type="text/css" href="/css/clientes.css"> 
+		<meta charset="utf-8">
+	</head>
+		<header class="container">
+			<h1><a href="/HTML/index.html"><img src="/img/logo.png" alt="Mirror Fashion"></a></h1>
+			<p class="admin" >Bem vindo(a) Admin</p>
+
+			<nav class="menu-opcoes" class="links">
+				<ul>
+					<li><a href="../HTML/index.html">Home</a></li>
+					<li><a href="../HTML/produtos.html">Produtos</a></li>
+					<li><a href="../HTML/login.html">Sair</a></li>
+				</br>
+				</ul>		
+			</nav>
+		</header>
+	<body>
+		<!-- CONTAINER - DESTAQUE - PARTE PRINCIPAL-->
+		<div class="container destaque">
+			
+			<!-- SEÇÃO MENU ADMIN -->
+				<section class="menu-departamentos">
+					<h2 style="margin-left: 5px;"> Menu</h2>
+						<nav>
+							<li><a href="../HTML/clientes.html">Clientes</a></li>
+							<li><a href="#">Pedidos</a>
+								<ul>
+									<li><a href="">Vendas Realizadas</a></li>
+									<li><a href="">Devolução</a></li>
+									<li><a href="">Pendentes</a></li>
+									<li><a href="">Relatório</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Produtos</a>
+								<ul>
+									<li><a href="">Estoque</a></li>
+									<li><a href="">Adicionar Novo</a></li>
+								</ul>
+							</li>
+							<li><a href="">Cupons</a></li>
+						</nav>
+				</section> 
+				<!-- FIM DA SEÇÃO MENU ADMIN -->
+		</div>
+		<!-- FIM CONTAINER DESTAQUE -->
+
+		<div class="container destaque">
+					<!-- FORMULÁRIO DE NOVA CONTA  -->
+			<form class="formularioEnderecos" action="..\mirrorfashion\index.html" method="post">
+				<caption>* Endereços *</caption>
+					     <div>
+					     	<label class="CEP" for="CEP">CEP:</label><input type="text" id="CEP" class="form-control cep-mask" placeholder="00000-000" />
+				        	<label for="Logradouro" id="logradouro">Logradouro:</label> <input type="text" name="logradouro" id="logradouro"/>
+				        	<label for="Numero" id="numero">Nº</label> <input type="text" name="numero" id="numero" />
+						</div>
+						<div>
+				        	 <label for="Bairro" id="bairro">Bairro:</label><input type="text" name="bairro" id="bairro" />
+				        	 <label for="complemento" id="complemento">Complemento:</label><input type="text" name="complemento" id="complemento" />
+				        	 
+					       </div>	
+						<!-- Estado -->
+						<div>
+					        <label for="Estado"> Estado: </label>
+									<select id="estado" name="estado" onchange="buscaCidades(this.value)"> 
+								   <option value="">Selecione Estado</option>
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+								    <option value="SE">Sergipe</option>
+								    <option value="TO">Tocantins</option>
+								    <!-- <option value="EX">Estrangeiro</option> -->
+								</select>
+							
+
+								<label for="Cidade"> Cidade: </label>
+								<select id="cidade">
+									<option value="">--</option>
+									<script type="text/javascript" src="js/estados-cidades.js">
+									</script>
+								</select>
+						</div>
+					      
+			<!-- BOTÕES DE VOLTAR PARA TELA DE LOGIN OU CIRAR NOVA CONTA -->
+				    <div class="button">
+				    	<button type="submit"><a href="../HTML/login.html">Voltar </a> </button>
+				    	<button type="submit"> <a href="../HTML/meusenderecos.html">Novo Endereço </a></button>
+				    	<button type="submit" onclick="entrar()"> <a href="../HTML/meusdados.html">Salvar </a></button>
+				    </div>
+
+				    <!-- ALERTA QUANDO CRIAR CONTA -->
+				    <script>
+				    	function entrar(){
+				    		alert("Endereço adicionado com sucesso!");
+				    	}
+				    </script>		
+		</form>
+		</div>	
+
+	<!-- RODAPÉ -->
+	<footer>
+		<div class="container">
+			<a href="../HTML/index.html">
+				<img src="../img/logo-rodape.png" alt="Logo Mirror Fashion"></a>
+			<ul class="social">
+				<!-- <li id="copy">&copy; Copyright MF - Todos os direitos protegidos - 2021</li> -->
+				<li><a href="http://facebook.com/mirrorfashion">Facebook</a></li>
+				<li><a href="http://twitter.com/mirrorfashion">Twitter</a></li>
+				<li><a href="http://plus.google.com/mirrorfashion">Google+</a></li>
+			</ul>
+		</div>
+	</footer>
+	<!-- FIM DO RODAPÉ -->
+
+	</body>
+</html>
