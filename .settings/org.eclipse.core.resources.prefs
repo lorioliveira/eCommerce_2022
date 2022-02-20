@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebContent/JSP/alterar-cliente.jsp=UTF-8
+encoding//WebContent/JSP/alterar-endereco.jsp=UTF-8
+encoding//WebContent/JSP/detalhe_produto.jsp=UTF-8
+encoding//WebContent/css/detalhe_blusa.css=UTF-8
+encoding//src/com/les/roupa/core/dao/impl/EstoqueDAO.java=UTF-8
+encoding//src/com/les/roupa/core/strategy/impl/ValidarEntradaEstoque.java=UTF-8
+encoding//src/com/les/roupa/core/strategy/impl/ValidarSaidaEstoque.java=UTF-8
+encoding//src/com/les/roupa/view/helper/impl/ClienteHelper.java=UTF-8
+encoding//src/com/les/roupa/view/helper/impl/EstoqueHelper.java=UTF-8
