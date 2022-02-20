@@ -1,0 +1,26 @@
+Guia de formulários HTML
+https://developer.mozilla.org/pt-BR/docs/Web/Guide/HTML/Forms
+
+Meu primeiro formulário HTML
+https://developer.mozilla.org/pt-BR/docs/Web/Guide/HTML/Forms/Meu_primeiro_formulario_HTML
+
+
+Envio de dados de formulário
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data
+
+Validação de dados de formulário
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+
+-----------------------------------------------------------------------------
+Estrutura da web expressa (Node.js / JavaScript)
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs
+-----------------------------------------------------------------------------
+
+CSS básico
+https://developer.mozilla.org/pt-BR/docs/Aprender/Getting_started_with_the_web/CSS_basico
+
+HTML básico
+https://developer.mozilla.org/pt-BR/docs/Aprender/Getting_started_with_the_web/HTML_basico
+
+Lidando com arquivos
+https://developer.mozilla.org/pt-BR/docs/Aprender/Getting_started_with_the_web/lidando_com_arquivos
