@@ -6,7 +6,7 @@ package com.les.roupa.core.dominio;
  */
 public class EntidadeDominio implements IEntidade {
 	private String id;
-	private String data_cadastro;
+	private String data_Cadastro;
 	
 	
 	public String getId() {
@@ -15,12 +15,13 @@ public class EntidadeDominio implements IEntidade {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getData_Cadastro() {
+		return data_Cadastro;
+	}
+	public void setData_Cadastro(String data_Cadastro) {
+		data_Cadastro = data_Cadastro;
+	}
 	
-	public String getData_cadastro() {
-		return data_cadastro;
-	}
-	public void setData_cadastro(String data_cadastro) {
-		this.data_cadastro = data_cadastro;
-	}
+	
 	
 }

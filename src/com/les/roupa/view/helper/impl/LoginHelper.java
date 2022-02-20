@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.les.roupa.view.helper.IViewHelper;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
-import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 
@@ -81,12 +80,12 @@ public class LoginHelper implements IViewHelper {
 				// salva na sessão o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
-				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
+//				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
 				// salva na sessão o objeto "itensPedidoTroca", para quando for clicado no botão de "Solicitar Troca",
 				// da tela do detalhes do pedido, ele poder adicionar os itens do pedido selecionados para gerar um pedido de troca
-				sessao.setAttribute("itensPedidoTroca", itensPedidoTroca);
+//				sessao.setAttribute("itensPedidoTroca", itensPedidoTroca);
 				
-				if(usuario.getTipo().equals("cliente")) {
+				if(usuario.getTipoCliente().equals("cliente")) {
 					
 					request.getRequestDispatcher("JSP/index_entrar.jsp").forward(request, response);
 				} else {

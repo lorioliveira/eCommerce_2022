@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//WebContent/JSP/alterar-cliente.jsp=UTF-8
 encoding//WebContent/JSP/alterar-endereco.jsp=UTF-8
 encoding//WebContent/JSP/detalhe_produto.jsp=UTF-8
+encoding//WebContent/JSP/login.jsp=UTF-8
 encoding//src/com/les/roupa/view/helper/impl/ClienteHelper.java=UTF-8

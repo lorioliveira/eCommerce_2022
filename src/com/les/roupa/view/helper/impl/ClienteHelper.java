@@ -30,16 +30,16 @@ public class ClienteHelper implements IViewHelper {
 		
         String email = null;
         String senha = null;
-        String confsenha = null;
+        String confirmarSenha = null;
         String nome = null;
         String cpf = null;
-        String dt_nasc = null;
+        String data_Nascimento = null;
         String telefone = null;
         String genero = null;
         String id = null;
         String alteraCliente = null;
         String status = null;
-        String tipo = null;
+        String tipoCliente = null;
         
      // salva a data atual na tabela de Cliente
  		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -59,35 +59,35 @@ public class ClienteHelper implements IViewHelper {
 			// Atributos da classe Usuario
 			email = request.getParameter("email");
 			senha = request.getParameter("senha");
-			confsenha = request.getParameter("confsenha");
+			confirmarSenha = request.getParameter("confirmarSenha");
 			
 			// Atributos da classe Pessoa
 			nome = request.getParameter("nome");
 			cpf = request.getParameter("cpf");
-			dt_nasc = request.getParameter("dt_nasc");
+			data_Nascimento = request.getParameter("data_Nascimento");
 			telefone = request.getParameter("telefone");
 			genero = request.getParameter("genero");
 			status = request.getParameter("status");
-			tipo = request.getParameter("tipo");
+			tipoCliente = request.getParameter("tipoCliente");
 			alteraCliente = request.getParameter("alteraCliente");
 			
 						
 			// Atribuindo os valores capturados do HTML para o cliente
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
-			usuario.setConfirmarSenha(confsenha);
+			usuario.setConfirmarSenha(confirmarSenha);
 			cliente.setUsuario(usuario);
 			
 			
 			cliente.setNome(nome);
 			cliente.setCpf(cpf);
-			cliente.setData_Nascimento(dt_nasc);
+			cliente.setData_Nascimento(data_Nascimento);
 			cliente.setTelefone(telefone);
 			cliente.setGenero(genero);
 			cliente.setStatus(status);
-			cliente.setTipo(tipo);
+			cliente.setTipoCliente(tipoCliente);
 			cliente.setAlteraCliente(alteraCliente);
-			cliente.setData_cadastro(dataAtual);
+			cliente.setData_Cadastro(dataAtual);
 			
 		}
 		
@@ -98,13 +98,13 @@ public class ClienteHelper implements IViewHelper {
 			// Atributos da classe Usuario
 			email = request.getParameter("email");
 			senha = request.getParameter("senha");
-			confsenha = request.getParameter("confsenha");
+			confirmarSenha = request.getParameter("confirmarSenha");
 			id = request.getParameter("id");
 						
 			// Atributos da classe Pessoa
 			nome = request.getParameter("nome");
 			cpf = request.getParameter("cpf");
-			dt_nasc = request.getParameter("dt_nasc");
+			data_Nascimento = request.getParameter("data_Nascimento");
 			telefone = request.getParameter("telefone");
 			genero = request.getParameter("genero");
 			alteraCliente = request.getParameter("alteraCliente");
@@ -113,19 +113,19 @@ public class ClienteHelper implements IViewHelper {
 			// Atribuindo os valores capturados do HTML para o cliente
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
-			usuario.setConfirmarSenha(confsenha);
+			usuario.setConfirmarSenha(confirmarSenha);
 			cliente.setUsuario(usuario);
 						
 			cliente.setId(id);
 			cliente.setNome(nome);
 			cliente.setCpf(cpf);
-			cliente.setData_Nascimento(dt_nasc);
+			cliente.setData_Nascimento(data_Nascimento);
 			cliente.setTelefone(telefone);
 			cliente.setGenero(genero);
 			cliente.setAlteraCliente(alteraCliente);
 			cliente.setStatus(status);
 			
-			cliente.setData_cadastro(dataAtual);
+			cliente.setData_Cadastro(dataAtual);
 
 		}
 		
@@ -166,8 +166,8 @@ public class ClienteHelper implements IViewHelper {
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				/*
 				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA CONSULTAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
+				 * System.out.println("ERRO PARA CONSULTAR!");
+				 *  writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
 				 * );
 				 */
 			}

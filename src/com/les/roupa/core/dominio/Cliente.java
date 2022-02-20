@@ -10,7 +10,7 @@ public class Cliente extends Pessoa {
 	private Usuario usuario;
 	private String data_Nascimento;
 	private String status;
-	private String tipo;
+	private String tipoCliente;
 	
 	private String alteraCliente;
 	
@@ -49,11 +49,11 @@ public class Cliente extends Pessoa {
     }
 	
     /* Tipo - Cliente/ Admin */
-	public String getTipo() {
-		return tipo;
+	public String getTipoCliente() {
+		return tipoCliente;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
     
 	/* Altera Cliente */

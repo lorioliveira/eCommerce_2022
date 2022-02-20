@@ -24,7 +24,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		openConnection();
 		
 		String sql = "insert into cliente "+
-				"(nome,cpf,dt_nasc,genero,telefone,email,senha,status,tipo,dt_cadastro)" +
+				"(nome,cpf,data_Nascimento,genero,telefone,email,senha,status,tipoCliente,data_Cadastro)" +
 				"values (?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
@@ -43,8 +43,8 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			stmt.setString(6,usuario.getEmail());
 			stmt.setString(7,usuario.getSenha());
 			stmt.setString(8,cliente.getStatus());
-			stmt.setString(9,cliente.getTipo());
-			stmt.setString(10,cliente.getData_cadastro());
+			stmt.setString(9,cliente.getTipoCliente());
+			stmt.setString(10,cliente.getData_Cadastro());
 			
 			// executa
 			stmt.execute();
@@ -62,8 +62,8 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	public void alterar (EntidadeDominio entidade) {
 		openConnection();
 		
-		String sql = "update cliente set nome=?, cpf=?, dt_nasc=?, genero=?, "
-				+ "telefone=?, email=?, senha=?, status=?, dt_cadastro=? where id=?";
+		String sql = "update cliente set nome=?, cpf=?, data_Nascimento=?, genero=?, "
+				+ "telefone=?, email=?, senha=?, status=?, data_Cadastro=? where id=?";
 		
 		try {
 			Cliente cliente = (Cliente) entidade;
@@ -81,7 +81,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				stmt.setString(6,usuario.getEmail());
 				stmt.setString(7,usuario.getSenha());
 				stmt.setString(8,cliente.getStatus());
-				stmt.setString(9,cliente.getData_cadastro());
+				stmt.setString(9,cliente.getData_Cadastro());
 				stmt.setString(10,cliente.getId());
 				
 				stmt.execute();
@@ -148,13 +148,13 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				cliente.setId(rs.getString("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
-				cliente.setData_Nascimento(rs.getString("data_nasc"));
+				cliente.setData_Nascimento(rs.getString("data_Nascimento"));
 				cliente.setGenero(rs.getString("genero"));
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setStatus(rs.getString("status"));
-				cliente.setTipo(rs.getString("tipo"));
+				cliente.setTipoCliente(rs.getString("tipoCliente"));
 
-				cliente.setData_cadastro(rs.getString("dt_cadastro"));
+				cliente.setData_Cadastro(rs.getString("data_Cadastro"));
 				
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
@@ -194,12 +194,12 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				cliente.setId(rs.getString("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
-				cliente.setData_Nascimento(rs.getString("data_nasc"));
+				cliente.setData_Nascimento(rs.getString("data_Nascimento"));
 				cliente.setGenero(rs.getString("genero"));
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setStatus(rs.getString("status"));
-				cliente.setTipo(rs.getString("tipo"));
-				cliente.setData_cadastro(rs.getString("dt_cadastro"));
+				cliente.setTipoCliente(rs.getString("tipoCliente"));
+				cliente.setData_Cadastro(rs.getString("data_Cadastro"));
 				
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
@@ -238,12 +238,12 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				cliente.setId(rs.getString("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
-				cliente.setData_Nascimento(rs.getString("data_nasc"));
+				cliente.setData_Nascimento(rs.getString("data_Nascimento"));
 				cliente.setGenero(rs.getString("genero"));
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setStatus(rs.getString("status"));
-				cliente.setTipo(rs.getString("tipo"));
-				cliente.setData_cadastro(rs.getString("dt_cadastro"));
+				cliente.setTipoCliente(rs.getString("tipoCliente"));
+				cliente.setData_Cadastro(rs.getString("data_Cadastro"));
 				
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
@@ -285,13 +285,13 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				cliente.setId(rs.getString("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
-				cliente.setData_Nascimento(rs.getString("data_nasc"));
+				cliente.setData_Nascimento(rs.getString("data_Nascimento"));
 				cliente.setGenero(rs.getString("genero"));
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setStatus(rs.getString("status"));
-				cliente.setTipo(rs.getString("tipo"));
+				cliente.setTipoCliente(rs.getString("tipoCliente"));
 
-				cliente.setData_cadastro(rs.getString("dt_cadastro"));
+				cliente.setData_Cadastro(rs.getString("data_Cadastro"));
 				
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
