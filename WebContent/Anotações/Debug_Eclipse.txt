@@ -1,5 +1,0 @@
-1 - Funcionalidade de Resume (F8) – Avança para o próximo Breakpoint do código. Caso não tenha próximo, avança até o fim da execução do software.
-2 - Funcionalidade de Terminate (Ctrl + F2) – Finaliza a execução do software independente de onde esteja
-3 - Funcionalidade de Step Into (F5) – Entra dentro de um método que exista na linha da execução. Muito importante para saber para onde o sistema está indo
-4 - Funcionalidade de Step Over (F6) – Avança para a próxima linha de código dentro da mesma classe que está em execução.
-5 - Funcionalidade de Step Return (F7) – Volta para o método anterior. Fácil de ser verificado pela stack de execução.
