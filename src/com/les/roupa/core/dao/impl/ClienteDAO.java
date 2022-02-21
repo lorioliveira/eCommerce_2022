@@ -24,8 +24,8 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		openConnection();
 		
 		String sql = "insert into cliente "+
-				"(nome,cpf,data_Nascimento,genero,telefone,email,senha,status,tipoCliente,data_Cadastro)" +
-				"values (?,?,?,?,?,?,?,?,?,?)";
+				"(nome,cpf,data_Nascimento,genero,telefone,email,senha,"
+				+ "status,tipoCliente,data_Cadastro) values (?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			Cliente cliente = (Cliente) entidade;

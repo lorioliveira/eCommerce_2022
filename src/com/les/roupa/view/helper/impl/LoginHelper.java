@@ -87,32 +87,25 @@ public class LoginHelper implements IViewHelper {
 				
 				if(usuario.getTipoCliente().equals("cliente")) {
 					
-					request.getRequestDispatcher("JSP/index_entrar.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/index.jsp").forward(request, response);
 				} else {
-					request.getRequestDispatcher("JSP/admin-entrar.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/indexAdm.jsp").forward(request, response);
 				}
 			} 
 			else {
-				// pendura o "resultado" na requisi��o para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisicao para poder mandar para o arquivo .JSP
 				// Guarda a mensagem que veio da Strategy na vari�vel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR LOGIN!");
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				
-				//writer.println(resultado.getMensagem());
-				//System.out.println("ERRO PARA CONSULTAR!");
-				//writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-				
-				// Redireciona para o arquivo .jsp
-				//request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request, response);
-				
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Requisi��o do form de nova conta e redirecionada para tela de login
+				// Requisicao da nova conta e redirecionada para tela de login
 				request.getRequestDispatcher("JSP/login.jsp").forward(request, response);
 			}
 			else {
@@ -122,14 +115,6 @@ public class LoginHelper implements IViewHelper {
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR LOGIN!");
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				
-				/*
-				 * request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA SALVAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		
@@ -145,15 +130,6 @@ public class LoginHelper implements IViewHelper {
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
         	System.out.println("ERRO PARA ALTERAR LOGIN!");
 			request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-
-
-			/*
-			 * request.setAttribute("mensagemStrategy", resultado.getMensagem());
-			 * writer.println(resultado.getMensagem());
-			 * System.out.println("ERRO PARA ALTERAR!"); writer.
-			 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-			 * );
-			 */
 		}
 	}
 		
@@ -179,13 +155,6 @@ public class LoginHelper implements IViewHelper {
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR LOGIN!");
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-
-				
-				/*
-				 * System.out.println("ERRO PARA EXCLUIR!");
-				 * request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request,
-				 * response);
-				 */
 				
 			}
 		}

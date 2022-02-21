@@ -25,7 +25,7 @@ public class ClienteHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operação foi acionada
 		String operacao = request.getParameter("operacao");
 		
         String email = null;
@@ -41,7 +41,7 @@ public class ClienteHelper implements IViewHelper {
         String status = null;
         String tipoCliente = null;
         
-     // salva a data atual na tabela de Cliente
+     // salva a data atual como Data Cadastro na tabela de Cliente
  		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
  		Date date = new Date();
  		String dataAtual;
@@ -146,7 +146,7 @@ public class ClienteHelper implements IViewHelper {
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operação foi acionada
 		String operacao = request.getParameter("operacao");
 		
 		// Usa para escrever na tela
@@ -160,35 +160,19 @@ public class ClienteHelper implements IViewHelper {
 						
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA CONSULTAR!");
-				 *  writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				request.getRequestDispatcher("/JSP/login.jsp").forward(request, response);
+				request.getRequestDispatcher("./JSP/login.jsp").forward(request, response);
 			}
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA SALVAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		
@@ -201,24 +185,16 @@ public class ClienteHelper implements IViewHelper {
 				// No caso 'não', então ele encaminha para tela de alteração com os dados puxados do banco
 				if(alteraCliente.equals("0")) {
 					request.setAttribute("idCliente", id);
-					
-					request.getRequestDispatcher("JSP/alterar-cliente.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
 				}else {
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/perfil2.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
 				}
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA ALTERAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		
@@ -229,16 +205,8 @@ public class ClienteHelper implements IViewHelper {
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA EXCLUIR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 	}

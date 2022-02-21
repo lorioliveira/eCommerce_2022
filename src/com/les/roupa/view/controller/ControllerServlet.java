@@ -23,7 +23,7 @@ import com.les.roupa.view.helper.impl.EnderecoHelper;
 import com.les.roupa.view.helper.impl.LoginHelper;
 
 /**
- * Respons�vel por processar todas as requisi��es feita pelo usuario,
+ * Responsavel por processar todas as requisicoes feita pelo usuario,
  * configurado conforme o arquivo web.xml
  * @author Lorena Oliveira
  */

@@ -27,7 +27,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 			Cliente cliente = (Cliente) entidade;
 			Usuario usuario = cliente.getUsuario();
 			
-			// prepared statement para inser��o
+			// prepared statement para insercao
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			// seta os valores

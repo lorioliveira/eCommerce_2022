@@ -139,7 +139,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p>Ou registre-se aqui</p>
-                                        <a href="novaConta.jsp"><button class="btn"><i class="fa fa-user-plus"></i> Nova conta</button></a>
+                                        <button class="btn"><a href="../JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</button></a>
                                     </div>
                                 </div>
                             </div>

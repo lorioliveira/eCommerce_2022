@@ -19,7 +19,7 @@ public class EntidadeDominio implements IEntidade {
 		return data_Cadastro;
 	}
 	public void setData_Cadastro(String data_Cadastro) {
-		data_Cadastro = data_Cadastro;
+		this.data_Cadastro = data_Cadastro;
 	}
 	
 	
