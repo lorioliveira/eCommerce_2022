@@ -59,13 +59,13 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="../login.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="../JSP/login.jsp" class="nav-item nav-link active">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
-                                <a href="../login.jsp" class="dropdown-item">Login</a>
+                                <a href="../JSP/login.jsp" class="dropdown-item">Login</a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="../login.jsp">
+                        <a href="../JSP/login.jsp">
                         <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -123,7 +123,7 @@
             <div class="container-novaconta">
                 <div class="col-lg-9">   
                     <div class="register-form">
-                        <form action="http://localhost:8080/eCommerce/cadastro">
+                        <form action="http://localhost:8080/eCommerce/cadastro" method="post">
                             <h4>Crie sua conta para acessar a loja </h4><br>
                                 <div class="row">
                                 <div class="col-md-3">
@@ -132,16 +132,16 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label>CPF</label>
-                                    <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF apenas números" maxlength="14"  required>
+                                    <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF apenas números" maxlength="14"  >
                                 </div>
                                 <div class="col-md-6">
                                     <label>Gênero: </label></br>
-                                    <input type="radio" name="genero" value="feminino" required>   <i class="fa fa-female"></i>   Feminino
-                                    <input type="radio" name="genero" value="masculino" class="espacamento_genero" required>       <i class="fa fa-male"></i>   Masculino 
+                                    <input type="radio" name="genero" value="feminino" >   <i class="fa fa-female"></i>   Feminino
+                                    <input type="radio" name="genero" value="masculino" class="espacamento_genero" >       <i class="fa fa-male"></i>   Masculino 
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Telefone</label>
-                                    <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Telefone" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+                                    <label>Celular</label>
+                                    <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Telefone" pattern="\(\d{2}\)\s*\d{5}-\d{4}" >
                                 </div>
                                 <div class="col-md-3">
                                     <label> Data de Nascimento</label>
@@ -149,7 +149,7 @@
                             </div>
                                 <div class="col-md-6">
                                     <label>E-mail</label>
-                                    <input class="form-control" name="email" type="email" placeholder="E-mail" required>
+                                    <input class="form-control" name="email" type="email" placeholder="E-mail" >
                                 </div>
                                 <div class="col-md-6">
                                     <label>Senha</label>
@@ -160,12 +160,22 @@
                                     <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8">
                                 </div>
                                 <div class="col-md-9">
-                                    <button type="submit" class="btn" name="operacao" value="SALVAR"><i class="fa fa-user-check"></i> Criar Conta</button>
+                                    <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-user-check"></i> Criar Conta</button>
                                 </div>
                             </div>
                             <input type="hidden" name="alteraCliente" value="0"/>
                             <input type="hidden" name="status" value="ativo"/>
                             <input type="hidden" name="tipoCliente" value="cliente"/>
+
+                            <div id="openModal" class="modalDialog">
+                                <div>
+                                  <a href="#close" title="Close" class="close">X</a>
+                                  <h2>Bem Vinda(o) à nossa loja!</h2>
+                                  
+                                  <p>Agora você pode realizar seu login <a href="../JSP/login.jsp">aqui</a></p>
+                                </div>
+                              </div>
+
                         </form> 
                     </div>
                 </div>    
@@ -244,7 +254,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
