@@ -87,13 +87,13 @@
                     </div>
                 </div>
                 <!-- MINHA SACOLA -->
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div class="user">
                         <a href="" class="btn cart">
                         Minha Sacola <i class="fas fa-shopping-bag"></i>
                         </a>
                     </div>
-                </div>
+                </div> -->
             </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p>Ou registre-se aqui</p>
-                                        <button class="btn"><a href="../JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</button></a>
+                                        <a class="btn" href="../JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</a>
                                     </div>
                                 </div>
                             </div>

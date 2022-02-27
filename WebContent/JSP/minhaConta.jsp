@@ -109,13 +109,13 @@
                             <button><i class="fa fa-search"></i></button> -->
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="user">
                             <a href="../JSP/carrinho.jsp" class="btn cart">
                             Minha Sacola <i class="fas fa-shopping-bag"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

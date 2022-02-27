@@ -95,13 +95,13 @@
                     </div>
                 </div>
                 <!-- MINHA SACOLA -->
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div class="user">
                         <a href="" class="btn cart">
                         Minha Sacola <i class="fas fa-shopping-bag"></i>
                         </a>
                     </div>
-                </div>
+                </div> -->
             </div>
             </div>
         </div>
