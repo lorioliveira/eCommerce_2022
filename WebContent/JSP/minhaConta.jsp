@@ -38,9 +38,6 @@
 		List<Cliente> clientes = dao.consultarClienteById(usuarioLogado.getId());
 		%>
 
-
-
-
     <body>
         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
@@ -142,7 +139,7 @@
                             <!-- <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a> -->
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Meus Dados</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>Meus Endereços</a>
-                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Forma de Pagamento</a>
+                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Cartões</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-receipt"></i>Pedidos</a>
                             <a class="nav-link" id="changepassword-nav" data-toggle="pill" href="#changepassword-tab" role="tab"><i class="fa fa-key"></i>Alterar Senha</a>
                             <a class="nav-link">
@@ -182,9 +179,10 @@
                                         <div class="col-md-6">
                                             <input class="form-control valEmail" name="email" type="email" value="<%=clientes.get(0).getUsuario().getEmail() %>">
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="radio" name="genero" value="feminino"> <i class="fa fa-female"></i> Feminino  
-                                            <input type="radio" name="genero" value="masculino"> <i class="fa fa-male"></i> Masculino
+                                        <div class="col-md-6" >
+                                             <input type="radio" name="genero" value="<%=clientes.get(0).getGenero() %> " checked> <i class="fa fa-male"></i>  <%=clientes.get(0).getGenero() %>                                      
+                                            <!--   <input type="radio" name="genero" value="feminino"> <i class="fa fa-female"></i> Feminino  
+                                            <input type="radio" name="genero" value="masculino"> <i class="fa fa-male"></i> Masculino-->
                                         </div>
 
                                         <div class="col-md-4">
@@ -205,7 +203,7 @@
                             <!-- MEUS ENDEREÇOS  -->
                             <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                                 <h4>Meus Endereços</h4>
-                                <a href="../JSP/novoendereco.jsp"><button class="btn ml-auto nav-link btn_NovoEndereco"><i class="fa fa-map-marker-alt"> Novo Endereço</i></a></button>
+                                <button type="submit" class="btn ml-auto nav-link btn_NovoEndereco"><a href="../JSP/novoendereco.jsp"><i class="fa fa-map-marker-alt"></i> Novo Endereço</a></button>
                                 </br>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -237,7 +235,7 @@
                             </div>
                              <!-- FORMA DE PAGAMENTO - CARTÕES -->
                              <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                                <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"> Novo Cartão</i></a></button></h4>
+                                <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo Cartão</a></button></h4>
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
                                         <tr>

@@ -2550,14 +2550,11 @@ h2 {
 }
 .btnCadastrarEndereco{
     margin-top: 5%;
-    width: 40%;
+    width: 30%;
 }
 .btn_editarEndereco{
-    width: 50%;
+    width: 30%;
     margin: 5% 0%;
-}
-.btnCancelarCartao{
-    width: 40%;
 }
 .selectSelecionarProduto{
     width: 20%;

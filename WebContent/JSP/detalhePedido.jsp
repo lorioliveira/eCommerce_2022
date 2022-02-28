@@ -2,8 +2,10 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
-<%@page import="java.util.List"%>
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>  
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    		pageEncoding="UTF-8"%>	
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -49,30 +51,31 @@
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         
       <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
-      <div class="nav">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="#" class="navbar-brand">MENU</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="../JSP/login.jsp" class="nav-item nav-link active">Home</a>
-                    </div>
-                    <div class="navbar-nav ml-auto">
-                        <div class="nav-item dropdown">
-                            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                            <div class="dropdown-menu">
-                                <a href="../JSP/login.jsp" class="dropdown-item">Login</a>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
+                            <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <div class="dropdown-menu">
+                                    <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
-    </div>
        <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
         
         <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
@@ -82,7 +85,7 @@
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="../JSP/login.jsp">
+                        <a href="../JSP/index.jsp">
                         <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -95,13 +98,13 @@
                     </div>
                 </div>
                 <!-- MINHA SACOLA -->
-                <!-- <div class="col-md-2">
+                <div class="col-md-2">
                     <div class="user">
-                        <a href="" class="btn cart">
+                        <a href="../JSP/carrinho.jsp" class="btn cart">
                         Minha Sacola <i class="fas fa-shopping-bag"></i>
                         </a>
                     </div>
-                </div> -->
+                </div>
             </div>
             </div>
         </div>
@@ -112,77 +115,110 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Criar nova conta</li>
+                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Minha Conta</a></li>
+                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Meus Pedidos</a></li>
+                    <li class="breadcrumb-item active">Detalhe do Pedido</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Inicio de Registrar nova conta -->
+        <!-- Início dos dados do Pedido -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
                 <div class="col-lg-9">   
                     <div class="register-form">
-                        <form action="http://localhost:8080/eCommerce/cadastro" method="post">
-                            <h4>Crie sua conta para acessar a loja </h4><br>
-                                <div class="row">
+                        <h6 class="titulo__registrarnovaconta">Detalhe do Pedido nº ###### - Data: ####-##-## </h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Total Produtos </label>
+                                    <span> R$ 900,00</span>
+                                    <br>
+                                    <label>Frete</label>
+                                    <span> R$ 900,00</span>
+                                    <br>
+                                    <label>Desconto</label>
+                                    <span class="valorDesconto"> R$ 900,00</span>
+                                    <br>
+                                    <label>Total:</label>
+                                    <span> R$ 900,00</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <label>Cartao</label>
+                                    <p>lorena s oliveira - (Mastercard / 2028-07)</p>
+                                    <p>R$ 980,00</p>
+                                </div>
+                                
                                 <div class="col-md-3">
-                                    <label>Nome</label>
-                                    <input class="form-control" type="text" name="nome" placeholder="Nome">
-                                </div>
-                                <div class="col-md-3">
-                                    <label>CPF</label>
-                                    <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF apenas números" maxlength="14"  >
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Gênero: </label></br>
-                                    <input type="radio" name="genero" value="feminino" >   <i class="fa fa-female"></i>   Feminino
-                                    <input type="radio" name="genero" value="masculino" class="espacamento_genero" >       <i class="fa fa-male"></i>   Masculino 
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Celular</label>
-                                    <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Telefone" pattern="\(\d{2}\)\s*\d{5}-\d{4}" >
-                                </div>
-                                <div class="col-md-3">
-                                    <label> Data de Nascimento</label>
-                                    <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" placeholder="Data de Nascimento" >
-                            </div>
-                                <div class="col-md-6">
-                                    <label>E-mail</label>
-                                    <input class="form-control" name="email" type="email" placeholder="E-mail" >
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Senha</label>
-                                    <input class="form-control" type="password" name="senha" placeholder="Senha" min="8">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Confirme a Senha</label>
-                                    <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8">
-                                </div>
-                                <div class="col-md-9">
-                                    <button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
-                                    <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-user-check"></i> Criar Conta</button>
+                                    <label>Entrega</label>
+                                    <p>Rodovia BR-324 km 18,5 nº s/n</p>
+                                    <p>Salvador - BA</p>
+                                    <p>CEP 43700-050</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="alteraCliente" value="0"/>
-                            <input type="hidden" name="status" value="ativo"/>
-                            <input type="hidden" name="tipoCliente" value="cliente"/>
-
-                            <div id="openModal" class="modalDialog">
-                                <div>
-                                  <a href="#close" title="Close" class="close">X</a>
-                                  <h2>Bem Vinda(o) à nossa loja!</h2>
-                                  
-                                  <p>Agora você pode realizar seu login <a href="../JSP/login.jsp">aqui</a></p>
-                                </div>
-                              </div>
-
-                        </form> 
+                        </div>
                     </div>
-                </div>    
+            <!-- Fim dos dados do Pedido -->
+
+                     <!-- Início dos produtos do Pedido - TABELA -->
+                    <div class="col-lg-9">
+                        <div class="login-form">
+                            <div class="row div__novaconta">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Produto</th>
+                                                <th>Valor Produto</th>
+                                                <th>Qtde.</th>
+                                                <th>Status</th>
+                                                <th>Qtde. Troca</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$29</td>
+                                                <td>1</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$23</td>
+                                                <td>3</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$39</td>
+                                                <td>2</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blusa Amarela</td>
+                                                <td>$13</td>
+                                                <td>4</td>
+                                                <td>Em Processamento</td>
+                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <button class="btn btnQtdeTroca">Realizar Troca</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Login End -->
+        <!-- Fim do Login -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -193,7 +229,7 @@
                             <h2>Contato</h2>
                             <div class="contact-info">
                                 <p><i class="fa fa-map-marker"></i>Mogi das Cruzes - SP</p>
-                                <p><i class="fa fa-envelope"></i>Lorena Oliveira</p>
+                                <p><i class="fa fa-envelope"></i>Lorena Oliveira </p>
                                 <p><i class="fa fa-phone"></i>+55 11 91234-5678</p>
                             </div>
                         </div>
@@ -234,7 +270,7 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="metodo_pagamento_MF" />
+                            <img src="../img/payment-method.png" alt="Payment Method" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -277,6 +313,5 @@
         
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
-        <script src="../js/all.js"></script>
     </body>
 </html>
