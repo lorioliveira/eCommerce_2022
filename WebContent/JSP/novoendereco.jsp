@@ -91,13 +91,13 @@
                             <button><i class="fa fa-search"></i></button> -->
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="user">
                             <a href="../JSP/carrinho.jsp" class="btn cart">
                             Minha Sacola <i class="fas fa-shopping-bag"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -206,10 +206,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-8">
-                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" style="width: 60%;"></textarea>
+                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
                                         <br>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-6">
                                         <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEndereco"><i class="fa fa-ban"></i> Cancelar</button>
                                         <button class="btn btnCadastrarEndereco"><a href="../JSP/minhaConta.jsp"><i class="fa fa-save"></i>  Salvar</a></button>
                                     </div>

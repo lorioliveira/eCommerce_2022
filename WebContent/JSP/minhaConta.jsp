@@ -75,9 +75,9 @@
                     <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
 
                     <div class="navbar-nav ml-auto">
-                        <div class="nav-item dropdown">
+                       <!-- <div class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                            <!-- <div class="dropdown-menu">
+                             <div class="dropdown-menu">
                                 <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
                             </div> -->
                         </div>
@@ -179,11 +179,10 @@
                                         <div class="col-md-6">
                                             <input class="form-control valEmail" name="email" type="email" value="<%=clientes.get(0).getUsuario().getEmail() %>">
                                         </div>
-                                        <div class="col-md-6" >
-                                             <input type="radio" name="genero" value="<%=clientes.get(0).getGenero() %> " checked> <i class="fa fa-male"></i>  <%=clientes.get(0).getGenero() %>                                      
-                                            <!--   <input type="radio" name="genero" value="feminino"> <i class="fa fa-female"></i> Feminino  
-                                            <input type="radio" name="genero" value="masculino"> <i class="fa fa-male"></i> Masculino-->
-                                        </div>
+                                        <!--<div class="col-md-6" >                   
+                                               <input type="radio" name="genero" value="feminino"> <i class="fa fa-female"></i> Feminino  
+                                            <input type="radio" name="genero" value="masculino"> <i class="fa fa-male"></i> Masculino
+                                        </div>-->
 
                                         <div class="col-md-4">
                                             <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-sync-alt"></i> Atualizar Dados</button>
@@ -196,6 +195,7 @@
                                         <input type="hidden" name="id" value="<%=clientes.get(0).getId()%>"/>
                                         <input type="hidden" name="senha" accesskey="S" value="<%=clientes.get(0).getUsuario().getSenha() %>" />
 					                    <input type="hidden" name="confirmarSenha" value="<%=clientes.get(0).getUsuario().getSenha() %>"/>
+                                        <input type="hidden" name="genero" value="<%=clientes.get(0).getGenero() %> "> 
 
                                     </div>
                                 </form>

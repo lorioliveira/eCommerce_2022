@@ -2,16 +2,15 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
-<%@page import="java.util.List"%>  
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    		pageEncoding="UTF-8"%>	
 
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>Mirror Fashion</title>
+        <title>Mirror Fashion - Admin</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
@@ -33,7 +32,7 @@
     </head>
 
     <body>
-         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
+        <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -49,8 +48,9 @@
             </div>
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
-        
-      <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+    
+    
+        <!-- Inicio da faixa de menu -  faixa rosa contendo home e minha conta -->
         <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -58,18 +58,14 @@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
+    
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
-                            <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                            <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
-
-                        <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
-                    
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                                 <div class="dropdown-menu">
                                     <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
                                 </div>
@@ -79,47 +75,45 @@
                 </nav>
             </div>
         </div>
-       <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
-        
-        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
+        <!-- Fim da faixa de menu -  faixa rosa contendo home e minha conta-->
+    
+    
+        <!-- Inicio da div contendo logo, barra de pesquisa  -->
         <div class="bottom-bar">
             <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <!-- LOGO -->
-                    <div class="logo">
-                        <a href="../JSP/index.jsp">
-                        <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
-                        </a>
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="../JSP/indexAdm.jsp">
+                                <img src="../img/mir.svg" alt="Logo Mirror Fashion">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <!-- <input type="text" placeholder="Procuro por ...">
+                            <button><i class="fa fa-search"></i></button> -->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="user">
+                            <h6><div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div></h6>
+                            <!-- <a href="cart.jsp" class="btn cart">
+                                Minha Sacola <i class="fas fa-shopping-bag"></i>
+                                </a> -->
+                        </div>
                     </div>
                 </div>
-                <!-- BARRA DE PESQUISA -->
-                <div class="col-md-6">
-                    <div class="search">
-                        <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
-                    </div>
-                </div>
-                <!-- MINHA SACOLA -->
-                <!-- <div class="col-md-2">
-                    <div class="user">
-                        <a href="../JSP/carrinho.jsp" class="btn cart">
-                        Minha Sacola <i class="fas fa-shopping-bag"></i>
-                        </a>
-                    </div>
-                </div> -->
-            </div>
             </div>
         </div>
-        <!--- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->       
+        <!-- Fim da div contendo logo, barra de pesquisa  -->   
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Minha Conta</a></li>
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Meus Pedidos</a></li>
+                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Home</a></li>
                     <li class="breadcrumb-item active">Detalhe do Pedido</li>
                 </ul>
             </div>
@@ -131,25 +125,24 @@
             <div class="container-novaconta">
                 <div class="col-lg-9">   
                     <div class="register-form">
-                        <h6 class="titulo__registrarnovaconta">Detalhe do Pedido nº ###### - Data: ####-##-## </h6>
+                        <h4>Detalhe do Pedido nº ###### - Data: ####-##-## </h4><br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label>Total Produtos </label>
-                                    <span> R$ 900,00</span>
+                                    <label>Produtos </label>
+                                    <span> R$ 700,00</span>
                                     <br>
                                     <label>Frete</label>
-                                    <span> R$ 900,00</span>
+                                    <span> R$ 200,00</span>
                                     <br>
                                     <label>Desconto</label>
-                                    <span class="valorDesconto"> R$ 900,00</span>
+                                    <span class="valorDesconto"> R$ 100,00</span>
                                     <br>
                                     <label>Total:</label>
-                                    <span> R$ 900,00</span>
+                                    <span> R$ 800,00</span>
                                 </div>
                                 <div class="col-md-5">
                                     <label>Cartao</label>
                                     <p>lorena s oliveira - (Mastercard / 2028-07)</p>
-                                    <p>R$ 980,00</p>
                                 </div>
                                 
                                 <div class="col-md-3">
@@ -163,7 +156,7 @@
                     </div>
             <!-- Fim dos dados do Pedido -->
 
-                     <!-- Início dos produtos do Pedido - TABELA -->
+                     <!-- Início do Pedido - TABELA -->
                     <div class="col-lg-9">
                         <div class="login-form">
                             <div class="row div__novaconta">
@@ -175,7 +168,7 @@
                                                 <th>Valor Produto</th>
                                                 <th>Qtde.</th>
                                                 <th>Status</th>
-                                                <th>Qtde. Troca</th>
+                                                <th>Ação</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -184,34 +177,29 @@
                                                 <td>$29</td>
                                                 <td>1</td>
                                                 <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                               <td rowspan="9">
+                                                   <a href="../JSP/alterarStatusPedido.jsp"><button class="btn btnEditarStatus btnCupom"> <i class="fa fa-edit"></i> </button></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>$23</td>
                                                 <td>3</td>
                                                 <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>$39</td>
                                                 <td>2</td>
                                                 <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>$13</td>
                                                 <td>4</td>
                                                 <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5">
-                                                    <button class="btn btnQtdeTroca">Realizar Troca</button>
-                                                </td>
-                                            </tr>
+                                            </tr> 
                                         </tbody>
                                     </table>
                                 </div>
@@ -294,7 +282,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">

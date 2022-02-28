@@ -2,16 +2,15 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
-<%@page import="java.util.List"%>  
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    		pageEncoding="UTF-8"%>	
 
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>Mirror Fashion</title>
+        <title>Mirror Fashion - Admin</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
@@ -33,7 +32,7 @@
     </head>
 
     <body>
-         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
+        <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -49,8 +48,9 @@
             </div>
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
-        
-      <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+    
+    
+        <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
         <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -58,18 +58,14 @@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
+    
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
-                            <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                            <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
-
-                        <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
-                    
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                                 <div class="dropdown-menu">
                                     <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
                                 </div>
@@ -79,149 +75,140 @@
                 </nav>
             </div>
         </div>
-       <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
-        
-        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
+        <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta-->
+    
+    
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         <div class="bottom-bar">
             <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <!-- LOGO -->
-                    <div class="logo">
-                        <a href="../JSP/index.jsp">
-                        <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
-                        </a>
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="../JSP/indexAdm.jsp">
+                                <img src="../img/mir.svg" alt="Logo Mirror Fashion">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <!-- <input type="text" placeholder="Procuro por ...">
+                            <button><i class="fa fa-search"></i></button> -->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="user">
+                            <h6><div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div></h6>
+                            <!-- <a href="cart.jsp" class="btn cart">
+                                Minha Sacola <i class="fas fa-shopping-bag"></i>
+                                </a> -->
+                        </div>
                     </div>
                 </div>
-                <!-- BARRA DE PESQUISA -->
-                <div class="col-md-6">
-                    <div class="search">
-                        <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
-                    </div>
-                </div>
-                <!-- MINHA SACOLA -->
-                <!-- <div class="col-md-2">
-                    <div class="user">
-                        <a href="../JSP/carrinho.jsp" class="btn cart">
-                        Minha Sacola <i class="fas fa-shopping-bag"></i>
-                        </a>
-                    </div>
-                </div> -->
-            </div>
             </div>
         </div>
-        <!--- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->       
+        <!-- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->   
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Minha Conta</a></li>
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Meus Pedidos</a></li>
-                    <li class="breadcrumb-item active">Detalhe do Pedido</li>
+                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Home</a></li>
+                    <li class="breadcrumb-item active">Alterar Produto</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Início dos dados do Pedido -->
+        <!-- Inicio de Registrar nova conta -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
                 <div class="col-lg-9">   
                     <div class="register-form">
-                        <h6 class="titulo__registrarnovaconta">Detalhe do Pedido nº ###### - Data: ####-##-## </h6>
+                        <h4>Alterar Cadastro de Produto</h4><br>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label>Total Produtos </label>
-                                    <span> R$ 900,00</span>
-                                    <br>
-                                    <label>Frete</label>
-                                    <span> R$ 900,00</span>
-                                    <br>
-                                    <label>Desconto</label>
-                                    <span class="valorDesconto"> R$ 900,00</span>
-                                    <br>
-                                    <label>Total:</label>
-                                    <span> R$ 900,00</span>
-                                </div>
-                                <div class="col-md-5">
-                                    <label>Cartao</label>
-                                    <p>lorena s oliveira - (Mastercard / 2028-07)</p>
-                                    <p>R$ 980,00</p>
-                                </div>
-                                
-                                <div class="col-md-3">
-                                    <label>Entrega</label>
-                                    <p>Rodovia BR-324 km 18,5 nº s/n</p>
-                                    <p>Salvador - BA</p>
-                                    <p>CEP 43700-050</p>
-                                </div>
+                            <div class="col-md-3">
+                                <label>Nome</label>
+                                <input class="form-control" type="text" placeholder="Nome">
                             </div>
-                        </div>
-                    </div>
-            <!-- Fim dos dados do Pedido -->
-
-                     <!-- Início dos produtos do Pedido - TABELA -->
-                    <div class="col-lg-9">
-                        <div class="login-form">
-                            <div class="row div__novaconta">
-                                <div class="col-md-12">
-                                    <table class="table table-bordered">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Produto</th>
-                                                <th>Valor Produto</th>
-                                                <th>Qtde.</th>
-                                                <th>Status</th>
-                                                <th>Qtde. Troca</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Blusa Amarela</td>
-                                                <td>$29</td>
-                                                <td>1</td>
-                                                <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Blusa Amarela</td>
-                                                <td>$23</td>
-                                                <td>3</td>
-                                                <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Blusa Amarela</td>
-                                                <td>$39</td>
-                                                <td>2</td>
-                                                <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Blusa Amarela</td>
-                                                <td>$13</td>
-                                                <td>4</td>
-                                                <td>Em Processamento</td>
-                                                <td><input class="input_qtdeTroca" type="number"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5">
-                                                    <button class="btn btnQtdeTroca">Realizar Troca</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="col-md-3">
+                                <label>Categoria</label>
+                                <select class="form-control" name="categoria">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Blusa Comprida">Blusa Comprida</option>
+                                    <option value="Blusa Curta">Blusa Curta</option>
+                                    <option value="Calca">Calça</option>
+                                    <option value="Vestido">Vestido</option>
+                                </select>
                             </div>
-                        </div>
+                            <div class="col-md-3">
+                                <label>Cor Produto </label>
+                                <select class="form-control" name="categoria">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Amarelo">Amarelo</option>
+                                    <option value="Preto">Preto</option>
+                                    <option value="Verde">Verde</option>
+                                    <option value="Rosa">Rosa</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Tamanho </label>
+                                <select class="form-control" name="categoria">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="36">36</option>
+                                    <option value="38">38</option>
+                                    <option value="40">40</option>
+                                    <option value="42">42</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label> Qtde</label>
+                                <input class="form-control inputQtde" type="number" placeholder="0000">
+                           </div>
+                            <div class="col-md-3">
+                                <label>R$ Compra</label>
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-md-3">
+                                <label>R$ Venda</label>
+                                <input class="form-control" type="number">
+                            </div>
+                            <!-- <div class="col-md-2">
+                                <label>Grupo Preço </label>
+                                <select name="grupoPrecificacao">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Grupo1">Grupo1</option>
+                                    <option value="Grupo2">Grupo2</option>
+                                    <option value="Grupo3">Grupo3</option>
+                                    <option value="Grupo4">Grupo4</option>
+                                </select>
+                            </div> -->
+                            <div class="col-md-4">
+                                <label>Status</label> <br>
+                                <input type="radio" name="statusProduto" value="Ativo" checked> Ativo                              
+                                <input type="radio" name="statusProduto" value="Inativo">  Inativo
+                            </div>
+                            <div class="col-md-5">
+                                <label>Foto</label>
+                                <input class="btnFile form-control" type="file">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Motivo Ativação/Inativação </label>
+                                <textarea class="textareaProduto" name="motivoStatus" id="motivo" cols="60" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Descrição</label>
+                                <textarea class="textareaProduto" name="descricaoProduto" id="descricao" cols="110" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-9">
+                                <a href="../JSP/indexAdm.jsp"><button class="btn btnAtualizarProduto"><i class="fa fa-save"></i>  Salvar</button></a>
+                            </div>
+                        </div> 
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
-        <!-- Fim do Login -->
+        <!-- Login End -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -294,7 +281,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">

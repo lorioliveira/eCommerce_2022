@@ -77,11 +77,11 @@ public class LoginHelper implements IViewHelper {
 				
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
-				// salva na sess�o o objeto "usuarioLogado", recebendo o valor de "usuario"
+				// salva na sessao o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
 //				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
-				// salva na sess�o o objeto "itensPedidoTroca", para quando for clicado no bot�o de "Solicitar Troca",
+				// salva na sessao o objeto "itensPedidoTroca", para quando for clicado no bot�o de "Solicitar Troca",
 				// da tela do detalhes do pedido, ele poder adicionar os itens do pedido selecionados para gerar um pedido de troca
 //				sessao.setAttribute("itensPedidoTroca", itensPedidoTroca);
 				
@@ -94,7 +94,7 @@ public class LoginHelper implements IViewHelper {
 			} 
 			else {
 				// pendura o "resultado" na requisicao para poder mandar para o arquivo .JSP
-				// Guarda a mensagem que veio da Strategy na vari�vel para que 
+				// Guarda a mensagem que veio da Strategy na variavel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR LOGIN!");
@@ -110,7 +110,7 @@ public class LoginHelper implements IViewHelper {
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na vari�vel para que 
+				// Guarda a mensagem que veio da Strategy na variavel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR LOGIN!");
@@ -120,12 +120,12 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-			// Requisi��o de alteracao de senha
+			// requisisao de alteracao de senha
 			request.getRequestDispatcher("JSP/perfil.jsp").forward(request, response);
 		}
 		else {
 			// mostra as mensagens de ERRO se houver
-			// Guarda a mensagem que veio da Strategy na vari�vel para que 
+			// Guarda a mensagem que veio da Strategy na variavel para que 
 			// seja exibida na tela 'tela-mensagem.jsp'
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
         	System.out.println("ERRO PARA ALTERAR LOGIN!");
@@ -135,22 +135,22 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Limpa a sess�o - Sair
+				// Limpa a sessao - Sair
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				//sessao.removeAttribute("usuarioLogado"); // remove somente 1 atributo criado
 				sessao.invalidate(); // destroi o cookie JSESSIONID inteiro e cria outro
 				
-				// pendura o "resultado" na requisi��o para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisisao para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
 				request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request, response);
 			}
 			else {
-				// se tiver alguma mensagem da Strategy, ir� redirecionar para a tela de Login do mesmo jeito
+				// se tiver alguma mensagem da Strategy, ira redirecionar para a tela de Login do mesmo jeito
 				// Redireciona para o arquivo .jsp
-				// Guarda a mensagem que veio da Strategy na vari�vel para que 
+				// Guarda a mensagem que veio da Strategy na variavel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR LOGIN!");

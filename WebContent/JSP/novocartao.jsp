@@ -59,6 +59,9 @@
                         <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
                         <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
                     </div>
+
+                    <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
+                    
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
@@ -91,13 +94,13 @@
                             <button><i class="fa fa-search"></i></button> -->
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="user">
                             <a href="../JSP/carrinho.jsp" class="btn cart">
                             Minha Sacola <i class="fas fa-shopping-bag"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
