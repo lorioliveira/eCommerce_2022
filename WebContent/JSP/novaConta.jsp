@@ -149,7 +149,7 @@
                             </div>
                                 <div class="col-md-6">
                                     <label>E-mail</label>
-                                    <input class="form-control" name="email" type="email" placeholder="E-mail" >
+                                    <input class="form-control" name="email" type="email" placeholder="e-mail" >
                                 </div>
                                 <div class="col-md-6">
                                     <label>Senha</label>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
-                                    <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-user-check"></i> Criar Conta</button>
+                                    <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-user-check"></i> Criar</button>
                                 </div>
                             </div>
                             <input type="hidden" name="alteraCliente" value="0"/>

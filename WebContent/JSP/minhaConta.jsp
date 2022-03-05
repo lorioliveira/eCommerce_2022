@@ -203,7 +203,7 @@
                             <!-- MEUS ENDEREÇOS  -->
                             <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                                 <h4>Meus Endereços</h4>
-                                <button type="submit" class="btn ml-auto nav-link btn_NovoEndereco"><a href="../JSP/novoendereco.jsp"><i class="fa fa-map-marker-alt"></i> Novo Endereço</a></button>
+                                <button type="submit" class="btn ml-auto nav-link btn_NovoEndereco"><a href="../JSP/novoendereco.jsp"><i class="fa fa-map-marker-alt"></i> Novo</a></button>
                                 </br>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -235,7 +235,7 @@
                             </div>
                              <!-- FORMA DE PAGAMENTO - CARTÕES -->
                              <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                                <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo Cartão</a></button></h4>
+                                <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </a></button></h4>
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
                                         <tr>

@@ -160,7 +160,9 @@
                                                <option value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
                                            </select>
                                         </td>
-                                        <td><button class="btn atualizarStatus"><i class="fa fa-save"></i> Salvar</button>
+                                        <td>
+                                            <button class="btn"><i class="fa fa-times-circle"></i> Cancelar</button>
+                                            <button class="btn atualizarStatus"><i class="fa fa-save"></i> Salvar</button>
                                         </td>
                                     </tr>
                                 </tbody>

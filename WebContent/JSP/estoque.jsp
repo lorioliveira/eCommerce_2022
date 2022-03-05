@@ -144,7 +144,7 @@
                                 <option value="Saida">Saída</option>
                             </select>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label>Qtde</label>
                             <input class="inputQuantidade form-control" type="number" placeholder="000">
                         </div>
@@ -156,8 +156,11 @@
                             <label>Data</label>
                             <input class="form-control" type="date">
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <button class="btn btnCadastrarEstoque"><i class="fa fa-save"></i> Salvar</button>
+                        </div>
+                        <div class="col-md-4">
+                        	<button class="btn btnCadastrarEstoque"><i class="fa fa-times-circle"></i> Cancelar</button>
                         </div>
                     </div>
                 </div>

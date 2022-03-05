@@ -59,6 +59,9 @@
                         <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
                         <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
                     </div>
+
+                    <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
+
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
@@ -123,7 +126,7 @@
                     <div class="col-md-9">
                         <div class="tab-content">
                              <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                                <h4>Editar Endereço</h4> <br>
+                                <h4>Editar endereço</h4> <br>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>Tipo Residência</label>

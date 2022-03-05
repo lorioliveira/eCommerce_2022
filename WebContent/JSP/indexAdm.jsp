@@ -276,7 +276,7 @@
                         <!-- CUPONS  -->
                         <div class="tab-pane fade" id="coupons-tab" role="tabpanel" aria-labelledby="coupons-nav">
                             <h4><i class="fa fa-tags"></i> Lista de Cupons </h4>
-                            <a href="./JSP/novoCupom.jsp"><button class="btn btnCupom nav-link"><i class="fa fa-plus"></i> Novo</button></a>
+                            <a href="./JSP/novoCupom.jsp"><button class="btn btnCupom nav-link"><i class="fa fa-tags"></i> Novo</button></a>
                             </br>
                             <div class="col-md-12">
                                 <table class="table table-bordered">
