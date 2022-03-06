@@ -154,12 +154,12 @@ public class ClienteHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				//Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/consultar-cliente.jsp").forward(request, response);
+				//Redirecionamento
+					request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 						
 			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+				// se houver, mostra as mensagens de ERRO
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 			}
@@ -167,7 +167,7 @@ public class ClienteHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				request.getRequestDispatcher("./JSP/login.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
@@ -185,10 +185,10 @@ public class ClienteHelper implements IViewHelper {
 				// No caso 'não', então ele encaminha para tela de alteração com os dados puxados do banco
 				if(alteraCliente.equals("0")) {
 					request.setAttribute("idCliente", id);
-					request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/alterarCliente2.jsp").forward(request, response);
 				}else {
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
 			} 
 			else {
@@ -197,11 +197,11 @@ public class ClienteHelper implements IViewHelper {
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 			}
 		}
-		
+		//		TELA ADMIN
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/consultar-cliente2.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior

@@ -1,5 +1,7 @@
 package com.les.roupa.core.dominio;
 
+import java.util.List;
+
 /**
  * Classe para representar o Usuario (Cliente/Pessoa)
  * @author Lorena Oliveira
@@ -11,6 +13,13 @@ public class Usuario extends EntidadeDominio {
 	private String confirmarSenha;
 	private String tipoCliente;
 	private String nome;
+	private String telefone;
+	private String genero;
+	private String cpf;
+	private String data_Nascimento;
+	
+	private List<Endereco> enderecosCliente; 
+	
 	
 	/* Email */
 	public String getEmail() {
@@ -60,5 +69,44 @@ public class Usuario extends EntidadeDominio {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	/*Enderecos do Cliente */
+	public List<Endereco> getEnderecosCliente() {
+		return enderecosCliente;
+	}
+
+	public void setEnderecosCliente(List<Endereco> enderecosCliente) {
+		this.enderecosCliente = enderecosCliente;
+	}
+	
+	/* Telefone */
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+	/*Genero*/
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	/* CPF */
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	/* Data Nascimento */
+	public String getData_Nascimento() {
+		return data_Nascimento;
+	}
+	public void setData_Nascimento(String data_Nascimento) {
+		this.data_Nascimento = data_Nascimento;
 	}
 }

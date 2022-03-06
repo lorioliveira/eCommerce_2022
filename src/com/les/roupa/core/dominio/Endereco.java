@@ -1,7 +1,7 @@
 package com.les.roupa.core.dominio;
 
 /**
- * Classe para representar o Endereço - Cliente
+ * Classe para representar o Endereco - Cliente
  */
 public class Endereco extends EntidadeDominio {
 	private String logradouro;
@@ -67,7 +67,7 @@ public class Endereco extends EntidadeDominio {
 		this.estado = estado;
 	}
 	
-	// PAÍS
+	// PAï¿½S
 	public String getPais() {
 		return pais;
 	}
@@ -91,7 +91,7 @@ public class Endereco extends EntidadeDominio {
     	this.observacoes = observacoes;
     }
     
- // TIPO DE ENDERECO - COBRANÇA/ENTREGA
+ // TIPO DE ENDERECO - COBRANï¿½A/ENTREGA
     public String getTipoEnd() {
     	return tipoEndereco;
     }

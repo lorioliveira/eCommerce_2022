@@ -67,7 +67,10 @@
                         <div class="nav-item dropdown">
                             <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
-                                <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                <!-- BOTAO SAIR -->
+		                                <form action="http://localhost:8080/eCommerce/login">
+		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+		                                </form>
                             </div>
                         </div>
                     </div>
@@ -137,13 +140,13 @@
                                 <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14">
                             </div>
                             <div class="col-md-4"><br>
-                                <input type="radio" name="genero" value="feminino" checked> Feminino        <br>
-                                <input type="radio" name="genero" value="masculino"> Masculino
+                                <input type="radio" name="genero" value="Feminino" checked> Feminino        <br>
+                                <input type="radio" name="genero" value="Masculino"> Masculino
                             </div>
                             
                             <div class="col-md-4">
-                                <label>Telefone</label>
-                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Telefone" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+                                <label>Celular</label>
+                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
                             </div>
                             
                             <div class="col-md-4">
@@ -167,8 +170,8 @@
                                 <input type="radio" name="status" value="Inativo"> Inativo
                             </div>
                             <div class="col-md-9">
-                                <button class="btn"> <i class="fa fa-times-circle"></i> Cancelar </button>
-                                <button class="btn"> <i class="fa fa-save"></i> Salvar </button>
+                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+                                <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-save"></i> Salvar </button>
                             </div>
                         </div> 
                     </div>

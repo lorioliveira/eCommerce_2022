@@ -13,17 +13,17 @@
         <title>Mirror Fashion</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <!-- Favicon -->
-        <link href="../img/favicon.ico" rel="icon">
+        <link href="./img/favicon.ico" rel="icon">
         <link href="css/reset.css" rel="stylesheet">
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
         <!-- Biblioteca CSS - Bootstrap-->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="../lib/slick/slick.css" rel="stylesheet">
-        <link href="../lib/slick/slick-theme.css" rel="stylesheet">
+        <link href="./lib/slick/slick.css" rel="stylesheet">
+        <link href="./lib/slick/slick-theme.css" rel="stylesheet">
         <!--- Biblioteca CSS - Principal-->
-        <link href="../css/style.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
             
     </head>
     <body>
@@ -56,8 +56,8 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
-                        <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                        <a href="./JSP/index.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="./JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
                     </div>
 
                     <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
@@ -66,7 +66,10 @@
                         <div class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
-                                <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                <!-- BOTAO SAIR -->
+		                                <form action="http://localhost:8080/eCommerce/login">
+		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+		                                </form>
                             </div>
                         </div>
                     </div>
@@ -83,8 +86,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="../JSP/index.jsp">
-                            <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
+                            <a href="./JSP/index.jsp">
+                            <img src="./img/mir.svg" alt="Logo Mirror Fashion" >
                             </a>
                         </div>
                     </div>
@@ -96,7 +99,7 @@
                     </div>
                     <!-- <div class="col-md-2">
                         <div class="user">
-                            <a href="../JSP/carrinho.jsp" class="btn cart">
+                            <a href="./JSP/carrinho.jsp" class="btn cart">
                             Minha Sacola <i class="fas fa-shopping-bag"></i>
                             </a>
                         </div>
@@ -111,118 +114,133 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/index.jsp">Home</a></li>
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Minha Conta</a></li>
+                    <li class="breadcrumb-item"><a href="./JSP/index.jsp">Home</a></li>
+                    <li class="breadcrumb-item"><a href="./JSP/minhaConta.jsp">Minha Conta</a></li>
                     <li class="breadcrumb-item active">Editar Endereço</li>
                 </ul>
             </div>
         </div>
         <!-- Fim do Breadcrumb -->
         
+        <%
+			EnderecoDAO dao = new EnderecoDAO();
+			Usuario usuarioLogado = new Usuario();
+			
+			HttpSession sessao = request.getSession();
+			usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+			
+			String idEndereco = (String)request.getAttribute("idEndereco");
+			
+			List<Endereco> endereco = dao.consultarEnderecoById(idEndereco);
+		%>
+        
+        
         <!-- Inicio do formulário de novo endereço -->
-        <div class="registrar__novoEndereco">
-            <div class="container-novoEndereco">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="tab-content">
-                             <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                                <h4>Editar endereço</h4> <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Tipo Residência</label>
-                                        <select class="form-control" type="text">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="apartamento">Apto</option>
-                                            <option value="casa">Casa</option>
-                                            <option value="outros">Outro</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Tipo Endereço</label>
-                                        <select class="form-control" type="text">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="entrega">Entrega</option>
-                                            <option value="cobranca">Cobrança</option>
-                                            <option value="entrega_cobranca">Entrega e Cobrança</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>CEP</label>
-                                        <input class="form-control" type="text" onkeypress="mascara(this, '#####-###')" maxlength="9">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label>Logradouro</label>
-                                        <input class="form-control" type="text" placeholder="Logradouro">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Número</label>
-                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Bairro</label>
-                                        <input class="form-control" type="text" placeholder="Bairro">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Estado</label>
-                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="AC">Acre</option>
-                                            <option value="AL">Alagoas</option>
-                                            <option value="AP">Amapa</option>
-                                            <option value="AM">Amazonas</option>
-                                            <option value="BA">Bahia</option>
-                                            <option value="CE">Ceara</option>
-                                            <option value="DF">Distrito Federal</option>
-                                            <option value="ES">Espirito Santo</option>
-                                            <option value="GO">Goias</option>
-                                            <option value="MA">Maranhao</option>
-                                            <option value="MT">Mato Grosso</option>
-                                            <option value="MS">Mato Grosso do Sul</option>
-                                            <option value="MG">Minas Gerais</option>
-                                            <option value="PA">Para</option>
-                                            <option value="PB">Paraiba</option>
-                                            <option value="PR">Parana</option>
-                                            <option value="PE">Pernambuco</option>
-                                            <option value="PI">Piaui</option>
-                                            <option value="RJ">Rio de Janeiro</option>
-                                            <option value="RN">Rio Grande do Norte</option>
-                                            <option value="RS">Rio Grande do Sul</option>
-                                            <option value="RO">Rondonia</option>
-                                            <option value="RR">Roraima</option>
-                                            <option value="SC">Santa Catarina</option>
-                                            <option value="SP">Sao Paulo</option>
-                                            <option value="SE">Sergipe</option>
-                                            <option value="TO">Tocantins</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Cidade</label>
-                                        <select class="form-control" id="cidade" name="cidade">
-                                            <option selected disabled>Selecione o Estado</option>
-                                            <script type="text/javascript" src="../js/estados-cidades.js" charset="utf-8"></script>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>País</label>
-                                        <select class="form-control">
-                                            <option value="Brasil">Brasil</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>
-                                        <a href="../JSP/minhaConta.jsp"><button class=" btn_editarEndereco btn"><i class="fa fa-save"></i>  Salvar</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form action="http://localhost:8080/eCommerce/cadastroEndereco" >
+	        <div class="registrar__novoEndereco">
+	            <div class="container-novoEndereco">
+	                <div class="row">
+	                    <div class="col-md-9">
+	                        <div class="tab-content">
+	                             <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+	                                <h4>Editar endereço</h4> <br>
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <label>Tipo Residência</label><input type="hidden" value="<%=endereco.get(0).getTipoResidencia()%>"/>
+	                                        <select class="form-control" name="tipoResidencia">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="Apartamento">Apto</option>
+	                                            <option value="Casa">Casa</option>
+	                                            <option value="Outro">Outro</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Tipo Endereço</label><input type="hidden" value="<%=endereco.get(0).getTipoEnd()%>" />
+	                                        <select class="form-control" name="tipoEndereco">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="Entrega">Entrega</option>
+		                                        <option value="Cobranca">Cobrança</option>
+		                                        <option value="Entrega e Cobranca">Entrega e Cobrança</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <label>CEP</label>
+	                                        <input class="form-control" type="text" name="cep" onkeypress="mascara(this, '#####-###')" maxlength="9" value="<%=endereco.get(0).getCep()%>" >
+	                                    </div>
+	                                    <div class="col-md-5">
+	                                        <label>Logradouro</label>
+	                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro"  value="<%=endereco.get(0).getLogradouro()%>">
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <label>Número</label>
+	                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5" name="numero"value="<%=endereco.get(0).getNumero()%>">
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <label>Bairro</label>
+	                                        <input class="form-control" type="text" placeholder="Bairro" name="bairro">
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Estado</label>
+	                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="AC">Acre</option>
+	                                            <option value="AL">Alagoas</option>
+	                                            <option value="AP">Amapa</option>
+	                                            <option value="AM">Amazonas</option>
+	                                            <option value="BA">Bahia</option>
+	                                            <option value="CE">Ceara</option>
+	                                            <option value="DF">Distrito Federal</option>
+	                                            <option value="ES">Espirito Santo</option>
+	                                            <option value="GO">Goias</option>
+	                                            <option value="MA">Maranhao</option>
+	                                            <option value="MT">Mato Grosso</option>
+	                                            <option value="MS">Mato Grosso do Sul</option>
+	                                            <option value="MG">Minas Gerais</option>
+	                                            <option value="PA">Para</option>
+	                                            <option value="PB">Paraiba</option>
+	                                            <option value="PR">Parana</option>
+	                                            <option value="PE">Pernambuco</option>
+	                                            <option value="PI">Piaui</option>
+	                                            <option value="RJ">Rio de Janeiro</option>
+	                                            <option value="RN">Rio Grande do Norte</option>
+	                                            <option value="RS">Rio Grande do Sul</option>
+	                                            <option value="RO">Rondonia</option>
+	                                            <option value="RR">Roraima</option>
+	                                            <option value="SC">Santa Catarina</option>
+	                                            <option value="SP">Sao Paulo</option>
+	                                            <option value="SE">Sergipe</option>
+	                                            <option value="TO">Tocantins</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Cidade</label>
+	                                        <select class="form-control" id="cidade" name="cidade">
+	                                            <option selected disabled>Selecione o Estado</option>
+	                                            <script type="text/javascript" src="./js/estados-cidades.js" charset="utf-8"></script>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <label>País</label>
+	                                        <select class="form-control" name="pais">
+	                                            <option value="Brasil">Brasil</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-8">
+	                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
+	                                        <br>
+	                                    </div>
+	                                    <div class="col-md-6">
+	                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>
+	                                        <button class="btn_editarEndereco btn" name="operacao" value="SALVAR"><i class="fa fa-save"></i>  Salvar</button>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	     </form>
         <!-- Fim do formulário de novo endereço -->
         
          <!-- Início do Footer -->
@@ -275,15 +293,15 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="Forma de Pagamento" />
+                            <img src="./img/payment-method.png" alt="Forma de Pagamento" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="payment-security">
                             <h2>Compre com segurança</h2>
-                            <img src="../img/godaddy.svg" alt="Payment Security" />
-                            <img src="../img/norton.svg" alt="Payment Security" />
-                            <img src="../img/ssl.svg" alt="Payment Security" />
+                            <img src="./img/godaddy.svg" alt="Payment Security" />
+                            <img src="./img/norton.svg" alt="Payment Security" />
+                            <img src="./img/ssl.svg" alt="Payment Security" />
                         </div>
                     </div>
                 </div>
@@ -296,7 +314,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
                 </div>
             </div>
@@ -309,11 +327,11 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/slick/slick.min.js"></script>
+        <script src="./lib/easing/easing.min.js"></script>
+        <script src="./lib/slick/slick.min.js"></script>
         
         <!--  Javascript -->
-        <script src="../js/main.js"></script>
-        <script src="../js/all.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/all.js"></script>
     </body>
 </html>

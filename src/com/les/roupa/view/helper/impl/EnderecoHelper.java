@@ -42,7 +42,7 @@ public class EnderecoHelper implements IViewHelper {
         
         String alteraEndereco = null;
         
-     // salva a data atual na tabela de Cupom
+     // salva a data atual na tabela
      		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
      		Date date = new Date();
      		String dataAtual;
@@ -90,7 +90,7 @@ public class EnderecoHelper implements IViewHelper {
 			endereco.setTipoEnd(tipoEndereco);		
 			endereco.setIdCliente(idCliente);
 			endereco.setAlteraEndereco(alteraEndereco);
-			endereco.setData_cadastro(dataAtual);
+			endereco.setData_Cadastro(dataAtual);
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
@@ -125,7 +125,7 @@ public class EnderecoHelper implements IViewHelper {
 			endereco.setObservacoes(observacoes);
 			endereco.setTipoEnd(tipoEndereco);
 			endereco.setAlteraEndereco(alteraEndereco);
-			endereco.setData_cadastro(dataAtual);
+			endereco.setData_Cadastro(dataAtual);
 			
 			endereco.setIdCliente(idCliente);
 			
@@ -156,7 +156,7 @@ public class EnderecoHelper implements IViewHelper {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/enderecos.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -165,24 +165,13 @@ public class EnderecoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA CONSULTAR ENDERECO!");
-				
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA CONSULTAR ENDERECO!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// atribui a nova mensagem para poder mostra na pagina .JSP
-				//resultado.setMensagem("Endereço salvo com sucesso!");
-				//writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-				
 				// Redireciona para o arquivo
-				request.getRequestDispatcher("JSP/enderecos.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -191,13 +180,6 @@ public class EnderecoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA SALVAR ENDERECO!");
-				
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA SALVAR ENDERECO!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			
 			}
 		}
@@ -214,7 +196,7 @@ public class EnderecoHelper implements IViewHelper {
 					request.setAttribute("idEndereco", idEndereco);
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/alterar-endereco.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/alterarendereco.jsp").forward(request, response);
 				}
 				// caso contrário, se eu estiver pela tela de edição do endereço,
 				// vou ter/mandar o parametro "alteraEndereco" igual a um, para poder editar o endereço,
@@ -225,7 +207,7 @@ public class EnderecoHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/enderecos.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/alterarendereco.jsp").forward(request, response);
 				}
 			
 			} 
@@ -236,13 +218,6 @@ public class EnderecoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA ALTERAR ENDERECO!");
-				
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA ALTERAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
 			}
 		}
 		else if (("EXCLUIR").equals(operacao)) {
@@ -253,7 +228,7 @@ public class EnderecoHelper implements IViewHelper {
 				request.setAttribute("idEndereco", idEndereco);
 				
 				// Redireciona para o arquivo .jsp, para poder listar os endereços novamente
-				request.getRequestDispatcher("JSP/enderecos.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver

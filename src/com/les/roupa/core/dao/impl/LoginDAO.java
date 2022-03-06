@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Usuario;
 
@@ -165,10 +166,46 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuarioItem.setEmail(rs.getString("email"));
 				usuarioItem.setSenha(rs.getString("senha"));
 				usuarioItem.setTipoCliente(rs.getString("tipoCliente"));
+				usuarioItem.setCpf(rs.getString("cpf"));
+				usuarioItem.setData_Nascimento(rs.getString("data_Nascimento"));
+				usuarioItem.setGenero(rs.getString("genero"));
+				usuarioItem.setTelefone(rs.getString("telefone"));
 				
 				// adicionando o objeto a lista
 				usuarios.add(usuarioItem);
 			}
+			
+
+			stmt = connection.prepareStatement("select * from endereco where id_cliente=?");
+			stmt.setString(1, usuarios.get(0).getId());
+			rs = stmt.executeQuery();
+			
+			// Lista de Enderecos criada
+				List<Endereco> enderecos = new ArrayList<>();
+				while (rs.next()) {
+					
+					// criando o objeto endereco
+					Endereco end = new Endereco();
+					
+					end.setCep(rs.getString("cep"));
+					end.setLogradouro(rs.getString("logradouro"));
+					end.setNumero(rs.getString("numero"));
+					end.setBairro(rs.getString("bairro"));
+					end.setCidade(rs.getString("cidade"));
+					end.setEstado(rs.getString("estado"));
+					end.setPais(rs.getString("pais"));
+					end.setTipoResidencia(rs.getString("tipoResidencia"));
+					end.setObservacoes(rs.getString("observacoes"));
+					end.setId(rs.getString("id"));
+					end.setTipoEnd(rs.getString("tipoEndereco"));
+					end.setData_Cadastro(rs.getString("data_Cadastro"));
+					
+					
+					// adicionando o objeto à lista de Enderecos criado acima
+					enderecos.add(end);
+				}
+				Usuario novoUsuario = (Usuario) usuarios.get(0);
+				novoUsuario.setEnderecosCliente(enderecos);
 				
 			rs.close();
 			stmt.close();
@@ -193,6 +230,8 @@ public class LoginDAO extends AbstractJdbcDAO {
 			stmt.setString(1, idCliente);
 			ResultSet rs = stmt.executeQuery();
 			
+			List<EntidadeDominio> usuarios = new ArrayList<>();
+			
 			while (rs.next()) {
 				// criando o objeto Cliente
 				
@@ -216,6 +255,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				// adicionando o objeto ï¿½ lista
 				clientes.add(cliente);
 			}
+			
 			rs.close();
 			stmt.close();
 			return clientes;

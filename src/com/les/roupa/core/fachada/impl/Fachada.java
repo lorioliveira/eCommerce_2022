@@ -7,29 +7,47 @@ import java.util.Map;
 
 import com.les.roupa.core.dao.IDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
+import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
+import com.les.roupa.core.strategy.impl.ValidarBairro;
+import com.les.roupa.core.strategy.impl.ValidarBairro_Alt;
+import com.les.roupa.core.strategy.impl.ValidarCEP;
+import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
 import com.les.roupa.core.strategy.impl.ValidarCPF_Alt;
+import com.les.roupa.core.strategy.impl.ValidarCidade;
+import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
 import com.les.roupa.core.strategy.impl.ValidarEmail;
+import com.les.roupa.core.strategy.impl.ValidarEstado;
+import com.les.roupa.core.strategy.impl.ValidarEstado_Alt;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmail;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmailSenha;
 import com.les.roupa.core.strategy.impl.ValidarGenero;
 import com.les.roupa.core.strategy.impl.ValidarGenero_Alt;
+import com.les.roupa.core.strategy.impl.ValidarLogradouro;
+import com.les.roupa.core.strategy.impl.ValidarLogradouro_Alt;
 import com.les.roupa.core.strategy.impl.ValidarNome;
 import com.les.roupa.core.strategy.impl.ValidarNome_Alt;
+import com.les.roupa.core.strategy.impl.ValidarNumero;
+import com.les.roupa.core.strategy.impl.ValidarNumero_Alt;
+import com.les.roupa.core.strategy.impl.ValidarPais;
+import com.les.roupa.core.strategy.impl.ValidarPais_Alt;
 import com.les.roupa.core.strategy.impl.ValidarSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaConfSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaLogin;
 import com.les.roupa.core.strategy.impl.ValidarStatus;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
+import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
+import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
 import com.les.roupa.core.strategy.IStrategy;
 
 
@@ -48,7 +66,7 @@ public class Fachada implements IFachada {
 	/* ---- CLIENTE -----*/
 	ValidarEmail vEmail = new ValidarEmail();
 	ValidarNome vNome = new ValidarNome();
-	ValidarCPF vCPF = new ValidarCPF();
+	//ValidarCPF vCPF = new ValidarCPF();
 	ValidarDataNascimento vDt_nasc = new ValidarDataNascimento();
 	ValidarTelefone vTelefone = new ValidarTelefone();
 	ValidarGenero vGenero = new ValidarGenero();
@@ -63,24 +81,24 @@ public class Fachada implements IFachada {
 	
 	/* ---- ENDERECO -----*/
 	/* ---- Salvar Novo Endere�o ---- */
-//	ValidarCEP vcep = new ValidarCEP();
-//	ValidarLogradouro vLogradouro = new ValidarLogradouro();
-//	ValidarNumero vNumero = new ValidarNumero();
-//	ValidarBairro vBairro = new ValidarBairro();
-//	ValidarCidade vCidade = new ValidarCidade();
-//	ValidarEstado vEstado = new ValidarEstado();
-//	ValidarPais vPais = new ValidarPais();
-//	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
+	ValidarCEP vcep = new ValidarCEP();
+	ValidarLogradouro vLogradouro = new ValidarLogradouro();
+	ValidarNumero vNumero = new ValidarNumero();
+	ValidarBairro vBairro = new ValidarBairro();
+	ValidarCidade vCidade = new ValidarCidade();
+	ValidarEstado vEstado = new ValidarEstado();
+	ValidarPais vPais = new ValidarPais();
+	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
 	
 	/* ---- Alterar um Endere�o Salvo ------ */
-//	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
-//	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
-//	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
-//	ValidarNumero_Alt vNumAlterado = new ValidarNumero_Alt();
-//	ValidarCidade_Alt vCidadeAlterado = new ValidarCidade_Alt();
-//	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
-//	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
-//	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
+	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
+	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
+	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
+	ValidarNumero_Alt vNumAlterado = new ValidarNumero_Alt();
+	ValidarCidade_Alt vCidadeAlterado = new ValidarCidade_Alt();
+	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
+	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
+	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
 //	
 	
 	/* ---- CARTAO DE CREDITO -----*/
@@ -211,7 +229,7 @@ public class Fachada implements IFachada {
 		// Criando instancias dos DAOS a serem utilizados,
 		// adicionando cada dado no MAP indexado pelo nome da classe
 		daos.put(Cliente.class.getName(), new ClienteDAO());
-		//daos.put(Endereco.class.getName(), new EnderecoDAO());
+		daos.put(Endereco.class.getName(), new EnderecoDAO());
 		//daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
 		daos.put(Usuario.class.getName(), new LoginDAO());
 		//daos.put(Produto.class.getName(), new ProdutoDAO());
@@ -227,7 +245,7 @@ public class Fachada implements IFachada {
 		
 		/* ----- SALVAR ----- */
 		regrasSalvarCliente.add(vNome);
-		regrasSalvarCliente.add(vCPF);
+		//regrasSalvarCliente.add(vCPF);
 		regrasSalvarCliente.add(vEmail);
 		regrasSalvarCliente.add(vExisteEmail);
 		regrasSalvarCliente.add(vSenha);
@@ -250,24 +268,24 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do Endere�o ----- */
 		
 		/* ----- SALVAR ----- */
-//		regrasSalvarEndereco.add(vcep);
-//		regrasSalvarEndereco.add(vLogradouro);
-//		regrasSalvarEndereco.add(vNumero);
-//		regrasSalvarEndereco.add(vBairro);
-//		regrasSalvarEndereco.add(vCidade);
-//		regrasSalvarEndereco.add(vEstado);
-//		regrasSalvarEndereco.add(vPais);
-//		regrasSalvarEndereco.add(vTipoResidencia);
-//		
+		regrasSalvarEndereco.add(vcep);
+		regrasSalvarEndereco.add(vLogradouro);
+		regrasSalvarEndereco.add(vNumero);
+		regrasSalvarEndereco.add(vBairro);
+		regrasSalvarEndereco.add(vCidade);
+		regrasSalvarEndereco.add(vEstado);
+		regrasSalvarEndereco.add(vPais);
+		regrasSalvarEndereco.add(vTipoResidencia);
+		
 //		/* ----- ALTERAR ----- */
-//		regrasAlterarEndereco.add(vCEPAlterado);
-//		regrasAlterarEndereco.add(vLogradouroAlterado);
-//		regrasAlterarEndereco.add(vNumAlterado);
-//		regrasAlterarEndereco.add(vBairroAlterado);
-//		regrasAlterarEndereco.add(vCidadeAlterado);
-//		regrasAlterarEndereco.add(vEstadoAlterado);
-//		regrasAlterarEndereco.add(vPaisAlterado);
-//		regrasAlterarEndereco.add(vTipoResidenciaAlterado);
+		regrasAlterarEndereco.add(vCEPAlterado);
+		regrasAlterarEndereco.add(vLogradouroAlterado);
+		regrasAlterarEndereco.add(vNumAlterado);
+		regrasAlterarEndereco.add(vBairroAlterado);
+		regrasAlterarEndereco.add(vCidadeAlterado);
+		regrasAlterarEndereco.add(vEstadoAlterado);
+		regrasAlterarEndereco.add(vPaisAlterado);
+		regrasAlterarEndereco.add(vTipoResidenciaAlterado);
 		
 		/* ---------------------------------------------------------- */
 		
@@ -474,7 +492,7 @@ public class Fachada implements IFachada {
 		
 		/* ----- REGRAS GERAIS ----- */
 		regrasGeral.put(Cliente.class.getName(), regrasCliente);
-		//regrasGeral.put(Endereco.class.getName(), regrasEndereco);
+		regrasGeral.put(Endereco.class.getName(), regrasEndereco);
 		//regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
 		regrasGeral.put(Usuario.class.getName(), regrasLogin);
 		//regrasGeral.put(Produto.class.getName(), regrasProduto);

@@ -16,7 +16,7 @@
     <meta content="eCommerce HTML Template Free Download" name="description">
 
     <!-- Favicon -->
-    <link href="../img/favicon.ico" rel="icon">
+    <link href="./img/favicon.ico" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
@@ -25,11 +25,11 @@
     <!-- Biblioteca CSS - Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="../lib/slick/slick.css" rel="stylesheet">
-    <link href="../lib/slick/slick-theme.css" rel="stylesheet">
+    <link href="./lib/slick/slick.css" rel="stylesheet">
+    <link href="./lib/slick/slick-theme.css" rel="stylesheet">
 
     <!-- CSS Principal do Projeto -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 </head>
 
         
@@ -74,11 +74,11 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
+                        <a href="./JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                            <a href="./JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
                                 <!-- BOTAO SAIR -->
                                 <form action="http://localhost:8080/eCommerce/login">
@@ -100,8 +100,8 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="../JSP/indexAdm.jsp">
-                            <img src="../img/mir.svg" alt="Logo Mirror Fashion">
+                        <a href="./JSP/indexAdm.jsp">
+                            <img src="./img/mir.svg" alt="Logo Mirror Fashion">
                         </a>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                                             <td>$239</td>
                                             <td>ENTREGA REALIZADA</td>
                                             <td>
-                                                <a href="../JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
+                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
                                                 
                                             </td>
                                         </tr>
@@ -230,7 +230,7 @@
                                             <td>Juliana</td>
                                             <td>$420</td>
                                             <td>TROCA SOLICITADA</td>
-                                            <td><a href="../JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
+                                            <td><a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -241,7 +241,7 @@
                         <div class="tab-pane fade" id="products-tab" role="tabpanel" aria-labelledby="products-nav">
                             <div class="table-responsive">
                                 <h4><i class="fa fa-barcode"></i> Lista de Produtos</h4>
-                                <a href="../JSP/estoque.jsp"><button class="btn btnEstoque nav-link"><i class="fa fa-warehouse"></i> Consultar Estoque</button></a>
+                                <a href="./JSP/estoque.jsp"><button class="btn btnEstoque nav-link"><i class="fa fa-warehouse"></i> Consultar Estoque</button></a>
                                 <br>
                                 <div class="col-md-12">
                                     <table class="table table-bordered">
@@ -274,7 +274,7 @@
                                                 <td>Excelente material italiano com cor desenhada pelos deuses.. </td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="../JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Manga Comprida</td>
@@ -288,7 +288,7 @@
                                                 <td>Excelente material italiano com cor desenhada pelos deuses.. </td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="../JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -299,7 +299,7 @@
                         <!-- CUPONS  -->
                         <div class="tab-pane fade" id="coupons-tab" role="tabpanel" aria-labelledby="coupons-nav">
                             <h4><i class="fa fa-tags"></i> Lista de Cupons </h4>
-                            <a href="../JSP/novoCupom.jsp"><button class="btn btnCupom nav-link"><i class="fa fa-tags"></i> Novo</button></a>
+                            <a href="./JSP/novoCupom.jsp"><button class="btn btnCupom nav-link"><i class="fa fa-tags"></i> Novo</button></a>
                             </br>
                             <div class="col-md-12">
                                 <table class="table table-bordered">
@@ -325,8 +325,8 @@
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
-                                                <a href="../JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                                                <a href="../JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -338,8 +338,8 @@
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
-                                                <a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                                                <a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
+                                                <a href="./JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                                                <a href="./JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -414,15 +414,15 @@
                 <div class="col-md-6">
                     <div class="payment-method">
                         <h2>Forma de pagamento</h2>
-                        <img src="../img/payment-method.png" alt="Forma de Pagamento" />
+                        <img src="./img/payment-method.png" alt="Forma de Pagamento" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="payment-security">
                         <h2>Compre com segurança</h2>
-                        <img src="../img/godaddy.svg" alt="Payment Security" />
-                        <img src="../img/norton.svg" alt="Payment Security" />
-                        <img src="../img/ssl.svg" alt="Payment Security" />
+                        <img src="./img/godaddy.svg" alt="Payment Security" />
+                        <img src="./img/norton.svg" alt="Payment Security" />
+                        <img src="./img/ssl.svg" alt="Payment Security" />
                     </div>
                 </div>
             </div>
@@ -435,7 +435,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 copyright">
-                    <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados
+                    <p>Copyright &copy; <a href="./JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados
                     </p>
                 </div>
             </div>
@@ -449,12 +449,12 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="../lib/easing/easing.min.js"></script>
-    <script src="../lib/slick/slick.min.js"></script>
+    <script src="./lib/easing/easing.min.js"></script>
+    <script src="./lib/slick/slick.min.js"></script>
 
     <!--  Javascript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/all.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/all.js"></script>
 </body>
 
 </html>

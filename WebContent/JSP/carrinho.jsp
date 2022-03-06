@@ -69,7 +69,10 @@
                                 Conta</a>
                             <div class="dropdown-menu">
                                 <a href="../JSP/minhaConta.jsp" class="dropdown-item">Meu Perfil</a>
-                                <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                <!-- BOTAO SAIR -->
+		                                <form action="http://localhost:8080/eCommerce/login">
+		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+		                                </form>
                             </div>
                         </div>
                     </div>

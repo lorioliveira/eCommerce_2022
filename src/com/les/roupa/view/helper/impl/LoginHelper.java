@@ -80,16 +80,14 @@ public class LoginHelper implements IViewHelper {
 				// salva na sessao o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
-//				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
-				// salva na sessao o objeto "itensPedidoTroca", para quando for clicado no botï¿½o de "Solicitar Troca",
-				// da tela do detalhes do pedido, ele poder adicionar os itens do pedido selecionados para gerar um pedido de troca
-//				sessao.setAttribute("itensPedidoTroca", itensPedidoTroca);
+				sessao.setAttribute("enderecosCliente", usuario.getEnderecosCliente());
+				
 				
 				if(usuario.getTipoCliente().equals("cliente")) {
 					
-					request.getRequestDispatcher("JSP/index.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 				} else {
-					request.getRequestDispatcher("JSP/indexAdm.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
 			} 
 			else {
@@ -106,7 +104,7 @@ public class LoginHelper implements IViewHelper {
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// Requisicao da nova conta e redirecionada para tela de login
-				request.getRequestDispatcher("JSP/login.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -118,17 +116,18 @@ public class LoginHelper implements IViewHelper {
 			}
 		}
 		
+		//		ALTERAR SENHA
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 			// requisisao de alteracao de senha
-			request.getRequestDispatcher("JSP/perfil.jsp").forward(request, response);
+			request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 		}
 		else {
 			// mostra as mensagens de ERRO se houver
 			// Guarda a mensagem que veio da Strategy na variavel para que 
 			// seja exibida na tela 'tela-mensagem.jsp'
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
-        	System.out.println("ERRO PARA ALTERAR LOGIN!");
+        	System.out.println("ERRO PARA ALTERAR LOGIN - (Senha)!");
 			request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 		}
 	}
@@ -144,8 +143,8 @@ public class LoginHelper implements IViewHelper {
 				// pendura o "resultado" na requisisao para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
-				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/login_entrar.jsp").forward(request, response);
+				// Redireciona para o arquivo de login após sair da loja 
+				request.getRequestDispatcher("JSP/logout.jsp").forward(request, response);
 			}
 			else {
 				// se tiver alguma mensagem da Strategy, ira redirecionar para a tela de Login do mesmo jeito

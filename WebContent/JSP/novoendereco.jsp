@@ -66,7 +66,10 @@
                         <div class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
-                                <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                <!-- BOTAO SAIR -->
+		                                <form action="http://localhost:8080/eCommerce/login">
+		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+		                                </form>
                             </div>
                         </div>
                     </div>
@@ -76,6 +79,12 @@
     </div>
     <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta--> 
            
+           <%
+	    Usuario usuarioLogado = new Usuario();
+	    
+	    HttpSession sessao = request.getSession();
+	    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");      
+    %>
         
         <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         <div class="bottom-bar">
@@ -120,109 +129,114 @@
         <!-- Fim do Breadcrumb -->
         
         <!-- Inicio do formulário de novo endereço -->
-        <div class="registrar__novoEndereco">
-            <div class="container-novoEndereco">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="tab-content">
-                             <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                                <h4>Cadastrar novo endereço</h4> <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Tipo Residência</label>
-                                        <select class="form-control" type="text">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="apartamento">Apto</option>
-                                            <option value="casa">Casa</option>
-                                            <option value="outros">Outro</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Tipo Endereço</label>
-                                        <select class="form-control" type="text">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="entrega">Entrega</option>
-                                            <option value="cobranca">Cobrança</option>
-                                            <option value="entrega_cobranca">Entrega e Cobrança</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>CEP</label>
-                                        <input class="form-control" type="text" onkeypress="mascara(this, '#####-###')" maxlength="9">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label>Logradouro</label>
-                                        <input class="form-control" type="text" placeholder="Logradouro">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Número</label>
-                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Bairro</label>
-                                        <input class="form-control" type="text" placeholder="Bairro">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Estado</label>
-                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
-                                            <option selected disabled>Selecione</option>
-                                            <option value="AC">Acre</option>
-                                            <option value="AL">Alagoas</option>
-                                            <option value="AP">Amapa</option>
-                                            <option value="AM">Amazonas</option>
-                                            <option value="BA">Bahia</option>
-                                            <option value="CE">Ceara</option>
-                                            <option value="DF">Distrito Federal</option>
-                                            <option value="ES">Espirito Santo</option>
-                                            <option value="GO">Goias</option>
-                                            <option value="MA">Maranhao</option>
-                                            <option value="MT">Mato Grosso</option>
-                                            <option value="MS">Mato Grosso do Sul</option>
-                                            <option value="MG">Minas Gerais</option>
-                                            <option value="PA">Para</option>
-                                            <option value="PB">Paraiba</option>
-                                            <option value="PR">Parana</option>
-                                            <option value="PE">Pernambuco</option>
-                                            <option value="PI">Piaui</option>
-                                            <option value="RJ">Rio de Janeiro</option>
-                                            <option value="RN">Rio Grande do Norte</option>
-                                            <option value="RS">Rio Grande do Sul</option>
-                                            <option value="RO">Rondonia</option>
-                                            <option value="RR">Roraima</option>
-                                            <option value="SC">Santa Catarina</option>
-                                            <option value="SP">Sao Paulo</option>
-                                            <option value="SE">Sergipe</option>
-                                            <option value="TO">Tocantins</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Cidade</label>
-                                        <select class="form-control" id="cidade" name="cidade">
-                                            <option selected disabled>Selecione o Estado</option>
-                                            <script type="text/javascript" src="../js/estados-cidades.js" charset="utf-8"></script>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>País</label>
-                                        <select class="form-control">
-                                            <option selected value="Brasil">Brasil</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEndereco"><i class="fa fa-ban"></i> Cancelar</button>
-                                        <button class="btn btnCadastrarEndereco"><a href="../JSP/minhaConta.jsp"><i class="fa fa-save"></i>  Salvar</a></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form action="http://localhost:8080/eCommerce/cadastroEndereco">
+	        <div class="registrar__novoEndereco">
+	            <div class="container-novoEndereco">
+	                <div class="row">
+	                    <div class="col-md-9">
+	                        <div class="tab-content">
+	                             <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+	                                <h4>Cadastrar novo endereço</h4> <br>
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <label>Tipo Residência</label>
+	                                        <select class="form-control" name="tipoResidencia">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="Apartamento">Apto</option>
+	                                            <option value="Casa">Casa</option>
+	                                            <option value="Outro">Outro</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Tipo Endereço</label>
+	                                        <select class="form-control" name="tipoEndereco">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="Entrega">Entrega</option>
+	                                            <option value="Cobranca">Cobrança</option>
+	                                            <option value="Entrega e Cobranca">Entrega e Cobrança</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <label>CEP</label>
+	                                        <input class="form-control" type="text" name="cep" onkeypress="mascara(this, '#####-###')" maxlength="9">
+	                                    </div>
+	                                    <div class="col-md-5">
+	                                        <label>Logradouro</label>
+	                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro">
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <label>Número</label>
+	                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5" name="numero">
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <label>Bairro</label>
+	                                        <input class="form-control" type="text" placeholder="Bairro" name="bairro">
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Estado</label>
+	                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
+	                                            <option selected disabled>Selecione</option>
+	                                            <option value="AC">Acre</option>
+	                                            <option value="AL">Alagoas</option>
+	                                            <option value="AP">Amapa</option>
+	                                            <option value="AM">Amazonas</option>
+	                                            <option value="BA">Bahia</option>
+	                                            <option value="CE">Ceara</option>
+	                                            <option value="DF">Distrito Federal</option>
+	                                            <option value="ES">Espirito Santo</option>
+	                                            <option value="GO">Goias</option>
+	                                            <option value="MA">Maranhao</option>
+	                                            <option value="MT">Mato Grosso</option>
+	                                            <option value="MS">Mato Grosso do Sul</option>
+	                                            <option value="MG">Minas Gerais</option>
+	                                            <option value="PA">Para</option>
+	                                            <option value="PB">Paraiba</option>
+	                                            <option value="PR">Parana</option>
+	                                            <option value="PE">Pernambuco</option>
+	                                            <option value="PI">Piaui</option>
+	                                            <option value="RJ">Rio de Janeiro</option>
+	                                            <option value="RN">Rio Grande do Norte</option>
+	                                            <option value="RS">Rio Grande do Sul</option>
+	                                            <option value="RO">Rondonia</option>
+	                                            <option value="RR">Roraima</option>
+	                                            <option value="SC">Santa Catarina</option>
+	                                            <option value="SP">Sao Paulo</option>
+	                                            <option value="SE">Sergipe</option>
+	                                            <option value="TO">Tocantins</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-4">
+	                                        <label>Cidade</label>
+	                                        <select class="form-control" id="cidade" name="cidade">
+	                                            <option selected disabled>Selecione o Estado</option>
+	                                            <script type="text/javascript" src="../js/estados-cidades.js" charset="utf-8"></script>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <label>País</label>
+	                                        <select class="form-control" name="pais">
+	                                            <option selected value="Brasil">Brasil</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="col-md-8">
+	                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
+	                                        <br>
+	                                    </div>
+	                                    <div class="col-md-6">
+	                                        <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEndereco"><i class="fa fa-ban"></i> Cancelar</button>
+	                                        <button type="submit" class="btn btnCadastrarEndereco" name="operacao" value="SALVAR"><i class="fa fa-save"></i>  Salvar</button>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <input type="hidden" name="idCliente" value="<%=usuarioLogado.getId()%>"/>
+			<input type="hidden" name="alteraEndereco" value="0"/>
+        </form>
+	        </div>
+	        
         <!-- Fim do formulário de novo endereço -->
         
          <!-- Início do Footer -->

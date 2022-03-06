@@ -1,6 +1,4 @@
-<%@page import='com.les.roupa.core.dao.*'%>
 <%@page import='com.les.roupa.core.dominio.*'%>
-<%@page import='com.les.roupa.core.dao.impl.*'%>
 
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
@@ -15,7 +13,7 @@
         <meta content="eCommerce HTML Template Free Download" name="description">
 
         <!-- Favicon -->
-        <link href="../img/favicon.ico" rel="icon">
+        <link href="./img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -23,16 +21,15 @@
         <!-- Biblioteca CSS - Bootstrap -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="../lib/slick/slick.css" rel="stylesheet">
-        <link href="../lib/slick/slick-theme.css" rel="stylesheet">
+        <link href="./lib/slick/slick.css" rel="stylesheet">
+        <link href="./lib/slick/slick-theme.css" rel="stylesheet">
 
         <!-- CSS Principal do Projeto -->
-        <link href="../css/style.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
     </head>
 
     <body>
-         
-    <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
+          <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
     <div class="top-bar">
         <div class="container-fluid">
             <div class="row">
@@ -50,7 +47,7 @@
     <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
 
 
-    <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+    <!-- Inicio da faixa de menu -  faixa rosa contendo home e minha conta -->
     <div class="nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -61,16 +58,16 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
+                        <a href="./JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                            <a href="./JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
                                 <!-- BOTAO SAIR -->
-		                                <form action="http://localhost:8080/eCommerce/login">
-		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-		                                </form>
+                               <form action="http://localhost:8080/eCommerce/login">
+                                   <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                               </form>
                             </div>
                         </div>
                     </div>
@@ -87,8 +84,8 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="../JSP/indexAdm.jsp">
-                            <img src="../img/mir.svg" alt="Logo Mirror Fashion">
+                        <a href="./JSP/indexAdm.jsp">
+                            <img src="./img/mir.svg" alt="Logo Mirror Fashion">
                         </a>
                     </div>
                 </div>
@@ -101,84 +98,81 @@
                 <div class="col-md-2">
                     <div class="user">
                         <h6><div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div></h6>
-                        <!-- <a href="cart.jsp" class="btn cart">
-                            Minha Sacola <i class="fas fa-shopping-bag"></i>
-                            </a> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->
+      
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">Alterar Status Pedido</li>
+                    <li class="breadcrumb-item"><a href="./JSP/indexAdm.jsp">Home</a></li>
+                    <li class="breadcrumb-item active"> Alterar Cadastro</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Inicio de Registrar nova conta -->
+        <!-- Inicio de alterar conta -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
-                <div class="col-lg-10">
+                <div class="col-lg-10">   
                     <div class="register-form">
-                        <h4>Alterar Status do Pedido</h4><br>
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Nº Pedido</th>
-                                        <th>Cliente</th>
-                                        <th>Valor</th>
-                                        <th>Status</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>021</td>
-                                        <td>Lorena</td>
-                                        <td>$239</td>
-                                        <td>
-                                            <select class="form-control borderSelect" name="statusPedido" autofocus> 
-                                               <option selected disabled>Selecione</option>
-                                               <option value="EM PROCESSAMENTO">EM PROCESSAMENTO</option>
-                                               <option value="PAGAMENTO REALIZADO">PAGAMENTO REALIZADO</option>
-                                               <option value="EM TRANSPORTE">EM TRANSPORTE</option>
-                                               <option value="TROCA SOLICITADA">TROCA SOLICITADA</option>
-                                               <option value="TROCA AUTORIZADA">TROCA AUTORIZADA</option>
-                                               <option value="TROCA REJEITADA">TROCA REJEITADA</option>
-                                               <option value="CANCELAMENTO SOLICITADO">CANCELAMENTO SOLICITADO</option>
-                                               <option value="CANCELAMENTO REJEITADO">CANCELAMENTO REJEITADO</option>
-                                               <option value="TROCA ACEITA">TROCA ACEITA</option>
-                                               <option value="CANCELAMENTO ACEITO">CANCELAMENTO ACEITO</option>
-                                               <option value="ENTREGA REALIZADA">ENTREGA REALIZADA</option>
-                                               <option value="TROCA EFETUADA">TROCA EFETUADA</option>
-                                               <option value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
-                                           </select>
-                                        </td>
-                                        <td>
-                                            <button class="btn"><i class="fa fa-times-circle"></i> Cancelar</button>
-                                            <button class="btn atualizarStatus"><i class="fa fa-save"></i> Salvar</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <h4>Alterar Cadastro de Cliente</h4><br>
+                            <div class="row">
+                            <div class="col-md-4">
+                                <label>Nome</label>
+                                <input class="form-control" type="text" placeholder="Nome">
+                            </div>
+                            <div class="col-md-4">
+                                <label>CPF</label>
+                                <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14">
+                            </div>
+                            <div class="col-md-4"><br>
+                                <input type="radio" name="genero" value="Feminino" checked> Feminino        <br>
+                                <input type="radio" name="genero" value="Masculino"> Masculino
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label>Celular</label>
+                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label> Data de Nascimento</label>
+                                <input class="form-control" type="date" class="fa fa-birthday-cake" placeholder="Data de Nascimento">
+                           </div>
+                            <div class="col-md-4">
+                                <label>E-mail</label>
+                                <input class="form-control" type="email" placeholder="E-mail">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Senha</label>
+                                <input class="form-control" type="password" placeholder="Senha">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Confirme a Senha</label>
+                                <input class="form-control" type="password" placeholder="Insira novamente a senha">
+                            </div>                            
+                            <div class="col-md-4">
+                            <br><input type="radio" name="status" value="Ativo" checked> Ativo <br>
+                                <input type="radio" name="status" value="Inativo"> Inativo
+                            </div>
+                            <div class="col-md-9">
+                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+                                <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-save"></i> Salvar </button>
+                            </div>
+                        </div> 
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
-        <div>
-            <div class="espacamento"></div>
-        </div>
-        <!-- Login End -->
+        <!-- Fim de Alterar Conta -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -230,15 +224,15 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="Payment Method" />
+                            <img src="./img/payment-method.png" alt="Payment Method" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="payment-security">
                             <h2>Compre com segurança</h2>
-                            <img src="../img/godaddy.svg" alt="Payment Security" />
-                            <img src="../img/norton.svg" alt="Payment Security" />
-                            <img src="../img/ssl.svg" alt="Payment Security" />
+                            <img src="./img/godaddy.svg" alt="Payment Security" />
+                            <img src="./img/norton.svg" alt="Payment Security" />
+                            <img src="./img/ssl.svg" alt="Payment Security" />
                         </div>
                     </div>
                 </div>
@@ -251,12 +245,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
-
-                    <!-- <div class="col-md-6 template-by">
-                        <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -268,11 +258,11 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/slick/slick.min.js"></script>
+        <script src="./lib/easing/easing.min.js"></script>
+        <script src="./lib/slick/slick.min.js"></script>
         
         <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
-        <script src="../js/all.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/all.js"></script>
     </body>
 </html>
