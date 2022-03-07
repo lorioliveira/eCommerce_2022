@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class ClienteHelper implements IViewHelper {
         String status = null;
         String tipoCliente = null;
         
-     // salva a data atual como Data Cadastro na tabela de Cliente
+     // salva a data atual como Data de Cadastro na tabela de Cliente 
  		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
  		Date date = new Date();
  		String dataAtual;
@@ -178,6 +179,18 @@ public class ClienteHelper implements IViewHelper {
 		
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Cliente cliente = (Cliente) entidades.get(0);
+				
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				HttpSession sessao = request.getSession();
+				// atualiza a sessao com todos os clientes alterados
+				sessao.setAttribute("todosClientes", cliente.getUsuario().getTodosClientes());
+				//cliente selecionado para alteração - opcao ALTERAR
+				sessao.setAttribute("clienteAlterado", cliente.getUsuario().getTodosClientes().get(0));
+				
 				String alteraCliente = request.getParameter("alteraCliente");
 				String id = request.getParameter("id");
 				

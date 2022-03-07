@@ -1,3 +1,4 @@
+
 // MÁSCARA PARA O CAMPO DO TELEFONE - TELA "MEUS DADOS / REGISTRAR NOVA CONTA"
 //
 const tel = document.getElementById('telefone') // Seletor do campo de telefone

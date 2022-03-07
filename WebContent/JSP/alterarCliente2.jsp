@@ -27,6 +27,17 @@
         <!-- CSS Principal do Projeto -->
         <link href="./css/style.css" rel="stylesheet">
     </head>
+    <% 
+    Usuario usuarioLogado = new Usuario();
+    
+    HttpSession sessao = request.getSession();
+    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+    
+    String idCliente = (String)request.getAttribute("idCliente");
+    
+  	//pega cliente a ser alterado
+    Cliente clienteAlterado = (Cliente)sessao.getAttribute("clienteAlterado");
+        %>
 
     <body>
           <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -119,59 +130,59 @@
        <!-- Fim do Breadcrumb -->
         
         <!-- Inicio de alterar conta -->
-        <div class="registrar__novaconta">
-            <div class="container-novaconta">
-                <div class="col-lg-10">   
-                    <div class="register-form">
-                        <h4>Alterar Cadastro de Cliente</h4><br>
-                            <div class="row">
-                            <div class="col-md-4">
-                                <label>Nome</label>
-                                <input class="form-control" type="text" placeholder="Nome">
-                            </div>
-                            <div class="col-md-4">
-                                <label>CPF</label>
-                                <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14">
-                            </div>
-                            <div class="col-md-4"><br>
-                                <input type="radio" name="genero" value="Feminino" checked> Feminino        <br>
-                                <input type="radio" name="genero" value="Masculino"> Masculino
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <label>Celular</label>
-                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <label> Data de Nascimento</label>
-                                <input class="form-control" type="date" class="fa fa-birthday-cake" placeholder="Data de Nascimento">
-                           </div>
-                            <div class="col-md-4">
-                                <label>E-mail</label>
-                                <input class="form-control" type="email" placeholder="E-mail">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Senha</label>
-                                <input class="form-control" type="password" placeholder="Senha">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Confirme a Senha</label>
-                                <input class="form-control" type="password" placeholder="Insira novamente a senha">
-                            </div>                            
-                            <div class="col-md-4">
-                            <br><input type="radio" name="status" value="Ativo" checked> Ativo <br>
-                                <input type="radio" name="status" value="Inativo"> Inativo
-                            </div>
-                            <div class="col-md-9">
-                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-                                <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-save"></i> Salvar </button>
-                            </div>
-                        </div> 
-                    </div>
-                </div>    
-            </div>
-        </div>
+        <form action="http://localhost:8080/eCommerce/cadastro" >
+	        <div class="registrar__novaconta">
+	            <div class="container-novaconta">
+	                <div class="col-lg-10">   
+	                    <div class="register-form">
+	                        <h4>Alterar Cadastro de Cliente</h4><br>
+	                            <div class="row">
+		                            <div class="col-md-4">
+		                                <label>Nome</label>
+		                                <input class="form-control" type="text" placeholder="Nome" name="nome" value="<%=clienteAlterado.getNome() %>" >
+		                            </div>
+		                            <div class="col-md-3">
+		                                <label>CPF</label>
+		                                <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14" value="<%=clienteAlterado.getCpf() %>" readonly>
+		                            </div>
+		                            	                            
+		                             <div class="col-md-3">
+		                             <label>Status</label> <input type="hidden" value="<%=clienteAlterado.getStatus()%> "/><br>
+		                             	<input type="radio" name="status" value="Ativo" checked> Ativo      
+		                                <input type="radio" name="status" value="Inativo"> Inativo
+		                            </div>
+		                            
+		                            <div class="col-md-4">
+		                                <label>Celular</label>
+		                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" value="<%=clienteAlterado.getTelefone() %>" required>
+		                            </div>
+		                            
+		                            <div class="col-md-3">
+		                                <label> Data de Nascimento</label>
+		                                <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" placeholder="Data de Nascimento" value="<%=clienteAlterado.getData_Nascimento()%>">
+		                           </div>
+		                            <div class="col-md-3">
+		                                <label>E-mail</label>
+		                                <input class="form-control" type="email" name="email" placeholder="E-mail" value="<%=clienteAlterado.getUsuario().getEmail() %>">
+		                            </div>                            
+		                           
+		                            <div class="col-md-9">
+		                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+		                                <button type="submit" class="btn" name="operacao" value="ALTERAR"> <i class="fa fa-save"></i> Salvar </button>
+		                            </div>
+		                            <input type="hidden" name="tipoCliente" value="cliente"/>
+				                    <input type="hidden" name="alteraCliente" value="1"/>
+				                    <input type="hidden" name="id" value="<%=clienteAlterado.getId()%>"/>
+				                    <input type="hidden" name="senha" value="<%=clienteAlterado.getUsuario().getSenha()%>"/>
+				                    <input type="hidden" name="confirmarSenha" value="<%=clienteAlterado.getUsuario().getSenha()%>"/>
+				                    <input type="hidden" name="genero" value="<%=clienteAlterado.getGenero() %> "/>
+	                            </div>
+	                        </div> 
+	                    </div>
+	                </div>    
+	            </div>
+	        </div>
+	      </form>
         <!-- Fim de Alterar Conta -->
         
         <!-- Footer Start -->

@@ -80,9 +80,13 @@ public class LoginHelper implements IViewHelper {
 				// salva na sessao o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
+				//Todas as listas que serão adicionadas a Sessao 
 				sessao.setAttribute("enderecosCliente", usuario.getEnderecosCliente());
+				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
+				// Este apenas puxa apenas o cliente que sera alterado
+				sessao.setAttribute("clienteAlterado", usuario.getTodosClientes().get(0));
 				
-				
+				//Caso usuario logado for Cliente ou Admin 
 				if(usuario.getTipoCliente().equals("cliente")) {
 					
 					request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);

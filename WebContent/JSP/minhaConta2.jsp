@@ -167,7 +167,7 @@
                               <input type="hidden" name="alteraCliente" value="1"/>
                               <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
                               <input type="hidden" name="senha" accesskey="S" value="<%=usuarioLogado.getSenha() %>" />
-                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getSenha() %>"/>
+                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getConfirmarSenha() %>"/>
                               <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero() %> "> 
                            </div>
                         </form>
@@ -285,18 +285,32 @@
                         <h4>Alterar Senha</h4>
                         <br>
                         <div class="row">
-                           <div class="col-md-4">
-                              <label>Digite nova senha:</label>
-                              <input class="form-control" type="password">
-                           </div>
-                           <div class="col-md-4">
-                              <label>Confirme a nova senha:</label>
-                              <input class="form-control" type="password" >
-                           </div>
-                           <div class="col-md-6">
-                              <button class="btn"><i class="fa fa-check"></i> Salvar</button>
-                              <br>
-                           </div>
+                           <form action="http://localhost:8080/eCommerce/cadastro" method="post">
+                        
+		                        <input type="hidden" id="nome" name="nome" value="<%=usuarioLogado.getNome() %>" />      
+				                <input type="hidden" id="CPF" name="cpf" class="form-control cpf-mask" maxlength="14" value="<%=usuarioLogado.getCpf() %>"/>
+				                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
+				                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
+				                <input type="hidden" name="telefone" id="telefone" maxlength="15" value="<%=usuarioLogado.getTelefone() %>">
+				                <input type="hidden" id="email" name="email" value="<%=usuarioLogado.getEmail() %>"/>
+			                
+	                           <div class="col-md-6">
+	                              <label>Digite nova senha:</label>
+	                              <input class="form-control" type="password" name="senha">
+	                           </div>
+	                           <div class="col-md-8">
+	                              <label>Confirme a nova senha:</label>
+	                              <input class="form-control" type="password"  name="confirmarSenha">
+	                           </div>
+	                           <div class="col-md-8">
+	                              <button class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Salvar</button>
+	                              <br>
+	                           </div>
+	                           <input type="hidden" name="status" value="ativo"/>
+				            <input type="hidden" name="tipoCliente" value="cliente"/>
+						    <input type="hidden" name="alteraCliente" value="1"/>
+				            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
+			            </form>
                         </div>
                      </div>
                   </div>
@@ -327,11 +341,11 @@
                      <h2>Siga-nos</h2>
                      <div class="contact-info">
                         <div class="social">
-                           <a href="#"><i class="fab fa-twitter"></i></a>
-                           <a href="#"><i class="fab fa-facebook-f"></i></a>
-                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                           <a href="#"><i class="fab fa-instagram"></i></a>
-                           <a href="#"><i class="fab fa-youtube"></i></a>
+                           <a href=""><i class="fab fa-twitter"></i></a>
+                           <a href=""><i class="fab fa-facebook-f"></i></a>
+                           <a href=""><i class="fab fa-linkedin-in"></i></a>
+                           <a href=""><i class="fab fa-instagram"></i></a>
+                           <a href=""><i class="fab fa-youtube"></i></a>
                         </div>
                      </div>
                   </div>

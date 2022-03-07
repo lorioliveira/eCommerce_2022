@@ -45,7 +45,7 @@ public class EnderecoHelper implements IViewHelper {
      // salva a data atual na tabela
      		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
      		Date date = new Date();
-     		String dataAtual;
+     		String dataAtual; 
      		dataAtual = dateFormat.format(date);
 		
 		if (("CONSULTAR").equals(operacao)) {

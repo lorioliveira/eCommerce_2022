@@ -36,11 +36,11 @@
     <%
     ClienteDAO dao = new ClienteDAO();
     Usuario usuarioLogado = new Usuario();
-
+    
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
 
-    List<Cliente> clientes = dao.consultarClienteById(usuarioLogado.getId());
+    List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
     %>
 
@@ -77,15 +77,15 @@
                         <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
-                        <div class="nav-item dropdown">
-                            <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                            <div class="dropdown-menu">
-                                <!-- BOTAO SAIR -->
-                                <form action="http://localhost:8080/eCommerce/login">
-                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-                                </form>
-                            </div>
-                        </div>
+<!--                         <div class="nav-item dropdown"> -->
+<!--                             <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a> -->
+<!--                             <div class="dropdown-menu"> -->
+<!--                                 BOTAO SAIR -->
+<!--                                 <form action="http://localhost:8080/eCommerce/login"> -->
+<!--                                     <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button> -->
+<!--                                 </form> -->
+<!--                             </div> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </nav>
@@ -146,6 +146,11 @@
                         <a class="nav-link" id="products-nav" data-toggle="pill" href="#products-tab" role="tab"><i class="fa fa-barcode"></i> Produtos</a>
                         <a class="nav-link" id="coupons-nav" data-toggle="pill" href="#coupons-tab" role="tab"><i class="fa fa-tags"></i>Cupons</a>
                         <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
+                        <a class="nav-link">
+	                       	<form action="http://localhost:8080/eCommerce/login">
+                                <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                            </form>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-10">
@@ -176,16 +181,17 @@
                                 </thead>
                                 
                                 <%
+                                Cliente cliente = new Cliente();
                                 // Listar apenas os Clientes (antes estava trazendo o próprio admin)
                                 List<EntidadeDominio> clientes = dao.consultarClienteByTipo(cliente);
-
+                                
                                 for(EntidadeDominio e : clientes){
 
                                     // Aplicado o CAST para poder popular o cliente
                                     Cliente c = (Cliente) e;
                                     //Pega o usuario que esta dentro do cliente
                                     Usuario u = c.getUsuario();
-                            %>
+                           		 %>
                                 <tbody>
                                     <tr>
                                         <td><%=c.getNome() %></td>
@@ -197,6 +203,9 @@
                                         <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                     </tr>
                                 </tbody>
+                                <%
+                                }
+                                %>
                             </table>
                         </div>
 

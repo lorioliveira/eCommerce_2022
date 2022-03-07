@@ -137,8 +137,6 @@ public class LoginDAO extends AbstractJdbcDAO {
 	} // Listar/Verificar Usuario por LOGIN e SENHA
 	
 	
-	
-	
 	/**
 	 * Metodo para consultar o Usuario
 	 * funcaoo criada para consultar o Login ao s acessar o sistema,
@@ -175,7 +173,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuarios.add(usuarioItem);
 			}
 			
-
+			// Listar todos os enderecos do Cliente logado
 			stmt = connection.prepareStatement("select * from endereco where id_cliente=?");
 			stmt.setString(1, usuarios.get(0).getId());
 			rs = stmt.executeQuery();
@@ -204,8 +202,43 @@ public class LoginDAO extends AbstractJdbcDAO {
 					// adicionando o objeto à lista de Enderecos criado acima
 					enderecos.add(end);
 				}
+				
+				//Listar todos os Clientes cadastrados - Opção como ADMIN
+				List<Cliente> todosClientes = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Cliente, onde tambem possui dados do Usuario
+					
+					Cliente cliente = new Cliente();
+					Usuario usuarioCliente = new Usuario();
+					
+					cliente.setId(rs.getString("id"));
+					cliente.setNome(rs.getString("nome"));
+					cliente.setCpf(rs.getString("cpf"));
+					cliente.setData_Nascimento(rs.getString("data_Nascimento"));
+					cliente.setGenero(rs.getString("genero"));
+					cliente.setTelefone(rs.getString("telefone"));
+					cliente.setStatus(rs.getString("status"));
+					cliente.setTipoCliente(rs.getString("tipoCliente"));
+
+					cliente.setData_Cadastro(rs.getString("data_Cadastro"));
+					
+					usuarioCliente.setEmail(rs.getString("email"));
+					usuarioCliente.setSenha(rs.getString("senha"));
+					
+					cliente.setUsuario(usuarioCliente);
+					
+					// adicionando o objeto a lista
+					todosClientes.add(cliente);
+				}
+				
+				//TODAS AS LISTAS
 				Usuario novoUsuario = (Usuario) usuarios.get(0);
 				novoUsuario.setEnderecosCliente(enderecos);
+				novoUsuario.setTodosClientes(todosClientes);
+				
 				
 			rs.close();
 			stmt.close();

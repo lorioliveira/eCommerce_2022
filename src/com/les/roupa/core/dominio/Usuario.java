@@ -19,8 +19,10 @@ public class Usuario extends EntidadeDominio {
 	private String data_Nascimento;
 	
 	private List<Endereco> enderecosCliente; 
+	private List<Cliente> todosClientes;
 	
 	
+
 	/* Email */
 	public String getEmail() {
 		if (email == null || email.equals("")) {
@@ -53,7 +55,6 @@ public class Usuario extends EntidadeDominio {
 		this.confirmarSenha = confirmarSenha;
 	}
 	
-	
 	/* Tipo de Cliente - se é admin ou cliente*/
 	public String getTipoCliente() {
 		return tipoCliente;
@@ -71,15 +72,6 @@ public class Usuario extends EntidadeDominio {
 		this.nome = nome;
 	}
 	
-	/*Enderecos do Cliente */
-	public List<Endereco> getEnderecosCliente() {
-		return enderecosCliente;
-	}
-
-	public void setEnderecosCliente(List<Endereco> enderecosCliente) {
-		this.enderecosCliente = enderecosCliente;
-	}
-	
 	/* Telefone */
 	public String getTelefone() {
 		return telefone;
@@ -95,6 +87,7 @@ public class Usuario extends EntidadeDominio {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	
 	/* CPF */
 	public String getCpf() {
 		return cpf;
@@ -102,11 +95,30 @@ public class Usuario extends EntidadeDominio {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
 	/* Data Nascimento */
 	public String getData_Nascimento() {
 		return data_Nascimento;
 	}
 	public void setData_Nascimento(String data_Nascimento) {
 		this.data_Nascimento = data_Nascimento;
+	}
+	
+	/*Enderecos do Cliente */
+	public List<Endereco> getEnderecosCliente() {
+		return enderecosCliente;
+	}
+
+	public void setEnderecosCliente(List<Endereco> enderecosCliente) {
+		this.enderecosCliente = enderecosCliente;
+	}
+	
+	/* Lista de todos os Clientes cadastrados*/
+	public List<Cliente> getTodosClientes() {
+		return todosClientes;
+	}
+
+	public void setTodosClientes(List<Cliente> todosClientes) {
+		this.todosClientes = todosClientes;
 	}
 }

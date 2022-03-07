@@ -60,7 +60,6 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 	 */
 	
 	public void alterar (EntidadeDominio entidade) {
-		
 		openConnection();
 		
 		String sql = "update endereco set cep=?, logradouro=?, numero=?, bairro=?,cidade=?, "
@@ -68,8 +67,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		
 		try {
 			Endereco endereco = (Endereco) entidade;
-			
-			
+			Cliente cliente = new Cliente();
 			// quando o atributo "alteraEndereco" for igual a 1, ele altera o endereco
 			//caso contrario, apenas tras as infos para a tela
 			if(endereco.getAlteraEndereco().contentEquals("1")) {
@@ -89,16 +87,79 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				stmt.setString(12,endereco.getId());
 				
 				stmt.execute();
+				
+				//Listar todos os dados do Endereco
+				List<Endereco> enderecosCliente = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from endereco");
+				stmt.setString(1, endereco.getId());
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Endereco
+					Endereco endAltera = new Endereco();
+					
+					endAltera.setId(rs.getString("id"));
+					endAltera.setCep(rs.getString("cep"));
+					endAltera.setLogradouro(rs.getString("logradouro"));
+					endAltera.setNumero(rs.getString("numero"));
+					endAltera.setBairro(rs.getString("bairro"));
+					endAltera.setCidade(rs.getString("cidade"));
+					endAltera.setEstado(rs.getString("estado"));
+					endAltera.setPais(rs.getString("pais"));
+					endAltera.setTipoResidencia(rs.getString("tipoResidencia"));
+					endAltera.setObservacoes(rs.getString("observacoes"));
+					endAltera.setTipoEnd(rs.getString("tipoEndereco"));
+					endAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+										
+					// adicionando o objeto a lista
+					enderecosCliente.add(endAltera);
+				}
+				
+				cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				
+				rs.close();
 				stmt.close();
+				
+				
 			}else {
-				PreparedStatement stmt = connection.prepareStatement(sql);
+				
+				//Listar todos os dados de um Endereco para alterar
+				List<Endereco> enderecosCliente = new ArrayList<>();
+				PreparedStatement stmt = connection.prepareStatement("select * from endereco where id = ?");
+				stmt.setString(1, endereco.getId());
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					
+					// criando o objeto Endereco
+					Endereco endAltera = new Endereco();
+					
+					endAltera.setId(rs.getString("id"));
+					endAltera.setCep(rs.getString("cep"));
+					endAltera.setLogradouro(rs.getString("logradouro"));
+					endAltera.setNumero(rs.getString("numero"));
+					endAltera.setBairro(rs.getString("bairro"));
+					endAltera.setCidade(rs.getString("cidade"));
+					endAltera.setEstado(rs.getString("estado"));
+					endAltera.setPais(rs.getString("pais"));
+					endAltera.setTipoResidencia(rs.getString("tipoResidencia"));
+					endAltera.setObservacoes(rs.getString("observacoes"));
+					endAltera.setTipoEnd(rs.getString("tipoEndereco"));
+					endAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+										
+					// adicionando o objeto a lista
+					enderecosCliente.add(endAltera);
+				}
+
+				cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				
+				rs.close();
 				stmt.close();
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
-	} // Alterar
+	} // Fim Alterar Endereco
 	
 
 	

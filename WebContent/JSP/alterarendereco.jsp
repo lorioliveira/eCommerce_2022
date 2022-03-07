@@ -67,9 +67,9 @@
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
                                 <!-- BOTAO SAIR -->
-		                                <form action="http://localhost:8080/eCommerce/login">
-		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-		                                </form>
+                               <form action="http://localhost:8080/eCommerce/login">
+                                   <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                               </form>
                             </div>
                         </div>
                     </div>
@@ -97,13 +97,6 @@
                             <button><i class="fa fa-search"></i></button> -->
                         </div>
                     </div>
-                    <!-- <div class="col-md-2">
-                        <div class="user">
-                            <a href="./JSP/carrinho.jsp" class="btn cart">
-                            Minha Sacola <i class="fas fa-shopping-bag"></i>
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -136,7 +129,6 @@
         
         
         <!-- Inicio do formulário de novo endereço -->
-        <form action="http://localhost:8080/eCommerce/cadastroEndereco" >
 	        <div class="registrar__novoEndereco">
 	            <div class="container-novoEndereco">
 	                <div class="row">
@@ -144,103 +136,106 @@
 	                        <div class="tab-content">
 	                             <div id="address-tab" role="tabpanel" aria-labelledby="address-nav">
 	                                <h4>Editar endereço</h4> <br>
-	                                <div class="row">
-	                                    <div class="col-md-3">
-	                                        <label>Tipo Residência</label><input type="hidden" value="<%=endereco.get(0).getTipoResidencia()%>"/>
-	                                        <select class="form-control" name="tipoResidencia">
-	                                            <option selected disabled>Selecione</option>
-	                                            <option value="Apartamento">Apto</option>
-	                                            <option value="Casa">Casa</option>
-	                                            <option value="Outro">Outro</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="col-md-4">
-	                                        <label>Tipo Endereço</label><input type="hidden" value="<%=endereco.get(0).getTipoEnd()%>" />
-	                                        <select class="form-control" name="tipoEndereco">
-	                                            <option selected disabled>Selecione</option>
-	                                            <option value="Entrega">Entrega</option>
-		                                        <option value="Cobranca">Cobrança</option>
-		                                        <option value="Entrega e Cobranca">Entrega e Cobrança</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="col-md-3">
-	                                        <label>CEP</label>
-	                                        <input class="form-control" type="text" name="cep" onkeypress="mascara(this, '#####-###')" maxlength="9" value="<%=endereco.get(0).getCep()%>" >
-	                                    </div>
-	                                    <div class="col-md-5">
-	                                        <label>Logradouro</label>
-	                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro"  value="<%=endereco.get(0).getLogradouro()%>">
-	                                    </div>
-	                                    <div class="col-md-2">
-	                                        <label>Número</label>
-	                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5" name="numero"value="<%=endereco.get(0).getNumero()%>">
-	                                    </div>
-	                                    <div class="col-md-3">
-	                                        <label>Bairro</label>
-	                                        <input class="form-control" type="text" placeholder="Bairro" name="bairro">
-	                                    </div>
-	                                    <div class="col-md-4">
-	                                        <label>Estado</label>
-	                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
-	                                            <option selected disabled>Selecione</option>
-	                                            <option value="AC">Acre</option>
-	                                            <option value="AL">Alagoas</option>
-	                                            <option value="AP">Amapa</option>
-	                                            <option value="AM">Amazonas</option>
-	                                            <option value="BA">Bahia</option>
-	                                            <option value="CE">Ceara</option>
-	                                            <option value="DF">Distrito Federal</option>
-	                                            <option value="ES">Espirito Santo</option>
-	                                            <option value="GO">Goias</option>
-	                                            <option value="MA">Maranhao</option>
-	                                            <option value="MT">Mato Grosso</option>
-	                                            <option value="MS">Mato Grosso do Sul</option>
-	                                            <option value="MG">Minas Gerais</option>
-	                                            <option value="PA">Para</option>
-	                                            <option value="PB">Paraiba</option>
-	                                            <option value="PR">Parana</option>
-	                                            <option value="PE">Pernambuco</option>
-	                                            <option value="PI">Piaui</option>
-	                                            <option value="RJ">Rio de Janeiro</option>
-	                                            <option value="RN">Rio Grande do Norte</option>
-	                                            <option value="RS">Rio Grande do Sul</option>
-	                                            <option value="RO">Rondonia</option>
-	                                            <option value="RR">Roraima</option>
-	                                            <option value="SC">Santa Catarina</option>
-	                                            <option value="SP">Sao Paulo</option>
-	                                            <option value="SE">Sergipe</option>
-	                                            <option value="TO">Tocantins</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="col-md-4">
-	                                        <label>Cidade</label>
-	                                        <select class="form-control" id="cidade" name="cidade">
-	                                            <option selected disabled>Selecione o Estado</option>
-	                                            <script type="text/javascript" src="./js/estados-cidades.js" charset="utf-8"></script>
-	                                        </select>
-	                                    </div>
-	                                    <div class="col-md-2">
-	                                        <label>País</label>
-	                                        <select class="form-control" name="pais">
-	                                            <option value="Brasil">Brasil</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="col-md-8">
-	                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"></textarea>
-	                                        <br>
-	                                    </div>
-	                                    <div class="col-md-6">
-	                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>
-	                                        <button class="btn_editarEndereco btn" name="operacao" value="SALVAR"><i class="fa fa-save"></i>  Salvar</button>
-	                                    </div>
-	                                </div>
+	                                 <form action="http://localhost:8080/eCommerce/cadastroEndereco" >
+		                                <div class="row">
+		                                    <div class="col-md-3">
+		                                        <label>Tipo Residência</label> <input type="hidden" value="<%=endereco.get(0).getTipoResidencia()%>"/>
+		                                        <select class="form-control" name="tipoResidencia">
+		                                            <option selected disabled><%=endereco.get(0).getTipoResidencia()%></option>
+		                                            <option value="Apartamento">Apto</option>
+		                                            <option value="Casa">Casa</option>
+		                                            <option value="Outro">Outro</option>
+		                                        </select>
+		                                    </div>
+		                                    <div class="col-md-4">
+		                                        <label>Tipo Endereço</label>
+		                                        <select class="form-control" name="tipoEndereco">
+		                                            <option selected disabled ><%=endereco.get(0).getTipoEnd()%> </option>
+		                                            <option value="Entrega">Entrega</option>
+			                                        <option value="Cobranca">Cobrança</option>
+			                                        <option value="Entrega e Cobranca">Entrega e Cobrança</option>
+		                                        </select>
+		                                    </div>
+		                                    <div class="col-md-3">
+		                                        <label>CEP</label>
+		                                        <input class="form-control" type="text" name="cep" onkeypress="mascara(this, '#####-###')" maxlength="9" value="<%=endereco.get(0).getCep()%>" >
+		                                    </div>
+		                                    <div class="col-md-5">
+		                                        <label>Logradouro</label>
+		                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro"  value="<%=endereco.get(0).getLogradouro()%>">
+		                                    </div>
+		                                    <div class="col-md-2">
+		                                        <label>Número</label>
+		                                        <input class="form-control" type="text" placeholder="Nº" maxlength="5" name="numero"value="<%=endereco.get(0).getNumero()%>">
+		                                    </div>
+		                                    <div class="col-md-3">
+		                                        <label>Bairro</label>
+		                                        <input class="form-control" type="text" placeholder="Bairro" name="bairro" value="<%=endereco.get(0).getBairro()%>" >
+		                                    </div>
+		                                    <div class="col-md-4">
+		                                        <label>Estado</label>
+		                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)" >
+		                                            <option selected disabled><%=endereco.get(0).getEstado()%></option>
+		                                            <option value="AC">Acre</option>
+		                                            <option value="AL">Alagoas</option>
+		                                            <option value="AP">Amapa</option>
+		                                            <option value="AM">Amazonas</option>
+		                                            <option value="BA">Bahia</option>
+		                                            <option value="CE">Ceara</option>
+		                                            <option value="DF">Distrito Federal</option>
+		                                            <option value="ES">Espirito Santo</option>
+		                                            <option value="GO">Goias</option>
+		                                            <option value="MA">Maranhao</option>
+		                                            <option value="MT">Mato Grosso</option>
+		                                            <option value="MS">Mato Grosso do Sul</option>
+		                                            <option value="MG">Minas Gerais</option>
+		                                            <option value="PA">Para</option>
+		                                            <option value="PB">Paraiba</option>
+		                                            <option value="PR">Parana</option>
+		                                            <option value="PE">Pernambuco</option>
+		                                            <option value="PI">Piaui</option>
+		                                            <option value="RJ">Rio de Janeiro</option>
+		                                            <option value="RN">Rio Grande do Norte</option>
+		                                            <option value="RS">Rio Grande do Sul</option>
+		                                            <option value="RO">Rondonia</option>
+		                                            <option value="RR">Roraima</option>
+		                                            <option value="SC">Santa Catarina</option>
+		                                            <option value="SP">Sao Paulo</option>
+		                                            <option value="SE">Sergipe</option>
+		                                            <option value="TO">Tocantins</option>
+		                                        </select>
+		                                    </div>
+		                                    <div class="col-md-4">
+		                                        <label>Cidade</label>
+		                                        <select class="form-control" id="cidade" name="cidade">
+		                                            <option selected disabled><%=endereco.get(0).getCidade()%></option>
+		                                            <script type="text/javascript" src="./js/estados-cidades.js" charset="utf-8"></script>
+		                                        </select>
+		                                    </div>
+		                                    <div class="col-md-2">
+		                                        <label>País</label>
+		                                        <select class="form-control" name="pais">
+		                                            <option selected value="Brasil">Brasil</option>
+		                                        </select>
+		                                    </div>
+		                                    <div class="col-md-8">
+		                                        <textarea placeholder="Campo para observações (opcional)" name="observacoes" cols="96"><%=endereco.get(0).getObservacoes()%></textarea>
+		                                        <br>
+		                                    </div>
+		                                    <div class="col-md-6">
+		                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>
+		                                        <button class="btn_editarEndereco btn" name="operacao" value="ALTERAR"><i class="fa fa-save"></i>  Salvar</button>
+		                                    </div>
+		                                    <input type="hidden" name="id" value="<%=endereco.get(0).getId()%>"/>
+											<input type="hidden" name="alteraEndereco" value="1"/>
+		                                </div>
+		                             </form>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-	     </form>
         <!-- Fim do formulário de novo endereço -->
         
          <!-- Início do Footer -->

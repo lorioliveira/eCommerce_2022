@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Usuario;
+import com.mysql.cj.exceptions.RSAException;
 
 /**
  * DAO para salvar, alterar, consultar e excluir CLIENTE
@@ -85,11 +88,83 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				stmt.setString(10,cliente.getId());
 				
 				stmt.execute();
+				
+				//Listar todos os Clientes cadastrados - Opção como ADMIN
+				List<Cliente> todosClientes = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Cliente, onde tambem possui dados do Usuario
+					
+					Cliente clienteAltera = new Cliente();
+					Usuario usuarioCliente = new Usuario();
+					
+					clienteAltera.setId(rs.getString("id"));
+					clienteAltera.setNome(rs.getString("nome"));
+					clienteAltera.setCpf(rs.getString("cpf"));
+					clienteAltera.setData_Nascimento(rs.getString("data_Nascimento"));
+					clienteAltera.setGenero(rs.getString("genero"));
+					clienteAltera.setTelefone(rs.getString("telefone"));
+					clienteAltera.setStatus(rs.getString("status"));
+					clienteAltera.setTipoCliente(rs.getString("tipoCliente"));
+
+					clienteAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+					
+					usuarioCliente.setEmail(rs.getString("email"));
+					usuarioCliente.setSenha(rs.getString("senha"));
+					
+					clienteAltera.setUsuario(usuarioCliente);
+					
+					// adicionando o objeto a lista
+					todosClientes.add(clienteAltera);
+				}
+				
+				cliente.getUsuario().setTodosClientes(todosClientes);
+				
+				rs.close();
 				stmt.close();
+				
 			}else {
-				PreparedStatement stmt = connection.prepareStatement(sql);
+				
+				//Listar todos os dados de um Cliente para alterar - Opção como ADMIN
+				List<Cliente> todosClientes = new ArrayList<>();
+				PreparedStatement stmt = connection.prepareStatement("select * from cliente where id = ?");
+				stmt.setString(1, cliente.getId());
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					
+					// criando o objeto Cliente, onde tambem possui dados do Usuario
+					Cliente clienteAltera = new Cliente();
+					Usuario usuarioCliente = new Usuario();
+					
+					clienteAltera.setId(rs.getString("id"));
+					clienteAltera.setNome(rs.getString("nome"));
+					clienteAltera.setCpf(rs.getString("cpf"));
+					clienteAltera.setData_Nascimento(rs.getString("data_Nascimento"));
+					clienteAltera.setGenero(rs.getString("genero"));
+					clienteAltera.setTelefone(rs.getString("telefone"));
+					clienteAltera.setStatus(rs.getString("status"));
+					clienteAltera.setTipoCliente(rs.getString("tipoCliente"));
+
+					clienteAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+					
+					usuarioCliente.setEmail(rs.getString("email"));
+					usuarioCliente.setSenha(rs.getString("senha"));
+					
+					clienteAltera.setUsuario(usuarioCliente);
+					
+					// adicionando o objeto a lista
+					todosClientes.add(clienteAltera);
+				}
+				
+				cliente.getUsuario().setTodosClientes(todosClientes);
+				
+				rs.close();
 				stmt.close();
 			}
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -180,7 +255,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	public List<Cliente> consultarClienteById (String idCliente){
 		openConnection();
 		try {
-			List<Cliente> clientes = new ArrayList<>();
+			List<Cliente> client = new ArrayList<>();
 			PreparedStatement stmt = connection.prepareStatement("select * from cliente where id=? ");
 			stmt.setString(1, idCliente);
 			ResultSet rs = stmt.executeQuery();
@@ -207,11 +282,11 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				cliente.setUsuario(usuario);
 				
 				// adicionando o objeto a lista
-				clientes.add(cliente);
+				client.add(cliente);
 			}
 			rs.close();
 			stmt.close();
-			return clientes;
+			return client;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -227,7 +302,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		openConnection();
 		try {
 			List<EntidadeDominio> clientes = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from cliente where tipo = 'cliente'");
+			PreparedStatement stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {

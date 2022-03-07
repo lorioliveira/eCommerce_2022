@@ -5,7 +5,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -30,6 +29,16 @@
         <!-- CSS Principal do Projeto -->
         <link href="../css/style.css" rel="stylesheet">
     </head>
+    <% 
+    ClienteDAO dao = new ClienteDAO();
+    Usuario usuarioLogado = new Usuario();
+    
+    HttpSession sessao = request.getSession();
+    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+    
+    String idCliente = (String)request.getAttribute("idCliente");
+    List<Cliente> cliente = dao.consultarClienteById(idCliente);
+        %>
 
     <body>
           <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -68,9 +77,9 @@
                             <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
                                 <!-- BOTAO SAIR -->
-		                                <form action="http://localhost:8080/eCommerce/login">
-		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-		                                </form>
+                               <form action="http://localhost:8080/eCommerce/login">
+                                   <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                               </form>
                             </div>
                         </div>
                     </div>
@@ -101,9 +110,6 @@
                 <div class="col-md-2">
                     <div class="user">
                         <h6><div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div></h6>
-                        <!-- <a href="cart.jsp" class="btn cart">
-                            Minha Sacola <i class="fas fa-shopping-bag"></i>
-                            </a> -->
                     </div>
                 </div>
             </div>
@@ -125,59 +131,59 @@
        <!-- Fim do Breadcrumb -->
         
         <!-- Inicio de alterar conta -->
-        <div class="registrar__novaconta">
-            <div class="container-novaconta">
-                <div class="col-lg-10">   
-                    <div class="register-form">
-                        <h4>Alterar Cadastro de Cliente</h4><br>
-                            <div class="row">
-                            <div class="col-md-4">
-                                <label>Nome</label>
-                                <input class="form-control" type="text" placeholder="Nome">
-                            </div>
-                            <div class="col-md-4">
-                                <label>CPF</label>
-                                <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14">
-                            </div>
-                            <div class="col-md-4"><br>
-                                <input type="radio" name="genero" value="Feminino" checked> Feminino        <br>
-                                <input type="radio" name="genero" value="Masculino"> Masculino
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <label>Celular</label>
-                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <label> Data de Nascimento</label>
-                                <input class="form-control" type="date" class="fa fa-birthday-cake" placeholder="Data de Nascimento">
-                           </div>
-                            <div class="col-md-4">
-                                <label>E-mail</label>
-                                <input class="form-control" type="email" placeholder="E-mail">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Senha</label>
-                                <input class="form-control" type="password" placeholder="Senha">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Confirme a Senha</label>
-                                <input class="form-control" type="password" placeholder="Insira novamente a senha">
-                            </div>                            
-                            <div class="col-md-4">
-                            <br><input type="radio" name="status" value="Ativo" checked> Ativo <br>
-                                <input type="radio" name="status" value="Inativo"> Inativo
-                            </div>
-                            <div class="col-md-9">
-                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-                                <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-save"></i> Salvar </button>
-                            </div>
-                        </div> 
-                    </div>
-                </div>    
-            </div>
-        </div>
+        <form action="http://localhost:8080/eCommerce/cadastro" >
+	        <div class="registrar__novaconta">
+	            <div class="container-novaconta">
+	                <div class="col-lg-10">   
+	                    <div class="register-form">
+	                        <h4>Alterar Cadastro de Cliente</h4><br>
+	                            <div class="row">
+	                            <div class="col-md-4">
+	                                <label>Nome</label>
+	                                <input class="form-control" type="text" placeholder="Nome"  value="<%=cliente.get(0).getNome() %>" >
+	                            </div>
+	                            <div class="col-md-3">
+	                                <label>CPF</label>
+	                                <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14" value="<%=cliente.get(0).getCpf() %>" readonly>
+	                            </div>
+	                            	                            
+	                             <div class="col-md-3">
+	                             <label>Status</label> <input type="hidden" value="<%=cliente.get(0).getStatus()%> "/><br>
+	                             	<input type="radio" name="status" value="Ativo" checked> Ativo      
+	                                <input type="radio" name="status" value="Inativo"> Inativo
+	                            </div>
+	                            
+	                            <div class="col-md-4">
+	                                <label>Celular</label>
+	                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" value="<%=cliente.get(0).getTelefone() %>" required>
+	                            </div>
+	                            
+	                            <div class="col-md-3">
+	                                <label> Data de Nascimento</label>
+	                                <input class="form-control" type="date" class="fa fa-birthday-cake" placeholder="Data de Nascimento" value="<%=cliente.get(0).getData_Nascimento()%>">
+	                           </div>
+	                            <div class="col-md-3">
+	                                <label>E-mail</label>
+	                                <input class="form-control" type="email" placeholder="E-mail" value="<%=cliente.get(0).getUsuario().getEmail() %>">
+	                            </div>                            
+	                           
+	                            <div class="col-md-9">
+	                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+	                                <button type="submit" class="btn" name="operacao" value="ALTERAR"> <i class="fa fa-save"></i> Salvar </button>
+	                            </div>
+	                            <input type="hidden" name="tipoCliente" value="cliente"/>
+			                    <input type="hidden" name="alteraCliente" value="1"/>
+			                    <input type="hidden" name="id" value="<%=cliente.get(0).getId()%>"/>
+			                    <input type="hidden" name="senha" value="<%=cliente.get(0).getUsuario().getSenha()%>"/>
+			                    <input type="hidden" name="confirmarSenha" value="<%=cliente.get(0).getUsuario().getConfirmarSenha()%>"/>
+			                    <input type="hidden" name="genero" value="<%=cliente.get(0).getGenero() %> "/>
+	                            </div>
+	                        </div> 
+	                    </div>
+	                </div>    
+	            </div>
+	        </div>
+	      </form>
         <!-- Fim de Alterar Conta -->
         
         <!-- Footer Start -->
@@ -268,7 +274,7 @@
         <script src="../lib/slick/slick.min.js"></script>
         
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        <script src="js/all.js"></script>
+        <script src="../js/main.js"></script>
+        <script src="../js/all.js"></script>
     </body>
 </html>

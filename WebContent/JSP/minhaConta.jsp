@@ -9,16 +9,20 @@
       <meta charset="utf-8">
       <title>Mirror Fashion</title>
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      
       <!-- Favicon -->
       <link href="../img/favicon.ico" rel="icon">
       <link href="../css/reset.css" rel="stylesheet">
+      
       <!-- Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+      
       <!-- Biblioteca CSS - Bootstrap-->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
       <link href="../lib/slick/slick.css" rel="stylesheet">
       <link href="../lib/slick/slick-theme.css" rel="stylesheet">
+      
       <!--- Biblioteca CSS - Principal-->
       <link href="../css/style.css" rel="stylesheet">
    </head>
@@ -159,7 +163,7 @@
                               <input type="hidden" name="alteraCliente" value="1"/>
                               <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
                               <input type="hidden" name="senha" accesskey="S" value="<%=usuarioLogado.getSenha() %>" />
-                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getSenha() %>"/>
+                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getConfirmarSenha() %>"/>
                               <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero() %> "> 
                            </div>
                         </form>
@@ -181,9 +185,10 @@
                               <h5><%=d.getTipoResidencia() %></h5>
                               <p><%=d.getObservacoes()%></p>
                               <p><%=d.getLogradouro() %></p>
-                              <p><%=d.getCidade() %> - <%=d.getEstado() %> / <%=d.getCep() %></p>
-                              <a href="../JSP/alterarendereco.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                              <button class="btn"><i class="fa fa-trash-alt"></i></button>
+                              <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
+                              <p>CEP <%=d.getCep() %></p>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
                            </div>
                            <%
                               }
@@ -278,18 +283,32 @@
                         <h4>Alterar Senha</h4>
                         <br>
                         <div class="row">
-                           <div class="col-md-4">
-                              <label>Digite nova senha:</label>
-                              <input class="form-control" type="password">
-                           </div>
-                           <div class="col-md-4">
-                              <label>Confirme a nova senha:</label>
-                              <input class="form-control" type="password" >
-                           </div>
-                           <div class="col-md-6">
-                              <button class="btn"><i class="fa fa-check"></i> Salvar</button>
-                              <br>
-                           </div>
+                        	<form action="http://localhost:8080/eCommerce/cadastro" method="post">
+                        
+		                        <input type="hidden" name="nome" value="<%=usuarioLogado.getNome() %>" />      
+				                <input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf() %>"/>
+				                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
+				                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
+				                <input type="hidden" name="telefone" value="<%=usuarioLogado.getTelefone() %>">
+				                <input type="hidden" name="email" value="<%=usuarioLogado.getEmail() %>"/>
+			                
+	                           <div class="col-md-10">
+	                              <label>Digite nova senha:</label>
+	                              <input class="form-control" type="password" name="senha">
+	                           </div>
+	                           <div class="col-md-10">
+	                              <label>Confirme a nova senha:</label>
+	                              <input class="form-control" type="password"  name="confirmarSenha">
+	                           </div>
+	                           <div class="col-md-6">
+	                              <button class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Salvar</button>
+	                              <br>
+	                           </div>
+	                           <input type="hidden" name="status" value="ativo"/>
+				            <input type="hidden" name="tipoCliente" value="cliente"/>
+						    <input type="hidden" name="alteraCliente" value="1"/>
+				            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
+			            </form>
                         </div>
                      </div>
                   </div>
@@ -321,11 +340,11 @@
                      <h2>Siga-nos</h2>
                      <div class="contact-info">
                         <div class="social">
-                           <a href="#"><i class="fab fa-twitter"></i></a>
-                           <a href="#"><i class="fab fa-facebook-f"></i></a>
-                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                           <a href="#"><i class="fab fa-instagram"></i></a>
-                           <a href="#"><i class="fab fa-youtube"></i></a>
+                           <a href=""><i class="fab fa-twitter"></i></a>
+                           <a href=""><i class="fab fa-facebook-f"></i></a>
+                           <a href=""><i class="fab fa-linkedin-in"></i></a>
+                           <a href=""><i class="fab fa-instagram"></i></a>
+                           <a href=""><i class="fab fa-youtube"></i></a>
                         </div>
                      </div>
                   </div>
