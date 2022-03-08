@@ -1,6 +1,4 @@
-<%@page import='com.les.roupa.core.dao.*'%>
 <%@page import='com.les.roupa.core.dominio.*'%>
-<%@page import='com.les.roupa.core.dao.impl.*'%>
 
 <%@page import="java.util.List"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -64,9 +62,6 @@
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                          <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a> 
-<!--                             <div class="dropdown-menu"> -->
-                            
-<!--                             </div> -->
                         </div>
                     </div>
                 </div>
@@ -90,18 +85,8 @@
                 <!-- BARRA DE PESQUISA -->
                 <div class="col-md-6">
                     <div class="search">
-                        <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
                     </div>
                 </div>
-                <!-- MINHA SACOLA -->
-                <!-- <div class="col-md-2">
-                    <div class="user">
-                        <a href="" class="btn cart">
-                        Minha Sacola <i class="fas fa-shopping-bag"></i>
-                        </a>
-                    </div>
-                </div> -->
             </div>
             </div>
         </div>
@@ -255,7 +240,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">

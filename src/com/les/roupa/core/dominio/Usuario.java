@@ -18,7 +18,7 @@ public class Usuario extends EntidadeDominio {
 	private String cpf;
 	private String data_Nascimento;
 	
-	private List<Endereco> enderecosCliente; 
+	private List<Endereco> enderecosCliente;
 	private List<Cliente> todosClientes;
 	
 	

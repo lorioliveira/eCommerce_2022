@@ -1,25 +1,28 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import="java.util.List"%>  
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="UTF-8"%>	
-
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="UTF-8"%>
+   	
 <!DOCTYPE html>
 <html lang="pt-BR">
    <head>
       <meta charset="utf-8">
       <title>Mirror Fashion</title>
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      
       <!-- Favicon -->
       <link href="./img/favicon.ico" rel="icon">
       <link href="./css/reset.css" rel="stylesheet">
+      
       <!-- Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+      
       <!-- Biblioteca CSS - Bootstrap-->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
       <link href="./lib/slick/slick.css" rel="stylesheet">
       <link href="./lib/slick/slick-theme.css" rel="stylesheet">
+      
       <!--- Biblioteca CSS - Principal-->
       <link href="./css/style.css" rel="stylesheet">
    </head>
@@ -31,6 +34,7 @@
       
       //pega todos enderecos que estao na sessao
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
+      
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -49,6 +53,7 @@
          </div>
       </div>
       <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
+      
       <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
       <div class="nav">
          <div class="container-fluid">
@@ -64,11 +69,6 @@
                   </div>
                   <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
                   <div class="navbar-nav ml-auto">
-                     <!-- <div class="nav-item dropdown">
-                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                         <div class="dropdown-menu">
-                            <a href="./JSP/login.jsp" class="dropdown-item">Logout</a>
-                        </div> -->
                   </div>
                </div>
          </div>
@@ -76,6 +76,7 @@
       </div>
       </div>
       <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta--> 
+      
       <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
       <div class="bottom-bar">
          <div class="container-fluid">
@@ -113,7 +114,6 @@
             <div class="row">
                <div class="col-md-3">
                   <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                     <!-- <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a> -->
                      <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Meus Dados</a>
                      <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>Meus Endereços</a>
                      <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Cartões</a>
@@ -154,10 +154,6 @@
                               <div class="col-md-6">
                                  <input class="form-control valEmail" name="email" type="email" value="<%=usuarioLogado.getEmail() %>">
                               </div>
-                              <!--<div class="col-md-6" >                   
-                                 <input type="radio" name="genero" value="feminino"> <i class="fa fa-female"></i> Feminino  
-                                 <input type="radio" name="genero" value="masculino"> <i class="fa fa-male"></i> Masculino
-                                 </div>-->
                               <div class="col-md-4">
                                  <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-sync-alt"></i> Atualizar Dados</button>
                                  <br>
@@ -183,18 +179,21 @@
                               
                               	// Aplicado o CAST 
                               	Endereco d = (Endereco) e;
-                            %>	
+                           %>	
+                              
                            <div class="col-md-4">
                               <h5><%=d.getTipoResidencia() %></h5>
                               <p><%=d.getObservacoes()%></p>
                               <p><%=d.getLogradouro() %></p>
-                              <p><%=d.getCidade() %> - <%=d.getEstado() %> / <%=d.getCep() %></p>
-                              <a href="./JSP/alterarendereco.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                              <button class="btn"><i class="fa fa-trash-alt"></i></button>
+                              <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
+                              <p>CEP <%=d.getCep() %></p>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=d.getIdCliente() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=d.getIdCliente() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
+                               <br> <br>
                            </div>
                            <%
                               }
-                           %> 
+                            %> 
                         </div>
                      </div>
                      <!-- FORMA DE PAGAMENTO - CARTÕES -->
@@ -284,34 +283,35 @@
                      <div class="tab-pane fade" id="changepassword-tab" role="tabpanel" aria-labelledby="changepassword-nav">
                         <h4>Alterar Senha</h4>
                         <br>
-                        <div class="row">
-                           <form action="http://localhost:8080/eCommerce/cadastro" method="post">
-                        
-		                        <input type="hidden" id="nome" name="nome" value="<%=usuarioLogado.getNome() %>" />      
-				                <input type="hidden" id="CPF" name="cpf" class="form-control cpf-mask" maxlength="14" value="<%=usuarioLogado.getCpf() %>"/>
-				                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
-				                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
-				                <input type="hidden" name="telefone" id="telefone" maxlength="15" value="<%=usuarioLogado.getTelefone() %>">
-				                <input type="hidden" id="email" name="email" value="<%=usuarioLogado.getEmail() %>"/>
-			                
-	                           <div class="col-md-6">
-	                              <label>Digite nova senha:</label>
-	                              <input class="form-control" type="password" name="senha">
-	                           </div>
-	                           <div class="col-md-8">
-	                              <label>Confirme a nova senha:</label>
-	                              <input class="form-control" type="password"  name="confirmarSenha">
-	                           </div>
-	                           <div class="col-md-8">
-	                              <button class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Salvar</button>
-	                              <br>
-	                           </div>
-	                           <input type="hidden" name="status" value="ativo"/>
-				            <input type="hidden" name="tipoCliente" value="cliente"/>
-						    <input type="hidden" name="alteraCliente" value="1"/>
-				            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
-			            </form>
-                        </div>
+                        <form action="http://localhost:8080/eCommerce/cadastro">
+	                        <div class="row">
+	                        	
+			                        <input type="hidden" name="nome" value="<%=usuarioLogado.getNome() %>" />      
+					                <input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf() %>"/>
+					                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
+					                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
+					                <input type="hidden" name="telefone" value="<%=usuarioLogado.getTelefone() %>">
+					                <input type="hidden" name="email" value="<%=usuarioLogado.getEmail() %>"/>
+					                
+		                           <input type="hidden" name="status" value="ativo"/>
+						            <input type="hidden" name="tipoCliente" value="cliente"/>
+								    <input type="hidden" name="alteraCliente" value="1"/>
+						            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
+				                
+		                           <div class="col-md-10">
+		                              <label>Digite nova senha:</label>
+		                              <input class="form-control" type="password" name="senha">
+		                           </div>
+		                           <div class="col-md-10">
+		                              <label>Confirme a nova senha:</label>
+		                              <input class="form-control" type="password"  name="confirmarSenha">
+		                           </div>
+		                           <div class="col-md-6">
+		                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
+		                              <br>
+		                           </div>
+	                        </div>
+                        </form>
                      </div>
                   </div>
                </div>
@@ -319,6 +319,7 @@
          </div>
       </div>
       <!-- Fim da Minha Conta -->
+      
       <!-- Início do Footer -->
       <div class="footer">
          <div class="container-fluid">
@@ -380,6 +381,7 @@
          </div>
       </div>
       <!-- Fim do Footer -->
+      
       <!-- Footer Bottom Start -->
       <div class="footer-bottom">
          <div class="container">
@@ -390,15 +392,18 @@
             </div>
          </div>
       </div>
-      <!-- Footer Bottom End -->       
+      <!-- Footer Bottom End --> 
+            
       <!-- Back to Top -->
       <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+      
       <!-- JavaScript Libraries -->
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
       <script src="./lib/easing/easing.min.js"></script>
       <script src="./lib/slick/slick.min.js"></script>
-      <!--  Javascript -->
+      
+      <!--  Javascript do Projeto -->
       <script src="./js/main.js"></script>
       <script src="./js/all.js"></script>
    </body>

@@ -1,6 +1,4 @@
-<%@page import='com.les.roupa.core.dao.*'%>
 <%@page import='com.les.roupa.core.dominio.*'%>
-<%@page import='com.les.roupa.core.dao.impl.*'%>
 
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
@@ -30,14 +28,15 @@
         <link href="../css/style.css" rel="stylesheet">
     </head>
     <% 
-    ClienteDAO dao = new ClienteDAO();
     Usuario usuarioLogado = new Usuario();
     
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
     
-    String idCliente = (String)request.getAttribute("idCliente");
-    List<Cliente> cliente = dao.consultarClienteById(idCliente);
+    //String idCliente = (String)request.getAttribute("idCliente");
+    
+  	//pega cliente a ser alterado
+    Cliente clienteAlterado = (Cliente)sessao.getAttribute("clienteAlterado");
         %>
 
     <body>
@@ -138,45 +137,45 @@
 	                    <div class="register-form">
 	                        <h4>Alterar Cadastro de Cliente</h4><br>
 	                            <div class="row">
-	                            <div class="col-md-4">
-	                                <label>Nome</label>
-	                                <input class="form-control" type="text" placeholder="Nome"  value="<%=cliente.get(0).getNome() %>" >
-	                            </div>
-	                            <div class="col-md-3">
-	                                <label>CPF</label>
-	                                <input class="form-control" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14" value="<%=cliente.get(0).getCpf() %>" readonly>
-	                            </div>
-	                            	                            
-	                             <div class="col-md-3">
-	                             <label>Status</label> <input type="hidden" value="<%=cliente.get(0).getStatus()%> "/><br>
-	                             	<input type="radio" name="status" value="Ativo" checked> Ativo      
-	                                <input type="radio" name="status" value="Inativo"> Inativo
-	                            </div>
-	                            
-	                            <div class="col-md-4">
-	                                <label>Celular</label>
-	                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" value="<%=cliente.get(0).getTelefone() %>" required>
-	                            </div>
-	                            
-	                            <div class="col-md-3">
-	                                <label> Data de Nascimento</label>
-	                                <input class="form-control" type="date" class="fa fa-birthday-cake" placeholder="Data de Nascimento" value="<%=cliente.get(0).getData_Nascimento()%>">
-	                           </div>
-	                            <div class="col-md-3">
-	                                <label>E-mail</label>
-	                                <input class="form-control" type="email" placeholder="E-mail" value="<%=cliente.get(0).getUsuario().getEmail() %>">
-	                            </div>                            
-	                           
-	                            <div class="col-md-9">
-	                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-	                                <button type="submit" class="btn" name="operacao" value="ALTERAR"> <i class="fa fa-save"></i> Salvar </button>
-	                            </div>
-	                            <input type="hidden" name="tipoCliente" value="cliente"/>
-			                    <input type="hidden" name="alteraCliente" value="1"/>
-			                    <input type="hidden" name="id" value="<%=cliente.get(0).getId()%>"/>
-			                    <input type="hidden" name="senha" value="<%=cliente.get(0).getUsuario().getSenha()%>"/>
-			                    <input type="hidden" name="confirmarSenha" value="<%=cliente.get(0).getUsuario().getConfirmarSenha()%>"/>
-			                    <input type="hidden" name="genero" value="<%=cliente.get(0).getGenero() %> "/>
+		                            <div class="col-md-4">
+		                                <label>Nome</label>
+		                                <input class="form-control" type="text" placeholder="Nome" name="nome" value="<%=clienteAlterado.getNome() %>" >
+		                            </div>
+		                            <div class="col-md-3">
+		                                <label>CPF</label>
+		                                <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" maxlength="14" value="<%=clienteAlterado.getCpf() %>" readonly>
+		                            </div>
+		                            	                            
+		                             <div class="col-md-3">
+		                             <label>Status</label> <input type="hidden" value="<%=clienteAlterado.getStatus()%> "/><br>
+		                             	<input type="radio" name="status" value="Ativo" checked> Ativo      
+		                                <input type="radio" name="status" value="Inativo"> Inativo
+		                            </div>
+		                            
+		                            <div class="col-md-4">
+		                                <label>Celular</label>
+		                                <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" value="<%=clienteAlterado.getTelefone() %>" required>
+		                            </div>
+		                            
+		                            <div class="col-md-3">
+		                                <label> Data de Nascimento</label>
+		                                <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" placeholder="Data de Nascimento" value="<%=clienteAlterado.getData_Nascimento()%>">
+		                           </div>
+		                            <div class="col-md-3">
+		                                <label>E-mail</label>
+		                                <input class="form-control" type="email" name="email" placeholder="E-mail" value="<%=clienteAlterado.getUsuario().getEmail() %>">
+		                            </div>                            
+		                           
+		                            <div class="col-md-9">
+		                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+		                                <button type="submit" class="btn" name="operacao" value="ALTERAR"> <i class="fa fa-save"></i> Salvar </button>
+		                            </div>
+		                            <input type="hidden" name="tipoCliente" value="cliente"/>
+				                    <input type="hidden" name="alteraCliente" value="1"/>
+				                    <input type="hidden" name="id" value="<%=clienteAlterado.getId()%>"/>
+				                    <input type="hidden" name="senha" value="<%=clienteAlterado.getUsuario().getSenha()%>"/>
+				                    <input type="hidden" name="confirmarSenha" value="<%=clienteAlterado.getUsuario().getSenha()%>"/>
+				                    <input type="hidden" name="genero" value="<%=clienteAlterado.getGenero() %> "/>
 	                            </div>
 	                        </div> 
 	                    </div>

@@ -46,6 +46,38 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			
 			// executa
 			stmt.execute();
+			
+			//Listar todos os dados do Endereco
+			List<Endereco> enderecosCliente = new ArrayList<>();
+			stmt = connection.prepareStatement("select * from endereco where id_cliente = ?");
+			stmt.setString(1, endereco.getIdCliente());
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				// criando o objeto Endereco
+				Endereco endAltera = new Endereco();
+				
+				endAltera.setId(rs.getString("id"));
+				endAltera.setCep(rs.getString("cep"));
+				endAltera.setLogradouro(rs.getString("logradouro"));
+				endAltera.setNumero(rs.getString("numero"));
+				endAltera.setBairro(rs.getString("bairro"));
+				endAltera.setCidade(rs.getString("cidade"));
+				endAltera.setEstado(rs.getString("estado"));
+				endAltera.setPais(rs.getString("pais"));
+				endAltera.setTipoResidencia(rs.getString("tipoResidencia"));
+				endAltera.setObservacoes(rs.getString("observacoes"));
+				endAltera.setTipoEnd(rs.getString("tipoEndereco"));
+				endAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+									
+				// adicionando o objeto a lista
+				enderecosCliente.add(endAltera);
+			}
+			
+			//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+			endereco.setTodosEnderecos(enderecosCliente);
+			
+			rs.close();
 			stmt.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -68,6 +100,8 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		try {
 			Endereco endereco = (Endereco) entidade;
 			Cliente cliente = new Cliente();
+			Usuario usuario = cliente.getUsuario();
+			
 			// quando o atributo "alteraEndereco" for igual a 1, ele altera o endereco
 			//caso contrario, apenas tras as infos para a tela
 			if(endereco.getAlteraEndereco().contentEquals("1")) {
@@ -90,8 +124,8 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				
 				//Listar todos os dados do Endereco
 				List<Endereco> enderecosCliente = new ArrayList<>();
-				stmt = connection.prepareStatement("select * from endereco");
-				stmt.setString(1, endereco.getId());
+				stmt = connection.prepareStatement("select * from endereco where id_cliente = ?");
+				stmt.setString(1, endereco.getIdCliente());
 				ResultSet rs = stmt.executeQuery();
 				
 				while (rs.next()) {
@@ -115,7 +149,8 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 					enderecosCliente.add(endAltera);
 				}
 				
-				cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				endereco.setTodosEnderecos(enderecosCliente);
 				
 				rs.close();
 				stmt.close();
@@ -151,7 +186,8 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 					enderecosCliente.add(endAltera);
 				}
 
-				cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				endereco.setTodosEnderecos(enderecosCliente);
 				
 				rs.close();
 				stmt.close();
@@ -174,11 +210,44 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			Endereco endereco = (Endereco) entidade;
 			
 			PreparedStatement stmt = connection.prepareStatement("delete from endereco where id=?");
-			
 			stmt.setString(1, endereco.getId());
 			
 			stmt.executeUpdate();
+			
+			//Listar todos os dados do Endereco
+			List<Endereco> enderecosCliente = new ArrayList<>();
+			stmt = connection.prepareStatement("select * from endereco where id_cliente = ?");
+			stmt.setString(1, endereco.getIdCliente());
+			ResultSet rs = stmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				// criando o objeto Endereco
+				Endereco endExcluir = new Endereco();
+				
+				endExcluir.setId(rs.getString("id"));
+				endExcluir.setCep(rs.getString("cep"));
+				endExcluir.setLogradouro(rs.getString("logradouro"));
+				endExcluir.setNumero(rs.getString("numero"));
+				endExcluir.setBairro(rs.getString("bairro"));
+				endExcluir.setCidade(rs.getString("cidade"));
+				endExcluir.setEstado(rs.getString("estado"));
+				endExcluir.setPais(rs.getString("pais"));
+				endExcluir.setTipoResidencia(rs.getString("tipoResidencia"));
+				endExcluir.setObservacoes(rs.getString("observacoes"));
+				endExcluir.setTipoEnd(rs.getString("tipoEndereco"));
+				endExcluir.setData_Cadastro(rs.getString("data_Cadastro"));
+				
+									
+				// adicionando o objeto a lista
+				enderecosCliente.add(endExcluir);
+			}
+			
+			endereco.setTodosEnderecos(enderecosCliente);
+			
+			rs.close();
 			stmt.close();
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

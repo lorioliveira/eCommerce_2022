@@ -189,6 +189,7 @@
                               <p>CEP <%=d.getCep() %></p>
                               <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
                               <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
+                               <br> <br>
                            </div>
                            <%
                               }
@@ -291,6 +292,11 @@
 				                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
 				                <input type="hidden" name="telefone" value="<%=usuarioLogado.getTelefone() %>">
 				                <input type="hidden" name="email" value="<%=usuarioLogado.getEmail() %>"/>
+				                
+	                            <input type="hidden" name="status" value="ativo"/>
+					            <input type="hidden" name="tipoCliente" value="cliente"/>
+							    <input type="hidden" name="alteraCliente" value="1"/>
+					            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
 			                
 	                           <div class="col-md-10">
 	                              <label>Digite nova senha:</label>
@@ -301,13 +307,9 @@
 	                              <input class="form-control" type="password"  name="confirmarSenha">
 	                           </div>
 	                           <div class="col-md-6">
-	                              <button class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Salvar</button>
+	                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
 	                              <br>
 	                           </div>
-	                           <input type="hidden" name="status" value="ativo"/>
-				            <input type="hidden" name="tipoCliente" value="cliente"/>
-						    <input type="hidden" name="alteraCliente" value="1"/>
-				            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
 			            </form>
                         </div>
                      </div>

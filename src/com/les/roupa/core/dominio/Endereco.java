@@ -1,5 +1,7 @@
 package com.les.roupa.core.dominio;
 
+import java.util.List;
+
 /**
  * Classe para representar o Endereco - Cliente
  */
@@ -18,6 +20,8 @@ public class Endereco extends EntidadeDominio {
 	private String status;
 	
 	private String alteraEndereco;
+	
+	private List<Endereco> todosEnderecos;
 	
 	
 //	LOGRADOURO
@@ -121,5 +125,14 @@ public class Endereco extends EntidadeDominio {
 	}
 	public void setAlteraEndereco(String alteraEndereco) {
 		this.alteraEndereco = alteraEndereco;
+	}
+	
+	/*Enderecos do Cliente */
+	public List<Endereco> getTodosEnderecos() {
+		return todosEnderecos;
+	}
+
+	public void setTodosEnderecos(List<Endereco> todosEnderecos) {
+		this.todosEnderecos = todosEnderecos;
 	}
 }

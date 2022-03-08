@@ -124,6 +124,7 @@ public class LoginHelper implements IViewHelper {
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 			// requisisao de alteracao de senha
+				
 			request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 		}
 		else {
@@ -141,7 +142,7 @@ public class LoginHelper implements IViewHelper {
 				// Limpa a sessao - Sair
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
-				//sessao.removeAttribute("usuarioLogado"); // remove somente 1 atributo criado
+				 
 				sessao.invalidate(); // destroi o cookie JSESSIONID inteiro e cria outro
 				
 				// pendura o "resultado" na requisisao para poder mandar para o arquivo .JSP

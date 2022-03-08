@@ -135,8 +135,10 @@ public class EnderecoHelper implements IViewHelper {
 			endereco = new Endereco();
 			
 			id = request.getParameter("id");
+			idCliente = request.getParameter("idCliente");
 			
 			endereco.setId(id);
+			idCliente = request.getParameter("idCliente");
 		}
 		
 		return endereco;
@@ -156,7 +158,7 @@ public class EnderecoHelper implements IViewHelper {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -170,8 +172,18 @@ public class EnderecoHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Endereco endereco = (Endereco) entidades.get(0);
+				
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				HttpSession sessao = request.getSession();
+				
+				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
+				
 				// Redireciona para o arquivo
-				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -188,6 +200,19 @@ public class EnderecoHelper implements IViewHelper {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				String alteraEndereco = request.getParameter("alteraEndereco");
 				String idEndereco = request.getParameter("id");
+				
+				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Endereco endereco = (Endereco) entidades.get(0);
+				
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				HttpSession sessao = request.getSession();
+				
+				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
+				// Este apenas puxa apenas o endereço que sera alterado
+				sessao.setAttribute("enderecoAlterado", endereco.getTodosEnderecos().get(0));
+				
 
 				// Se eu estiver pela tela de listagem de endereços
 				// não vou mandar o parametro "alteraEndereco" igual a zero, para poder chama o arquivo .JSP para edição do endereço
@@ -207,7 +232,7 @@ public class EnderecoHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/alterarendereco.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				}
 			
 			} 
@@ -222,13 +247,24 @@ public class EnderecoHelper implements IViewHelper {
 		}
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				String idEndereco = request.getParameter("idEndereco");
+				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Endereco endereco = (Endereco) entidades.get(0);
 				
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				HttpSession sessao = request.getSession();
+				
+				//atualiza a sessao com todos os enderecos existentes
+				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
+				
+				
+				String idEndereco = request.getParameter("idEndereco");
 				// pendura o "idEndereco" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("idEndereco", idEndereco);
 				
 				// Redireciona para o arquivo .jsp, para poder listar os endereços novamente
-				request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -237,10 +273,6 @@ public class EnderecoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA EXCLUIR ENDERECO!");
-				
-				
-				// Redireciona para o arquivo .jsp
-				//request.getRequestDispatcher("JSP/enderecos.jsp").forward(request, response);
 			}
 		}
 	}

@@ -30,7 +30,7 @@ public class ValidarSenhaConfSenha implements IStrategy {
 				return ("Favor insira a mesma senha, com no minimo 8 caracteres.<br>");
 			}
 			else if (!cliente.getUsuario().getSenha().equals(cliente.getUsuario().getConfirmarSenha())) {
-				return ("As senhas digitadas n√£o se correspondem. Insira novamente.<br>");
+				return ("As senhas digitadas n„o se correspondem. Insira novamente.<br>");
 			}
 			else {
 				return null;

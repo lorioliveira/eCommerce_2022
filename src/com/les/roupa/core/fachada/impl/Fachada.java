@@ -257,6 +257,7 @@ public class Fachada implements IFachada {
 		regrasAlterarCliente.add(vNomeAlterado);
 		//regrasAlterarCliente.add(vCPFAlterado);
 		regrasAlterarCliente.add(vEmail);
+		regrasAlterarCliente.add(vSenha);
 		regrasAlterarCliente.add(vSenhaConfSenhaIgual);
 		regrasAlterarCliente.add(vDtNascimentoAlterado);
 		regrasAlterarCliente.add(vTelefone);
@@ -311,6 +312,7 @@ public class Fachada implements IFachada {
 		/* ----- CONSULTAR ----- */
 		regrasConsultarLogin.add(vExisteEmailSenha);
 		regrasConsultarLogin.add(vSenhaLogin); 
+		
 		
 		
 		/* ---------------------------------------------------------- */
