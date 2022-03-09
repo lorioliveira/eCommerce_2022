@@ -20,7 +20,7 @@ import com.mysql.cj.exceptions.RSAException;
 public class ClienteDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Mï¿½todo para SALVAR o Cliente
+	 * Método para SALVAR o Cliente
 	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
@@ -34,10 +34,10 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			Cliente cliente = (Cliente) entidade;
 			Usuario usuario = cliente.getUsuario();
 			
-			// prepared statement para insercao do cliente no banco
+			// para inserir o cliente no banco
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
-			// seta os valores
+			// seta os valores corretamente
 			stmt.setString(1,cliente.getNome());
 			stmt.setString(2,cliente.getCpf());
 			stmt.setString(3,cliente.getData_Nascimento());
@@ -49,7 +49,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			stmt.setString(9,cliente.getTipoCliente());
 			stmt.setString(10,cliente.getData_Cadastro());
 			
-			// executa
+			// executa e fecha conexao
 			stmt.execute();
 			stmt.close();
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para ALTERAR o Cliente
+	 * Metodo para ALTERAR os Dados do Cliente
 	 * @param entidade
 	 */
 	public void alterar (EntidadeDominio entidade) {
@@ -119,7 +119,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 					// adicionando o objeto a lista
 					todosClientes.add(clienteAltera);
 				}
-				
+				//lista de todos os clientes
 				cliente.getUsuario().setTodosClientes(todosClientes);
 				
 				rs.close();
@@ -158,7 +158,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 					// adicionando o objeto a lista
 					todosClientes.add(clienteAltera);
 				}
-				
+				// lista atualizada
 				cliente.getUsuario().setTodosClientes(todosClientes);
 				
 				rs.close();
@@ -180,17 +180,17 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		try {
 			Cliente cliente = (Cliente) entidade;
 			
-			// Exclui os endereï¿½os relacionados ao cliente
+			// Exclui os enderecos relacionados ao cliente
 			PreparedStatement stmt = connection.prepareStatement("delete from endereco where id_cliente=?");
 			stmt.setString(1, cliente.getId());
 			stmt.executeUpdate();
 			
-			// Exclui os cartï¿½es de credito relacionados ao cliente
+			// Exclui os cartoes de credito relacionados ao cliente
 			stmt = connection.prepareStatement("delete from cartaoCredito where id_cliente=?");
 			stmt.setString(1, cliente.getId());
 			stmt.executeUpdate();
 			
-			// Exclui o cadsatro do cliente
+			// Exclui o cadastro do cliente
 			stmt = connection.prepareStatement("delete from cliente where id=?");
 			stmt.setString(1, cliente.getId());
 			stmt.executeUpdate();
@@ -294,7 +294,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Mï¿½todo para Listar somente Cliente -- ADMIN
+	 * Método para Listar somente Cliente -- ADMIN
 	 * @param entidade
 	 * @return
 	 */
@@ -338,7 +338,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Mï¿½todo para Listar/Verificar o status do Usuario (ativo/inativo) -- ADMIN
+	 * Método para Listar/Verificar o status do Usuario (ativo/inativo) -- ADMIN
 	 * @param entidade
 	 * @return
 	 */

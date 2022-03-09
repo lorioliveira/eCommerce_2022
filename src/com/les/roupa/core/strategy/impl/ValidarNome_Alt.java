@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo nome do cliente
+ * Classe para validar o campo nome do cliente ao alterar
  */
 public class ValidarNome_Alt implements IStrategy {
 
@@ -16,7 +16,7 @@ public class ValidarNome_Alt implements IStrategy {
 		// se o "alteraCliente" for igual a 1, executa essa regra
 		if(cliente.getAlteraCliente().contentEquals("1")) {
 			if(cliente.getNome() == null || cliente.getNome().equals("")) {
-				return ("Favor insira o nome do cliente. <br>");
+				return ("Insira o nome do cliente. <br>");
 			}
 			else {
 				return null;

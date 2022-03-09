@@ -15,10 +15,10 @@ public class ValidarSenhaLogin implements IStrategy {
 		Usuario usuario = (Usuario) entidade;
 		
 			if(usuario.getSenha() == null || usuario.getSenha().equals("")) {
-				return ("Favor insira uma senha. <br>");
+				return ("Insira uma senha. <br>");
 			}
 			else if (usuario.getSenha().length() < 8) {
-				return ("Favor insira uma senha com no minimo 8 caracteres.<br>");
+				return ("Insira uma senha com no minimo 8 caracteres.<br>");
 			}
 			else {
 				return null;

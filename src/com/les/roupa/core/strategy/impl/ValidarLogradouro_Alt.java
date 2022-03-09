@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Logradouro do Endereco
+ * Classe para validar o campo Logradouro do Endereco ao alterar
  * 
  */
 

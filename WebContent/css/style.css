@@ -2776,3 +2776,9 @@ h2 {
 .btnModal{
     color: #000;
 }
+
+/************* TELA CENTRALIZADORA DE MENSAGEM **************/
+.telaMensagem{
+	font-size: 20px;
+	text-align: center;
+}

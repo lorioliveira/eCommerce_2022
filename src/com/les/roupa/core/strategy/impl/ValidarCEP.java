@@ -17,10 +17,10 @@ public class ValidarCEP implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if (endereco.getCep() == null || endereco.getCep().equals("")) {
-				return ("Favor insira um CEP.<br>");
+				return ("Insira um CEP. <br>");
 			}
 			else if (endereco.getCep().length() < 8) {
-				return ("Favor insira um CEP com no minimo 8 números.<br>");
+				return ("Insira um CEP com no minimo 8 dígitos. <br>");
 			}
 			else {
 				return null;

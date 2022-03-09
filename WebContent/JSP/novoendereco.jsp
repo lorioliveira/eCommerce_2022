@@ -67,9 +67,9 @@
                             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
                                 <!-- BOTAO SAIR -->
-		                                <form action="http://localhost:8080/eCommerce/login">
-		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-		                                </form>
+                                <form action="http://localhost:8080/eCommerce/login">
+                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
 	                                        <label>Tipo Residência</label>
 	                                        <select class="form-control" name="tipoResidencia">
 	                                            <option selected disabled>Selecione</option>
-	                                            <option value="Apartamento">Apto</option>
+	                                            <option value="Apartamento">Apartamento</option>
 	                                            <option value="Casa">Casa</option>
 	                                            <option value="Outro">Outro</option>
 	                                        </select>
@@ -177,32 +177,32 @@
 	                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)">
 	                                            <option selected disabled>Selecione</option>
 	                                            <option value="AC">Acre</option>
-	                                            <option value="AL">Alagoas</option>
-	                                            <option value="AP">Amapa</option>
-	                                            <option value="AM">Amazonas</option>
-	                                            <option value="BA">Bahia</option>
-	                                            <option value="CE">Ceara</option>
-	                                            <option value="DF">Distrito Federal</option>
-	                                            <option value="ES">Espirito Santo</option>
-	                                            <option value="GO">Goias</option>
-	                                            <option value="MA">Maranhao</option>
-	                                            <option value="MT">Mato Grosso</option>
-	                                            <option value="MS">Mato Grosso do Sul</option>
-	                                            <option value="MG">Minas Gerais</option>
-	                                            <option value="PA">Para</option>
-	                                            <option value="PB">Paraiba</option>
-	                                            <option value="PR">Parana</option>
-	                                            <option value="PE">Pernambuco</option>
-	                                            <option value="PI">Piaui</option>
-	                                            <option value="RJ">Rio de Janeiro</option>
-	                                            <option value="RN">Rio Grande do Norte</option>
-	                                            <option value="RS">Rio Grande do Sul</option>
-	                                            <option value="RO">Rondonia</option>
-	                                            <option value="RR">Roraima</option>
-	                                            <option value="SC">Santa Catarina</option>
-	                                            <option value="SP">Sao Paulo</option>
-	                                            <option value="SE">Sergipe</option>
-	                                            <option value="TO">Tocantins</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapa</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceara</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espirito Santo</option>
+                                            <option value="GO">Goias</option>
+                                            <option value="MA">Maranhao</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Para</option>
+                                            <option value="PB">Paraiba</option>
+                                            <option value="PR">Parana</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piaui</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondonia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">Sao Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
 	                                        </select>
 	                                    </div>
 	                                    <div class="col-md-4">

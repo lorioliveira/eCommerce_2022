@@ -13,7 +13,7 @@ public class ValidarNome implements IStrategy {
 	public String validar(EntidadeDominio entidade) {
 		Cliente cliente = (Cliente) entidade;
 			if(cliente.getNome() == null || cliente.getNome().equals("")) {
-				return ("Favor insira o nome do cliente. <br>");
+				return ("Insira o nome do cliente. <br>");
 			}
 			else {
 				return null;

@@ -8,7 +8,7 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo CPF do cliente
+ * Classe para validar o campo CPF do cliente ao alterar
  * 
  */
 public class ValidarCPF_Alt implements IStrategy {
@@ -35,7 +35,7 @@ public class ValidarCPF_Alt implements IStrategy {
 				            CPF.equals("66666666666") || CPF.equals("77777777777") ||
 				            CPF.equals("88888888888") || CPF.equals("99999999999") ||
 				            (CPF.length() != 11))
-				            return("CPF invalido !<br>");
+				            return("CPF inválido. Tente novamente.<br>");
 			
 				        char dig10, dig11;
 				        int sm, i, r, num, peso;
@@ -77,9 +77,9 @@ public class ValidarCPF_Alt implements IStrategy {
 				            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
 				                 return(null);
 				            else 
-				            	return("CPF invalido! Insira um CPF válido <br>");
+				            	return("CPF inválido! Insira um CPF válido. <br>");
 				        } catch (InputMismatchException erro) {
-				        	return("CPF invalido! Insira um CPF válido <br>");
+				        	return("CPF inválido! Insira um CPF válido. <br>");
 				        }
 					}
 				}

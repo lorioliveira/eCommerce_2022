@@ -138,12 +138,14 @@ public class EnderecoHelper implements IViewHelper {
 			idCliente = request.getParameter("idCliente");
 			
 			endereco.setId(id);
-			idCliente = request.getParameter("idCliente");
+			endereco.setIdCliente(idCliente);
 		}
 		
 		return endereco;
 	}
 
+	// SET VIEW	
+	
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -162,8 +164,6 @@ public class EnderecoHelper implements IViewHelper {
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA CONSULTAR ENDERECO!");
@@ -187,8 +187,6 @@ public class EnderecoHelper implements IViewHelper {
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA SALVAR ENDERECO!");
@@ -198,9 +196,6 @@ public class EnderecoHelper implements IViewHelper {
 		
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				String alteraEndereco = request.getParameter("alteraEndereco");
-				String idEndereco = request.getParameter("id");
-				
 				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
 				List<EntidadeDominio> entidades = resultado.getEntidades();
 				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
@@ -213,9 +208,11 @@ public class EnderecoHelper implements IViewHelper {
 				// Este apenas puxa apenas o endereço que sera alterado
 				sessao.setAttribute("enderecoAlterado", endereco.getTodosEnderecos().get(0));
 				
-
+				String alteraEndereco = request.getParameter("alteraEndereco");
+				String idEndereco = request.getParameter("id");
+				
 				// Se eu estiver pela tela de listagem de endereços
-				// não vou mandar o parametro "alteraEndereco" igual a zero, para poder chama o arquivo .JSP para edição do endereço
+				// chama o arquivo .JSP para edição do endereço
 				if (alteraEndereco.contentEquals("0")) {					
 					// pendura o "idEndereco" na requisição para poder mandar para o arquivo .JSP
 					request.setAttribute("idEndereco", idEndereco);
@@ -223,9 +220,6 @@ public class EnderecoHelper implements IViewHelper {
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/alterarendereco.jsp").forward(request, response);
 				}
-				// caso contrário, se eu estiver pela tela de edição do endereço,
-				// vou ter/mandar o parametro "alteraEndereco" igual a um, para poder editar o endereço,
-				// dentro da DAO de endereço, vai ter um IF verificando se tem o "alteraEndereco"
 				else {
 					
 					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
@@ -238,8 +232,6 @@ public class EnderecoHelper implements IViewHelper {
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA ALTERAR ENDERECO!");
@@ -258,7 +250,7 @@ public class EnderecoHelper implements IViewHelper {
 				//atualiza a sessao com todos os enderecos existentes
 				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
 				
-				
+
 				String idEndereco = request.getParameter("idEndereco");
 				// pendura o "idEndereco" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("idEndereco", idEndereco);
@@ -268,8 +260,6 @@ public class EnderecoHelper implements IViewHelper {
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 				System.out.println("ERRO PARA EXCLUIR ENDERECO!");

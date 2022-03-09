@@ -15,7 +15,7 @@ public class ValidarBairro implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 		if(endereco.getBairro() == null || endereco.getBairro().equals("")) {
-			return ("- Insira um Bairro. <br>");
+			return ("Insira um Bairro. <br>");
 		}
 		else {
 			return null;

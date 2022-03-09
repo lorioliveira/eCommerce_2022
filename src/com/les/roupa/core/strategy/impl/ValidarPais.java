@@ -16,7 +16,7 @@ public class ValidarPais implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if(endereco.getPais() == null || endereco.getPais().equals("")) {
-				return ("Selecione um pais. <br>");
+				return ("Selecione um país. <br>");
 			}
 			else {
 				return null;

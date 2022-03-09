@@ -6,7 +6,7 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Usuario;
 
 /**
- * Classe para validar Email vazio - Alterar Cliente
+ * Classe para validar Email vazio ao alterar Cliente
  */
 public class ValidarEmail implements IStrategy {
 

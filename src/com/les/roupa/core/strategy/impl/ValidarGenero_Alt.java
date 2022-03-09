@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo genero do cliente
+ * Classe para validar o campo genero do cliente ao alterar
  * 
  */
 public class ValidarGenero_Alt implements IStrategy {

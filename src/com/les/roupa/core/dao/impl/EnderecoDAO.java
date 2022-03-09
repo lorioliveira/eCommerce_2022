@@ -210,11 +210,12 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			Endereco endereco = (Endereco) entidade;
 			
 			PreparedStatement stmt = connection.prepareStatement("delete from endereco where id=?");
+			
 			stmt.setString(1, endereco.getId());
 			
 			stmt.executeUpdate();
 			
-			//Listar todos os dados do Endereco
+			//Listar todos os dados do Endereco daquele Cliente
 			List<Endereco> enderecosCliente = new ArrayList<>();
 			stmt = connection.prepareStatement("select * from endereco where id_cliente = ?");
 			stmt.setString(1, endereco.getIdCliente());
@@ -243,15 +244,14 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				enderecosCliente.add(endExcluir);
 			}
 			
-			endereco.setTodosEnderecos(enderecosCliente);
+			endereco.setTodosEnderecos(enderecosCliente);	
 			
 			rs.close();
 			stmt.close();
-			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Excluir
+	}  // Excluir
 	
 	
 	/**

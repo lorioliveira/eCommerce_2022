@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Bairro - Alterar Endereco
+ * Classe para validar o campo Bairro do Endereco ao alterar
  * 
  */
 public class ValidarBairro_Alt implements IStrategy {
@@ -17,7 +17,7 @@ public class ValidarBairro_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if(endereco.getBairro() == null || endereco.getBairro().equals("")) {
-				return (" Insira um Bairro.<br>");
+				return (" Insira um Bairro. <br>");
 			}
 			else {
 				return null;

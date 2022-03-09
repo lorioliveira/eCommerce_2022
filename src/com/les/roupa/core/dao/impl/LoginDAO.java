@@ -14,7 +14,7 @@ import com.les.roupa.core.dominio.Usuario;
 public class LoginDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para SALVAR 
+	 * Metodo para SALVAR o cliente
 	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
@@ -53,7 +53,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para ALTERAR
+	 * Metodo para ALTERAR o cliente
 	 * @param entidade
 	 */
 	public void alterar (EntidadeDominio entidade) {
@@ -92,7 +92,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 	} // Alterar
 	
 	/**
-	 * Metodo para EXCLUIR
+	 * Metodo para EXCLUIR o cliente
 	 * @param entidade
 	 */
 	public void excluir (EntidadeDominio entidade) {
@@ -138,10 +138,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar o Usuario
-	 * funcaoo criada para consultar o Login ao s acessar o sistema,
-	 * quando a Fachada realizar a funcaoo de consulta, esta funcao de Consultar sera chamada para
-	 * poder fazer o setEntidades do Resultado, com isso feito, sera salvo esse Login em sessao arquivo LoginHelper.
+	 * Metodo para CONSULTAR o Usuario
 	 * @param entidade
 	 */
 	@Override
@@ -199,11 +196,11 @@ public class LoginDAO extends AbstractJdbcDAO {
 					end.setData_Cadastro(rs.getString("data_Cadastro"));
 					
 					
-					// adicionando o objeto à lista de Enderecos criado acima
+					// adicionando o objeto ï¿½ lista de Enderecos criado acima
 					enderecos.add(end);
 				}
 				
-				//Listar todos os Clientes cadastrados - Opção como ADMIN
+				//Listar todos os Clientes cadastrados - Opï¿½ï¿½o como ADMIN
 				List<Cliente> todosClientes = new ArrayList<>();
 				stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
 				rs = stmt.executeQuery();

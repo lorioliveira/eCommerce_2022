@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo CIDADE do Endereco
+ * Classe para validar o campo CIDADE do Endereco 
  * 
  */
 
@@ -16,7 +16,7 @@ public class ValidarCidade implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if(endereco.getCidade() == null || endereco.getCidade().equals("")) {
-				return (("- Selecione uma Cidade.  <br>"));
+				return (("Selecione uma Cidade.  <br>"));
 			}
 			else {
 				return null;

@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Numero do Endereco
+ * Classe para validar o campo Numero do Endereco ao alterar
  * 
  */
 
@@ -17,7 +17,7 @@ public class ValidarNumero_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if(endereco.getNumero() == null || endereco.getNumero().equals("")) {
-				return (" Insira um numero do endereco.  <br>");
+				return (" Insira um número do endereco.  <br>");
 			}
 			else {
 				return null;

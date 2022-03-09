@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Tipo Residencia do Endereco
+ * Classe para validar o campo Tipo Residencia do Endereco ao alterar
  * 
  */
 
@@ -17,7 +17,7 @@ public class ValidarTipoResidencia_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if(endereco.getTipoResidencia() == null || endereco.getTipoResidencia().equals("")) {
-				return (" Insira um tipo para residencia. <br>");
+				return (" Insira um tipo para o endereço. <br>");
 			}
 			else {
 				return null;

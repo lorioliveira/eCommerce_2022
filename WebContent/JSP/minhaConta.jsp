@@ -163,7 +163,7 @@
                               <input type="hidden" name="alteraCliente" value="1"/>
                               <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
                               <input type="hidden" name="senha" accesskey="S" value="<%=usuarioLogado.getSenha() %>" />
-                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getConfirmarSenha() %>"/>
+                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getSenha() %>"/>
                               <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero() %> "> 
                            </div>
                         </form>
@@ -182,13 +182,13 @@
                            %>	
                               
                            <div class="col-md-4">
-                              <h5><%=d.getTipoResidencia() %></h5>
+                              <h5><%=d.getTipoResidencia() %> - <%=d.getTipoEnd() %></h5>
                               <p><%=d.getObservacoes()%></p>
                               <p><%=d.getLogradouro() %></p>
                               <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
                               <p>CEP <%=d.getCep() %></p>
                               <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
                                <br> <br>
                            </div>
                            <%

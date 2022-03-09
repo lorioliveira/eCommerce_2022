@@ -49,10 +49,16 @@ public class LoginHelper implements IViewHelper {
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
+			usuario = new Usuario();
+			
+			email = request.getParameter("email");
+			senha = request.getParameter("senha");
+			
+			usuario.setEmail(email);
+			usuario.setSenha(senha);
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
-			
 		}
 		
 		return usuario;
@@ -80,7 +86,7 @@ public class LoginHelper implements IViewHelper {
 				// salva na sessao o objeto "usuarioLogado", recebendo o valor de "usuario"
 				sessao.setAttribute("usuarioLogado", usuario);
 				
-				//Todas as listas que serão adicionadas a Sessao 
+				//Todas as listas que serao adicionadas a Sessao 
 				sessao.setAttribute("enderecosCliente", usuario.getEnderecosCliente());
 				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
 				// Este apenas puxa apenas o cliente que sera alterado
@@ -95,7 +101,7 @@ public class LoginHelper implements IViewHelper {
 				}
 			} 
 			else {
-				// pendura o "resultado" na requisicao para poder mandar para o arquivo .JSP
+				
 				// Guarda a mensagem que veio da Strategy na variavel para que 
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
@@ -112,8 +118,7 @@ public class LoginHelper implements IViewHelper {
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// Guarda a mensagem que veio da Strategy na variavel para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
+				//  na 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR LOGIN!");
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
@@ -129,8 +134,6 @@ public class LoginHelper implements IViewHelper {
 		}
 		else {
 			// mostra as mensagens de ERRO se houver
-			// Guarda a mensagem que veio da Strategy na variavel para que 
-			// seja exibida na tela 'tela-mensagem.jsp'
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
         	System.out.println("ERRO PARA ALTERAR LOGIN - (Senha)!");
 			request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
@@ -139,7 +142,7 @@ public class LoginHelper implements IViewHelper {
 		
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Limpa a sessao - Sair
+				// Limpa a sessao ao Sair
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				 
@@ -148,13 +151,11 @@ public class LoginHelper implements IViewHelper {
 				// pendura o "resultado" na requisisao para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
-				// Redireciona para o arquivo de login após sair da loja 
+				// Redireciona para o arquivo de login apos sair da loja 
 				request.getRequestDispatcher("JSP/logout.jsp").forward(request, response);
 			}
 			else {
-				// se tiver alguma mensagem da Strategy, ira redirecionar para a tela de Login do mesmo jeito
-				// Redireciona para o arquivo .jsp
-				// Guarda a mensagem que veio da Strategy na variavel para que 
+				
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR LOGIN!");

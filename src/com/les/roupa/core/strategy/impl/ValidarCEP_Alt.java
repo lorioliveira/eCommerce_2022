@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo CEP do Endereco
+ * Classe para validar o campo CEP do Endereco ao alterar
  * 
  */
 
@@ -19,10 +19,10 @@ public class ValidarCEP_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if (endereco.getCep() == null || endereco.getCep().equals("")) {
-				return ("Favor insira um CEP.<br>");
+				return ("Insira um CEP.<br>");
 			}
 			else if (endereco.getCep().length() < 8) {
-				return ("Favor insira um CEP com no minimo 8 números. <br>");
+				return ("Insira um CEP com no minimo 8 dígitos. <br>");
 			}
 			else {
 				return null;

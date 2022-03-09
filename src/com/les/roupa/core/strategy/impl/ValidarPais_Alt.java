@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Pais do Endereco
+ * Classe para validar o campo Pais do Endereco ao alterar
  * 
  */
 
@@ -17,7 +17,7 @@ public class ValidarPais_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if(endereco.getPais() == null || endereco.getPais().equals("")) {
-				return ("Selecione um pais. <br>");
+				return ("Selecione um país. <br>");
 			}
 			else {
 				return null;

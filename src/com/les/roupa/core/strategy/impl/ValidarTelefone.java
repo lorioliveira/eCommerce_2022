@@ -4,8 +4,8 @@ import com.les.roupa.core.strategy.IStrategy;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
-/**
- * Classe para validar o campo Telefone do cliente
+/** 
+ * Classe para validar o campo Telefone do cliente ao alterar
  * 
  */
 public class ValidarTelefone implements IStrategy {

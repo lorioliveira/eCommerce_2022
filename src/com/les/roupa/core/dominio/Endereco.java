@@ -71,7 +71,7 @@ public class Endereco extends EntidadeDominio {
 		this.estado = estado;
 	}
 	
-	// PA�S
+	// PAIS
 	public String getPais() {
 		return pais;
 	}
@@ -95,7 +95,7 @@ public class Endereco extends EntidadeDominio {
     	this.observacoes = observacoes;
     }
     
- // TIPO DE ENDERECO - COBRAN�A/ENTREGA
+ // TIPO DE ENDERECO - COBRANCA/ENTREGA
     public String getTipoEnd() {
     	return tipoEndereco;
     }
@@ -119,7 +119,7 @@ public class Endereco extends EntidadeDominio {
     	this.status = status;
     }
     
-    /* Altera Endereco */
+    /* ALTERA ENDERECO */
 	public String getAlteraEndereco() {
 		return alteraEndereco;
 	}
@@ -127,7 +127,7 @@ public class Endereco extends EntidadeDominio {
 		this.alteraEndereco = alteraEndereco;
 	}
 	
-	/*Enderecos do Cliente */
+	/* ENDERECOS DO CLIENTE */
 	public List<Endereco> getTodosEnderecos() {
 		return todosEnderecos;
 	}

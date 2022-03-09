@@ -182,13 +182,13 @@
                            %>	
                               
                            <div class="col-md-4">
-                              <h5><%=d.getTipoResidencia() %></h5>
+                              <h5><%=d.getTipoResidencia() %> - <%=d.getTipoEnd() %></h5>
                               <p><%=d.getObservacoes()%></p>
                               <p><%=d.getLogradouro() %></p>
                               <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
                               <p>CEP <%=d.getCep() %></p>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=d.getIdCliente() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=d.getIdCliente() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
                                <br> <br>
                            </div>
                            <%
@@ -283,35 +283,35 @@
                      <div class="tab-pane fade" id="changepassword-tab" role="tabpanel" aria-labelledby="changepassword-nav">
                         <h4>Alterar Senha</h4>
                         <br>
-                        <form action="http://localhost:8080/eCommerce/cadastro">
-	                        <div class="row">
-	                        	
-			                        <input type="hidden" name="nome" value="<%=usuarioLogado.getNome() %>" />      
-					                <input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf() %>"/>
-					                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
-					                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
-					                <input type="hidden" name="telefone" value="<%=usuarioLogado.getTelefone() %>">
-					                <input type="hidden" name="email" value="<%=usuarioLogado.getEmail() %>"/>
-					                
-		                           <input type="hidden" name="status" value="ativo"/>
-						            <input type="hidden" name="tipoCliente" value="cliente"/>
-								    <input type="hidden" name="alteraCliente" value="1"/>
-						            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
+                        <div class="row">
+                        	<form action="http://localhost:8080/eCommerce/cadastro" method="post">
+                        
+		                        <input type="hidden" name="nome" value="<%=usuarioLogado.getNome() %>" />      
+				                <input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf() %>"/>
+				                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
+				                <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero()%>">
+				                <input type="hidden" name="telefone" value="<%=usuarioLogado.getTelefone() %>">
+				                <input type="hidden" name="email" value="<%=usuarioLogado.getEmail() %>"/>
 				                
-		                           <div class="col-md-10">
-		                              <label>Digite nova senha:</label>
-		                              <input class="form-control" type="password" name="senha">
-		                           </div>
-		                           <div class="col-md-10">
-		                              <label>Confirme a nova senha:</label>
-		                              <input class="form-control" type="password"  name="confirmarSenha">
-		                           </div>
-		                           <div class="col-md-6">
-		                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
-		                              <br>
-		                           </div>
-	                        </div>
-                        </form>
+	                            <input type="hidden" name="status" value="ativo"/>
+					            <input type="hidden" name="tipoCliente" value="cliente"/>
+							    <input type="hidden" name="alteraCliente" value="1"/>
+					            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
+			                
+	                           <div class="col-md-10">
+	                              <label>Digite nova senha:</label>
+	                              <input class="form-control" type="password" name="senha">
+	                           </div>
+	                           <div class="col-md-10">
+	                              <label>Confirme a nova senha:</label>
+	                              <input class="form-control" type="password"  name="confirmarSenha">
+	                           </div>
+	                           <div class="col-md-6">
+	                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
+	                              <br>
+	                           </div>
+			            </form>
+                        </div>
                      </div>
                   </div>
                </div>

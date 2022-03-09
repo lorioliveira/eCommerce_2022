@@ -10,7 +10,7 @@ import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.core.strategy.IStrategy;
 
 /**
- * Validar a existencia do Usuario (email e senha) - LOGIN
+ * Validar a existencia do Usuario (email e senha) ao logar -  LOGIN
  */
 public class ValidarExisteEmailSenha implements IStrategy {
 

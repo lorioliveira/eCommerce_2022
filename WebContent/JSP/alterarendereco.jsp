@@ -139,8 +139,8 @@
 		                                    <div class="col-md-3">
 		                                        <label>Tipo Residência</label>
 		                                        <select class="form-control" name="tipoResidencia">
-		                                            <option selected disabled><%=enderecoAlterado.getTipoResidencia()%></option>
-		                                            <option value="Apartamento">Apto</option>
+		                                            <option selected><%=enderecoAlterado.getTipoResidencia()%></option>
+		                                            <option value="Apartamento">Apartamento</option>
 		                                            <option value="Casa">Casa</option>
 		                                            <option value="Outro">Outro</option>
 		                                        </select>
@@ -148,7 +148,7 @@
 		                                    <div class="col-md-4">
 		                                        <label>Tipo Endereço</label>
 		                                        <select class="form-control" name="tipoEndereco">
-		                                            <option selected disabled ><%=enderecoAlterado.getTipoEnd()%> </option>
+		                                            <option selected><%=enderecoAlterado.getTipoEnd()%> </option>
 		                                            <option value="Entrega">Entrega</option>
 			                                        <option value="Cobranca">Cobrança</option>
 			                                        <option value="Entrega e Cobranca">Entrega e Cobrança</option>
@@ -173,38 +173,38 @@
 		                                    <div class="col-md-4">
 		                                        <label>Estado</label>
 		                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)" >
-		                                            <option selected disabled><%=enderecoAlterado.getEstado()%></option>
-		                                            <option value="AC">Acre</option>
-		                                            <option value="AL">Alagoas</option>
-		                                            <option value="AP">Amapa</option>
-		                                            <option value="AM">Amazonas</option>
-		                                            <option value="BA">Bahia</option>
-		                                            <option value="CE">Ceara</option>
-		                                            <option value="DF">Distrito Federal</option>
-		                                            <option value="ES">Espirito Santo</option>
-		                                            <option value="GO">Goias</option>
-		                                            <option value="MA">Maranhao</option>
-		                                            <option value="MT">Mato Grosso</option>
-		                                            <option value="MS">Mato Grosso do Sul</option>
-		                                            <option value="MG">Minas Gerais</option>
-		                                            <option value="PA">Para</option>
-		                                            <option value="PB">Paraiba</option>
-		                                            <option value="PR">Parana</option>
-		                                            <option value="PE">Pernambuco</option>
-		                                            <option value="PI">Piaui</option>
-		                                            <option value="RJ">Rio de Janeiro</option>
-		                                            <option value="RN">Rio Grande do Norte</option>
-		                                            <option value="RS">Rio Grande do Sul</option>
-		                                            <option value="RO">Rondonia</option>
-		                                            <option value="RR">Roraima</option>
-		                                            <option value="SC">Santa Catarina</option>
-		                                            <option value="SP">Sao Paulo</option>
-		                                            <option value="SE">Sergipe</option>
-		                                            <option value="TO">Tocantins</option>
+		                                        <option selected disabled><%=enderecoAlterado.getEstado()%></option>
+	                                        <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapa</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceara</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espirito Santo</option>
+                                            <option value="GO">Goias</option>
+                                            <option value="MA">Maranhao</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Para</option>
+                                            <option value="PB">Paraiba</option>
+                                            <option value="PR">Parana</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piaui</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondonia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">Sao Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
 		                                        </select>
 		                                    </div>
 		                                    <div class="col-md-4">
-		                                        <label>Cidade</label>
+		                                        <label>Cidade</label> 
 		                                        <select class="form-control" id="cidade" name="cidade">
 		                                            <option selected disabled><%=enderecoAlterado.getCidade()%></option>
 		                                            <script type="text/javascript" src="./js/estados-cidades.js" charset="utf-8"></script>

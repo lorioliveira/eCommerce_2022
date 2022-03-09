@@ -5,7 +5,7 @@ import java.util.List;
 import com.les.roupa.core.dominio.EntidadeDominio;;
 
 /**
- * Classe Resultado
+ * Classe Resultado - Entidades e mensagem de retorno
  */
 public class Resultado {
 	private String mensagem;

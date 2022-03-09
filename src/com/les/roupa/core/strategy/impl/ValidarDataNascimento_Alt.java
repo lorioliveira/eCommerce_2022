@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Data de Nascimento do Cliente
+ * Classe para validar o campo Data de Nascimento do Cliente ao alterar
  */
 public class ValidarDataNascimento_Alt implements IStrategy {
 
@@ -16,7 +16,7 @@ public class ValidarDataNascimento_Alt implements IStrategy {
 		// se o "alteraCliente" for igual a 1, executa essa regra
 		if(cliente.getAlteraCliente().contentEquals("1")) {
 			if(cliente.getData_Nascimento() == null || cliente.getData_Nascimento().equals("")) {
-				return ("- Insira uma Data de Nascimento.  <br>");
+				return ("Insira uma Data de Nascimento.  <br>");
 			}
 			else {
 				return null;

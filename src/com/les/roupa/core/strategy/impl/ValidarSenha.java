@@ -14,19 +14,19 @@ public class ValidarSenha implements IStrategy {
 		Cliente cliente = (Cliente) entidade;
 		
 			if(cliente.getUsuario().getSenha() == null || cliente.getUsuario().getSenha().equals("")) {
-				return ("Favor insira uma senha.<br>");
+				return ("Insira uma senha.<br>");
 			}
 			else if (cliente.getUsuario().getSenha().length() < 8) {
-				return ("Favor insira uma senha com no minimo 8 caracteres.<br>");
+				return ("Insira uma senha com no mínimo 8 caracteres.<br>");
 			}
 			else if (cliente.getUsuario().getConfirmarSenha() == null || cliente.getUsuario().getConfirmarSenha().equals("")) {
-				return ("Favor insira a senha novamente.<br>");
+				return ("Insira a senha novamente. <br>");
 			}
 			else if (cliente.getUsuario().getConfirmarSenha().length() < 8) {
-				return ("Favor insira a mesma senha, com no minimo 8 caracteres.<br>");
+				return ("Insira a mesma senha, com no minimo 8 caracteres. <br>");
 			}
 			else if (!cliente.getUsuario().getSenha().equals(cliente.getUsuario().getConfirmarSenha())) {
-				return ("As senhas digitadas não se correspondem.<br>");
+				return ("As senhas digitadas não se correspondem. Insira-as corretamente. <br>");
 			}
 			else {
 				return null;

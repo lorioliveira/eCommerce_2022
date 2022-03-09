@@ -16,7 +16,7 @@ public class ValidarNumero implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if(endereco.getNumero() == null || endereco.getNumero().equals("")) {
-				return (" Insira um numero do endereco.  <br>");
+				return (" Insira um número do endereco.  <br>");
 			}
 			else {
 				return null;

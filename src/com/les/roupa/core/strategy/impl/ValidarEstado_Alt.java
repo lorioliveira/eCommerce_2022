@@ -5,8 +5,8 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
- * Classe para validar o campo Estado do Endereco
- * 
+ * Classe para validar o campo Estado do Endereco ao alterar
+ *  
  */
 
 public class ValidarEstado_Alt implements IStrategy {

@@ -61,13 +61,13 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-        // Obt�m a opera��o que ser� executada
+        // Obtem a operacao que sera executada
         String operacao = request.getParameter("operacao");
         
-        // Obt�m a uri que invocou esta servlet
+        // Obtem a uri que invocou esta servlet
         String uri = request.getRequestURI();
         
-        // Obt�m uma viewhelper indexado pela uri que invocou esta servlet
+        //Obtem uma viewhelper indexado pela uri que invocou esta servlet
         IViewHelper vh = viewHelper.get(uri);
         
         // O View Helper retorna a entidade especifica para a tela que chamou esta servlet
@@ -76,24 +76,24 @@ public class ControllerServlet extends HttpServlet {
         // Recupera o command correspondente com a operacao
         ICommand command = commands.get(operacao);
         
-        // Executa o command que chamar� a fachada para executar a opera��o requisitada
-        // o retorno � uma inst�ncia da classe resultado que pode conter mensagens de erro
+        // Executa o command que chamaria a fachada para executar a operacao requisitada
+        // o retorno  pode conter mensagens de erro
         // ou entidades de retorno
         Resultado resultado = command.execute(entidade);
         
-        // Executa o m�todo setView do view helper espec�fico para definir como dever� ser apresentado
-        // o resultado para o usu�rio
+        // Executa o metodo setView do view helper especifico para definir como deveria ser apresentado
+        // o resultado para o usuario
         vh.setView(resultado, request, response);
 	}
 	
-	// Method doGet que redireciona para o processRequest
+	// Method doGet
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 	
-	// Method doPost que redireciona para o processRequest
+	// Method doPost 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {

@@ -52,7 +52,7 @@ import com.les.roupa.core.strategy.IStrategy;
 
 
 /**
- * Classe Fachada 
+ * Classe Fachada - Mirror Fashion
  * @author Lorena Oliveira
 */
 
@@ -61,7 +61,7 @@ public class Fachada implements IFachada {
 	private Resultado resultado;
 	private static Map<String, IDAO> daos;
 
-	/* ------------ Declaraï¿½ï¿½o de TODAS as Strategy's ------------ */
+	/* ------------ Declaracao de TODAS as Strategy's ------------ */
 	
 	/* ---- CLIENTE -----*/
 	ValidarEmail vEmail = new ValidarEmail();
@@ -143,7 +143,7 @@ public class Fachada implements IFachada {
 	
 	/* ------------------------------------------------------------ */
 	
-	/* ------------ Declaraï¿½ï¿½o das Listas de Strategy's dos Dominios ------------ */
+	/* ------------ Declaracao das Listas de Strategy's dos Dominios ------------ */
 	/* ------------ SALVAR ------------ */
 	List<IStrategy> regrasSalvarCliente = new ArrayList<>();
 	List<IStrategy> regrasSalvarEndereco = new ArrayList<>();
@@ -201,7 +201,7 @@ public class Fachada implements IFachada {
 	
 	/* -------------------------------------------------------------------------- */
 	
-	/* ------------ Declaraï¿½ï¿½o dos MAP's das Regras de Negï¿½cios dos Dominios ------------ */
+	/* ------------ Declaracao dos MAP's das Regras de Negocios dos Dominios ------------ */
 	Map<String, List<IStrategy>> regrasCliente = new HashMap<>();
 	Map<String, List<IStrategy>> regrasEndereco = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCartaoCredito = new HashMap<>();
@@ -217,7 +217,7 @@ public class Fachada implements IFachada {
 	
 	/* ----------------------------------------------------------------------------------- */
 	
-	/* ------------ Declaraï¿½ï¿½o da Regra de Negï¿½cio Geral ------------ */
+	/* ------------ Declaracao da Regra de Negocio Geral ------------ */
 	Map<String, Map<String, List<IStrategy>>> regrasGeral = new HashMap<>();
 	/* --------------------------------------------------------------- */
 
@@ -257,7 +257,7 @@ public class Fachada implements IFachada {
 		regrasAlterarCliente.add(vNomeAlterado);
 		//regrasAlterarCliente.add(vCPFAlterado);
 		regrasAlterarCliente.add(vEmail);
-		regrasAlterarCliente.add(vSenha);
+		//regrasAlterarCliente.add(vSenha);
 		regrasAlterarCliente.add(vSenhaConfSenhaIgual);
 		regrasAlterarCliente.add(vDtNascimentoAlterado);
 		regrasAlterarCliente.add(vTelefone);
@@ -530,7 +530,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Nï¿½o foi possï¿½vel Salvar o registro!");
+				resultado.setMensagem("Não foi possível Salvar o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -557,7 +557,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Nï¿½o foi possï¿½vel Alterar o registro!");
+				resultado.setMensagem("Não foi possível Alterar o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
@@ -584,7 +584,7 @@ public class Fachada implements IFachada {
 				resultado.setEntidades(entidades);
 			} catch (Exception e) {
 				e.printStackTrace();
-				resultado.setMensagem("Nï¿½o foi possï¿½vel Excluir o registro!");
+				resultado.setMensagem("Não foi possível Excluir o registro!");
 			}
 		} else {
 			resultado.setMensagem(msg);
