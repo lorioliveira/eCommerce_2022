@@ -78,7 +78,7 @@
         </div>
         <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta-->          
         
-        <!-- Inicio da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola -->
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         <div class="bottom-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -108,7 +108,7 @@
 				</div>
             </div>
         </div>
-        <!-- Fim da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola -->
+        <!-- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
