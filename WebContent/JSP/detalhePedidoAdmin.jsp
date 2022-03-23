@@ -126,29 +126,29 @@
                         <h4>Detalhe do Pedido nº ###### - Data: ####-##-## </h4><br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label>Produtos </label>
+                                    <label><b>Produtos</b></label>
                                     <span> R$ 700,00</span>
                                     <br>
-                                    <label>Frete</label>
+                                    <label><b>Frete</b></label>
                                     <span> R$ 200,00</span>
                                     <br>
-                                    <label>Desconto</label>
+                                    <label><b>Desconto</b></label>
                                     <span class="valorDesconto"> R$ 100,00</span>
                                     <br>
                                     <label>Total:</label>
-                                    <span> R$ 800,00</span>
+                                    <span><b>R$ 800,00</b></span>
                                 </div>
-                                <div class="col-md-5">
-                                    <label>Cartao</label>
+                                <div class="col-md-4 formaPagamento_centralizado">
+                                    <label><b>Cartao</b></label>
                                     <p>lorena s oliveira - (Mastercard / 2028-07)</p>
                                     <p>lorena s oliveira - (Mastercard / 2028-07)</p>
                                     
-                                    <label>Cupom</label>
+                                    <label><b>Cupom</b></label>
                                     <p>promocional10</p>
                                 </div>
                                 
-                                <div class="col-md-3">
-                                    <label>Entrega</label>
+                                <div class="col-md-4 endereco_aDireita">
+                                    <label><b>Entrega</b></label>
                                     <p>Rodovia BR-324 km 18,5 nº s/n</p>
                                     <p>Salvador - BA</p>
                                     <p>CEP 43700-050</p>
@@ -178,29 +178,26 @@
                                                 <td>Blusa Amarela</td>
                                                 <td>29</td>
                                                 <td>1</td>
-                                                <td>Em Processamento</td>
-                                               <td rowspan="9">
-                                                   <a href="alterarStatusPedido.jsp"><button class="btn btnEditarStatus btnCupom"> <i class="fa fa-edit"></i> </button></a>
+                                                <td class="centrarlizarStatus_BtnAcao" rowspan="5">Em Processamento</td>
+                                               <td class="centrarlizarStatus_BtnAcao" rowspan="7">
+                                                   <a href="alterarStatusPedido.jsp"><button class="btn"> <i class="fa fa-edit"></i> </button></a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>23</td>
                                                 <td>3</td>
-                                                <td>Em Processamento</td>
                                                
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>39</td>
                                                 <td>2</td>
-                                                <td>Em Processamento</td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
                                                 <td>13</td>
                                                 <td>4</td>
-                                                <td>Em Processamento</td>
                                             </tr> 
                                         </tbody>
                                     </table>

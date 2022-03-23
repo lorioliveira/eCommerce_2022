@@ -2777,6 +2777,17 @@ h2 {
     color: #000;
 }
 
+.centrarlizarStatus_BtnAcao{
+	vertical-align:middle !important; 
+}
+
+.formaPagamento_centralizado{
+	text-align: center;
+}
+.endereco_aDireita{
+	text-align: right;
+}
+
 /************* TELA CENTRALIZADORA DE MENSAGEM **************/
 .telaMensagem{
 	font-size: 20px;

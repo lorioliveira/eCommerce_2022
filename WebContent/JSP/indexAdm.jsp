@@ -167,7 +167,8 @@
 
                         <!-- CLIENTES -->
                         <div class="tab-pane fade" id="clients-tab" role="tabpanel" aria-labelledby="clients-nav">
-                            <h4><i class="fas fa-user-friends"></i> Lista de Clientes</h4><br>
+                        <h4><i class="fas fa-user-friends"></i> Lista de Clientes</h4><br>
+                            <div class="row">
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
@@ -209,6 +210,7 @@
                                 }
                                 %>
                             </table>
+                            </div>
                         </div>
 
                         <!-- PEDIDOS  -->
