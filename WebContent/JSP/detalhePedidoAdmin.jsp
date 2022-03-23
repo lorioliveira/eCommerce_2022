@@ -1,26 +1,31 @@
+<%@page import='com.les.roupa.core.dominio.*'%>
+
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <meta charset="utf-8">
-        <title>Mirror Fashion - Admin</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">
+      <meta charset="utf-8">
+      <title>Mirror Fashion - Admin</title>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <meta content="eCommerce HTML Template Free Download" name="keywords">
+      <meta content="eCommerce HTML Template Free Download" name="description">
 
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+      <!-- Favicon -->
+      <link href="../img/favicon.ico" rel="icon">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
 
-        <!-- Biblioteca CSS - Bootstrap -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="lib/slick/slick.css" rel="stylesheet">
-        <link href="lib/slick/slick-theme.css" rel="stylesheet">
+      <!-- Biblioteca CSS - Bootstrap -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="lib/slick/slick.css" rel="stylesheet">
+      <link href="lib/slick/slick-theme.css" rel="stylesheet">
 
-        <!-- CSS Principal do Projeto -->
-        <link href="../css/style.css" rel="stylesheet">
+      <!-- CSS Principal do Projeto -->
+      <link href="../css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -53,13 +58,15 @@
     
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="indexAdm.html" class="nav-item nav-link">Home</a>
+                            <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="indexAdm.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                                 <div class="dropdown-menu">
-                                    <a href="login.html" class="dropdown-item">Logout</a>
+                                    <form action="http://localhost:8080/eCommerce/login">
+                                    	<button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                                 	</form>
                                 </div>
                             </div>
                         </div>
@@ -76,8 +83,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="indexAdm.html">
-                                <img src="img/mir.svg" alt="Logo Mirror Fashion">
+                            <a href="../JSP/indexAdm.jsp">
+                                <img src="../img/mir.svg" alt="Logo Mirror Fashion">
                             </a>
                         </div>
                     </div>
@@ -89,10 +96,9 @@
                     </div>
                     <div class="col-md-2">
                         <div class="user">
-                            <h6>Bem Vindo(a) Admin</h6>
-                            <!-- <a href="cart.html" class="btn cart">
-                                Minha Sacola <i class="fas fa-shopping-bag"></i>
-                                </a> -->
+                            <h6>
+                            	<div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -105,14 +111,14 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="indexAdm.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Home</a></li>
                     <li class="breadcrumb-item active">Detalhe do Pedido</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Início dos dados do Pedido -->
+        <!-- Inicio dos dados do Pedido -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
                 <div class="col-lg-9">   
@@ -135,6 +141,10 @@
                                 <div class="col-md-5">
                                     <label>Cartao</label>
                                     <p>lorena s oliveira - (Mastercard / 2028-07)</p>
+                                    <p>lorena s oliveira - (Mastercard / 2028-07)</p>
+                                    
+                                    <label>Cupom</label>
+                                    <p>promocional10</p>
                                 </div>
                                 
                                 <div class="col-md-3">
@@ -148,7 +158,7 @@
                     </div>
             <!-- Fim dos dados do Pedido -->
 
-                     <!-- Início do Pedido - TABELA -->
+                     <!-- Inicio do Pedido - TABELA -->
                     <div class="col-lg-9">
                         <div class="login-form">
                             <div class="row div__novaconta">
@@ -157,7 +167,7 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Produto</th>
-                                                <th>Valor Produto</th>
+                                                <th>R$ Valor Produto</th>
                                                 <th>Qtde.</th>
                                                 <th>Status</th>
                                                 <th>Ação</th>
@@ -166,29 +176,29 @@
                                         <tbody>
                                             <tr>
                                                 <td>Blusa Amarela</td>
-                                                <td>$29</td>
+                                                <td>29</td>
                                                 <td>1</td>
                                                 <td>Em Processamento</td>
                                                <td rowspan="9">
-                                                   <a href="alterarStatusPedido.html"><button class="btn btnEditarStatus btnCupom"> <i class="fa fa-edit"></i> </button></a>
+                                                   <a href="alterarStatusPedido.jsp"><button class="btn btnEditarStatus btnCupom"> <i class="fa fa-edit"></i> </button></a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
-                                                <td>$23</td>
+                                                <td>23</td>
                                                 <td>3</td>
                                                 <td>Em Processamento</td>
                                                
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
-                                                <td>$39</td>
+                                                <td>39</td>
                                                 <td>2</td>
                                                 <td>Em Processamento</td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Amarela</td>
-                                                <td>$13</td>
+                                                <td>13</td>
                                                 <td>4</td>
                                                 <td>Em Processamento</td>
                                             </tr> 
@@ -253,15 +263,15 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="img/payment-method.png" alt="Payment Method" />
+                            <img src="../img/payment-method.png" alt="Forma de pagamento" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="payment-security">
                             <h2>Compre com segurança</h2>
-                            <img src="img/godaddy.svg" alt="Payment Security" />
-                            <img src="img/norton.svg" alt="Payment Security" />
-                            <img src="img/ssl.svg" alt="Payment Security" />
+                            <img src="../img/godaddy.svg" alt="Segurança" />
+                            <img src="../img/norton.svg" alt="Segurança" />
+                            <img src="../img/ssl.svg" alt="Segurança" />
                         </div>
                     </div>
                 </div>
@@ -274,7 +284,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="indexAdm.html">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -291,10 +301,10 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/slick/slick.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/slick/slick.min.js"></script>
         
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 </html>

@@ -37,9 +37,10 @@
     ClienteDAO dao = new ClienteDAO();
     Usuario usuarioLogado = new Usuario();
     
+    // Pega o usuário em sessão - Cliente logado -> admin
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-
+    // Pega o ID daquele cliente logado -> admin
     List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
     %>
@@ -173,7 +174,7 @@
                                         <th>Nome</th>
                                         <th>CPF</th>
                                         <th>Dt. Nascimento</th>
-                                        <th>Telefone</th>
+                                        <th>Celular</th>
                                         <th>e-mail</th>
                                         <th>Status</th>
                                         <th>Ação</th>
@@ -182,6 +183,7 @@
                                 
                                 <%
                                 Cliente cliente = new Cliente();
+                                
                                 // Listar apenas os Clientes (antes estava trazendo o próprio admin)
                                 List<EntidadeDominio> clientes = dao.consultarClienteByTipo(cliente);
                                 
@@ -261,10 +263,7 @@
                                                 <th>R$ Compra</th>
                                                 <th>R$ Venda</th>
                                                 <th>Dt. Cadastro</th>
-                                                <th>Cor</th>
-                                                <th>Tamanho</th>
                                                 <th>Qtde</th>
-                                                <th>Descrição</th>
                                                 <th>Status</th>
                                                 <th>Grupo Preço</th>
                                                 <th>Ação</th>
@@ -277,10 +276,7 @@
                                                 <td>20.00</td>
                                                 <td>69.99</td>
                                                 <td>21-06-2021</td>
-                                                <td>Amarela</td>
-                                                <td>36</td>
                                                 <td>40</td>
-                                                <td>Excelente material italiano com cor desenhada pelos deuses.. </td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
                                                 <td><a href="../JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
@@ -291,10 +287,7 @@
                                                 <td>20.00</td>
                                                 <td>69.99</td>
                                                 <td>21-06-2021</td>
-                                                <td>Amarela</td>
-                                                <td>36</td>
                                                 <td>40</td>
-                                                <td>Excelente material italiano com cor desenhada pelos deuses.. </td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
                                                 <td><a href="../JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
@@ -330,7 +323,7 @@
                                             <td>Promocional</td>
                                             <td>R$ 20.00</td>
                                             <td>2022-01-02</td>
-                                            <td>2</td>
+                                            <td>Lorena</td>
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
@@ -343,7 +336,7 @@
                                             <td>Promocional</td>
                                             <td>R$ 20.00</td>
                                             <td>2022-01-02</td>
-                                            <td>2</td>
+                                            <td>Juliana</td>
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
