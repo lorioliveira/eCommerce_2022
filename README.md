@@ -1,5 +1,19 @@
-Trabalho desenvolvido para a matÃ©ria de Lab. de Engenharia de Software</br>
+# Mirror Fashion - eCommerce de Roupas Femininas
+## Lab. de Engenharia de Software - FATEC MC - 2022
+ Projeto elaborado e desenvolvido na arquitetura MVC para a matéria de Laboratório de Engenharia de Software na FATEC Mogi das Cruzes</br>
+ Foram utilizados os padrões de projeto: ViewHelper, Strategy, Command, Factory, Facade e DAO.</br>
 
-Tecnologias utilizadas: HTML, CSS, Java, JSP, Servlet e MySQL</br>
+ Tecnologias utilizadas:
+ - Front-End: HTML, CSS/SCSS, Bootstrap, Javascript;
+ - Back-end:  JSP (Java Web), Servlet;
+ - Banco de Dados: MySQL</br>
 
-Foram utilizados os seguintes padrÃµes de projetos: ViewHelper, Strategy, Command, Facade e DAO e o projeto foi realizado na arquitetura MVC.
+ Algumas funcionalidades implementadas:
+ - Cadastro de Cliente;
+ - Cadastro de Endereço;
+ - Cadastro de Cartão de Crédito;
+ - Visualização de Pedidos Realizados - Painel Admin;
+ - Visualização de vendas em um período - Painel Admin;
+ - Cadastro de Cupons - Painel Admin;
+ 
+ 
