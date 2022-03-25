@@ -125,7 +125,7 @@
     </div>
   </div>
   <!-- Fim do Breadcrumb -->
-  <!-- InÃ­cio do Checkout  -->
+  <!-- Inicio do Checkout  -->
   <div class="checkout">
     <div class="container-fluid">
       <div class="row">
