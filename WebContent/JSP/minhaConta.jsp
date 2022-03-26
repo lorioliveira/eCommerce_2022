@@ -35,6 +35,11 @@
       //pega todos enderecos que estao na sessao
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
       
+   	  //pega todos cartoes que estao na sessao
+     // List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
+        
+      
+      
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -197,7 +202,7 @@
                         </div>
                      </div>
                      <!-- FORMA DE PAGAMENTO - CARTÕES -->
-                     <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                      <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
                         <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </a></button></h4>
                         <table class="table table-bordered">
                            <thead class="thead-dark">
@@ -206,29 +211,31 @@
                                  <th>Nº Cartão</th>
                                  <th>Titular</th>
                                  <th>Validade</th>
-                                 <th>Preferencial</th>
+                                 <th>Cartão Prefer?</th>
                                  <th>Ação</th>
                               </tr>
                            </thead>
-                           <tbody>
+                          <tbody>
+                           <%-- <%
+                              for(CartaoCredito r : cartoes){
+                              
+                              	// Aplicado o CAST 
+                             	CartaoCredito c = (CartaoCredito) r;
+                           %>
                               <tr>
-                                 <td>Mastercard</td>
-                                 <td>5144 **** **** 5978</td>
-                                 <td>lorena s oliveira</td>
-                                 <td>03/2029</td>
-                                 <td>Sim</td>
-                                 <td><a href="../JSP/alterarcartao.jsp"><button class="btn"><i class="fa fa-eye"></i></button></td>
-                                 </a>
+                                  <td><%=c.getBandeira() %></td>
+                                 <td><%=c.getNumCartao() %></td>
+                                 <td><%=c.getNome() %></td>
+                                 <td><%=c.getValidade() %></td>
+                                 <td><%=c.getPreferencial() %></td>
+                                 <td>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn"><i class="fa fa-eye"></i></button></a>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash"></i></button></a>
+	                             </td> 
                               </tr>
-                              <tr>
-                                 <td>Visa</td>
-                                 <td>4916 **** **** 8350</td>
-                                 <td>lorena s oliveira</td>
-                                 <td>06/2023</td>
-                                 <td>Não</td>
-                                 <td><a href="../JSP/alterarcartao.jsp"><button class="btn"><i class="fa fa-eye"></i></button></td>
-                                 </a>
-                              </tr>
+                            <%
+                             	}
+                           	%>  --%>
                            </tbody>
                         </table>
                      </div>

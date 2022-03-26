@@ -1,4 +1,4 @@
-<%@page import='com.les.roupa.core.dao.*'%>
+
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
