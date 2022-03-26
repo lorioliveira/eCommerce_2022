@@ -6,7 +6,7 @@ import java.util.List;
  * Classe para representar o Endereco - Cliente
  */
 public class Endereco extends EntidadeDominio {
-	private String logradouro;
+	public String logradouro;
 	private String numero;
 	private String bairro;
 	private String cep;

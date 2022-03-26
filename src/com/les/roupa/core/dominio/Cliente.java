@@ -1,7 +1,7 @@
 package com.les.roupa.core.dominio;
 
 /**
- * Classe para representar o Cliente -
+ * Classe para representar o Cliente - (Usuario/Pessoa)
  * @author Lorena Oliveira
  * 
  */

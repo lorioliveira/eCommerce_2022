@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.les.roupa.core.dao.IDAO;
+import com.les.roupa.core.dao.impl.CartaoCreditoDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.fachada.IFachada;
+import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
@@ -17,6 +19,7 @@ import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.core.strategy.impl.ValidarBairro;
 import com.les.roupa.core.strategy.impl.ValidarBairro_Alt;
+import com.les.roupa.core.strategy.impl.ValidarBandeiraCartao;
 import com.les.roupa.core.strategy.impl.ValidarCEP;
 import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
@@ -37,6 +40,7 @@ import com.les.roupa.core.strategy.impl.ValidarLogradouro;
 import com.les.roupa.core.strategy.impl.ValidarLogradouro_Alt;
 import com.les.roupa.core.strategy.impl.ValidarNome;
 import com.les.roupa.core.strategy.impl.ValidarNome_Alt;
+import com.les.roupa.core.strategy.impl.ValidarNumCartao;
 import com.les.roupa.core.strategy.impl.ValidarNumero;
 import com.les.roupa.core.strategy.impl.ValidarNumero_Alt;
 import com.les.roupa.core.strategy.impl.ValidarPais;
@@ -81,7 +85,7 @@ public class Fachada implements IFachada {
 	
 	/* ---- ENDERECO -----*/
 	/* ---- Salvar Novo Endere�o ---- */
-	ValidarCEP vcep = new ValidarCEP();
+	//ValidarCEP vcep = new ValidarCEP();
 	ValidarLogradouro vLogradouro = new ValidarLogradouro();
 	ValidarNumero vNumero = new ValidarNumero();
 	ValidarBairro vBairro = new ValidarBairro();
@@ -102,9 +106,10 @@ public class Fachada implements IFachada {
 //	
 	
 	/* ---- CARTAO DE CREDITO -----*/
-	/* ----- Salvar Novo Cart�o ---- */
-//	ValidarNumeroCartao vNumCartao = new ValidarNumeroCartao();
-//	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
+	/* ----- SALVAR ---- */
+	
+	ValidarNumCartao vNumCartao = new ValidarNumCartao();
+	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
 //	ValidarCVV vCVV = new ValidarCVV();
 //	ValidarNomeCartao vNomeCartao = new ValidarNomeCartao();
 //	
@@ -230,7 +235,7 @@ public class Fachada implements IFachada {
 		// adicionando cada dado no MAP indexado pelo nome da classe
 		daos.put(Cliente.class.getName(), new ClienteDAO());
 		daos.put(Endereco.class.getName(), new EnderecoDAO());
-		//daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
+		daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
 		daos.put(Usuario.class.getName(), new LoginDAO());
 		//daos.put(Produto.class.getName(), new ProdutoDAO());
 		//daos.put(Carrinho.class.getName(), new CarrinhoDAO());
@@ -269,7 +274,7 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do Endere�o ----- */
 		
 		/* ----- SALVAR ----- */
-		regrasSalvarEndereco.add(vcep);
+		//regrasSalvarEndereco.add(vcep);
 		regrasSalvarEndereco.add(vLogradouro);
 		regrasSalvarEndereco.add(vNumero);
 		regrasSalvarEndereco.add(vBairro);
@@ -293,8 +298,8 @@ public class Fachada implements IFachada {
 		/* --- Adicionando as Strategy's do Cartao de Credito ------- */
 		
 		/* ----- SALVAR ----- */
-//		regrasSalvarCartaoCredito.add(vNumCartao);
-//		regrasSalvarCartaoCredito.add(vBandeiraCartao);
+		regrasSalvarCartaoCredito.add(vNumCartao);
+		regrasSalvarCartaoCredito.add(vBandeiraCartao);
 //		regrasSalvarCartaoCredito.add(vCVV);
 //		regrasSalvarCartaoCredito.add(vNomeCartao);
 //		
@@ -495,7 +500,7 @@ public class Fachada implements IFachada {
 		/* ----- REGRAS GERAIS ----- */
 		regrasGeral.put(Cliente.class.getName(), regrasCliente);
 		regrasGeral.put(Endereco.class.getName(), regrasEndereco);
-		//regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
+		regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
 		regrasGeral.put(Usuario.class.getName(), regrasLogin);
 		//regrasGeral.put(Produto.class.getName(), regrasProduto);
 		//regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);

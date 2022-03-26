@@ -34,7 +34,7 @@
 
   <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
-    <url-pattern>/cadastroCartao</url-pattern>
+    <url-pattern>/cartao</url-pattern>
   </servlet-mapping>
   
   

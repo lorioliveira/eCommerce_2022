@@ -13,7 +13,7 @@ import com.les.roupa.core.dominio.Usuario;
 import com.mysql.cj.exceptions.RSAException;
 
 /**
- * DAO para salvar, alterar, consultar e excluir(inativar) CLIENTE
+ * DAO para CLIENTE
  * @author Lorena Oliveira 
  * 
  */

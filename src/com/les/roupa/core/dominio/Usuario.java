@@ -20,6 +20,7 @@ public class Usuario extends EntidadeDominio {
 	
 	private List<Endereco> enderecosCliente;
 	private List<Cliente> todosClientes;
+	public List<CartaoCredito> cartoesCliente;
 	
 	
 
@@ -120,5 +121,14 @@ public class Usuario extends EntidadeDominio {
 
 	public void setTodosClientes(List<Cliente> todosClientes) {
 		this.todosClientes = todosClientes;
+	}
+	
+	// Lista de Todos os cartoes do Cliente cadastrados
+	public List<CartaoCredito> getTodosCartoes() {
+		return cartoesCliente;
+	}
+
+	public void setTodosCartoes(List<CartaoCredito> cartoesCliente) {
+		this.cartoesCliente = cartoesCliente;
 	}
 }

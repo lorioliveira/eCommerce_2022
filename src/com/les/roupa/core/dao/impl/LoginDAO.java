@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
@@ -153,6 +154,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 			
 			List<EntidadeDominio> usuarios = new ArrayList<>();
 			while (rs.next()) {
+				
 				// criando o objeto Usuario
 				Usuario usuarioItem = new Usuario();
 				
@@ -196,11 +198,37 @@ public class LoginDAO extends AbstractJdbcDAO {
 					end.setData_Cadastro(rs.getString("data_Cadastro"));
 					
 					
-					// adicionando o objeto ï¿½ lista de Enderecos criado acima
+					// adicionando o objeto na lista de Enderecos criado acima
 					enderecos.add(end);
 				}
 				
-				//Listar todos os Clientes cadastrados - Opï¿½ï¿½o como ADMIN
+				//Lista todos os Cartoes do cliente
+				stmt = connection.prepareStatement("select * from cartaoCredito where id_cliente = ?");
+				stmt.setString(1, usuarios.get(0).getId());
+				rs = stmt.executeQuery();
+				
+				//Lista de Cartoes criada
+				List<CartaoCredito> cartoes = new ArrayList<>();
+
+				while (rs.next()) {
+					// criando o objeto Cartao
+					CartaoCredito cCredito = new CartaoCredito();
+					
+					cCredito.setId(rs.getString("id"));
+					cCredito.setNumCartao(rs.getString("numCartao"));
+					cCredito.setBandeira(rs.getString("bandeira"));
+					cCredito.setNome(rs.getString("nome"));
+					cCredito.setValidade(rs.getString("validade"));
+					cCredito.setCvv(rs.getString("cvv"));
+					cCredito.setPreferencial(rs.getString("preferencial"));
+					cCredito.setData_Cadastro(rs.getString("data_Cadastro"));
+										
+					// adicionando o objeto a lista de cartoes
+					cartoes.add(cCredito);
+				}
+				
+				
+				//Listar todos os Clientes cadastrados - Opção como ADMIN
 				List<Cliente> todosClientes = new ArrayList<>();
 				stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
 				rs = stmt.executeQuery();
@@ -235,6 +263,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				Usuario novoUsuario = (Usuario) usuarios.get(0);
 				novoUsuario.setEnderecosCliente(enderecos);
 				novoUsuario.setTodosClientes(todosClientes);
+				novoUsuario.setTodosCartoes(cartoes);
 				
 				
 			rs.close();
@@ -282,7 +311,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				cliente.setUsuario(usuario);
 				
 				
-				// adicionando o objeto ï¿½ lista
+				// adicionando o objeto na lista
 				clientes.add(cliente);
 			}
 			
@@ -318,7 +347,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				usuarioItem.setNome(rs.getString("nome"));
 				usuarioItem.setTipoCliente(rs.getString("tipoCliente"));
 				
-				// adicionando o objeto ï¿½ lista
+				// adicionando o objeto na lista
 				usuarios.add(usuarioItem);
 			}
 				
