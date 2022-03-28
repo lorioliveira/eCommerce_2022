@@ -173,7 +173,7 @@
 		                                    <div class="col-md-4">
 		                                        <label>Estado</label>
 		                                        <select class="form-control" id="estado" name="estado" onchange="buscaCidades(this.value)" >
-		                                        <option selected disabled><%=enderecoAlterado.getEstado()%></option>
+		                                        <option selected><%=enderecoAlterado.getEstado()%></option>
 	                                        <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>
                                             <option value="AP">Amapa</option>
@@ -206,7 +206,7 @@
 		                                    <div class="col-md-4">
 		                                        <label>Cidade</label> 
 		                                        <select class="form-control" id="cidade" name="cidade">
-		                                            <option selected disabled><%=enderecoAlterado.getCidade()%></option>
+		                                            <option selected><%=enderecoAlterado.getCidade()%></option>
 		                                            <script type="text/javascript" src="./js/estados-cidades.js" charset="utf-8"></script>
 		                                        </select>
 		                                    </div>

@@ -10,7 +10,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>Mirror Fashion - Admin</title>
+        <title>[Admin] Mirror Fashion</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
@@ -65,16 +65,18 @@
                             <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
-                            <div class="nav-item dropdown">
-                                <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                                <div class="dropdown-menu">
-                                   <!-- BOTAO SAIR -->
+                         <div class="nav-item dropdown">
+                              <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                             <div class="dropdown-menu">
+                                    <a href="" class="dropdown-item">
+                                       <!-- BOTAO SAIR -->
 		                                <form action="http://localhost:8080/eCommerce/login">
 		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
 		                                </form>
-                                </div>
-                            </div>
-                        </div>
+                                    </a>
+                             </div>
+                         </div>
+                     </div>
                     </div>
                 </nav>
             </div>

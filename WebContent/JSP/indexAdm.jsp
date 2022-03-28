@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Mirror Fashion - Admin</title>
+    <title>[Admin] Mirror Fashion</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="eCommerce HTML Template Free Download" name="keywords">
     <meta content="eCommerce HTML Template Free Download" name="description">
@@ -78,15 +78,6 @@
                         <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
-<!--                         <div class="nav-item dropdown"> -->
-<!--                             <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a> -->
-<!--                             <div class="dropdown-menu"> -->
-<!--                                 BOTAO SAIR -->
-<!--                                 <form action="http://localhost:8080/eCommerce/login"> -->
-<!--                                     <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button> -->
-<!--                                 </form> -->
-<!--                             </div> -->
-<!--                         </div> -->
                     </div>
                 </div>
             </nav>
@@ -147,12 +138,11 @@
                         <a class="nav-link" id="products-nav" data-toggle="pill" href="#products-tab" role="tab"><i class="fa fa-barcode"></i> Produtos</a>
                         <a class="nav-link" id="coupons-nav" data-toggle="pill" href="#coupons-tab" role="tab"><i class="fa fa-tags"></i>Cupons</a>
                         <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
-                        <a class="nav-link">
-	                       	<form action="http://localhost:8080/eCommerce/login">
-                                <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-                            </form>
-                        </a>
-                    </div>
+                   </div>
+					<!-- BOTAO SAIR -->
+					<form action="http://localhost:8080/eCommerce/login">
+						<button type="submit" class="btn col-md-12" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+					</form>
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content">

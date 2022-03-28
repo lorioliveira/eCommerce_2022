@@ -8,7 +8,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>Mirror Fashion - Admin</title>
+        <title>[Admin] Mirror Fashion</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 		<meta content="eCommerce HTML Template Free Download" name="keywords">
     	<meta content="eCommerce HTML Template Free Download" name="description">
@@ -62,13 +62,18 @@
                             <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
-                            <div class="nav-item dropdown">
-                                <a href="../JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                                <div class="dropdown-menu">
-                                    <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
-                                </div>
-                            </div>
-                        </div>
+                         <div class="nav-item dropdown">
+                              <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
+                             <div class="dropdown-menu">
+                                    <a href="" class="dropdown-item">
+                                       <!-- BOTAO SAIR -->
+		                                <form action="http://localhost:8080/eCommerce/login">
+		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+		                                </form>
+                                    </a>
+                             </div>
+                         </div>
+                     </div>
                     </div>
                 </nav>
             </div>
@@ -110,7 +115,7 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Minha Conta</a></li>
                     <li class="breadcrumb-item active">Alterar Produto</li>
                 </ul>
             </div>
@@ -120,7 +125,7 @@
         <!-- Inicio de Alterar Produto  -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
-                <div class="col-lg-8">   
+                <div class="col-lg-9">   
                     <div class="register-form">
                         <h4>Alterar Cadastro de Produto</h4><br>
                             <div class="row">
@@ -197,9 +202,11 @@
                                 <label>Descrição</label>
                                 <textarea class="textareaProduto" name="descricaoProduto" id="descricao" cols="120" rows="2"></textarea>
                             </div>
-                            <div class="col-md-9">
-                                <a href="indexAdm.jsp"><button class="btn btnAtualizarProduto btnCupom "><i class="fa fa-save"></i>  Salvar</button></a>
+                            <div class="col-md-8"><br>
+                            	<button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
+                                <button class="btn btnAtualizarProduto btnCupom "><i class="fa fa-save"></i>  Salvar</button>
                             </div>
+                            
                         </div> 
                     </div>
                 </div>    

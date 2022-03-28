@@ -2438,16 +2438,17 @@ h2 {
     background: #ffffff;
     margin-bottom: 30px;
 }
-.btn_NovoEndereco{
-   text-align: center;
-   padding-left: 0.8rem;
-}  
 
 .registrar__novoEndereco {
     position: relative;
     padding: 30px;
     background: #ffffff;
     margin-bottom: 30px;
+}
+
+.btn_NovoEndereco{
+	margin-left: 73%;
+	position: static;
 }
 
 .container-novoEndereco{
@@ -2469,6 +2470,8 @@ h2 {
 .btn_NovoCartao{
     text-align: center;
     padding-left: 0.8rem;
+	margin-left: 72%;
+	position: static;
  }  
 
 .input_qtdeTroca{
@@ -2888,6 +2891,8 @@ h2 {
 [data-tooltip=""]::after, [data-tooltip=""]::before {
   display: none !important;
 }
+
+
 
 /************* TELA CENTRALIZADORA DE MENSAGEM **************/
 .telaMensagem{

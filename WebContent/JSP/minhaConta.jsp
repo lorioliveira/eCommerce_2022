@@ -125,7 +125,7 @@
                   <br>
                   <!-- BOTAO SAIR -->
                   <form action="http://localhost:8080/eCommerce/login">
-                     <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+                     <button type="submit" class="btn col-md-12" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
                   </form>
                </div>
                <div class="col-md-9">
@@ -172,9 +172,8 @@
                      </div>
                      <!-- MEUS ENDEREÇOS  -->
                      <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                        <h4>Meus Endereços</h4>
-                        <button type="submit" class="btn ml-auto nav-link btn_NovoEndereco"><a href="../JSP/novoendereco.jsp"><i class="fa fa-map-marker-alt"></i> Novo</a></button>
-                        </br>
+                        <h4>Meus Endereços   <a href="../JSP/novoendereco.jsp"><button type="submit" class="btn btn_NovoEndereco"><i class="fa fa-map-marker-alt"></i> Novo</button></a>
+                        </h4></br>
                         <div class="row">
                            <%
                               for(Endereco e : enderecos){
@@ -190,7 +189,7 @@
                               <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
                               <p>CEP <%=d.getCep() %></p>
                               <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn" class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash-alt"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash-alt"></i></button></a>
                                <br> <br>
                            </div>
                            <%
@@ -200,9 +199,10 @@
                      </div>
                      <!-- FORMA DE PAGAMENTO - CARTÕES -->
                       <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                        <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </a></button></h4>
+                        <h4>Meus Cartões <a href="../JSP/novocartao.jsp"><button class="btn btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </button></a></h4>
+                        <br>
                         <table class="table table-bordered">
-                           <thead class="thead-dark">
+                                <thead class="thead-dark">
                               <tr>
                                  <th>Bandeira</th>
                                  <th>Nº Cartão</th>
@@ -226,8 +226,8 @@
                                  <td><%=c.getValidade() %></td>
                                  <td><%=c.getPreferencial() %></td>
                                  <td>
-	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn"><i class="fa fa-eye"></i></button></a>
-	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash"></i></button></a>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash"></i></button></a>
 	                             </td> 
                               </tr>
                             <%
@@ -239,7 +239,7 @@
                      <!-- MEUS PEDIDOS -->
                      <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                         <div class="table-responsive">
-                           <h4>Meus Pedidos</h4>
+                           <h4>Meus Pedidos</h4><br>
                            <table class="table table-bordered">
                               <thead class="thead-dark">
                                  <tr>
@@ -256,28 +256,21 @@
                                     <td>21 Jun 2021</td>
                                     <td>$239</td>
                                     <td>Em Processamento</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="bottom"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                                  <tr>
                                     <td>001</td>
-                                    <td>10 Jan 2021</td>
-                                    <td>$99</td>
-                                    <td>Entregue</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
+                                    <td>21 Jun 2021</td>
+                                    <td>$239</td>
+                                    <td>Em Processamento</td>
+                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                                  <tr>
                                     <td>001</td>
-                                    <td>01 Fev 2020</td>
-                                    <td>$599</td>
-                                    <td>Cancelado</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
-                                 </tr>
-                                 <tr>
-                                    <td>001</td>
-                                    <td>28 Ago 2021</td>
-                                    <td>$99</td>
-                                    <td>Aprovado</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
+                                    <td>21 Jun 2021</td>
+                                    <td>$239</td>
+                                    <td>Em Processamento</td>
+                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                               </tbody>
                            </table>
@@ -287,9 +280,20 @@
                      <div class="tab-pane fade" id="changepassword-tab" role="tabpanel" aria-labelledby="changepassword-nav">
                         <h4>Alterar Senha</h4>
                         <br>
-                        <div class="row">
-                        	<form action="http://localhost:8080/eCommerce/cadastro" method="post">
-                        
+                        <form action="http://localhost:8080/eCommerce/cadastro" method="post">
+                        	<div class="row">
+	                           <div class="col-md-5">
+	                              <label>Digite nova senha:</label>
+	                              <input class="form-control" type="password" name="senha">
+	                           </div>
+	                           <div class="col-md-5">
+	                              <label>Confirme a nova senha:</label>
+	                              <input class="form-control" type="password"  name="confirmarSenha">
+	                           </div>
+	                           <div class="col-md-10">
+	                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
+	                           </div>
+	                           
 		                        <input type="hidden" name="nome" value="<%=usuarioLogado.getNome() %>" />      
 				                <input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf() %>"/>
 				                <input type="hidden" name="data_Nascimento" value="<%=usuarioLogado.getData_Nascimento() %>">
@@ -301,19 +305,7 @@
 					            <input type="hidden" name="tipoCliente" value="cliente"/>
 							    <input type="hidden" name="alteraCliente" value="1"/>
 					            <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
-			                
-	                           <div class="col-md-10">
-	                              <label>Digite nova senha:</label>
-	                              <input class="form-control" type="password" name="senha">
-	                           </div>
-	                           <div class="col-md-10">
-	                              <label>Confirme a nova senha:</label>
-	                              <input class="form-control" type="password"  name="confirmarSenha">
-	                           </div>
-	                           <div class="col-md-6">
-	                              <button type="submit" class="btn" name="operacao" value="ALTERAR"><i class="fa fa-check"></i> Alterar</button>
-	                              <br>
-	                           </div>
+			                </div>
 			            </form>
                         </div>
                      </div>

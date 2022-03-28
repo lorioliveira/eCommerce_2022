@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Mirror Fashion - Admin</title>
+    <title>[Admin] Mirror Fashion</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="eCommerce HTML Template Free Download" name="keywords">
     <meta content="eCommerce HTML Template Free Download" name="description">
@@ -42,6 +42,8 @@
    // Lista com todos os clientes que estao na sessao
     List<Cliente> todosClientes = (List<Cliente>)sessao.getAttribute("todosClientes");
     
+   //Listar os produtos e os pedidos 
+   
     %>
 
 <body>
@@ -77,16 +79,7 @@
                         <a href="./JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
-<!--                         <div class="nav-item dropdown"> -->
-<!--                             <a href="./JSP/indexAdm.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a> -->
-<!--                             <div class="dropdown-menu"> -->
-<!--                                 BOTAO SAIR -->
-<!--                                 <form action="http://localhost:8080/eCommerce/login"> -->
-<!--                                     <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button> -->
-<!--                                 </form> -->
-<!--                             </div> -->
-<!--                         </div> -->
-                    </div>
+	                </div>
                 </div>
             </nav>
         </div>
@@ -145,14 +138,14 @@
                         <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-receipt"></i> Pedidos</a>
                         <a class="nav-link" id="products-nav" data-toggle="pill" href="#products-tab" role="tab"><i class="fa fa-barcode"></i> Produtos</a>
                         <a class="nav-link" id="coupons-nav" data-toggle="pill" href="#coupons-tab" role="tab"><i class="fa fa-tags"></i>Cupons</a>
-                        <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
-                        <a class="nav-link">
-	                       	<form action="http://localhost:8080/eCommerce/login">
-                                <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-                            </form>
-                        </a>
-                    </div>
-                </div>
+                        <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>				
+					<!-- BOTAO SAIR -->
+					<form action="http://localhost:8080/eCommerce/login">
+						<button type="submit" class="btn col-md-12" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+					</form>
+					</div>
+				</div>
+					
                 <div class="col-md-10">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel"
@@ -194,7 +187,7 @@
                                         <td><%=c.getTelefone() %></td>
                                         <td><%=u.getEmail() %></td>
                                         <td><%=c.getStatus() %></td>
-                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a></td>
                                     </tr>
                                 </tbody>
                                 <%
@@ -224,7 +217,7 @@
                                             <td>$239</td>
                                             <td>ENTREGA REALIZADA</td>
                                             <td>
-                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
+                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"  data-tooltip="Visualizar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
                                                 
                                             </td>
                                         </tr>
@@ -271,7 +264,7 @@
                                                 <td>40</td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="top"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Manga Comprida</td>
@@ -282,7 +275,7 @@
                                                 <td>40</td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="top"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -319,8 +312,8 @@
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
                                             </td>
                                         </tr>
                                         <tr>

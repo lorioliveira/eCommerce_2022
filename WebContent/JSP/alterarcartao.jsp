@@ -148,7 +148,7 @@
 	                                    <div class="col-md-3">
 	                                        <label>Bandeira</label>
 	                                        <select class="form-control" type="text" name="bandeira">
-	                                            <option selected disabled><%=cartaoAlterado.getBandeira()%></option>
+                                            <option selected value="<%=cartaoAlterado.getBandeira()%>"><%=cartaoAlterado.getBandeira()%></option>
 	                                            <option value="Visa">Visa</option>
 	                                            <option value="Mastercard">Mastercard</option>
 	                                            <option value="Elo">Elo</option>
@@ -160,8 +160,8 @@
 	                                    </div>
 	                                    <div class="col-md-2">
 	                                        <label>Cartão Principal: </label></br> <input type="hidden" value="<%=cartaoAlterado.getPreferencial()%>">
-	                                        <input type="radio" name="preferencial" value="sim">    Sim
-	                                        <input type="radio" name="preferencial" value="nao">    Não 
+	                                        <input type="radio" name="preferencial" value="Sim" checked>    Sim
+	                                        <input type="radio" name="preferencial" value="Nao">    Não 
 	                                    </div>
 	                                    <div class="col-md-5">
 	                                        <label>Nome do Títular</label>
