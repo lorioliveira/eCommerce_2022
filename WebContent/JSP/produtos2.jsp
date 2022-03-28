@@ -26,6 +26,17 @@
         <!--- Biblioteca CSS - Principal-->
         <link href="./css/style.css" rel="stylesheet">
     </head>
+    
+     <%
+      Usuario usuarioLogado = new Usuario();
+      
+      HttpSession sessao = request.getSession();
+      usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+      
+      //pega todos enderecos que estao na sessao
+      List<Produto> produtos = (List<Produto>) sessao.getAttribute("listaProdutos");
+        
+      %>
     <body>
         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
@@ -80,7 +91,7 @@
         </div>
         <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta--> 
              
-        <!-- Inicio da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola -->
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola -->
         <div class="bottom-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -107,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <!-- Fim da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola -->
+        <!-- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->
 
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
@@ -162,9 +173,16 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="product-item">
+                                
                                     <!-- Produto -->
+                                    <%
+		                              for(Produto e : produtos){
+		                              
+		                              	// Aplicado o CAST 
+		                              	Produto p = (Produto) e;
+                          			 %>
                                     <div class="product-title">
-                                        <a href="./JSP/detalhe_produto.jsp">Blusa Amarela</a>
+                                        <a href="/eCommerce_roupa/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -182,225 +200,16 @@
                                         </div>
                                     </div>
                                     <div class="product-price">
-                                        <h3><span>R$</span> 89,90</h3>
-                                        <!--<a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
+                                        <h3><span>R$</span> <%=p.getPrecoVenda() %></h3>
                                     </div>
                                 </div>
+                                <%
+                                }
+                                %>
                             </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <!-- Produto -->
-                                    <div class="product-title">
-                                        <a href="#">Blusa Amarela</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/blusaamarela.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="./JSP/detalhe_produto.jsp"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$</span> 89,90</h3>
-                                        <!--<a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <!-- Produto -->
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="./JSP/detalhe_produto.jsp"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <!-- Produto -->
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="./JSP/detalhe_produto.jsp"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="./JSP/detalhe_produto.jsp"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Ultimo Produto -->
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Vestido Vermelho</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="./img/vestidovermelho.png" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>R$ </span>109,99</h3>
-                                        <!-- <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a> -->
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
-                        <!-- Pagination Start -->
+                        <!-- Inicio de Páginação - indisponível no momento -->
                         <div class="col-md-12">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
@@ -416,7 +225,7 @@
                                 </ul>
                             </nav>
                         </div>
-                        <!-- Pagination Start -->
+                        <!-- Fim da Páginação -->
                     </div>
                     <!-- Inicio do Menu de Categoria -->
                     <div class="col-lg-4 sidebar">

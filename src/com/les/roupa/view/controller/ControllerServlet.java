@@ -22,6 +22,7 @@ import com.les.roupa.view.helper.impl.CartaoCreditoHelper;
 import com.les.roupa.view.helper.impl.ClienteHelper;
 import com.les.roupa.view.helper.impl.EnderecoHelper;
 import com.les.roupa.view.helper.impl.LoginHelper;
+import com.les.roupa.view.helper.impl.ProdutoHelper;
 
 /**
  * Responsavel por processar todas as requisicoes feita pelo usuario,
@@ -52,6 +53,7 @@ public class ControllerServlet extends HttpServlet {
 		viewHelper.put("/eCommerce/cadastroEndereco", new EnderecoHelper());
 		viewHelper.put("/eCommerce/login", new LoginHelper());
 		viewHelper.put("/eCommerce/cartao", new CartaoCreditoHelper());
+		viewHelper.put("/eCommerce/produto", new ProdutoHelper());
 	}
 	
 	// Servlet Principal do sistema

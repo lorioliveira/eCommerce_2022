@@ -10,6 +10,7 @@ import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Usuario;
 
 public class LoginDAO extends AbstractJdbcDAO {
@@ -227,6 +228,33 @@ public class LoginDAO extends AbstractJdbcDAO {
 					cartoes.add(cCredito);
 				}
 				
+				//Listar todos os dados do Produto
+				List<Produto> todosProdutos = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from produto");
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Produto
+					Produto listaProduto = new Produto();
+					
+					listaProduto.setId(rs.getString("id"));
+					listaProduto.setNome(rs.getString("nome"));
+					listaProduto.setDescricao(rs.getString("descricao"));
+					listaProduto.setCategoria(rs.getString("categoria"));
+					listaProduto.setCores(rs.getString("cores"));
+					listaProduto.setTamanho(rs.getString("tamanho"));
+					listaProduto.setPrecoCompra(rs.getString("precoCompra"));
+					listaProduto.setPrecoVenda(rs.getString("precoVenda"));
+					listaProduto.setQtdeEstoque(rs.getString("qtdeEstoque"));
+					listaProduto.setFoto(rs.getString("foto"));
+					listaProduto.setData_Cadastro(rs.getString("dt_cadastro"));
+					listaProduto.setStatus(rs.getString("status"));
+					listaProduto.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
+					listaProduto.setMotivoStatus(rs.getString("motivoStatus"));
+										
+					// adicionando o objeto a lista
+					todosProdutos.add(listaProduto);
+				}
 				
 				//Listar todos os Clientes cadastrados - Opção como ADMIN
 				List<Cliente> todosClientes = new ArrayList<>();
@@ -264,6 +292,7 @@ public class LoginDAO extends AbstractJdbcDAO {
 				novoUsuario.setEnderecosCliente(enderecos);
 				novoUsuario.setTodosClientes(todosClientes);
 				novoUsuario.setTodosCartoes(cartoes);
+				novoUsuario.setTodosProdutos(todosProdutos);
 				
 				
 			rs.close();

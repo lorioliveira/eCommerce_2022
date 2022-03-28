@@ -34,7 +34,7 @@
       usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
       
       //pega todos enderecos que estao na sessao
-      List<Produto> produtos = (List<Produto>) sessao.getAttribute("listaProdutos");
+      List<Produto> produtos = (List<Produto>) sessao.getAttribute("todosProdutos");
         
       %>
     <body>
@@ -175,10 +175,12 @@
                                 <div class="product-item">
                                 
                                     <!-- Produto -->
-                                    
-                                    
-                                    
-                                    
+                                    <%
+		                              for(Produto e : produtos){
+		                              
+		                              	// Aplicado o CAST 
+		                              	Produto p = (Produto) e;
+                          			 %>
                                     <div class="product-title">
                                         <a href="/eCommerce_roupa/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
                                         <div class="ratting">
@@ -201,6 +203,9 @@
                                         <h3><span>R$</span> <%=p.getPrecoVenda() %></h3>
                                     </div>
                                 </div>
+                                <%
+                                }
+                                %>
                             </div>
                             
                         </div>

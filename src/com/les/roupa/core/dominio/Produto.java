@@ -1,8 +1,10 @@
 package com.les.roupa.core.dominio;
 
+import java.util.List;
+
 /**
  * Classe para representar o produto 
- * 
+ * @author Lorena Oliveira
  */
 
 public class Produto extends EntidadeDominio {
@@ -16,16 +18,12 @@ public class Produto extends EntidadeDominio {
 	private String qtdeEstoque;
 	private String foto;
 	private String status;
-	private String observacao;
-	private String descricaoStatusProduto;
-	
+	private String motivoStatus;
 	private String grupoPrecificacao;
 	
 	private String alteraProduto;
-	
-	
-	
-	
+	private List<Produto> todosProdutos;
+		
 	/* NOME */
 	public String getNome() {
 		return nome;
@@ -43,11 +41,11 @@ public class Produto extends EntidadeDominio {
 	}
 	
 	/* Motivo Ativação/Inativação */
-	public String getStatusProduto() {
-		return descricaoStatusProduto;
+	public String getMotivoStatus() {
+		return motivoStatus;
 	}
-	public void setStatusProduto(String descricaoStatusProduto) {
-		this.descricaoStatusProduto = descricaoStatusProduto;
+	public void setMotivoStatus(String motivoStatus) {
+		this.motivoStatus = motivoStatus;
 	}
 	
 	/* CATEGORIA */
@@ -113,15 +111,7 @@ public class Produto extends EntidadeDominio {
     public void setStatus(String status) {
     	this.status = status;
     }
-	
-    /* OBS */
-    public String getObservacao() {
-    	return observacao;
-    }
-    public void setObservacao(String observacao) {
-    	this.observacao = observacao;
-    }
-	
+		
     /* GRUPO DE PRECIFICACAO */
     public String getGrupoPrecificacao() {
     	return grupoPrecificacao;
@@ -138,11 +128,6 @@ public class Produto extends EntidadeDominio {
     	this.alteraProduto = alteraProduto;
     }
     
-    
-    
-    
-    
-    
 	public void setQuantidadeSelecionada(String string) {
 		// TODO Auto-generated method stub
 		
@@ -150,5 +135,14 @@ public class Produto extends EntidadeDominio {
 	public String getQuantidadeSelecionada() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// Lista de Todos os cartoes do Cliente cadastrados
+	public List<Produto> getTodosProdutos() {
+		return todosProdutos;
+	}
+
+	public void setTodosProdutos(List<Produto> todosProdutos) {
+		this.todosProdutos = todosProdutos;
 	}
 }

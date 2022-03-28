@@ -35,11 +35,8 @@
       //pega todos enderecos que estao na sessao
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
       
-   	  //pega todos cartoes que estao na sessao
-     // List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
-        
-      
-      
+      //pega todos cartões do Cliente que estao na sessao
+      List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");        
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -192,8 +189,8 @@
                               <p><%=d.getLogradouro() %></p>
                               <p><%=d.getCidade() %> - <%=d.getEstado() %></p>
                               <p>CEP <%=d.getCep() %></p>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn"><i class="fa fa-trash-alt"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraEndereco=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
+                              <a href="/eCommerce/cadastroEndereco?id=<%= d.getId()%>&idCliente=<%=usuarioLogado.getId()  %>&operacao=EXCLUIR"><button class="btn" class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash-alt"></i></button></a>
                                <br> <br>
                            </div>
                            <%
@@ -216,11 +213,11 @@
                               </tr>
                            </thead>
                           <tbody>
-                           <%-- <%
-                              for(CartaoCredito r : cartoes){
-                              
-                              	// Aplicado o CAST 
-                             	CartaoCredito c = (CartaoCredito) r;
+                           <%
+                              for(CartaoCredito c : cartoes){
+                            	  
+                            	// Aplicado o CAST 
+                                //CartaoCredito c = (CartaoCredito) e;
                            %>
                               <tr>
                                   <td><%=c.getBandeira() %></td>
@@ -235,7 +232,7 @@
                               </tr>
                             <%
                              	}
-                           	%>  --%>
+                           	%>
                            </tbody>
                         </table>
                      </div>
@@ -259,7 +256,7 @@
                                     <td>21 Jun 2021</td>
                                     <td>$239</td>
                                     <td>Em Processamento</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="bottom"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                                  <tr>
                                     <td>001</td>

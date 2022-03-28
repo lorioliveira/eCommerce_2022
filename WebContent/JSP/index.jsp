@@ -27,7 +27,16 @@
       <!-- CSS Principal do Projeto -->
       <link href="../css/style.css" rel="stylesheet">
    </head>
-   
+    	<%
+	      Usuario usuarioLogado = new Usuario();
+	      
+	      HttpSession sessao = request.getSession();
+	      usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+	      
+	      //pega todos produtos que estao na sessao
+	      List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
+	      
+	      %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
@@ -164,33 +173,41 @@
                <h1>Nossos Produtos</h1>
             </div>
             <div class="row align-items-center product-slider product-slider-4">
-               <div class="col-lg-3">
-                  <div class="product-item">
-                     <div class="product-title">
-                        <a href="#">Blusa Amarela</a>
-                        <div class="ratting">
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                     <div class="product-image">
-                        <a href="../JSP/detalhe_produto.jsp">
-                        <img src="../img/blusaamarela.png" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                           <a href="#"><i class="fa fa-eye"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-price">
-                        <h3><span>R$</span> 89,90</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3">
+				<%
+					for (Produto e : produtos) {
+	
+						// Aplicado o CAST 
+						Produto p = (Produto) e;
+				%>
+				<div class="col-lg-3">
+					<div class="product-item">
+						<div class="product-title">
+							<a href="#"><%=p.getNome() %></a>
+							<div class="ratting">
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i>
+							</div>
+						</div>
+						<div class="product-image">
+							<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><img src="<%=p.getFoto()%>" alt="Product Image"></a>
+							<div class="product-action">
+								<a href="#"><i class="fa fa-eye"></i></a>
+							</div>
+						</div>
+						<div class="product-price">
+							<h3>
+								<span>R$</span> <%=p.getPrecoVenda() %>
+							</h3>
+							<a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
+						</div>
+					</div>
+				</div>
+				<%
+					}
+				%>
+			</div>
+				<div class="col-lg-3">
                   <div class="product-item">
                      <div class="product-title">
                         <a href="#">Vestido Vermelho</a>

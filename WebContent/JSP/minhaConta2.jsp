@@ -206,10 +206,10 @@
                            <thead class="thead-dark">
                            
                            <%
-                              for(CartaoCredito e : cartoes){
-                              
-                              	// Aplicado o CAST 
-                              	CartaoCredito c = (CartaoCredito) e;
+                              for(CartaoCredito c : cartoes){
+                            	  
+                           	  // Aplicado o CAST 
+                              //CartaoCredito c = (CartaoCredito) e;
                            %>
                            
                               <tr>

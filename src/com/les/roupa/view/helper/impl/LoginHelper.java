@@ -88,7 +88,10 @@ public class LoginHelper implements IViewHelper {
 				
 				//Todas as listas que serao adicionadas a Sessao 
 				sessao.setAttribute("enderecosCliente", usuario.getEnderecosCliente());
+				sessao.setAttribute("todosProdutos", usuario.getTodosProdutos());
+				sessao.setAttribute("cartoesCliente", usuario.getTodosCartoes());
 				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
+				
 				// Este apenas puxa apenas o cliente que sera alterado
 				sessao.setAttribute("clienteAlterado", usuario.getTodosClientes().get(0));
 				

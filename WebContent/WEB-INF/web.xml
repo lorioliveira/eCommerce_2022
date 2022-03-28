@@ -40,7 +40,7 @@
   
   <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
-    <url-pattern>/cadastroProduto</url-pattern>
+    <url-pattern>/produto</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

@@ -202,6 +202,32 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 			stmt.setString(1, cartaocredito.getId());
 			
 			stmt.executeUpdate();
+			
+			//Lista todos os dados do Cartao
+			List<CartaoCredito> cartoesCliente = new ArrayList<>();
+			stmt = connection.prepareStatement("select * from cartaoCredito where id_cliente = ?");
+			stmt.setString(1, cartaocredito.getIdCliente());
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				// criando o objeto Cartao
+				CartaoCredito listaCartao = new CartaoCredito();
+				
+				listaCartao.setId(rs.getString("id"));
+				listaCartao.setNumCartao(rs.getString("numCartao"));
+				listaCartao.setBandeira(rs.getString("bandeira"));
+				listaCartao.setNome(rs.getString("nome"));
+				listaCartao.setValidade(rs.getString("validade"));
+				listaCartao.setCvv(rs.getString("cvv"));
+				listaCartao.setPreferencial(rs.getString("preferencial"));
+				listaCartao.setData_Cadastro(rs.getString("data_Cadastro"));
+									
+				// adicionando o objeto a lista
+				cartoesCliente.add(listaCartao);
+			}
+			
+			cartaocredito.setTodosCartoes(cartoesCliente);
+			
 			stmt.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);

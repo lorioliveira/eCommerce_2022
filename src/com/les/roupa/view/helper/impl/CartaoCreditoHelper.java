@@ -183,22 +183,22 @@ public class CartaoCreditoHelper implements IViewHelper {
     				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
     				HttpSession sessao = request.getSession();
     				
-    				sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
-    				
-    				// Este apenas puxa apenas o cartao que sera alterado
-    				sessao.setAttribute("cartaoAlterado", cartaoCredito.getTodosCartoes().get(0));
-    				
     				String alteraPreferencial = request.getParameter("alteraPreferencial");
     				String id = request.getParameter("id");
     				
     				// Se eu estiver pela tela de listagem de cartoes, chama o arquivo .JSP para edição do cartao
-    				if (alteraPreferencial.contentEquals("0")) {					
+    				if (alteraPreferencial.contentEquals("0")) {	
+    					// Este apenas puxa apenas o cartao que sera alterado
+        				sessao.setAttribute("cartaoAlterado", cartaoCredito.getTodosCartoes().get(0));
+        				
     					// pendura o "id" do cartao na requisição para poder mandar para o arquivo .JSP
     					request.setAttribute("id", id);
     				    					
     					request.getRequestDispatcher("JSP/alterarCartao.jsp").forward(request, response);
     					
     				}else {
+    					sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
+    					
     					// Redireciona para o arquivo .jsp
     					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
     				}
@@ -222,10 +222,6 @@ public class CartaoCreditoHelper implements IViewHelper {
 				HttpSession sessao = request.getSession();
 				
 				sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
-            	
-				String id = request.getParameter("id");
-				// pendura o "id" do cartao na requisição para poder mandar para o arquivo .JSP
-				request.setAttribute("id", id);
             	      
                 // Redireciona para o arquivo .jsp
                 request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
