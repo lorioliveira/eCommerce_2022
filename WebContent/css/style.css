@@ -2509,10 +2509,7 @@ h2 {
     align-content: center;
     padding: 3px 0 0 10px;
 }
-.btnAtualizarProduto{
-    width: 50%;
-    margin:10px 0 0 0;
-}
+
 .btnEstoque{
     margin-left: 83%;
 }
@@ -2541,10 +2538,12 @@ h2 {
 .clienteVinculado{
     width: 50%;
 }
-.btnSalvarCupom{
-    width: 70%;
+
+.btnSalvarCupom, .btnCancelarCupom{
+    width: 80%;
     margin-top: 5%
 }
+
 .btnEntrar{
     width: 20%;
 }

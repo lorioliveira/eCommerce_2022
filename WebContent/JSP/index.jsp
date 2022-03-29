@@ -172,14 +172,12 @@
             <div class="section-header">
                <h1>Nossos Produtos</h1>
             </div>
+            
             <div class="row align-items-center product-slider product-slider-4">
 				<%
-					for (Produto e : produtos) {
-	
-						// Aplicado o CAST 
-						Produto p = (Produto) e;
-				%>
-				<div class="col-lg-3">
+				for (Produto p : produtos) {
+			%>
+			<div class="col-lg-3">
 					<div class="product-item">
 						<div class="product-title">
 							<a href="#"><%=p.getNome() %></a>
@@ -190,7 +188,7 @@
 							</div>
 						</div>
 						<div class="product-image">
-							<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><img src="<%=p.getFoto()%>" alt="Product Image"></a>
+							<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><img src=.<%=p.getFoto()%> alt="Product Image"></a>
 							<div class="product-action">
 								<a href="#"><i class="fa fa-eye"></i></a>
 							</div>
@@ -207,117 +205,8 @@
 					}
 				%>
 			</div>
-				<div class="col-lg-3">
-                  <div class="product-item">
-                     <div class="product-title">
-                        <a href="#">Vestido Vermelho</a>
-                        <div class="ratting">
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                     <div class="product-image">
-                        <a href="">
-                        <img src="../img/vestidovermelho.png" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                           <a href="#"><i class="fa fa-eye"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-price">
-                        <h3><span>R$ </span>109,99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3">
-                  <div class="product-item">
-                     <div class="product-title">
-                        <a href="#">Calça Preta</a>
-                        <div class="ratting">
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                     <div class="product-image">
-                        <a href="">
-                        <img src="../img/calcapreta.png" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                           <!-- <a href="#"><i class="fa fa-cart-plus"></i></a>
-                              <a href="#"><i class="fa fa-heart"></i></a> -->
-                           <a href="#"><i class="fa fa-eye"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-price">
-                        <h3><span>R$ </span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3">
-                  <div class="product-item">
-                     <div class="product-title">
-                        <a href="#">Blusa Rose</a>
-                        <div class="ratting">
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                     <div class="product-image">
-                        <a href="">
-                        <img src="../img/blusarose.png" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                           <a href="#"><i class="fa fa-eye"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-price">
-                        <h3><span>R$ </span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3">
-                  <div class="product-item">
-                     <div class="product-title">
-                        <a href="#">Blusa Azul Marinho</a>
-                        <div class="ratting">
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                     <div class="product-image">
-                        <a href="">
-                        <img src="../img/blusamarinho.png" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                           <!-- <a href="#"><i class="fa fa-cart-plus"></i></a>
-                              <a href="#"><i class="fa fa-heart"></i></a> -->
-                           <a href="#"><i class="fa fa-eye"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-price">
-                        <h3><span>R$ </span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+		</div>
+	</div>
       <!-- Featured Product End -->       
 
       <!-- Início do Footer -->

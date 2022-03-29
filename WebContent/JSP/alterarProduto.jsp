@@ -202,11 +202,11 @@
                                 <label>Descrição</label>
                                 <textarea class="textareaProduto" name="descricaoProduto" id="descricao" cols="120" rows="2"></textarea>
                             </div>
-                            <div class="col-md-8"><br>
+
+                            <div class="col-md-9">
                             	<button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-                                <button class="btn btnAtualizarProduto btnCupom "><i class="fa fa-save"></i>  Salvar</button>
+                                <button class="btn"><i class="fa fa-save"></i>  Salvar</button>
                             </div>
-                            
                         </div> 
                     </div>
                 </div>    

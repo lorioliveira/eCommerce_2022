@@ -28,15 +28,15 @@
     </head>
     
      <%
-      Usuario usuarioLogado = new Usuario();
-      
-      HttpSession sessao = request.getSession();
-      usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-      
-      //pega todos enderecos que estao na sessao
-      List<Produto> produtos = (List<Produto>) sessao.getAttribute("listaProdutos");
-        
-      %>
+	      Usuario usuarioLogado = new Usuario();
+	      
+	      HttpSession sessao = request.getSession();
+	      usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+	      
+	      //pega todos produtos que estao na sessao
+	      List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
+	      
+	      %>
     <body>
         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
@@ -171,18 +171,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="product-item">
-                                
-                                    <!-- Produto -->
-                                    <%
-		                              for(Produto e : produtos){
-		                              
-		                              	// Aplicado o CAST 
-		                              	Produto p = (Produto) e;
+                            <div class="col-md-4"> 
+                            		<%
+		                              for(Produto p : produtos){
                           			 %>
+                                <div class="product-item">
+                                    <!-- Produto -->
                                     <div class="product-title">
-                                        <a href="/eCommerce_roupa/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
+                                        <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -192,11 +188,9 @@
                                         </div>
                                     </div>
                                     <div class="product-image">
-                                        <a href="./JSP/detalhe_produto.jsp">
-                                        <img src="./img/blusaamarela.png" alt="Product Image">
-                                        </a>
+                                        <img src=<%=p.getFoto()%> alt="Product Image">
                                         <div class="product-action">
-                                            <a href="./JSP/detalhe_produto.jsp"><i class="fa fa-eye"></i></a>
+                                            <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-price">

@@ -167,6 +167,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
+                            	<button class="btn btnCancelarCupom" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
                                 <a href="../JSP/login.jsp"></a><button class="btn btnSalvarCupom"><i class="fa fa-save"></i> Salvar</button></a>
                             </div>
                         </div> 

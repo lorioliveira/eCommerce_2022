@@ -28,7 +28,6 @@
 
     <!-- CSS Principal do Projeto -->
     <link href="./css/style.css" rel="stylesheet">
-    <script src="./js/moment.min.js" type="text/javascript"></script>
 </head>
 
         
