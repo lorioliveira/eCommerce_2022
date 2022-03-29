@@ -152,18 +152,8 @@ public class ProdutoHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Redireciona para o arquivo .jsp
-				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
-				List<EntidadeDominio> entidades = resultado.getEntidades();
-				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
-				Produto produtos = (Produto) entidades.get(0);
-				
-				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
-				HttpSession sessao = request.getSession();
-				
-				sessao.setAttribute("todosProdutos", produtos.getTodosProdutos());
-				
-				request.getRequestDispatcher("JSP/produtos.jsp").forward(request, response);
+								
+				request.getRequestDispatcher("JSP/detalhe_produto.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -219,6 +209,8 @@ public class ProdutoHelper implements IViewHelper {
 					
 					request.getRequestDispatcher("JSP/alterarProduto.jsp").forward(request, response);
 				}else {
+					sessao.setAttribute("todosProdutos", produto.getTodosProdutos());
+					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
