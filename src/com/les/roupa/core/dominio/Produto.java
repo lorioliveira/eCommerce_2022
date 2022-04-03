@@ -23,7 +23,16 @@ public class Produto extends EntidadeDominio {
 	
 	private String alteraProduto;
 	private List<Produto> todosProdutos;
+	
+	private Produto produtoSelecionado;
 		
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+	
 	/* NOME */
 	public String getNome() {
 		return nome;

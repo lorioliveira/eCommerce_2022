@@ -6,18 +6,24 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Produto;
 
 public class DetalheProdutoDAO extends AbstractJdbcDAO {
 	
 	
-	
 	/**
 	 * Metodo para SALVAR 
 	 */
 	public void salvar(EntidadeDominio entidade) {
+		DetalheProduto detalheProduto = (DetalheProduto) entidade;
+		
+		ProdutoDAO dao = new ProdutoDAO();
+		
+		List<Produto> produtoPesquisado = dao.consultarProdutoById(detalheProduto.getProduto().getId()); 
+		
+		detalheProduto.setProduto(produtoPesquisado.get(0));
 		
 	} // Salvar
 	
@@ -64,7 +70,7 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 				prod.setPrecoVenda(rs.getString("precoVenda"));
 				prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
 				prod.setFoto(rs.getString("foto"));
-				prod.setDt_cadastro(rs.getString("dt_cadastro"));
+				prod.setData_Cadastro(rs.getString("dt_cadastro"));
 				prod.setStatus(rs.getString("status"));
 				prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
 			
@@ -108,7 +114,7 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 				prod.setPrecoVenda(rs.getString("precoVenda"));
 				prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
 				prod.setFoto(rs.getString("foto"));
-				prod.setDt_cadastro(rs.getString("dt_cadastro"));
+				prod.setData_Cadastro(rs.getString("dt_cadastro"));
 				prod.setStatus(rs.getString("status"));
 				prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
 			
@@ -151,7 +157,7 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 					prod.setPrecoVenda(rs.getString("precoVenda"));
 					prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
 					prod.setFoto(rs.getString("foto"));
-					prod.setDt_cadastro(rs.getString("dt_cadastro"));
+					prod.setData_Cadastro(rs.getString("dt_cadastro"));
 					prod.setStatus(rs.getString("status"));
 					prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
 				
@@ -171,51 +177,16 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Listar Produto 
+	 * Metodo para Listar Produto
 	 * @param entidade
 	 * @return
 	 */
 	public List<EntidadeDominio> consultar (EntidadeDominio entidade){
-		openConnection();
-		try {
-			List<EntidadeDominio> produtos = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from produto");
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				// criando o objeto Produto
-				
-				Produto prod = new Produto();
-								
-				prod.setId(rs.getString("id"));
-				prod.setNome(rs.getString("nome"));
-				prod.setDescricao(rs.getString("descricao"));
-				prod.setCategoria(rs.getString("categoria"));
-				prod.setCores(rs.getString("cores"));
-				prod.setTamanho(rs.getString("tamanho"));
-				prod.setPrecoCompra(rs.getString("precoCompra"));
-				prod.setPrecoVenda(rs.getString("precoVenda"));
-				prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
-				prod.setFoto(rs.getString("foto"));
-				prod.setDt_cadastro(rs.getString("dt_cadastro"));
-				prod.setStatus(rs.getString("status"));
-				prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
-				
-				
-				
-				// adicionando o objeto à lista
-				produtos.add(prod);
-			}
-			rs.close();
-			stmt.close();
-			return produtos;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		return null;
 	} // Listar
 	
 	/**
-	 * Metodo para Listar Produto por ID
+	 * Metodo para Listar Produto por ID 
 	 * @param entidade
 	 * @return
 	 */

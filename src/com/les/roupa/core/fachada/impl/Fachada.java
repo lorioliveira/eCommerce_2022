@@ -8,13 +8,17 @@ import java.util.Map;
 import com.les.roupa.core.dao.IDAO;
 import com.les.roupa.core.dao.impl.CartaoCreditoDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
+import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
+import com.les.roupa.core.dao.impl.ProdutoDAO;
 import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.core.strategy.impl.ValidarBairro;
@@ -52,6 +56,7 @@ import com.les.roupa.core.strategy.impl.ValidarStatus;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
+import com.les.roupa.view.helper.impl.DetalheProdutoHelper;
 import com.les.roupa.core.strategy.IStrategy;
 
 
@@ -155,6 +160,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasSalvarCartaoCredito = new ArrayList<>();
 	List<IStrategy> regrasSalvarLogin = new ArrayList<>();
 	List<IStrategy> regrasSalvarProduto = new ArrayList<>();
+	List<IStrategy> regrasSalvarDetalheProduto = new ArrayList<>();
 	List<IStrategy> regrasSalvarCarrinho = new ArrayList<>();
 	List<IStrategy> regrasSalvarPedido = new ArrayList<>();
 	List<IStrategy> regrasSalvarCupom = new ArrayList<>();
@@ -212,6 +218,7 @@ public class Fachada implements IFachada {
 	Map<String, List<IStrategy>> regrasCartaoCredito = new HashMap<>();
 	Map<String, List<IStrategy>> regrasLogin = new HashMap<>();
 	Map<String, List<IStrategy>> regrasProduto = new HashMap<>();
+	Map<String, List<IStrategy>> regrasDetalheProduto = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCarrinho = new HashMap<>();
 	Map<String, List<IStrategy>> regrasPedido = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCupom = new HashMap<>();
@@ -237,7 +244,8 @@ public class Fachada implements IFachada {
 		daos.put(Endereco.class.getName(), new EnderecoDAO());
 		daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
 		daos.put(Usuario.class.getName(), new LoginDAO());
-		//daos.put(Produto.class.getName(), new ProdutoDAO());
+		daos.put(Produto.class.getName(), new ProdutoDAO());
+		daos.put(DetalheProduto.class.getName(), new DetalheProdutoDAO());
 		//daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		//daos.put(Pedido.class.getName(), new PedidoDAO());
 		//daos.put(Cupom.class.getName(), new CupomDAO());
@@ -415,6 +423,12 @@ public class Fachada implements IFachada {
 			//regrasProduto.put("EXCLUIR", regrasExcluirProduto);
 		/* --------------------------------------- */
 		
+		/* ----- REGRAS DA ENTIDADE DETALHE DO PRODUTO ----- */
+		/* ----- SALVAR ----- */
+		regrasDetalheProduto.put("SALVAR", regrasSalvarDetalheProduto);
+		
+		/* --------------------------------------- */
+		
 		/* ----- REGRAS DA ENTIDADE CARRINHO ----- */
 		/* ----- SALVAR ----- */
 		regrasCarrinho.put("SALVAR", regrasSalvarCarrinho);
@@ -502,7 +516,8 @@ public class Fachada implements IFachada {
 		regrasGeral.put(Endereco.class.getName(), regrasEndereco);
 		regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
 		regrasGeral.put(Usuario.class.getName(), regrasLogin);
-		//regrasGeral.put(Produto.class.getName(), regrasProduto);
+		regrasGeral.put(Produto.class.getName(), regrasProduto);
+		regrasGeral.put(DetalheProduto.class.getName(), regrasDetalheProduto);
 		//regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
 		//regrasGeral.put(Pedido.class.getName(), regrasPedido);
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);

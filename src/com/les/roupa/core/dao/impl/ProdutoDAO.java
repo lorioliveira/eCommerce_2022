@@ -241,7 +241,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 				prod.setPrecoVenda(rs.getString("precoVenda"));
 				prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
 				prod.setFoto(rs.getString("foto"));
-				prod.setData_Cadastro(rs.getString("Data_Cadastro"));
+				prod.setData_Cadastro(rs.getString("dt_cadastro"));
 				prod.setStatus(rs.getString("status"));
 				prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
 				prod.setMotivoStatus(rs.getString("motivoStatus"));

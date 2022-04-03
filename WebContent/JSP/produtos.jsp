@@ -178,7 +178,7 @@
                                 <div class="product-item">
                                     <!-- Produto -->
                                     <div class="product-title">
-                                        <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
+                                        <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><%=p.getNome() %></a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -190,7 +190,7 @@
                                     <div class="product-image">
                                         <img src=.<%=p.getFoto()%> alt="Foto do Produto">
                                         <div class="product-action">
-                                            <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><i class="fa fa-eye"></i></a>
+                                            <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-price">
