@@ -159,7 +159,7 @@
                                 <div class="col-md-4">
                                     <div class="product-content">
                                         <div class="title">
-                                            <h2><%=produtoSelecionado.getNome()%> <%=produtoSelecionado.getId() %></h2>
+                                            <h2><%=produtoSelecionado.getNome()%></h2>
                                         </div>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
@@ -172,65 +172,74 @@
                                             <h4>Preço:</h4>
                                             <p>R$ <%=produtoSelecionado.getPrecoVenda() %><span>R$149,00</span></p>
                                         </div>
-                                        <div class="quantity">
-                                            <h4>Qtde.:</h4>
-                                            <div class="qty">
-                                                <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                                <input type="text" value="1">
-                                                <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="p-size">
-                                            <h4>Tam.:</h4>
-                                            <div class="tamanhos">
-                                                <div class="radioTam">
-                                                    <label>
-                                                        <input type="radio" name="tamanho" value="36">
-                                                        <span><%=produtoSelecionado.getTamanho() %></span>
-                                                    </label>
-                                                </div>
-                                                <div class="radioTam">
-                                                    <label>
-                                                        <input type="radio" name="tamanho" value="38">
-                                                        <span>38</span>
-                                                    </label>
-                                                </div>
-                                                <div class="radioTam">
-                                                    <label>
-                                                        <input type="radio" name="tamanho" value="40">
-                                                        <span>40</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="p-color">
-                                            <h4>Cores:</h4>
-                                            <div class="cores">
-                                                <div class="radioCores">
-                                                    <label>
-                                                        <input type="radio" name="cor" value="Amarela">
-                                                        <span><%=produtoSelecionado.getCores() %></span>
-                                                    </label>
-                                                </div>
-                                                <div class="radioCores">
-                                                    <label>
-                                                        <input type="radio" name="cor" value="Preta">
-                                                        <span>Preta</span>
-                                                    </label>
-                                                </div>
-                                                <div class="radioCores">
-                                                    <label>
-                                                        <input type="radio" name="cor" value="Verde Militar">
-                                                        <span>Verde Militar</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <br><br>
-                                            <div class="action">
-                                                <a class="btn btnAdicionar" href="#"><i class="fa fa-shopping-bag"></i> Adicionar</a>
-                                            </div>
-                                        </div>
+                                        
+                                        <form class="form" action="http://localhost:8080/eCommerce/carrinho">
+	                                        <div class="quantity">
+	                                            <h4>Qtde.:</h4>
+	                                            <div class="qty">
+	                                                <button class="btn-minus"><i class="fa fa-minus"></i>
+	                                                </button>
+	                                                
+	                                                <input type="text" name="quantidadeSelecionada" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3">
+	                                                
+	                                                <button class="btn-plus"><i class="fa fa-plus"></i>
+	                                                </button>
+	                                            </div>
+	                                        </div>
+	                                        <div class="p-size">
+	                                            <h4>Tam.:</h4>
+	                                            <div class="tamanhos">
+	                                                <div class="radioTam">
+	                                                    <label>
+	                                                        <input type="radio" name="tamanho" value="36">
+	                                                        <span><%=produtoSelecionado.getTamanho() %></span>
+	                                                    </label>
+	                                                </div>
+	                                                <div class="radioTam">
+	                                                    <label>
+	                                                        <input type="radio" name="tamanho" value="38">
+	                                                        <span>38</span>
+	                                                    </label>
+	                                                </div>
+	                                                <div class="radioTam">
+	                                                    <label>
+	                                                        <input type="radio" name="tamanho" value="40">
+	                                                        <span>40</span>
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                        <br>
+	                                        <div class="p-color">
+	                                            <h4>Cores:</h4>
+	                                            <div class="cores">
+	                                                <div class="radioCores">
+	                                                    <label>
+	                                                        <input type="radio" name="cor" value="Amarela">
+	                                                        <span><%=produtoSelecionado.getCores() %></span>
+	                                                    </label>
+	                                                </div>
+	                                                <div class="radioCores">
+	                                                    <label>
+	                                                        <input type="radio" name="cor" value="Preta">
+	                                                        <span>Preta</span>
+	                                                    </label>
+	                                                </div>
+	                                                <div class="radioCores">
+	                                                    <label>
+	                                                        <input type="radio" name="cor" value="Verde Militar">
+	                                                        <span>Verde Militar</span>
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <br><br>
+	                                            <div class="action">
+	                                                <button class="btn btnAdicionar" name="operacao" value="SALVAR"><i class="fa fa-shopping-bag"></i> Adicionar</button>
+	                                            </div>
+	                                        </div>
+	                                        	<!-- ID do Cliente -->
+												<input type="hidden" name="idProduto" id="idProduto" value="<%=produtoSelecionado.getId() %>">
+                                        </form>
                                     </div>
                                 </div>
                             </div>

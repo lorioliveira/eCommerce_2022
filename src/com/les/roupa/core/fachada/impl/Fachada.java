@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.les.roupa.core.dao.IDAO;
+import com.les.roupa.core.dao.impl.CarrinhoDAO;
 import com.les.roupa.core.dao.impl.CartaoCreditoDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
 import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
@@ -13,6 +14,7 @@ import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.dao.impl.ProdutoDAO;
 import com.les.roupa.core.fachada.IFachada;
+import com.les.roupa.core.dominio.Carrinho;
 import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.DetalheProduto;
@@ -246,7 +248,7 @@ public class Fachada implements IFachada {
 		daos.put(Usuario.class.getName(), new LoginDAO());
 		daos.put(Produto.class.getName(), new ProdutoDAO());
 		daos.put(DetalheProduto.class.getName(), new DetalheProdutoDAO());
-		//daos.put(Carrinho.class.getName(), new CarrinhoDAO());
+		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		//daos.put(Pedido.class.getName(), new PedidoDAO());
 		//daos.put(Cupom.class.getName(), new CupomDAO());
 		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
@@ -518,7 +520,7 @@ public class Fachada implements IFachada {
 		regrasGeral.put(Usuario.class.getName(), regrasLogin);
 		regrasGeral.put(Produto.class.getName(), regrasProduto);
 		regrasGeral.put(DetalheProduto.class.getName(), regrasDetalheProduto);
-		//regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
+		regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
 		//regrasGeral.put(Pedido.class.getName(), regrasPedido);
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);

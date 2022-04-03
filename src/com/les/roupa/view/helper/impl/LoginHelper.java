@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.les.roupa.view.helper.IViewHelper;
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 
@@ -91,6 +93,15 @@ public class LoginHelper implements IViewHelper {
 				sessao.setAttribute("todosProdutos", usuario.getTodosProdutos());
 				sessao.setAttribute("cartoesCliente", usuario.getTodosCartoes());
 				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
+				
+				List<Produto> detalheProduto = new ArrayList<>();
+				// salva na sessão o objeto "detalheProduto", para quando for clicado no botão de "Adicionar",
+				// da tela do detalhes do produto, ele poder adicionar os produtos selecionados para o carrinho
+				sessao.setAttribute("itensCarrinho", detalheProduto);
+				
+				List<Cupom> cupons = new ArrayList<>();
+				// salva na sessão o objeto "cupons", que será calculado dentro da tela do carrinho
+				sessao.setAttribute("cupons", cupons);
 				
 				// Este apenas puxa apenas o cliente que sera alterado
 				sessao.setAttribute("clienteAlterado", usuario.getTodosClientes().get(0));

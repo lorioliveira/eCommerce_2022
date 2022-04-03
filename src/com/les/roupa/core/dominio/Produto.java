@@ -20,6 +20,8 @@ public class Produto extends EntidadeDominio {
 	private String status;
 	private String motivoStatus;
 	private String grupoPrecificacao;
+	private String quantidadeSelecionada;
+	
 	
 	private String alteraProduto;
 	private List<Produto> todosProdutos;
@@ -137,14 +139,14 @@ public class Produto extends EntidadeDominio {
     	this.alteraProduto = alteraProduto;
     }
     
-	public void setQuantidadeSelecionada(String string) {
-		// TODO Auto-generated method stub
-		
+    /* Quantidade Selecionada */
+    public String getQuantidadeSelecionada() {
+		return quantidadeSelecionada;
 	}
-	public String getQuantidadeSelecionada() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setQuantidadeSelecionada(String quantidadeSelecionada) {
+		this.quantidadeSelecionada = quantidadeSelecionada;
 	}
+
 	
 	// Lista de Todos os cartoes do Cliente cadastrados
 	public List<Produto> getTodosProdutos() {

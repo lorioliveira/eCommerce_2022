@@ -171,14 +171,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4"> 
-                            		<%
-		                              for(Produto p : produtos){
-                          			 %>
+                         	<%
+                            	for(Produto p : produtos){
+                       		 %>
+                          	<div class="col-md-4"> 		 
                                 <div class="product-item">
                                     <!-- Produto -->
                                     <div class="product-title">
-                                        <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><%=p.getNome() %></a>
+                                        <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><%=p.getNome() %></a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -188,20 +188,19 @@
                                         </div>
                                     </div>
                                     <div class="product-image">
-                                        <img src=<%=p.getFoto()%> alt="Product Image">
+                                        <img src=<%=p.getFoto()%> alt="Foto do Produto">
                                         <div class="product-action">
-                                            <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><i class="fa fa-eye"></i></a>
+                                            <a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-price">
                                         <h3><span>R$</span> <%=p.getPrecoVenda() %></h3>
                                     </div>
                                 </div>
-                                <%
-                                }
-                                %>
                             </div>
-                            
+                             <%
+                                }
+                              %>
                         </div>
                         <!-- Inicio de Páginação - indisponível no momento -->
                         <div class="col-md-12">
@@ -247,117 +246,9 @@
 <!-- OBSERVAÃÃO : PARA FAZER AS PROXIMAS PÃGINAS DE PRODUTOS, PODE USAR A MESMA IDEIA DO MENU CLICAVEL DA 'MINHA CONTA'
     VINCULAR O NUMERO COM O BOTAO, ASSIM, AO CLICAR NO 2 VAI "CARREGAR" OUTROS PRODUTOS E ASSIM POR DIANTE .... FIZ ISSO COM O ESTOQUE -->
 
-                       <!--  <div class="sidebar-widget widget-slider">
-                            <div class="sidebar-slider normal-slider">
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Product Name</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    Produto em Destaque 
-                                   <div class="product-image">
-                                        <a href="">
-                                        <img src="img/product-10.jpg" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>$</span></h3>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                                    </div> 
-                                </div>
-                                <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Product Name</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="img/product-9.jpg" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>$</span>99</h3>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                                    </div>
-                                </div>
-                                 <div class="product-item">
-                                    <div class="product-title">
-                                        <a href="#">Product Name</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-image">
-                                        <a href="">
-                                        <img src="img/product-8.jpg" alt="Product Image">
-                                        </a>
-                                        <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-price">
-                                        <h3><span>$</span>99</h3>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
-                        <!-- <div class="sidebar-widget brands">
-                            <h2 class="title">Our Brands</h2>
-                            <ul>
-                                <li><a href="#">Nulla </a><span>(45)</span></li>
-                                <li><a href="#">Curabitur </a><span>(34)</span></li>
-                                <li><a href="#">Nunc </a><span>(67)</span></li>
-                                <li><a href="#">Ullamcorper</a><span>(74)</span></li>
-                                <li><a href="#">Fusce </a><span>(89)</span></li>
-                                <li><a href="#">Sagittis</a><span>(28)</span></li>
-                            </ul>
-                        </div>
-                        <div class="sidebar-widget tag">
-                            <h2 class="title">Tags Cloud</h2>
-                            <a href="#">Lorem ipsum</a>
-                            <a href="#">Vivamus</a>
-                            <a href="#">Phasellus</a>
-                            <a href="#">pulvinar</a>
-                            <a href="#">Curabitur</a>
-                            <a href="#">Fusce</a>
-                            <a href="#">Sem quis</a>
-                            <a href="#">Mollis metus</a>
-                            <a href="#">Sit amet</a>
-                            <a href="#">Vel posuere</a>
-                            <a href="#">orci luctus</a>
-                            <a href="#">Nam lorem</a>
-                        </div>
-                    </div> -->
-                    <!-- Side Bar End -->
+                        
                 </div>
             </div>
         </div>

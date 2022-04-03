@@ -18,6 +18,7 @@ import com.les.roupa.view.command.impl.AlterarCommand;
 import com.les.roupa.view.command.impl.ConsultarCommand;
 import com.les.roupa.view.command.impl.ExcluirCommand;
 import com.les.roupa.view.command.impl.SalvarCommand;
+import com.les.roupa.view.helper.impl.CarrinhoHelper;
 import com.les.roupa.view.helper.impl.CartaoCreditoHelper;
 import com.les.roupa.view.helper.impl.ClienteHelper;
 import com.les.roupa.view.helper.impl.DetalheProdutoHelper;
@@ -56,7 +57,7 @@ public class ControllerServlet extends HttpServlet {
 		viewHelper.put("/eCommerce/cartao", new CartaoCreditoHelper());
 		viewHelper.put("/eCommerce/produto", new ProdutoHelper());
 		viewHelper.put("/eCommerce/detalheProduto", new DetalheProdutoHelper());
-		
+		viewHelper.put("/eCommerce/carrinho", new CarrinhoHelper());
 	}
 	
 	// Servlet Principal do sistema
