@@ -36,7 +36,12 @@
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
       
       //pega todos cartões do Cliente que estao na sessao
-      List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");        
+      List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
+      
+   	 //pega todos os pedidos do cliente logado
+      List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
+      
+      
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -110,6 +115,7 @@
          </div>
       </div>
       <!-- Fim do Breadcrumb -->
+      
       <!-- Inicio da Minha Conta -->
       <div class="my-account">
          <div class="container-fluid">
@@ -250,29 +256,21 @@
                                     <th>Ação</th>
                                  </tr>
                               </thead>
+                              <%
+                              	for(Pedido pedido : pedidos) {
+                              %>
                               <tbody>
                                  <tr>
-                                    <td>001</td>
-                                    <td>21 Jun 2021</td>
-                                    <td>$239</td>
-                                    <td>Em Processamento</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
-                                 </tr>
-                                 <tr>
-                                    <td>001</td>
-                                    <td>21 Jun 2021</td>
-                                    <td>$239</td>
-                                    <td>Em Processamento</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
-                                 </tr>
-                                 <tr>
-                                    <td>001</td>
-                                    <td>21 Jun 2021</td>
-                                    <td>$239</td>
-                                    <td>Em Processamento</td>
-                                    <td><a href="../JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><%=pedido.getId() %></td>
+                                    <td><%=pedido.getData_Cadastro() %></td>
+                                    <td>R$ <%=pedido.getTotalPedido()%></td>
+                                    <td><%=pedido.getStatus() %></td>
+                                    <td><a href="/eCommerce/cadastroPedido?id=<%= pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                               </tbody>
+                              <%
+                              	}
+                               %>
                            </table>
                         </div>
                      </div>

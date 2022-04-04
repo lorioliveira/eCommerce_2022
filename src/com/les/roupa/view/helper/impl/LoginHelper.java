@@ -93,6 +93,9 @@ public class LoginHelper implements IViewHelper {
 				sessao.setAttribute("todosProdutos", usuario.getTodosProdutos());
 				sessao.setAttribute("cartoesCliente", usuario.getTodosCartoes());
 				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
+				sessao.setAttribute("pedidosCliente", usuario.getPedidosCliente());
+				sessao.setAttribute("todosPedidos", usuario.getTodosPedidos());
+				
 				
 				List<Produto> detalheProduto = new ArrayList<>();
 				// salva na sessão o objeto "detalheProduto", para quando for clicado no botão de "Adicionar",

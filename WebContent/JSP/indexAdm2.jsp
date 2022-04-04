@@ -1,4 +1,6 @@
+<%@page import='com.les.roupa.core.dao.*'%>
 <%@page import='com.les.roupa.core.dominio.*'%>
+<%@page import='com.les.roupa.core.dao.impl.*'%>
 
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
@@ -32,17 +34,18 @@
 
         
     <%
+    ClienteDAO dao = new ClienteDAO();
     Usuario usuarioLogado = new Usuario();
     
-    // Pega o usuário em sessão - Cliente logado
+    // Pega o usuário em sessão - Cliente logado -> admin
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+    // Pega o ID daquele cliente logado -> admin
+    List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
-   // Lista com todos os clientes que estao na sessao
-    List<Cliente> todosClientes = (List<Cliente>)sessao.getAttribute("todosClientes");
+ 	 //pega todos os pedidos do cliente logado
+    List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
-   //Listar os produtos e os pedidos 
-   
     %>
 
 <body>
@@ -78,7 +81,7 @@
                         <a href="./JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                     </div>
                     <div class="navbar-nav ml-auto">
-	                </div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -137,14 +140,13 @@
                         <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-receipt"></i> Pedidos</a>
                         <a class="nav-link" id="products-nav" data-toggle="pill" href="#products-tab" role="tab"><i class="fa fa-barcode"></i> Produtos</a>
                         <a class="nav-link" id="coupons-nav" data-toggle="pill" href="#coupons-tab" role="tab"><i class="fa fa-tags"></i>Cupons</a>
-                        <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>				
+                        <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
+                   </div>
 					<!-- BOTAO SAIR -->
 					<form action="http://localhost:8080/eCommerce/login">
 						<button type="submit" class="btn col-md-12" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
 					</form>
-					</div>
-				</div>
-					
+                </div>
                 <div class="col-md-10">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel"
@@ -158,7 +160,8 @@
 
                         <!-- CLIENTES -->
                         <div class="tab-pane fade" id="clients-tab" role="tabpanel" aria-labelledby="clients-nav">
-                            <h4><i class="fas fa-user-friends"></i> Lista de Clientes</h4><br>
+                        <h4><i class="fas fa-user-friends"></i> Lista de Clientes</h4><br>
+                            <div class="row">
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
@@ -173,9 +176,16 @@
                                 </thead>
                                 
                                 <%
-                                for(Cliente c : todosClientes){
+                                Cliente cliente = new Cliente();
+                                
+                                // Listar apenas os Clientes (antes estava trazendo o próprio admin)
+                                List<EntidadeDominio> clientes = dao.consultarClienteByTipo(cliente);
+                                
+                                for(EntidadeDominio e : clientes){
 
-                                    //Pega os dados de usuario que esta dentro do cliente
+                                    // Aplicado o CAST para poder popular o cliente
+                                    Cliente c = (Cliente) e;
+                                    //Pega o usuario que esta dentro do cliente
                                     Usuario u = c.getUsuario();
                            		 %>
                                 <tbody>
@@ -186,13 +196,14 @@
                                         <td><%=c.getTelefone() %></td>
                                         <td><%=u.getEmail() %></td>
                                         <td><%=c.getStatus() %></td>
-                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a></td>
+                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                     </tr>
                                 </tbody>
                                 <%
                                 }
                                 %>
                             </table>
+                            </div>
                         </div>
 
                         <!-- PEDIDOS  -->
@@ -209,25 +220,24 @@
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
+                                    <%
+		                              	for(Pedido pedido : pedidos) {
+		                              %>
                                     <tbody>
                                         <tr>
-                                            <td>021</td>
-                                            <td>Lorena</td>
-                                            <td>$239</td>
-                                            <td>ENTREGA REALIZADA</td>
+                                            <td><%=pedido.getId() %></td>
+                                            <td><%=pedido.getIdCliente() %></td>
+                                            <td>R$ <%=pedido.getTotalPedido() %></td>
+                                            <td><%=pedido.getStatus() %></td>
                                             <td>
-                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"  data-tooltip="Visualizar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
+                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
                                                 
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>064</td>
-                                            <td>Juliana</td>
-                                            <td>$420</td>
-                                            <td>TROCA SOLICITADA</td>
-                                            <td><a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
-                                        </tr>
                                     </tbody>
+                                    <%
+		                              	}
+                                    %>
                                 </table>
                             </div>
                         </div>
@@ -263,7 +273,7 @@
                                                 <td>40</td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="top"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                             <tr>
                                                 <td>Blusa Manga Comprida</td>
@@ -274,7 +284,7 @@
                                                 <td>40</td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="top"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -307,12 +317,12 @@
                                             <td>Promocional</td>
                                             <td>R$ 20.00</td>
                                             <td>2022-01-02</td>
-                                            <td>2</td>
+                                            <td>Lorena</td>
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -320,7 +330,7 @@
                                             <td>Promocional</td>
                                             <td>R$ 20.00</td>
                                             <td>2022-01-02</td>
-                                            <td>2</td>
+                                            <td>Juliana</td>
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>

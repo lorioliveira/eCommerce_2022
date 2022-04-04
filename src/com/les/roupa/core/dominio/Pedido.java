@@ -1,128 +1,173 @@
 package com.les.roupa.core.dominio;
 
+import java.util.List;
+
 /**
  * Classe para representar o Pedido
  */
-public class Pedido extends EntidadeDominio {
-	private String precoTotalProduto;
-	private String precoFrete;
-	private String precoTotal;
-	private String statusPedido;
+public class Pedido extends EntidadeDominio{
+	private String total_itens;
+	private String total_frete;
+	private String total_pedido;
+	private String status;
 	private String id_cliente;
 	private String id_endereco;
-	private String cartao1;
-	private String valorCartao1;
-	private String cartao2;
-	private String valorCartao2;
-	private String desconto;
+	private String forma_pagamento;
+	private String id_cartao_1;
+	private String valor_cartao_1;
+	private String id_cartao_2;
+	private String valor_cartao_2;
+	private String total_cupons;
+	private String trocado;
+	private String todosItensTrocado;
+	private List<Produto> produtos;
+	private List<Cupom> cupons;
+	private String id_cliente_consulta;
+	private List<Pedido> pedidosCliente;
+	private String nome_cliente;
+	private String dar_baixa_estoque;
 	
-	private String alteraPedido;
+	private Endereco endereco;
 	
-	private Cliente cliente;
-	
-	/* Preco Total dos produtos - sem frete/desconto */
-	public String getPrecoTotalProduto() {
-		return precoTotalProduto;
+	public Endereco getEndereco() {
+		return endereco;
 	}
-	public void setPrecoTotalProduto(String precoTotalProduto) {
-		this.precoTotalProduto = precoTotalProduto;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
-	
-	/* Preco do Frete*/
-	public String getPrecoFrete() {
-		return precoFrete;
-	}
-	public void setPrecoFrete(String precoFrete) {
-		this.precoFrete = precoFrete;
-	}
+
+	private Pedido pedidoSelecionado;
 	
 	
-	/* Preco Total - com frete e desconto*/
-	public String getPrecoTotal() {
-		return precoTotal;
+	public String getTotalItens() {
+		return total_itens;
 	}
-	public void setPrecoTotal(String precoTotal) {
-		this.precoTotal = precoTotal;
+	public void setTotalItens(String total_itens) {
+		this.total_itens = total_itens;
 	}
-	
-	// STATUS DO PEDIDO = em processamento/ entregue/ cancelamento
-    public String getStatusPedido() {
-    	return statusPedido;
-    }
-    public void setStatusPedido(String statusPedido) {
-    	this.statusPedido = statusPedido;
-    }
-	
-    /* Id Cliente*/
+	public String getTotalFrete() {
+		return total_frete;
+	}
+	public void setTotalFrete(String total_frete) {
+		this.total_frete = total_frete;
+	}
+	public String getTotalPedido() {
+		return total_pedido;
+	}
+	public void setTotalPedido(String total_pedido) {
+		this.total_pedido = total_pedido;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getIdCliente() {
 		return id_cliente;
 	}
 	public void setIdCliente(String id_cliente) {
 		this.id_cliente = id_cliente;
 	}
-    
-	/* Id Endereco */
 	public String getIdEndereco() {
 		return id_endereco;
 	}
 	public void setIdEndereco(String id_endereco) {
 		this.id_endereco = id_endereco;
 	}
-	
-	/* Cartao 1 Usado no Pedido*/
-	public String getCartao1() {
-		return cartao1;
+	public String getFormaPagamento() {
+		return forma_pagamento;
 	}
-	public void setCartao1(String cartao1) {
-		this.cartao1 = cartao1;
+	public void setFormaPagamento(String forma_pagamento) {
+		this.forma_pagamento = forma_pagamento;
 	}
-	
-	/* Valor do Cartao 1 usado no Pedido*/
+	public String getIdCartao1() {
+		return id_cartao_1;
+	}
+	public void setIdCartao1(String id_cartao_1) {
+		this.id_cartao_1 = id_cartao_1;
+	}
 	public String getValorCartao1() {
-		return valorCartao1;
+		return valor_cartao_1;
 	}
-	public void setValorCartao1(String valorCartao1) {
-		this.valorCartao1 = valorCartao1;
+	public void setValorCartao1(String valor_cartao_1) {
+		this.valor_cartao_1 = valor_cartao_1;
 	}
-	
-	/* Cartao 2 Usado no Pedido*/
-	public String getCartao2() {
-		return cartao2;
+	public String getIdCartao2() {
+		return id_cartao_2;
 	}
-	public void setCartao2(String cartao2) {
-		this.cartao2 = cartao2;
+	public void setIdCartao2(String id_cartao_2) {
+		this.id_cartao_2 = id_cartao_2;
 	}
-	
-	/* Valor do Cartao 2 Usado no Pedido*/
 	public String getValorCartao2() {
-		return valorCartao2;
+		return valor_cartao_2;
 	}
-	public void setValorCartao2(String valorCartao2) {
-		this.valorCartao2 = valorCartao2;
+	public void setValorCartao2(String valor_cartao_2) {
+		this.valor_cartao_2 = valor_cartao_2;
+	}
+	public String getTotalCupons() {
+		return total_cupons;
+	}
+	public void setTotalCupons(String total_cupons) {
+		this.total_cupons = total_cupons;
+	}
+	public String getTrocado() {
+		return trocado;
+	}
+	public void setTrocado(String trocado) {
+		this.trocado = trocado;
+	}
+	public String getTodosItensTrocado() {
+		return todosItensTrocado;
+	}
+	public void setTodosItensTrocado(String todosItensTrocado) {
+		this.todosItensTrocado = todosItensTrocado;
 	}
 	
-	/* Preco do Desconto - CUPOM*/
-	public String getDesconto() {
-		return desconto;
+	public List<Produto> getProdutos() {
+        return produtos;
+    }
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+    
+	public List<Cupom> getCupons() {
+        return cupons;
+    }
+    public void setCupons(List<Cupom> cupons) {
+        this.cupons = cupons;
+    }
+    
+    public String getIdClienteConsulta() {
+		return id_cliente_consulta;
 	}
-	public void setDesconto(String desconto) {
-		this.desconto = desconto;
+	public void setIdClienteConsulta(String id_cliente_consulta) {
+		this.id_cliente_consulta = id_cliente_consulta;
 	}
 	
-	/* Cliente */
-	public Cliente getCliente() {
-		return cliente;
+	public List<Pedido> getPedidosCliente() {
+        return pedidosCliente;
+    }
+    public void setPedidosCliente(List<Pedido> pedidosCliente) {
+        this.pedidosCliente = pedidosCliente;
+    }
+    
+    public String getNomeCliente() {
+		return nome_cliente;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNomeCliente(String nome_cliente) {
+		this.nome_cliente = nome_cliente;
 	}
 	
-
-	/* Altera Pedido */
-	public String getAlteraPedido() {
-		return alteraPedido;
+	public String getDarBaixaEstoque() {
+		return dar_baixa_estoque;
 	}
-	public void setAlteraPedido(String alteraPedido) {
-		this.alteraPedido = alteraPedido;
+	public void setDarBaixaEstoque(String dar_baixa_estoque) {
+		this.dar_baixa_estoque = dar_baixa_estoque;
+	}
+	
+	// Metodo
+	public void ValidarPrimieraCompra() {
+		
 	}
 }

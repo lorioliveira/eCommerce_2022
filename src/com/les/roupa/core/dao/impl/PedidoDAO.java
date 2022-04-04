@@ -2,27 +2,32 @@ package com.les.roupa.core.dao.impl;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-//import java.sql.SQLException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Cupom;
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Estoque;
+import com.les.roupa.core.dominio.ItemPedido;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 
 public class PedidoDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para SALVAR o Pedido
+	 * Metodo para salvar o Pedido
 	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		
 		String sql = "insert into pedido "+
-				"(precoTotalProduto,precoFrete,precoTotal,statusPedido,id_cliente,id_endereco,"
-				+ "cartao1,valorCartao1,cartao2,valorCartao2,desconto,dt_pedido) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+				"(total_itens, total_frete, total_pedido, status, id_cliente, id_endereco, forma_pagamento, id_cartao_1, valor_cartao_1,"
+				+ " id_cartao_2, valor_cartao_2, total_cupons, trocado, dt_cadastro)" +
+				"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			Pedido pedido = (Pedido) entidade;
@@ -31,116 +36,259 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			// seta os valores
-			
-			stmt.setString(1,pedido.getPrecoTotalProduto());
-			stmt.setString(2,pedido.getPrecoFrete());
-			stmt.setString(3,pedido.getPrecoTotal());
-			stmt.setString(4,pedido.getStatusPedido());
-			stmt.setString(5,pedido.getIdCliente());
-			stmt.setString(6,pedido.getIdEndereco());
-			stmt.setString(7,pedido.getCartao1());
-			stmt.setString(8,pedido.getValorCartao1());
-			stmt.setString(9,pedido.getCartao2());
-			stmt.setString(10,pedido.getValorCartao2());
-			stmt.setString(11,pedido.getDesconto());
-			stmt.setString(12,pedido.getDt_cadastro());
-			
+			stmt.setString(1, pedido.getTotalItens());
+			stmt.setString(2, pedido.getTotalFrete());
+			stmt.setString(3, pedido.getTotalPedido());
+			stmt.setString(4, "EM PROCESSAMENTO");
+			stmt.setString(5, pedido.getIdCliente());
+			stmt.setString(6, pedido.getIdEndereco());
+			stmt.setString(7, pedido.getFormaPagamento());
+			stmt.setString(8, pedido.getIdCartao1());
+			stmt.setString(9, pedido.getValorCartao1());
+			stmt.setString(10, pedido.getIdCartao2());
+			stmt.setString(11, pedido.getValorCartao2());
+			stmt.setString(12, pedido.getTotalCupons());
+			stmt.setString(13, pedido.getTrocado());
+			stmt.setString(14, pedido.getData_Cadastro());
 			
 			// executa
 			stmt.execute();
 			stmt.close();
+			
+			if (pedido.getDarBaixaEstoque() == null) {
+				// salva os itens do Pedido e da baixa no Estoque
+				salvarItensPedidoAndBaixaEstoque(pedido.getProdutos(), pedido.getCupons());
+			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	} // Salvar
 	
 	/**
-	 * Metodo para ALTERAR
+	 * Metodo para alterar o Pedido
 	 * @param entidade
 	 */
-	public void alterar (EntidadeDominio entidade) {
-		openConnection();
+	@Override
+	public void alterar(EntidadeDominio entidade) throws SQLException {
+		// TODO Auto-generated method stub
 		
-		String sql = "update pedido set statusPedido =? where id =?";
-		
-		try {
-			Pedido pedido = (Pedido) entidade;
-			
-			
-			if(pedido.getAlteraPedido().contentEquals("1")) {
-				PreparedStatement stmt = connection.prepareStatement(sql);
-				
-				stmt.setString(1,pedido.getStatusPedido());
-				stmt.setString(2,pedido.getId());
-				
-				
-				stmt.execute();
-				stmt.close();
-			}else {
-				PreparedStatement stmt = connection.prepareStatement(sql);
-				stmt.close();
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	} // Alterar
-	
-
 	
 	
 	/**
-	 * Metodo para EXCLUIR
+	 * Metodo para excluir o Pedido
+	 * @param entidade
 	 */
-	public void excluir (EntidadeDominio entidade) {
-		openConnection();
+	@Override
+	public void excluir(EntidadeDominio entidade) throws SQLException {
+		// TODO Auto-generated method stub
 		
 	} // Excluir
 	
-
+	
 	/**
-	 * Metodo para Listar TODOS os Pedidos 
+	 * Metodo para consultar o Pedido
 	 * @param entidade
-	 * @return
 	 */
-	public List<EntidadeDominio> consultar (EntidadeDominio entidade){
+	@Override
+	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
 		openConnection();
 		try {
-			List<EntidadeDominio> pedidos = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from pedido");
-			ResultSet rs = stmt.executeQuery();
+			Pedido pedidoEntidade = (Pedido) entidade;
+			ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
+			ClienteDAO clienteDAO = new ClienteDAO();
+			List<Pedido> pedidos = new ArrayList<>();
+			List<EntidadeDominio> Listpedidos = new ArrayList<>();
 			
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id = ?");
+			stmt.setString(1, pedidoEntidade.getId());
+			ResultSet rs = stmt.executeQuery();
+
 			while (rs.next()) {
-				// criando o objeto Produto
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
 				
-				Pedido pedido = new Pedido();
-								
-				pedido.setId(rs.getString("id"));
-				pedido.setPrecoTotalProduto(rs.getString("precoTotalProduto"));
-				pedido.setPrecoFrete(rs.getString("precoFrete"));
-				pedido.setPrecoTotal(rs.getString("precoTotal"));
-				pedido.setStatusPedido(rs.getString("statusPedido"));
-				pedido.setIdCliente(rs.getString("id_cliente"));
-				pedido.setIdEndereco(rs.getString("id_endereco"));
-				pedido.setCartao1(rs.getString("cartao1"));
-				pedido.setValorCartao1(rs.getString("valorCartao1"));
-				pedido.setCartao2(rs.getString("cartao2"));
-				pedido.setValorCartao2(rs.getString("valorCartao2"));
-				pedido.setDesconto(rs.getString("desconto"));
-				pedido.setDt_cadastro(rs.getString("dt_pedido"));
-				
-				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
 				
 				// adicionando o objeto à lista
-				pedidos.add(pedido);
+				pedidos.add(pedidoItem);
 			}
+			
+			List<Endereco> enderecosCliente = new ArrayList<>();
+			stmt = connection.prepareStatement("select * from endereco where id = ?");
+			stmt.setString(1, pedidos.get(0).getIdEndereco());
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				// criando o objeto Endereco
+				Endereco endAltera = new Endereco();
+				
+				endAltera.setId(rs.getString("id"));
+				endAltera.setCep(rs.getString("cep"));
+				endAltera.setLogradouro(rs.getString("logradouro"));
+				endAltera.setNumero(rs.getString("numero"));
+				endAltera.setBairro(rs.getString("bairro"));
+				endAltera.setCidade(rs.getString("cidade"));
+				endAltera.setEstado(rs.getString("estado"));
+				endAltera.setPais(rs.getString("pais"));
+				endAltera.setTipoResidencia(rs.getString("tipoResidencia"));
+				endAltera.setObservacoes(rs.getString("observacoes"));
+				endAltera.setTipoEnd(rs.getString("tipoEndereco"));
+				endAltera.setData_Cadastro(rs.getString("data_Cadastro"));
+									
+				// adicionando o objeto a lista
+				enderecosCliente.add(endAltera);
+			}
+			
+			
+			// se achou algum pedido do Cliente, também pesquisa se todos os itens desse pedido foi trocado,
+			// para poder verificar na tela de "lista-pedidos-scriptletCLIENTE.jsp".
+			if (pedidos.size() > 0) {
+				for(Pedido order: pedidos) {
+					List<ItemPedido> pedidoComTodosOsItensJaTrocados = itemPedidoDAO.consultarItemPedidoByIdPedidoAndTrocadoSim(order.getId());
+					
+					if (pedidoComTodosOsItensJaTrocados.isEmpty()) {
+						order.setTodosItensTrocado("nao");
+					}
+					else {
+						order.setTodosItensTrocado("sim");
+					}
+				}
+			}
+			
+			// para cada pedido, será consultado o nome do Cliente
+			if (pedidos.size() > 0) {
+				for(Pedido order: pedidos) {
+					List<Cliente> cliente = clienteDAO.consultarClienteById(order.getIdCliente());
+					
+					order.setNomeCliente(cliente.get(0).getNome());
+					order.setIdEndereco(null);
+				}
+			}
+			
+			// sala a REFERENCIA de todos os Pedidos em "novoPedido"
+			Pedido novoPedido =  new Pedido();
+			novoPedido.setPedidosCliente(pedidos);
+			novoPedido.setEndereco(enderecosCliente.get(0));
+			
+			
+			// depois faz o CAST da lista de "novoPedido" para "EntidadeDominio",
+			// para poder retornar uma lista de "EntidadeDominio"
+			Listpedidos.add(novoPedido);
+			
+			rs.close();
+			stmt.close();
+			return Listpedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Consultar
+	
+	
+	/**
+	 * Metodo para consultar o Pedido por ID
+	 */
+	public List<Pedido> consultarPedidoById (String idPedido) {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id=?");
+			stmt.setString(1, idPedido);
+			ResultSet rs = stmt.executeQuery();
+			
+			List<Pedido> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
 			rs.close();
 			stmt.close();
 			return pedidos;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Listar TODOS os Pedidos
-
+				
+	} // Consultar o Pedido por ID
+	
+	
+	/**
+	 * Metodo para consultar o Pedido por ID do Cliente
+	 */
+	public List<Pedido> consultarPedidoByIdCliente (String idCliente) {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id_cliente=?");
+			stmt.setString(1, idCliente);
+			ResultSet rs = stmt.executeQuery();
+			
+			List<Pedido> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
+			rs.close();
+			stmt.close();
+			return pedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Consultar o Pedido por ID do Cliente
+	
 	
 	/**
 	 * Metodo para Listar o ultimo Pedido cadastrado no sistema
@@ -156,24 +304,26 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			
 			while (rs.next()) {
 				// criando o objeto Pedido
-				Pedido pedido = new Pedido();
+				Pedido pedidoItem = new Pedido();
 				
-				pedido.setId(rs.getString("id"));
-				pedido.setPrecoTotalProduto(rs.getString("precoTotalProduto"));
-				pedido.setPrecoFrete(rs.getString("precoFrete"));
-				pedido.setPrecoTotal(rs.getString("precoTotal"));
-				pedido.setStatusPedido(rs.getString("statusPedido"));
-				pedido.setIdCliente(rs.getString("id_cliente"));
-				pedido.setIdEndereco(rs.getString("id_endereco"));
-				pedido.setCartao1(rs.getString("cartao1"));
-				pedido.setValorCartao1(rs.getString("valorCartao1"));
-				pedido.setCartao2(rs.getString("cartao2"));
-				pedido.setValorCartao2(rs.getString("valorCartao2"));
-				pedido.setDesconto(rs.getString("desconto"));
-				pedido.setDt_cadastro(rs.getString("dt_pedido"));
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
 				
 				// adicionando o objeto à lista
-				pedidos.add(pedido);
+				pedidos.add(pedidoItem);
 			}
 			rs.close();
 			stmt.close();
@@ -184,100 +334,262 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	} // Listar ultimo Pedido cadastrado
 	
 	
-
 	/**
-	 * Metodo para Listar Pedido por ID do Cliente
+	 * Metodo para alterar a trocação do Pedido
 	 * @param entidade
-	 * @return
 	 */
-	public List<Pedido> consultarPedidoByIdCliente (String idCliente){
+	public void alterarTrocacaoPedido (String idPedido) {
 		openConnection();
+		
+		String sql = "update pedido set " +
+					 "trocado='sim' " +
+					 "where id=?";
+		
 		try {
-			List<Pedido> pedidos = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id_cliente = ? ");
-			stmt.setString(1, idCliente);
-			ResultSet rs = stmt.executeQuery();
+			PreparedStatement stmt = connection.prepareStatement(sql);
 			
-			while (rs.next()) {
-				// criando o objeto Produto
-				
-				Pedido pedido = new Pedido();
-								
-				pedido.setId(rs.getString("id"));
-				pedido.setPrecoTotalProduto(rs.getString("precoTotalProduto"));
-				pedido.setPrecoFrete(rs.getString("precoFrete"));
-				pedido.setPrecoTotal(rs.getString("precoTotal"));
-				pedido.setStatusPedido(rs.getString("statusPedido"));
-				pedido.setIdCliente(rs.getString("id_cliente"));
-				pedido.setIdEndereco(rs.getString("id_endereco"));
-				pedido.setCartao1(rs.getString("cartao1"));
-				pedido.setValorCartao1(rs.getString("valorCartao1"));
-				pedido.setCartao2(rs.getString("cartao2"));
-				pedido.setValorCartao2(rs.getString("valorCartao2"));
-				pedido.setDesconto(rs.getString("desconto"));
-				pedido.setDt_cadastro(rs.getString("dt_pedido"));
-				
-				
-				
-				// adicionando o objeto à lista
-				pedidos.add(pedido);
-			}
-			rs.close();
-			stmt.close();
-			return pedidos;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	} // Listar pedido por ID do cliente
-
-	
-	
-
-	/**
-	 * Metodo para Listar Pedido por ID
-	 * @param entidade
-	 * @return
-	 */
-	public List<Pedido> consultarPedidoById (String idPedido){
-		openConnection();
-		try {
-			List<Pedido> pedidos = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id = ? ");
 			stmt.setString(1, idPedido);
+			
+			stmt.execute();
+			stmt.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	} // Alterar trocação do Pedido
+	
+	
+	/**
+	 * Metodo para alterar o status do Pedido
+	 * @param entidade
+	 */
+	public void alterarStatusPedido (String idPedido, String status) {
+		openConnection();
+		
+		String sql = "update pedido set " +
+					 "status=? " +
+					 "where id=?";
+		
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			
+			stmt.setString(1, status);
+			stmt.setString(2, idPedido);
+			
+			stmt.execute();
+			stmt.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	} // Alterar o status do Pedido
+	
+	
+	/**
+	 * Metodo para consultar os 3 clientes com maiores compras
+	 */
+	public List<Pedido> consultar3ClientesMaiorCompra () {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select id_cliente, count(id_cliente) as quantidade_comprado from pedido group by id_cliente order by count(id_cliente) desc LIMIT 3;");
 			ResultSet rs = stmt.executeQuery();
 			
+			List<Pedido> pedidos = new ArrayList<>();
 			while (rs.next()) {
-				// criando o objeto Produto
-				
-				Pedido pedido = new Pedido();
-								
-				pedido.setId(rs.getString("id"));
-				pedido.setPrecoTotalProduto(rs.getString("precoTotalProduto"));
-				pedido.setPrecoFrete(rs.getString("precoFrete"));
-				pedido.setPrecoTotal(rs.getString("precoTotal"));
-				pedido.setStatusPedido(rs.getString("statusPedido"));
-				pedido.setIdCliente(rs.getString("id_cliente"));
-				pedido.setIdEndereco(rs.getString("id_endereco"));
-				pedido.setCartao1(rs.getString("cartao1"));
-				pedido.setValorCartao1(rs.getString("valorCartao1"));
-				pedido.setCartao2(rs.getString("cartao2"));
-				pedido.setValorCartao2(rs.getString("valorCartao2"));
-				pedido.setDesconto(rs.getString("desconto"));
-				pedido.setDt_cadastro(rs.getString("dt_pedido"));
-				
-				
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+
+				pedidoItem.setTotalPedido(rs.getString("quantidade_comprado"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
 				
 				// adicionando o objeto à lista
-				pedidos.add(pedido);
+				pedidos.add(pedidoItem);
 			}
+				
 			rs.close();
 			stmt.close();
 			return pedidos;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Listar pedido por ID 
+				
+	} // Consultar os 3 clientes com maiores compras
+	
+	
+	/**
+	 * Metodo para consultar o Pedido por ID do Cliente, com o retorno de uma lista de EntidadeDominio
+	 * @param entidade
+	 * @return
+	 */
+	public List<EntidadeDominio> consultarPedidoByIdClienteEntidadeDominio (String IdCliente) {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id_cliente=?");
+			stmt.setString(1, IdCliente);
+			ResultSet rs = stmt.executeQuery();
+			
+			List<EntidadeDominio> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
+			rs.close();
+			stmt.close();
+			return pedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Consultar o Pedido por ID do Cliente, com o retorno de uma lista de EntidadeDominio
+	
+	
+	/**
+	 * Metodo para Listar os Pedidos pela Pesquisa por Filtro
+	 * @param entidade
+	 * @return
+	 */
+	public List<EntidadeDominio> consultarPedidoPesquisaByFiltro (EntidadeDominio entidade, String IdCliente, String StatusPedido) {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id_cliente=? and status=?");
+			stmt.setString(1, IdCliente);
+			stmt.setString(2, StatusPedido);
+			ResultSet rs = stmt.executeQuery();
+			
+			List<EntidadeDominio> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
+			rs.close();
+			stmt.close();
+			return pedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Listar os Pedidos pela Pesquisa por Filtro
+	
+	
+	/**
+	 * Metodo para Salvar itens do Pedido e dar baixa no Estoque
+	 * @param entidade
+	 * @return
+	 */
+	public void salvarItensPedidoAndBaixaEstoque(List<Produto> produtos, List<Cupom> cupons) {
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		ItemPedidoDAO pedidoItemDAO = new ItemPedidoDAO();
+		//EstoqueDAO estoqueDAO = new EstoqueDAO();
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		//CupomDAO cupomDAO = new CupomDAO();
+		Pedido pedido = new Pedido();
+		ItemPedido item_pedido = new ItemPedido();
+		Estoque estoque = new Estoque();
+		List<Produto> produtoAtualizado = new ArrayList<>();
+		int quantidadeFinal;
+		
+		// consulta o ultimo Pedido cadastrado para poder pegar o ID do Pedido,
+		// para poder salvar na tabela "pedido_item"
+		List<Pedido> ultimoPedido = pedidoDAO.consultarUltimoPedidoCadastrado(pedido);
+		
+		for(Cupom cupom : cupons) {
+			// altera o Cupom que foi selecionado no Pedido,
+			// para o status que "já foi utilizado",
+			// altera no banco a tabela "cupom" da coluna "utilizado" para "sim".
+			//cupomDAO.alterarUtilizacaoCupom(cupom.getId());
+		}
+		
+		// após salvar o pedido, será salvo os itens do pedido,
+		// faz um laço de repetição com os produtos selecionado da Sessão,
+		// para poder salvar na tabela "pedido_item"
+		for (int i = 0; i< produtos.size(); i++) {
+			item_pedido.setProduto(produtos.get(i));
+			item_pedido.setIdPedido(ultimoPedido.get(0).getId());
+			item_pedido.setTrocado("nao");
+			item_pedido.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
+			
+			// salva o item do pedido
+			pedidoItemDAO.salvar(item_pedido);
+			
+			// após salvar o item do pedido, o mesmo será dado a baixa no Estoque,
+			// faz a conta de subtração da quantidade selecionada, menos a quantidade que já tinha no produto
+			quantidadeFinal = (Integer.parseInt(produtos.get(i).getQuantidadeSelecionada()) - Integer.parseInt(produtos.get(i).getQuantidadeSelecionada()));
+			
+			// altera a quantidade do estoque do Produto (tabela produto)
+			//estoqueDAO.alterarQuantidadeProduto(Integer.toString(quantidadeFinal), produtos.get(i).getId());
+			
+			// faz a consulta pelo ID do produto do indice "i" do laço de repetição, 
+			// para verificar a quantidade do estoque atualizado (após a subtração feita a cima),
+			// se a quantidade for igual a ZERO, o produto será "inativado"
+			produtoAtualizado = produtoDAO.consultarProdutoById(produtos.get(i).getId());
+			/*
+			 * if(produtoAtualizado.get(0).getQuantidade().equals("0")) { String
+			 * motivo_inativacao; motivo_inativacao = " - SEM ESTOQUE";
+			 * 
+			 * // faz a concatenação da obeservação com a mensagem "SEM ESTOQUE"
+			 * produtoAtualizado.get(0).setMotivoStatus(produtoAtualizado.get(0).
+			 * getMotivoStatus() + motivo_inativacao);
+			 * 
+			 * estoqueDAO.inativaProdutoSemEstoque(produtoAtualizado.get(0).getId(),
+			 * produtoAtualizado.get(0).getMotivoStatus()); }
+			 */
+			
+			// salva os atributos do ultimo Pedido cadastrado no Estoque, 
+			// pra poder dar a saida no Estoque (tabela estoque)
+			/*
+			 * estoque.setIdProduto(produtos.get(i).getId()); estoque.setTipo("saida");
+			 * estoque.setQuantidadeEntradaSaida(produtos.get(i).getQuantidadeSelecionada())
+			 * ; estoque.setValorCusto(produtos.get(i).getPrecoDeCompra());
+			 * estoque.setFornecedor("Saida no Estoque pelo Pedido: " +
+			 * ultimoPedido.get(0).getId());
+			 * estoque.setDtEntrada(ultimoPedido.get(0).getData_Cadastro());
+			 * estoque.setQuantidadeFinal(produtoAtualizado.get(0).getQuantidade());
+			 * estoque.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
+			 * 
+			 * // cria a saida do produto no "Estoque" estoqueDAO.salvar(estoque);
+			 */
+		}
+		
+	} // Salvar itens do Pedido e dar baixa no Estoque
 	
 }
-
-	

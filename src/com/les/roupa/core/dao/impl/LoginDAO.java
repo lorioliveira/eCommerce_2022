@@ -10,6 +10,7 @@ import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Usuario;
 
@@ -287,12 +288,76 @@ public class LoginDAO extends AbstractJdbcDAO {
 					todosClientes.add(cliente);
 				}
 				
+				//Listar todos os pedidos - Opcao como ADMIN
+				List<Pedido> todosPedidos = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from pedido");
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Pedido
+					Pedido pedidoItem = new Pedido();
+					
+					pedidoItem.setId(rs.getString("id"));
+					pedidoItem.setTotalItens(rs.getString("total_itens"));
+					pedidoItem.setTotalFrete(rs.getString("total_frete"));
+					pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+					pedidoItem.setStatus(rs.getString("status"));
+					pedidoItem.setIdCliente(rs.getString("id_cliente"));
+					pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+					pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+					pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+					pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+					pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+					pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+					pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+					pedidoItem.setTrocado(rs.getString("trocado"));
+					pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+					
+					// adicionando o objeto à lista
+					todosPedidos.add(pedidoItem);
+				}
+				
+				//Listar todos os pedidos 
+				List<Pedido> pedidosCliente = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from pedido where id_cliente = ?");
+				stmt.setString(1, usuarios.get(0).getId());
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Pedido
+					Pedido pedidoItem = new Pedido();
+					
+					pedidoItem.setId(rs.getString("id"));
+					pedidoItem.setTotalItens(rs.getString("total_itens"));
+					pedidoItem.setTotalFrete(rs.getString("total_frete"));
+					pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+					pedidoItem.setStatus(rs.getString("status"));
+					pedidoItem.setIdCliente(rs.getString("id_cliente"));
+					pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+					pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+					pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+					pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+					pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+					pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+					pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+					pedidoItem.setTrocado(rs.getString("trocado"));
+					pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+					
+					// adicionando o objeto à lista
+					pedidosCliente.add(pedidoItem);
+				}
+				
+				
+				
+				
 				//TODAS AS LISTAS
 				Usuario novoUsuario = (Usuario) usuarios.get(0);
 				novoUsuario.setEnderecosCliente(enderecos);
 				novoUsuario.setTodosClientes(todosClientes);
 				novoUsuario.setTodosCartoes(cartoes);
 				novoUsuario.setTodosProdutos(todosProdutos);
+				novoUsuario.setTodosPedidos(todosPedidos);
+				novoUsuario.setPedidosCliente(pedidosCliente);
 				
 				
 			rs.close();

@@ -2451,6 +2451,12 @@ h2 {
 	position: static;
 }
 
+.btn_NovoEndCarrinho{
+	margin:0 5px 10px 72%;
+	 top: 34px;
+	 position: absolute;
+}
+
 .container-novoEndereco{
     padding-left: 400px;
     align-items: center;
@@ -2719,6 +2725,12 @@ h2 {
     /* margin-left: 60%; */
     border-radius: 5px;
 }
+.btn_cadCartao{
+	 margin:0 5px 10px 75%;
+	 top: 80px;
+	 position: absolute;
+}
+
 
 /* MODAL - TESTE */
 
@@ -2788,6 +2800,18 @@ h2 {
 }
 .endereco_aDireita{
 	text-align: right;
+}
+
+.btnFinalizarCompra{
+	width: 100%;
+	background-color: #FF6F61;
+	color: #FFFFFF;
+	height: 60px;
+	font-size: 1.5rem;
+}
+.btnFinalizarCompra:hover{
+	background-color: #24be0e;
+	border: 1px solid #24be0e;
 }
 
 /************* TOOLTIP **************/
@@ -2897,4 +2921,11 @@ h2 {
 .telaMensagem{
 	font-size: 20px;
 	text-align: center;
+}
+
+
+
+/*********** DESCONTO - CARRINHO *****************/
+.desconto{
+	color: red;
 }

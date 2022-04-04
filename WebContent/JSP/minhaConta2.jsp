@@ -34,9 +34,13 @@
       
       //pega todos enderecos que estao na sessao
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
-   	
-      //pega todos cartoes que estao na sessao
+      
+      //pega todos cartões do Cliente que estao na sessao
       List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
+      
+    //pega todos os pedidos do cliente logado
+      List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
+      
       
       %>
    <body>
@@ -166,16 +170,15 @@
                               <input type="hidden" name="alteraCliente" value="1"/>
                               <input type="hidden" name="id" value="<%=usuarioLogado.getId()%>"/>
                               <input type="hidden" name="senha" accesskey="S" value="<%=usuarioLogado.getSenha() %>" />
-                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getConfirmarSenha() %>"/>
+                              <input type="hidden" name="confirmarSenha" value="<%=usuarioLogado.getSenha() %>"/>
                               <input type="hidden" name="genero" value="<%=usuarioLogado.getGenero() %> "> 
                            </div>
                         </form>
                      </div>
                      <!-- MEUS ENDEREÇOS  -->
                      <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                        <h4>Meus Endereços</h4>
-                        <button type="submit" class="btn ml-auto nav-link btn_NovoEndereco"><a href="./JSP/novoendereco.jsp"><i class="fa fa-map-marker-alt"></i> Novo</a></button>
-                        </br>
+                        <h4>Meus Endereços   <a href="./JSP/novoendereco.jsp"><button type="submit" class="btn btn_NovoEndereco"><i class="fa fa-map-marker-alt"></i> Novo</button></a>
+                        </h4></br>
                         <div class="row">
                            <%
                               for(Endereco e : enderecos){
@@ -200,48 +203,48 @@
                         </div>
                      </div>
                      <!-- FORMA DE PAGAMENTO - CARTÕES -->
-                     <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                        <h4>Meus Cartões <a href="./JSP/novocartao.jsp"><button class="btn ml-auto nav-link btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </a></button></h4>
+                      <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                        <h4>Meus Cartões <a href="./JSP/novocartao.jsp"><button class="btn btn_NovoCartao"><i class="fa fa-credit-card"></i> Novo </button></a></h4>
+                        <br>
                         <table class="table table-bordered">
-                           <thead class="thead-dark">
+                                <thead class="thead-dark">
                               <tr>
                                  <th>Bandeira</th>
                                  <th>Nº Cartão</th>
                                  <th>Titular</th>
                                  <th>Validade</th>
-                                 <th>Preferencial?</th>
+                                 <th>Cartão Prefer?</th>
                                  <th>Ação</th>
                               </tr>
                            </thead>
-                           
+                          <tbody>
                            <%
                               for(CartaoCredito c : cartoes){
                             	  
-                           	  // Aplicado o CAST 
-                              //CartaoCredito c = (CartaoCredito) e;
+                            	// Aplicado o CAST 
+                                //CartaoCredito c = (CartaoCredito) e;
                            %>
-                           <tbody>
                               <tr>
-                                 <td><%=c.getBandeira() %></td>
+                                  <td><%=c.getBandeira() %></td>
                                  <td><%=c.getNumCartao() %></td>
                                  <td><%=c.getNome() %></td>
                                  <td><%=c.getValidade() %></td>
                                  <td><%=c.getPreferencial() %></td>
                                  <td>
-	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn"  data-tooltip="Editar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
-	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn"  data-tooltip="Excluirr" data-flow="bottom"><i class="fa fa-trash"></i></button></a>
-	                             </td>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash"></i></button></a>
+	                             </td> 
                               </tr>
+                            <%
+                             	}
+                           	%>
                            </tbody>
-                           <%
-                              }
-                           %>
                         </table>
                      </div>
                      <!-- MEUS PEDIDOS -->
                      <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                         <div class="table-responsive">
-                           <h4>Meus Pedidos</h4>
+                           <h4>Meus Pedidos</h4><br>
                            <table class="table table-bordered">
                               <thead class="thead-dark">
                                  <tr>
@@ -252,22 +255,21 @@
                                     <th>Ação</th>
                                  </tr>
                               </thead>
+                              <%
+                              	for(Pedido pedido : pedidos) {
+                              %>
                               <tbody>
                                  <tr>
-                                    <td>001</td>
-                                    <td>21 Jun 2021</td>
-                                    <td>$239</td>
-                                    <td>Em Processamento</td>
-                                    <td><a href="./JSP/detalhePedido.jsp"><button class="btn" data-tooltip="Visualizar" data-flow="bottom"><i class="fa fa-eye"></i></button></a></td>
-                                 </tr>
-                                 <tr>
-                                    <td>001</td>
-                                    <td>28 Ago 2021</td>
-                                    <td>$99</td>
-                                    <td>Aprovado</td>
-                                    <td><a href="./JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><%=pedido.getId() %></td>
+                                    <td><%=pedido.getData_Cadastro() %></td>
+                                    <td>R$ <%=pedido.getTotalPedido()%></td>
+                                    <td><%=pedido.getStatus() %></td>
+                                    <td><a href="./JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                               </tbody>
+                              <%
+                              	}
+                               %>
                            </table>
                         </div>
                      </div>

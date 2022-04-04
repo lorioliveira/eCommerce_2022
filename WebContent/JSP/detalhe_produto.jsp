@@ -237,7 +237,7 @@
 	                                                <button class="btn btnAdicionar" name="operacao" value="SALVAR"><i class="fa fa-shopping-bag"></i> Adicionar</button>
 	                                            </div>
 	                                        </div>
-	                                        	<!-- ID do Cliente -->
+	                                        	<!-- ID do Produto -->
 												<input type="hidden" name="idProduto" id="idProduto" value="<%=produtoSelecionado.getId() %>">
                                         </form>
                                     </div>

@@ -12,6 +12,7 @@ import com.les.roupa.core.dao.impl.ClienteDAO;
 import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
+import com.les.roupa.core.dao.impl.PedidoDAO;
 import com.les.roupa.core.dao.impl.ProdutoDAO;
 import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.Carrinho;
@@ -20,6 +21,7 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
@@ -249,10 +251,10 @@ public class Fachada implements IFachada {
 		daos.put(Produto.class.getName(), new ProdutoDAO());
 		daos.put(DetalheProduto.class.getName(), new DetalheProdutoDAO());
 		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
-		//daos.put(Pedido.class.getName(), new PedidoDAO());
+		daos.put(Pedido.class.getName(), new PedidoDAO());
 		//daos.put(Cupom.class.getName(), new CupomDAO());
 		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
-		//daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
+		//daos.put(PedioTroca.class.getName(), new PedidoTrocaDAO());
 		//daos.put(Estoque.class.getName(), new EstoqueDAO());
 		//daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
@@ -521,7 +523,7 @@ public class Fachada implements IFachada {
 		regrasGeral.put(Produto.class.getName(), regrasProduto);
 		regrasGeral.put(DetalheProduto.class.getName(), regrasDetalheProduto);
 		regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
-		//regrasGeral.put(Pedido.class.getName(), regrasPedido);
+		regrasGeral.put(Pedido.class.getName(), regrasPedido);
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
 		//regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);

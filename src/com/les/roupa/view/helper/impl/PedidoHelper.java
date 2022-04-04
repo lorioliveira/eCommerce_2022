@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,23 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.les.roupa.view.helper.IViewHelper;
-import com.les.roupa.core.dao.impl.CarrinhoDAO;
-import com.les.roupa.core.dao.impl.CupomCarrinhoDAO;
-import com.les.roupa.core.dao.impl.ItemPedidoDAO;
-import com.les.roupa.core.dao.impl.PedidoDAO;
-import com.les.roupa.core.dao.impl.ProdutoDAO;
-import com.les.roupa.core.dominio.Carrinho;
-import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Cupom;
-import com.les.roupa.core.dominio.CupomCarrinho;
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.dominio.ItemPedido;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
-import com.les.roupa.core.strategy.impl.ValidarPrecoVenda;
+import com.les.roupa.view.helper.IViewHelper;
 
 public class PedidoHelper implements IViewHelper {
 
@@ -41,85 +35,109 @@ public class PedidoHelper implements IViewHelper {
 		String operacao = request.getParameter("operacao");
 		
 		String id = null;
-		String precoTotalProduto = null;
-		String precoFrete = null;
-		String precoTotal = null;
-		String statusPedido = null;
-		String id_cliente = null;
+		String total_itens = null;
+        String total_frete = null;
+        String total_pedido = null;
+        String status = null;
+        String id_cliente = null;
 		String id_endereco = null;
-		String cartao1 = null;
-		String valorCartao1 = null;
-		String cartao2 = null;
-		String valorCartao2 = null;
-		String desconto = null;
-		String alteraPedido = null;
-		
-		// salva a data atual no item do Pedido
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = new Date();
-		String dataAtual;
-		dataAtual = dateFormat.format(date);
-				
+		String forma_pagamento = null;
+        String id_cartao_1 = null;
+        String valor_cartao_1 = null;
+        String id_cartao_2 = null;
+        String valor_cartao_2 = null;
+        String total_cupons = null;
+        String id_cliente_consulta = null;
+        
+        List<Produto> produtosDaSessao = new ArrayList<>();
+        List<Cupom> cuponsDaSessao = new ArrayList<>();
+        
+        // salva a data atual na tabela
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+ 		Date date = new Date();
+ 		String dataAtual;
+ 		dataAtual = dateFormat.format(date);
+        
 		
 		if (("CONSULTAR").equals(operacao)) {
 			pedido = new Pedido();
+			
+			id = request.getParameter("id");
+			
+			pedido.setId(id);
 			
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			pedido = new Pedido();
 			
-			precoTotalProduto = request.getParameter("precoTotalProduto");
-			precoFrete = request.getParameter("precoFrete");
-			precoTotal = request.getParameter("total_pedido");
-			statusPedido = request.getParameter("statusPedido");
+			// capturando os valores do HTML e passando para o Pedido
+			total_itens = request.getParameter("total_itens");
+			total_frete = request.getParameter("total_frete");
+			total_pedido = request.getParameter("total_pedido");
 			id_cliente = request.getParameter("idCliente");
-			id_endereco = request.getParameter("idEndereco");
-			cartao1 = request.getParameter("cartao1");
-			valorCartao1 = request.getParameter("valorCartao1");
-			cartao2 = request.getParameter("cartao2");
-			valorCartao2 = request.getParameter("valorCartao2");
-			desconto = request.getParameter("desconto");
+			id_endereco = request.getParameter("selecioneEndereco");
+			forma_pagamento = request.getParameter("selecioneFormadePagamento");
+			id_cartao_1 = request.getParameter("selecioneCartao1");
+			valor_cartao_1 = request.getParameter("valorCartao1");
+			id_cartao_2 = request.getParameter("selecioneCartao2");
+			valor_cartao_2 = request.getParameter("valorCartao2");
 			
+			total_cupons = request.getParameter("total_cupons");
 			
+			// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+			HttpSession sessao = request.getSession();
+			// pega o objeto salvo em Sessão com o nome "itensCarrinho",
+			// e passa para o "produtosDaSessao" (fazendo o CAST para o tipo List<Produto>)
+			produtosDaSessao = (List<Produto>) sessao.getAttribute("itensCarrinho");
+			// pega o objeto salvo em Sessão com o nome "cupons",
+			// e passa para o "cuponsDaSessao" (fazendo o CAST para o tipo List<Cupom>)
+			cuponsDaSessao = (List<Cupom>) sessao.getAttribute("cupons");
 			
-			pedido.setPrecoTotalProduto(precoTotalProduto);
-			pedido.setPrecoFrete(precoFrete);
-			pedido.setPrecoTotal(precoTotal);
-			pedido.setStatusPedido(statusPedido);
+			// Atribuindo os valores capturados do HTML para o Pedido
+			pedido.setTotalItens(total_itens);
+			pedido.setTotalFrete(total_frete);
+			pedido.setTotalPedido(total_pedido);
 			pedido.setIdCliente(id_cliente);
 			pedido.setIdEndereco(id_endereco);
-			pedido.setCartao1(cartao1);
-			pedido.setValorCartao1(valorCartao1);
-			pedido.setCartao2(cartao2);
-			pedido.setValorCartao2(valorCartao2);
-			pedido.setDesconto(desconto);
+			pedido.setFormaPagamento(forma_pagamento);
+			pedido.setIdCartao1(id_cartao_1);
+			pedido.setValorCartao1(valor_cartao_1);
+			pedido.setIdCartao2(id_cartao_2);
+			pedido.setValorCartao2(valor_cartao_2);
+			pedido.setTrocado("nao");
+			pedido.setTotalCupons(total_cupons);
+			pedido.setProdutos(produtosDaSessao);
+			pedido.setCupons(cuponsDaSessao);
+			pedido.setData_Cadastro(dataAtual);
 			
-			pedido.setDt_cadastro(dataAtual);
-			pedido.setAlteraPedido(alteraPedido);
+			//// ajuste do bug de quando o pedido não tiver nenhum Cupom vinculado,
+			//if (id_cupom.equals("null")) {
+        	//	// quando for finalizar o Pedido, e não tiver nenhum Cupom vinculado,
+        	//	// o valor do "id_cupom" será "null", em formato de String, 
+        	//	// então não atribui o valor ao objeto "pedido",
+        	//	// pq se o valor for "null" em formato de String, irá acusar ERRO ao salvar o Pedido na DAO.
+        	//	System.out.println("entrou !!");
+        	//}
+        	//else {
+        	//	// caso contrário, se tiver algum Cupom para vincular,
+        	//	// o valor será atribuido no Pedido
+        	//	pedido.setIdCupom(id_cupom);
+        	//}
 			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
-			pedido = new Pedido();
-			
-			id = request.getParameter("id");
-			statusPedido = request.getParameter("statusPedido");
-			alteraPedido = request.getParameter("alteraPedido");
-			
-			pedido.setId(id);
-			pedido.setStatusPedido(statusPedido);	
-			pedido.setAlteraPedido(alteraPedido);
 			
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
+			
 		}
 		
-	return pedido;
-}
+		return pedido;
+	}
 
-	// SET VIEW 
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -132,184 +150,72 @@ public class PedidoHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				String id = request.getParameter("id");
-				request.setAttribute("id_pedido", id);
-				// Redireciona para o arquivo .jsp
-
-				Usuario usuarioLogado = new Usuario();
-			    
-			    HttpSession sessao = request.getSession();
-			    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");    
-				
-				if(usuarioLogado.getTipo().equals("cliente")) {
-					
-					request.getRequestDispatcher("JSP/detalhe-pedido-CLIENTE.jsp").forward(request, response);
-				} else {
-					request.getRequestDispatcher("JSP/detalhe-pedido-ADMIN.jsp").forward(request, response);
-				}
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
-				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				System.out.println("ERRO PARA CONSULTAR PEDIDO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Pedido pedidoSelecionado = (Pedido) entidades.get(0);
 				
 				
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA CONSULTAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
+				// pendura o "idPedido" na requisição para poder mandar para o arquivo .JSP
+				request.setAttribute("pedidoSelecionado", pedidoSelecionado);
+				request.setAttribute("endereco", pedidoSelecionado.getEndereco());
+				
+				request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
 			}
+			else {
+				// mostra as mensagens de ERRO se houver
+				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+			}
+			
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				
-				PedidoDAO pedidoDAO = new PedidoDAO();
-				ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
-				CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
-				ProdutoDAO produtoDAO = new ProdutoDAO();
-				Pedido pedido = new Pedido();
-				ItemPedido itemPedido = new ItemPedido();
-				Usuario usuarioLogado = new Usuario();
-				CupomCarrinhoDAO cupomcarrinhoDAO = new CupomCarrinhoDAO();
-				
-				
-				// salva a data atual no item do Pedido
-				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-				Date date = new Date();
-				String dataAtual;
-				dataAtual = dateFormat.format(date);
-				
-				// usuario salvo na Sessão
+				List<Cupom> cuponsVazio = new ArrayList<>();
+				List<Produto> produtosVazio = new ArrayList<>();
+
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
-                usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-                
-                // consulta o ultimo Pedido cadastrado
-				List<Pedido> ultimoPedido = pedidoDAO.consultarUltimoPedidoCadastrado(pedido);
-                
-                // consulta todos os produtos que estavam no carrinho,
-                // referente aquele cliente com o status "ativo",
-                // para criar os itens do pedido cadastrado
-                List<Carrinho> carrinhos = carrinhoDAO.consultarCarrinhoByStatus(usuarioLogado.getId());
-                
-                // percorre a lista de produtos disponiveis dentro do carrinho do cliente,
-                // para cada item do carrinho, será criado o item do pedido
-                for (Carrinho car : carrinhos) {
-                	// consultar o produto by ID
-                	List<Produto> produtoCarrinho = produtoDAO.consultarProdutoById(car.getIdProduto());
-                	
-                	// passa o primeiro indice da lista retornada acima
-                	itemPedido.setProduto(produtoCarrinho.get(0));
-                	// passa a quantidade do produto que estava no carrinho
-                	itemPedido.setQtdeProduto(car.getQtdeProduto());
-                	// passo o ID do ultimo Pedido salvo no banco de dados
-                	itemPedido.setIdPedido(ultimoPedido.get(0).getId());
-                	// passa a data atual do sistema
-                	itemPedido.setDt_cadastro(dataAtual);
-                	
-                	// salva o novo item do pedido
-                	itemPedidoDAO.salvar(itemPedido);
-                	
-                	
-                	// Alteração de status do carrinho - deixa com status = 'inativo' 
-                	carrinhoDAO.alterarStatus(car.getId());
-                	 
-                }
-                // Tras os cupons ativos pelo ID do cliente logado
-                List<CupomCarrinho> cupomCarrinho = cupomcarrinhoDAO.consultarCupomAtivoByCliente(usuarioLogado.getId());
-                
-                // Alteração de status dos cupons no carrinho = 'inativo'
-                for(CupomCarrinho c : cupomCarrinho) {
-                	cupomcarrinhoDAO.alterarStatusCupom(c.getId());
-                }
-                
-               
-                // redireciona para a tela principal do sistema
-				request.getRequestDispatcher("JSP/index_entrar.jsp").forward(request, response);
+
+				// limpa os produtos selecionados do carrinho da sessão,
+				// atualiza o objeto "itensCarrinho" que esta salvo em sessão, com o novo objeto de produto vazio
+				sessao.setAttribute("itensCarrinho", produtosVazio);
+				
+				// limpa os cupons selecionados do carrinho da sessão,
+				// atualiza o objeto "cupons" que esta salvo em sessão, com o novo objeto de cupom vazio
+				sessao.setAttribute("cupons", cuponsVazio);
+				
+				// atribui a nova mensagem para poder mostra na pagina .JSP
+				resultado.setMensagem("Cadastro do Pedido salvo com sucesso!");
+				
+				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
+				// mostra as mensagens de ERRO se houver
+				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				System.out.println("ERRO PARA SALVAR PEDIDO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-								
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA SALVAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
+				
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				String alteraPedido = request.getParameter("alteraPedido");
-				String id = request.getParameter("id");
-				
-				// É para alterar o sttaus do Pedido agora?
-				// No caso 'não', então ele encaminha para tela de alteração com os dados
-				// puxados do ID do banco
-				if (alteraPedido.contentEquals("0")) {
-					request.setAttribute("id_pedido", id);
-
-					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/alterar-pedido.jsp").forward(request, response);
-				} else {
-					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/consultar-pedidos2.jsp").forward(request, response);
-				}
 			
-				// Redireciona para o arquivo .jsp
-				//request.getRequestDispatcher("JSP/consultar-pedidos.jsp").forward(request, response);
-
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
-				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				System.out.println("ERRO PARA ALTERAR PEDIDO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-								
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA ALTERAR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
-			}
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/pedidos.jsp").forward(request, response);
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				// Guarda a mensagem que veio da Strategy na variável para que 
-				// seja exibida na tela 'tela-mensagem.jsp'
-				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				System.out.println("ERRO PARA EXCLUIR PEDIDO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				
-				/*
-				 * writer.println(resultado.getMensagem());
-				 * System.out.println("ERRO PARA EXCLUIR!"); writer.
-				 * println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">"
-				 * );
-				 */
-			}
+			
 		}
+		
 	}
 
 }
-

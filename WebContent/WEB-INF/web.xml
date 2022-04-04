@@ -55,7 +55,7 @@
     
   <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
-    <url-pattern>/pedido</url-pattern>
+    <url-pattern>/cadastroPedido</url-pattern>
   </servlet-mapping>
   
     <servlet-mapping>

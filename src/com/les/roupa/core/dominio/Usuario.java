@@ -22,7 +22,10 @@ public class Usuario extends EntidadeDominio {
 	private List<Cliente> todosClientes;
 	private List<CartaoCredito> cartoesCliente;
 	private List<Produto> todosProdutos;
+	private List<Pedido> todosPedidos;
 	
+
+	private List<Pedido> pedidosCliente;
 	
 
 	/* Email */
@@ -133,7 +136,7 @@ public class Usuario extends EntidadeDominio {
 		this.cartoesCliente = cartoesCliente;
 	}
 	
-	// Lista de Todos os cartoes do Cliente cadastrados
+	// Lista de Todos os produtos 
 	public List<Produto> getTodosProdutos() {
 		return todosProdutos;
 	}
@@ -141,4 +144,23 @@ public class Usuario extends EntidadeDominio {
 	public void setTodosProdutos(List<Produto> todosProdutos) {
 		this.todosProdutos = todosProdutos;
 	}
+	
+	// Lista de todos os Pedidos - ADMIN
+	public List<Pedido> getTodosPedidos() {
+		return todosPedidos;
+	}
+
+	public void setTodosPedidos(List<Pedido> todosPedidos) {
+		this.todosPedidos = todosPedidos;
+	}
+
+	// Lista de todos os Pedidos do Cliente
+	public List<Pedido> getPedidosCliente() {
+		return pedidosCliente;
+	}
+
+	public void setPedidosCliente(List<Pedido> pedidosCliente) {
+		this.pedidosCliente = pedidosCliente;
+	}
+	
 }

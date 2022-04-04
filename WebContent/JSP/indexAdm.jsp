@@ -43,6 +43,9 @@
     // Pega o ID daquele cliente logado -> admin
     List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
+ 	 //pega todos os pedidos do cliente logado
+    List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
+    
     %>
 
 <body>
@@ -217,25 +220,24 @@
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
+                                    <%
+		                              	for(Pedido pedido : pedidos) {
+		                              %>
                                     <tbody>
                                         <tr>
-                                            <td>021</td>
-                                            <td>Lorena</td>
-                                            <td>$239</td>
-                                            <td>ENTREGA REALIZADA</td>
+                                            <td><%=pedido.getId() %></td>
+                                            <td><%=pedido.getIdCliente() %></td>
+                                            <td>R$ <%=pedido.getTotalPedido() %></td>
+                                            <td><%=pedido.getStatus() %></td>
                                             <td>
                                                 <a href="../JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
                                                 
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>064</td>
-                                            <td>Juliana</td>
-                                            <td>$420</td>
-                                            <td>TROCA SOLICITADA</td>
-                                            <td><a href="../JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a></td>
-                                        </tr>
                                     </tbody>
+                                    <%
+		                              	}
+                                    %>
                                 </table>
                             </div>
                         </div>

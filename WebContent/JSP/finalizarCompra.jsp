@@ -228,8 +228,7 @@
                   </div>
                 </div>
                 <a href="novocartao.html"><button class="btn btn_cadastrarCartao"><i class="fas fa-credit-card"></i> Novo Cartão</button></a>
-                <!-- <div class="payment-method"> <div class="custom-control custom-radio"> <input type="radio" class="custom-control-input" id="payment-3" name="payment"> <label class="custom-control-label" for="payment-3">Check Payment</label> </div> <div class="payment-content" id="payment-3-show"> <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam. </p> </div> </div> <div class="payment-method"> <div class="custom-control custom-radio"> <input type="radio" class="custom-control-input" id="payment-4" name="payment"> <label class="custom-control-label" for="payment-4">Direct Bank Transfer</label> </div> <div class="payment-content" id="payment-4-show"> <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam. </p> </div> </div> <div class="payment-method"> <div class="custom-control custom-radio"> <input type="radio" class="custom-control-input" id="payment-5" name="payment"> <label class="custom-control-label" for="payment-5">Cash on Delivery</label> </div> <div class="payment-content" id="payment-5-show"> <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam. </p> </div> </div> -->
-              </div>
+               </div>
               <div class="checkout-btn">
                 <button><a href="#openModal" class="btnModal"> <i class="fa fa-check-circle"></i> Finalizar Compra</a>
               </button>
