@@ -38,10 +38,12 @@
       //pega todos cartões do Cliente que estao na sessao
       List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
       
-    //pega todos os pedidos do cliente logado
+   	 //pega todos os pedidos do cliente logado
       List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
       
-      
+      // atualiza os pedidos 
+    	 sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente()); 
+   	 
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -115,6 +117,7 @@
          </div>
       </div>
       <!-- Fim do Breadcrumb -->
+      
       <!-- Inicio da Minha Conta -->
       <div class="my-account">
          <div class="container-fluid">
@@ -264,7 +267,7 @@
                                     <td><%=pedido.getData_Cadastro() %></td>
                                     <td>R$ <%=pedido.getTotalPedido()%></td>
                                     <td><%=pedido.getStatus() %></td>
-                                    <td><a href="./JSP/detalhePedido.jsp"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><a href="/eCommerce/cadastroPedido?id=<%= pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                  </tr>
                               </tbody>
                               <%
@@ -380,7 +383,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-6 copyright">
-                  <p>Copyright &copy; <a href="./JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                  <p>Copyright &copy; <a href="./JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                </div>
             </div>
          </div>

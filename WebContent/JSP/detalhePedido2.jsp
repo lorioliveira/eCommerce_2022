@@ -32,11 +32,9 @@
 	    
 	    HttpSession sessao = request.getSession();
 	    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-	    
+	    	    
 	    //pega o pedido a ser visualizado
-		  Pedido pedidoSelecionado = (Pedido)request.getAttribute("pedidoSelecionado");
-	    
-		  Endereco endereco = (Endereco)request.getAttribute("endereco");
+		Pedido pedidoSelecionado = (Pedido)request.getAttribute("pedidoSelecionado");
 	    
     %>
    
@@ -138,7 +136,7 @@
                                     <span><b>R$ <%=pedidoSelecionado.getTotalPedido() %></b></span>
                                 </div>
                                 <div class="col-md-4 formaPagamento_centralizado">
-                                    <label><b><%=pedidoSelecionado.getFormaPagamento() %></b></label>
+                                    <label><b>Cartao</b></label>
                                     <p><%=pedidoSelecionado.getIdCartao1() %></p>
                                     <p><%=pedidoSelecionado.getIdCartao2() %></p>
                                     
@@ -147,8 +145,9 @@
                                 
                                 <div class="col-md-4 endereco_aDireita">
                                     <label><b>Entrega</b></label>
-                                    <p><%=endereco.getLogradouro() %></p>
-                                    <p><%=endereco.getCep() %></p>
+                                    <p><%=pedidoSelecionado.getEndereco().getLogradouro() %>, <%=pedidoSelecionado.getEndereco().getNumero() %></p>
+                                    <p><%=pedidoSelecionado.getEndereco().getCidade() %> - <%=pedidoSelecionado.getEndereco().getEstado() %></p>
+                                    <p>CEP <%=pedidoSelecionado.getEndereco().getCep() %></p>
                                 </div>
                             </div>
                         </div>
@@ -173,10 +172,9 @@
                                         <tbody>
                                             <tr>
                                                 <td>Blusinha</td>
-                                                <td>43</td>
+                                                <td>//</td>
                                                 <td>1</td>
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="5"><%=pedidoSelecionado.getStatus() %></td>
-                                                
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="7">
                                                   <button class="btn"> <i class="fa fa-edit"></i> Solicitar Troca</button>
                                                 </td>

@@ -146,14 +146,13 @@
                             <div class="row detalheProduto">
                                 <div class="col-md-4 espacamento_DetalheProduto">
                                     <div class="product-slider-single normal-slider">
-                                        <img src="<%=produtoSelecionado.getFoto() %>" alt="Blusa Amarela">
-                                        <img src="./img/blusapreta.png" alt="Blusa Preta">
-                                        <img src="./img/blusaverdearmy.png" alt="Blusa Verde M.">
+                                        <img src="<%=produtoSelecionado.getFoto() %>" alt="Foto do produto">
+                                        <img src="<%=produtoSelecionado.getFoto() %>" alt="Foto do produto">
+                                        <img src="<%=produtoSelecionado.getFoto() %>" alt="Foto do produto">
                                     </div>
                                     <div class="product-slider-single-nav normal-slider">
-                                        <div class="slider-nav-img"><img src="./img/blusaamarela.png" alt="Blusa Amarela"> </div>
-                                        <div class="slider-nav-img"><img src="./img/blusapreta.png" alt="Blusa Preta"> </div>
-                                        <div class="slider-nav-img"><img src="./img/blusaverdearmy.png"  alt="Blusa Verde M."> </div>
+                                        <div class="slider-nav-img"><img src="../img/produtos/fotoindisponivel.png" alt="Foto do produto"> </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -170,7 +169,7 @@
                                         </div>
                                         <div class="price">
                                             <h4>Preço:</h4>
-                                            <p>R$ <%=produtoSelecionado.getPrecoVenda() %><span>R$149,00</span></p>
+                                            <p>R$ <%=produtoSelecionado.getPrecoVenda() %><span>R$179.00</span></p>
                                         </div>
                                         
                                         <form class="form" action="http://localhost:8080/eCommerce/carrinho">
@@ -180,7 +179,7 @@
 	                                                <button class="btn-minus"><i class="fa fa-minus"></i>
 	                                                </button>
 	                                                
-	                                                <input type="text" name="quantidadeSelecionada" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3">
+	                                                <input type="text" name="quantidadeSelecionada" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="2">
 	                                                
 	                                                <button class="btn-plus"><i class="fa fa-plus"></i>
 	                                                </button>
@@ -191,20 +190,8 @@
 	                                            <div class="tamanhos">
 	                                                <div class="radioTam">
 	                                                    <label>
-	                                                        <input type="radio" name="tamanho" value="36">
+	                                                        <input type="radio" name="tamanho" value="<%=produtoSelecionado.getTamanho() %>">
 	                                                        <span><%=produtoSelecionado.getTamanho() %></span>
-	                                                    </label>
-	                                                </div>
-	                                                <div class="radioTam">
-	                                                    <label>
-	                                                        <input type="radio" name="tamanho" value="38">
-	                                                        <span>38</span>
-	                                                    </label>
-	                                                </div>
-	                                                <div class="radioTam">
-	                                                    <label>
-	                                                        <input type="radio" name="tamanho" value="40">
-	                                                        <span>40</span>
 	                                                    </label>
 	                                                </div>
 	                                            </div>
@@ -215,22 +202,10 @@
 	                                            <div class="cores">
 	                                                <div class="radioCores">
 	                                                    <label>
-	                                                        <input type="radio" name="cor" value="Amarela">
+	                                                        <input type="radio" name="cor" value="<%=produtoSelecionado.getCores() %>">
 	                                                        <span><%=produtoSelecionado.getCores() %></span>
 	                                                    </label>
-	                                                </div>
-	                                                <div class="radioCores">
-	                                                    <label>
-	                                                        <input type="radio" name="cor" value="Preta">
-	                                                        <span>Preta</span>
-	                                                    </label>
-	                                                </div>
-	                                                <div class="radioCores">
-	                                                    <label>
-	                                                        <input type="radio" name="cor" value="Verde Militar">
-	                                                        <span>Verde Militar</span>
-	                                                    </label>
-	                                                </div>
+	                                                </div>        
 	                                            </div>
 	                                            <br><br>
 	                                            <div class="action">
@@ -267,7 +242,10 @@
                                     <div id="specification" class="container tab-pane fade">
                                         <h4>Especificação</h4>
                                         <ul>
-                                            <li>Teste 1</li>
+                                            <li>Estilo: Peças de alta costura</li>
+                                            <li>Tipo de Ajuste: Regular</li>
+                                            <li>Modo de lavagem: Podem ser lavadas na máquina de lavar. Utilize apenas sabão líquido para manter a vivência das cores das peças</li>
+                                            <li>Podem ser detalhes que seja necessário a lavagem à mão</li>
                                         </ul>
                                     </div>
                                 </div>

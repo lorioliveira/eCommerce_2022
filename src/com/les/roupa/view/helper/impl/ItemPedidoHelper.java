@@ -15,7 +15,6 @@ import com.les.roupa.core.dominio.ItemPedido;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
-import com.les.roupa.core.strategy.impl.ValidarPrecoVenda;
 
 public class ItemPedidoHelper implements IViewHelper {
 

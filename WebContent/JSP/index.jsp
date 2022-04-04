@@ -188,16 +188,16 @@
 							</div>
 						</div>
 						<div class="product-image">
-							<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><img src=.<%=p.getFoto()%> alt="Product Image"></a>
+							<a href="#"><img src=".<%=p.getFoto()%>" alt="Product Image"></a>
 							<div class="product-action">
-								<a href="#"><i class="fa fa-eye"></i></a>
+								<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><i class="fa fa-eye"></i></a>
 							</div>
 						</div>
 						<div class="product-price">
 							<h3>
 								<span>R$</span> <%=p.getPrecoVenda() %>
 							</h3>
-							<a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
+							<a class="btn" href="/eCommerce/carrinho?idProduto=<%= p.getId()%>&quantidadeSelecionada=1&operacao=SALVAR"><i class="fa fa-shopping-bag"></i>Adicionar</a>
 						</div>
 					</div>
 				</div>

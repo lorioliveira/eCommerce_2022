@@ -304,7 +304,7 @@
                                                    <%
                                                       for(CartaoCredito c : cartoes){
                                                       %>
-                                                   <option name=selecioneCartao1" value="<%=c.getId() %>">
+                                                   <option name=id_cartao_1" value="<%=c.getId() %>">
                                                       <%=c.getNome() %> - <%=c.getBandeira() %> / <%=c.getValidade() %>
                                                    </option>
                                                    <%
@@ -326,7 +326,7 @@
                                                    <%
                                                       for(CartaoCredito c : cartoes){
                                                       %>
-                                                   <option name=selecioneCartao1" value="<%=c.getId() %>">
+                                                   <option name=id_cartao_1" value="<%=c.getId() %>">
                                                       <%=c.getNome() %> - <%=c.getBandeira() %> / <%=c.getValidade() %>
                                                    </option>
                                                    <%
@@ -340,7 +340,7 @@
                                                    <%
                                                       for(CartaoCredito c : cartoes){
                                                       %>
-                                                   <option name=selecioneCartao2" value="<%=c.getId() %>">
+                                                   <option name=id_cartao_2" value="<%=c.getId() %>">
                                                       <%=c.getNome() %> - <%=c.getBandeira() %> / <%=c.getValidade() %>
                                                    </option>
                                                    <%

@@ -176,7 +176,6 @@ public class PedidoDAO extends AbstractJdbcDAO {
 					List<Cliente> cliente = clienteDAO.consultarClienteById(order.getIdCliente());
 					
 					order.setNomeCliente(cliente.get(0).getNome());
-					order.setIdEndereco(null);
 				}
 			}
 			

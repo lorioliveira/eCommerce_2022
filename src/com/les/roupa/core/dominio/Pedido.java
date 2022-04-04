@@ -29,13 +29,6 @@ public class Pedido extends EntidadeDominio{
 	
 	private Endereco endereco;
 	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	private Pedido pedidoSelecionado;
 	
 	
@@ -164,6 +157,13 @@ public class Pedido extends EntidadeDominio{
 	}
 	public void setDarBaixaEstoque(String dar_baixa_estoque) {
 		this.dar_baixa_estoque = dar_baixa_estoque;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	// Metodo

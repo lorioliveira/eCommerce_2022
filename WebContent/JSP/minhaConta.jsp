@@ -40,6 +40,9 @@
       
    	 //pega todos os pedidos do cliente logado
       List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
+   
+     // atualiza os pedidos 
+   	 sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente());
       
       
       %>
@@ -381,7 +384,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-6 copyright">
-                  <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                  <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                </div>
             </div>
          </div>

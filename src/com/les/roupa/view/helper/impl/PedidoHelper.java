@@ -158,7 +158,7 @@ public class PedidoHelper implements IViewHelper {
 				
 				// pendura o "idPedido" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("pedidoSelecionado", pedidoSelecionado);
-				request.setAttribute("endereco", pedidoSelecionado.getEndereco());
+				//request.setAttribute("endereco", pedidoSelecionado.getEndereco());
 				
 				request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
 			}

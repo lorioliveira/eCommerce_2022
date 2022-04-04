@@ -27,7 +27,7 @@
       <!-- CSS Principal do Projeto -->
       <link href="./css/style.css" rel="stylesheet">
    </head>
-   <%
+    	<%
 	      Usuario usuarioLogado = new Usuario();
 	      
 	      HttpSession sessao = request.getSession();
@@ -37,7 +37,6 @@
 	      List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
 	      
 	      %>
-   
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
@@ -173,11 +172,12 @@
             <div class="section-header">
                <h1>Nossos Produtos</h1>
             </div>
+            
             <div class="row align-items-center product-slider product-slider-4">
-            <%
+				<%
 				for (Produto p : produtos) {
 			%>
-				<div class="col-lg-3">
+			<div class="col-lg-3">
 					<div class="product-item">
 						<div class="product-title">
 							<a href="#"><%=p.getNome() %></a>
@@ -188,16 +188,16 @@
 							</div>
 						</div>
 						<div class="product-image">
-							<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=CONSULTAR"><img src=<%=p.getFoto()%> alt="Product Image"></a>
+							<a href="#"><img src="<%=p.getFoto()%>" alt="Product Image"></a>
 							<div class="product-action">
-								<a href="#"><i class="fa fa-eye"></i></a>
+								<a href="/eCommerce/detalheProduto?id=<%= p.getId()%>&operacao=SALVAR"><i class="fa fa-eye"></i></a>
 							</div>
 						</div>
 						<div class="product-price">
 							<h3>
 								<span>R$</span> <%=p.getPrecoVenda() %>
 							</h3>
-							<a class="btn" href=""><i class="fa fa-shopping-bag"></i>Adicionar</a>
+							<a class="btn" href="/eCommerce/carrinho?idProduto=<%= p.getId()%>&quantidadeSelecionada=1&operacao=SALVAR"><i class="fa fa-shopping-bag"></i>Adicionar</a>
 						</div>
 					</div>
 				</div>
@@ -205,8 +205,8 @@
 					}
 				%>
 			</div>
-         </div>
-      </div>
+		</div>
+	</div>
       <!-- Featured Product End -->       
 
       <!-- Início do Footer -->
