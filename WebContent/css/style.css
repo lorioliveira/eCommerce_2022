@@ -8,6 +8,7 @@ body {
     background: #f3f6ff;
 }
 
+
 a {
     color: #FF6F61;
 }
@@ -1179,7 +1180,7 @@ h2 {
 }
 
 .product-detail .product-content .quantity input {
-    width: 40px;
+    width: 60px;
     /* height: 30px; */
     color: #ffffff;
     font-size: 16px;
@@ -2486,10 +2487,12 @@ h2 {
 .qty input {
     width: 30px;
     height: 28px;
-    color: #ffffff;
+    color: #FF6F61 !important;
     font-size: 16px;
     text-align: center;
-    background: #000000;
+    background: #FFFFFF !important;
+    border: 1px solid #FF6F61 !important;
+    border-radius: 5px !important;
     border: none;
 }
 .btnCupom{
@@ -2599,6 +2602,31 @@ h2 {
  .radioTam label input[type=radio]:checked {
     background-color: #FF6F61;
  }
+ 
+ .radioEndereco {
+	 background-color: #FF6F61;
+	 border: 1px solid #FF6F61;
+    box-sizing: border-box;
+    float: left;
+    /* height: 25px; */
+    /* position: relative; */
+    width: 30%;
+    border-radius: 3px;
+    /*margin-left: 3px; */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    white-space: nowrap;
+    z-index: 1;
+    position: absolute;
+    color: #ffffff;
+    
+ }
+  .radioEndereco input[type=radio]{
+  background-color: #FF6F61;
+  }
 
  .radioCores label input[type=radio]:checked {
     background-color: #FF6F61;
@@ -2726,11 +2754,12 @@ h2 {
     border-radius: 5px;
 }
 .btn_cadCartao{
-	 margin:0 5px 10px 75%;
-	 top: 80px;
-	 position: absolute;
+	 margin:0 5px 6px 50%;
+	 position: relative;
+	 bottom: 353px;
+	 top: 50%;
+	 
 }
-
 
 /* MODAL - TESTE */
 

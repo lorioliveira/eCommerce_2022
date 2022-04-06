@@ -147,7 +147,7 @@ public class CarrinhoHelper implements IViewHelper {
 				sessao.setAttribute("entidadesEnderecoCartaoCupom", entidades);
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/lista-carrinho-scriptlet.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -266,7 +266,7 @@ public class CarrinhoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 			}
 		}
 		
@@ -384,7 +384,7 @@ public class CarrinhoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
 			}
 		}
 		

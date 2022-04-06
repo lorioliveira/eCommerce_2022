@@ -15,10 +15,15 @@ import com.les.roupa.core.dominio.ItemPedido;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para PEDIDO
+ * @author Lorena Oliveira 
+ * 
+ */
 public class PedidoDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para salvar o Pedido
+	 * Metodo para SALVAR o Pedido
 	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
@@ -62,32 +67,33 @@ public class PedidoDAO extends AbstractJdbcDAO {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Salvar
+	} // Salvar Pedido
+	
 	
 	/**
-	 * Metodo para alterar o Pedido
+	 * Metodo para ALTERAR o Pedido
 	 * @param entidade
 	 */
 	@Override
 	public void alterar(EntidadeDominio entidade) throws SQLException {
 		// TODO Auto-generated method stub
 		
-	} // Alterar
+	} // Alterar Pedido
 	
 	
 	/**
-	 * Metodo para excluir o Pedido
+	 * Metodo para EXCLUIR o Pedido
 	 * @param entidade
 	 */
 	@Override
 	public void excluir(EntidadeDominio entidade) throws SQLException {
 		// TODO Auto-generated method stub
 		
-	} // Excluir
+	} // Excluir pedido
 	
 	
 	/**
-	 * Metodo para consultar o Pedido
+	 * Metodo para CONSULTAR o Pedido
 	 * @param entidade
 	 */
 	@Override
@@ -97,6 +103,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			Pedido pedidoEntidade = (Pedido) entidade;
 			ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
 			ClienteDAO clienteDAO = new ClienteDAO();
+			
 			List<Pedido> pedidos = new ArrayList<>();
 			List<EntidadeDominio> Listpedidos = new ArrayList<>();
 			
@@ -128,6 +135,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 				pedidos.add(pedidoItem);
 			}
 			
+			// Lista de endereços
 			List<Endereco> enderecosCliente = new ArrayList<>();
 			stmt = connection.prepareStatement("select * from endereco where id = ?");
 			stmt.setString(1, pedidos.get(0).getIdEndereco());
@@ -154,9 +162,35 @@ public class PedidoDAO extends AbstractJdbcDAO {
 				enderecosCliente.add(endAltera);
 			}
 			
+			// Lista dos Itens do pedido
+			List<ItemPedido> itens_pedido = new ArrayList<>();
+			stmt = connection.prepareStatement("select * from pedido_item where id_pedido = ?");
+			stmt.setString(1, pedidos.get(0).getId());
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				ItemPedido item_pedidoItem = new ItemPedido();
+				Produto produto = new Produto();
+				
+				item_pedidoItem.setId(rs.getString("id"));
+				
+				produto.setId(rs.getString("id_produto"));
+				produto.setNome(rs.getString("nome"));
+				produto.setPrecoVenda(rs.getString("valor_de_venda"));
+				produto.setQuantidadeSelecionada(rs.getString("quantidade"));
+				item_pedidoItem.setProduto(produto);
+				
+				item_pedidoItem.setIdPedido(rs.getString("id_pedido"));
+				item_pedidoItem.setTrocado(rs.getString("trocado"));
+				item_pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				itens_pedido.add(item_pedidoItem);
+			}
 			
-			// se achou algum pedido do Cliente, também pesquisa se todos os itens desse pedido foi trocado,
-			// para poder verificar na tela de "lista-pedidos-scriptletCLIENTE.jsp".
+			
+			
+			// se achou algum pedido do Cliente, também pesquisa se todos os itens desse pedido foi trocado.
 			if (pedidos.size() > 0) {
 				for(Pedido order: pedidos) {
 					List<ItemPedido> pedidoComTodosOsItensJaTrocados = itemPedidoDAO.consultarItemPedidoByIdPedidoAndTrocadoSim(order.getId());
@@ -176,13 +210,21 @@ public class PedidoDAO extends AbstractJdbcDAO {
 					List<Cliente> cliente = clienteDAO.consultarClienteById(order.getIdCliente());
 					
 					order.setNomeCliente(cliente.get(0).getNome());
+					// salva o endereço do pedido
+					if(enderecosCliente.size() > 0)
+						order.setEndereco(enderecosCliente.get(0));
+				
+				//salva os itens do pedido
+				/*if(itens_pedido.size() > 0) 
+					order.setItemDoPedido(itens_pedido.get(0));*/
+				
 				}
 			}
 			
-			// sala a REFERENCIA de todos os Pedidos em "novoPedido"
+			// seta a REFERENCIA de todos os Pedidos em "novoPedido"
 			Pedido novoPedido =  new Pedido();
 			novoPedido.setPedidosCliente(pedidos);
-			novoPedido.setEndereco(enderecosCliente.get(0));
+			novoPedido.setItemPedido(itens_pedido);
 			
 			
 			// depois faz o CAST da lista de "novoPedido" para "EntidadeDominio",
@@ -200,7 +242,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar o Pedido por ID
+	 * Metodo para CONSULTAR o Pedido por ID
 	 */
 	public List<Pedido> consultarPedidoById (String idPedido) {
 		openConnection();
@@ -245,7 +287,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar o Pedido por ID do Cliente
+	 * Metodo para CONSULTAR o Pedido por ID do Cliente
 	 */
 	public List<Pedido> consultarPedidoByIdCliente (String idCliente) {
 		openConnection();
@@ -290,7 +332,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Listar o ultimo Pedido cadastrado no sistema
+	 * Metodo para CONSULTAR (LISTAR) o ultimo Pedido cadastrado no sistema
 	 * @param entidade
 	 * @return
 	 */
@@ -334,7 +376,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para alterar a trocação do Pedido
+	 * Metodo para ALTERAR a opção de 'Trocado' do Pedido
 	 * @param entidade
 	 */
 	public void alterarTrocacaoPedido (String idPedido) {
@@ -358,8 +400,8 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	} // Alterar trocação do Pedido
 	
 	
-	/**
-	 * Metodo para alterar o status do Pedido
+	/** 
+	 * Metodo para ALTERAR o status do Pedido - opção como ADMIN
 	 * @param entidade
 	 */
 	public void alterarStatusPedido (String idPedido, String status) {
@@ -385,7 +427,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar os 3 clientes com maiores compras
+	 * Metodo para CONSULTAR os 3 clientes com maiores compras - RANKING
 	 */
 	public List<Pedido> consultar3ClientesMaiorCompra () {
 		openConnection();
@@ -416,7 +458,8 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar o Pedido por ID do Cliente, com o retorno de uma lista de EntidadeDominio
+	 * Metodo para CONSULTAR o Pedido por ID do Cliente,
+	 *  com o retorno de uma lista de EntidadeDominio
 	 * @param entidade
 	 * @return
 	 */
@@ -463,7 +506,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Listar os Pedidos pela Pesquisa por Filtro
+	 * Metodo para CONSULTAR (LISTAR) os Pedidos pela Pesquisa por Filtro
 	 * @param entidade
 	 * @return
 	 */
@@ -511,7 +554,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Salvar itens do Pedido e dar baixa no Estoque
+	 * Metodo para SALVAR itens do Pedido e dar baixa no Estoque
 	 * @param entidade
 	 * @return
 	 */

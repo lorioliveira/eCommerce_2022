@@ -39,41 +39,14 @@ public class ItemPedidoHelper implements IViewHelper {
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
-			itemPedido = new ItemPedido();
-			
-			id_produto = request.getParameter("id_produto");
-			nome = request.getParameter("nome");
-			qtde_produto = request.getParameter("qtde_produto");
-			precoVenda = request.getParameter("precoVenda");
-			id_pedido = request.getParameter("id_pedido");
-			
-			
-			itemPedido.setIdProduto(id_produto);
-			itemPedido.setNome(nome);
-			itemPedido.setQtdeProduto(qtde_produto);
-			itemPedido.setPrecoVenda(precoVenda);
-			itemPedido.setIdPedido(id_pedido);		
-			
 			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
-			/*
-				id = request.getParameter("id");
-				qtde_produto = request.getParameter("qtde_produto");
-				valor_operacao = request.getParameter("valorOperacao");			
-				
-				carrinho.setId(id);
-				carrinho.setQtdeProduto(qtde_produto);
-				carrinho.setValorOperacao(valor_operacao);
-			*/
+			
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
-			
-			//id = request.getParameter("id");
-			
-			//carrinho.setId(id);
 			
 		}
 		
@@ -92,59 +65,19 @@ public class ItemPedidoHelper implements IViewHelper {
 		PrintWriter writer = response.getWriter();
 		
 		if (("CONSULTAR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				//String id = request.getParameter("idPedido");
-				//request.setAttribute("idPedido", id);
-				
-				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/index.jsp").forward(request, response);
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				writer.println(resultado.getMensagem());
-				System.out.println("ERRO PARA CONSULTAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-			}
+			
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				request.getRequestDispatcher("JSP/index_entrar.jsp").forward(request, response);
-			}
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				writer.println(resultado.getMensagem());
-				System.out.println("ERRO PARA SALVAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-			}
+			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				
-				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/pedidos.jsp").forward(request, response);
-
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				writer.println(resultado.getMensagem());
-				System.out.println("ERRO PARA ALTERAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-			}
+			
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
-			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/pedidos.jsp").forward(request, response);
-			} 
-			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
-				writer.println(resultado.getMensagem());
-				System.out.println("ERRO PARA EXCLUIR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
-			}
+			
 		}
 	}
 

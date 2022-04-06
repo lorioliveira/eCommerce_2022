@@ -34,16 +34,13 @@
       
       //pega todos enderecos que estao na sessao
       List<Endereco> enderecos = (List<Endereco>)sessao.getAttribute("enderecosCliente");
-      
+
       //pega todos cartões do Cliente que estao na sessao
       List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
       
-   	 //pega todos os pedidos do cliente logado
+   	// atualiza os pedidos 
       List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
-   
-     // atualiza os pedidos 
-   	 sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente());
-      
+    	 
       
       %>
    <body>

@@ -36,6 +36,9 @@
 	    //pega o pedido a ser visualizado
 		Pedido pedidoSelecionado = (Pedido)request.getAttribute("pedidoSelecionado");
 	    
+		Endereco enderecoDoPedidoSelecionado = (Endereco)request.getAttribute("enderecoDoPedidoSelecionado");
+		
+		List<ItemPedido> itensPedidoSelecionado = (List<ItemPedido>)request.getAttribute("itensPedidoSelecionado");
     %>
    
 
@@ -123,31 +126,31 @@
                         <h4>Detalhe do Pedido nº <%=pedidoSelecionado.getId() %> - Data: <%=pedidoSelecionado.getData_Cadastro() %> </h4><br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label><b>Produtos</b></label>
-                                    <span> R$ <%=pedidoSelecionado.getTotalItens() %></span>
+                                    <label><b>Total Produtos</b>:</label>
+                                    <span><i> R$ <%=pedidoSelecionado.getTotalItens() %></i></span>
                                     <br>
-                                    <label><b>Frete</b></label>
-                                    <span> R$ <%=pedidoSelecionado.getTotalFrete() %></span>
+                                    <label><b>Frete</b>:</label>
+                                    <span><i> R$ <%=pedidoSelecionado.getTotalFrete() %></i></span>
                                     <br>
-                                    <label><b>Desconto</b></label>
-                                    <span class="valorDesconto"> R$ <%=pedidoSelecionado.getTotalCupons() %></span>
+                                    <label><b>Descontos</b>:</label>
+                                    <span class="valorDesconto"><i> R$ <%=pedidoSelecionado.getTotalCupons() %></i></span>
                                     <br>
-                                    <label>Total:</label>
-                                    <span><b>R$ <%=pedidoSelecionado.getTotalPedido() %></b></span>
+                                    <label><b>Total</b>:</label>
+                                    <span><i>R$ <%=pedidoSelecionado.getTotalPedido() %></i></span>
                                 </div>
                                 <div class="col-md-4 formaPagamento_centralizado">
-                                    <label><b>Cartao</b></label>
-                                    <p><%=pedidoSelecionado.getIdCartao1() %></p>
-                                    <p><%=pedidoSelecionado.getIdCartao2() %></p>
+                                    <label><b>Cartão</b></label>
+                                    <p><i><%=pedidoSelecionado.getIdCartao1() %></i></p>
+                                    <p><i><%=pedidoSelecionado.getIdCartao2() %></i></p>
                                     
                                     
                                 </div>
                                 
                                 <div class="col-md-4 endereco_aDireita">
                                     <label><b>Entrega</b></label>
-                                    <p><%=pedidoSelecionado.getEndereco().getLogradouro() %>, <%=pedidoSelecionado.getEndereco().getNumero() %></p>
-                                    <p><%=pedidoSelecionado.getEndereco().getCidade() %> - <%=pedidoSelecionado.getEndereco().getEstado() %></p>
-                                    <p>CEP <%=pedidoSelecionado.getEndereco().getCep() %></p>
+                                    <p><i><%=pedidoSelecionado.getEndereco().getLogradouro() %>, <%=pedidoSelecionado.getEndereco().getNumero() %></i></p>
+                                    <p><i><%=pedidoSelecionado.getEndereco().getCidade() %> - <%=pedidoSelecionado.getEndereco().getEstado() %></i></p>
+                                    <p><i>CEP <%=pedidoSelecionado.getEndereco().getCep() %></i></p>
                                 </div>
                             </div>
                         </div>
@@ -169,17 +172,24 @@
                                                 <th>Ação</th>
                                             </tr>
                                         </thead>
+                                        <%
+                                        	for(ItemPedido i : itensPedidoSelecionado){
+                                        		ItemPedido d = (ItemPedido) i;
+                                        %>
                                         <tbody>
                                             <tr>
-                                                <td>Blusinha</td>
-                                                <td>//</td>
-                                                <td>1</td>
+                                                <td><%=d.getProduto().getNome() %></td>
+                                                <td><%=d.getProduto().getPrecoVenda() %></td>
+                                                <td><%=d.getProduto().getQuantidadeSelecionada() %></td>
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="5"><%=pedidoSelecionado.getStatus() %></td>
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="7">
-                                                  <button class="btn"> <i class="fa fa-edit"></i> Solicitar Troca</button>
+                                                  <button class="btn" disabled> <i class="fa fa-edit"></i> Solicitar Troca</button>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <%
+                                        	}
+                                        %>
                                     </table>
                                 </div>
                             </div>

@@ -9,9 +9,11 @@
       <meta charset="utf-8">
       <title>[Admin] Mirror Fashion</title>
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <meta content="eCommerce HTML Template Free Download" name="keywords">
+      <meta content="eCommerce HTML Template Free Download" name="description">
 
       <!-- Favicon -->
-      <link href="../img/favicon.ico" rel="icon">
+      <link href="./img/favicon.ico" rel="icon">
 
       <!-- Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -23,7 +25,7 @@
       <link href="lib/slick/slick-theme.css" rel="stylesheet">
 
       <!-- CSS Principal do Projeto -->
-      <link href="../css/style.css" rel="stylesheet">
+      <link href="./css/style.css" rel="stylesheet">
     </head>
     
     <% 
@@ -66,7 +68,7 @@
     
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
+                            <a href="./JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
                          <div class="nav-item dropdown">
@@ -94,8 +96,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="../JSP/indexAdm.jsp">
-                                <img src="../img/mir.svg" alt="Logo Mirror Fashion">
+                            <a href="./JSP/indexAdm.jsp">
+                                <img src="./img/mir.svg" alt="Logo Mirror Fashion">
                             </a>
                         </div>
                     </div>
@@ -122,7 +124,7 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/indexAdm.jsp">Minha Conta</a></li>
+                    <li class="breadcrumb-item"><a href="./JSP/indexAdm.jsp">Minha Conta</a></li>
                     <li class="breadcrumb-item active">Detalhe do Pedido</li>
                 </ul>
             </div>
@@ -199,7 +201,7 @@
                                 </div>
                             </div>
                              <!-- ID do Produto -->
-					<input type="hidden" name="idPedido" id="idPedido" value="<%=pedidoSelecionado.getId() %>">
+				<input type="hidden" name="idPedido" id="idPedido" value="<%=pedidoSelecionado.getId() %>">
                         </div>
                     </div>
                 </div>
@@ -257,15 +259,15 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="Forma de pagamento" />
+                            <img src="./img/payment-method.png" alt="Forma de pagamento" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="payment-security">
                             <h2>Compre com segurança</h2>
-                            <img src="../img/godaddy.svg" alt="Segurança" />
-                            <img src="../img/norton.svg" alt="Segurança" />
-                            <img src="../img/ssl.svg" alt="Segurança" />
+                            <img src="./img/godaddy.svg" alt="Segurança" />
+                            <img src="./img/norton.svg" alt="Segurança" />
+                            <img src="./img/ssl.svg" alt="Segurança" />
                         </div>
                     </div>
                 </div>
@@ -278,7 +280,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -295,10 +297,10 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/slick/slick.min.js"></script>
+        <script src="./lib/easing/easing.min.js"></script>
+        <script src="./lib/slick/slick.min.js"></script>
         
         <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>

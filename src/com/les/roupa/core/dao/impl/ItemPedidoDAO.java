@@ -1,6 +1,7 @@
 package com.les.roupa.core.dao.impl;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,11 @@ import com.les.roupa.core.dominio.ItemPedido;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para ITEM DO PEDIDO
+ * @author Lorena Oliveira 
+ * 
+ */
 public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	/**

@@ -38,11 +38,8 @@
       //pega todos cartões do Cliente que estao na sessao
       List<CartaoCredito> cartoes = (List<CartaoCredito>)sessao.getAttribute("cartoesCliente");
       
-   	 //pega todos os pedidos do cliente logado
-      List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
-      
       // atualiza os pedidos 
-    	 sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente()); 
+     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("pedidosCliente");
    	 
       %>
    <body>

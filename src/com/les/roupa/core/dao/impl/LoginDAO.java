@@ -14,6 +14,11 @@ import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Usuario;
 
+/**
+ * DAO para LOGIN - Usuario Cliente/ADMIN
+ * @author Lorena Oliveira 
+ * 
+ */
 public class LoginDAO extends AbstractJdbcDAO {
 	
 	/**

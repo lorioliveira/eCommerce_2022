@@ -3,10 +3,20 @@ package com.les.roupa.core.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.les.roupa.core.dominio.Cupom;
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Estoque;
+import com.les.roupa.core.dominio.ItemPedido;
+import com.les.roupa.core.dominio.Pedido;
+import com.les.roupa.core.dominio.PedidoTroca;
+import com.les.roupa.core.dominio.Produto;
 
 public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	
@@ -16,7 +26,6 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	 */
 	@Override
 	public void salvar(EntidadeDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
 		
 	} // Salvar
 	
@@ -27,7 +36,8 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	 */
 	@Override
 	public void alterar(EntidadeDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		
 		
 	} // Alterar
 	
@@ -49,8 +59,8 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	 */
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
+		
 	} // Consultar
 	
 }

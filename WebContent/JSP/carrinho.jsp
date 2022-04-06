@@ -65,7 +65,7 @@
       	// calculo do total dos itens (quantidade do item (*) o valor do item "preço de venda")
       	total_itens += (Double.parseDouble(produto.getQuantidadeSelecionada()) * Double.parseDouble(produto.getPrecoVenda()));
       	
-      	// calculo do frete (quantidade do item (*) 10 centavos)
+      	// calculo do frete (quantidade do item (*) 1 real)
       	total_frete += (Double.parseDouble(produto.getQuantidadeSelecionada()) * 0.10);
       }
       
@@ -183,6 +183,8 @@
          <div class="container-fluid">
             <div class="row">
             <!-- TABELA DE PRODUTOS / ENDEREÇOS / FORMA DE PAGAMENTO-->
+            
+            
                <div class="col-lg-8">
                   <div class="cart-page-inner">
                      <div class="table-responsive">
@@ -258,9 +260,10 @@
                      <div class="checkout-inner">
                         <div class="billing-address">
                         <!-- form para o cadastro do pedido -->
-							<form action="http://localhost:8080/eCommerce/cadastroPedido">
+                        <a href="../JSP/novoendereco.jsp"><button type="submit" class="btn btn_NovoEndCarrinho"><i class="fa fa-plus"></i> Endereço</button></a>
+                        
+			<form action="http://localhost:8080/eCommerce/cadastroPedido">
                            <h3>Endereços</h3>
-                           <a href="../JSP/novoendereco.jsp"><button type="submit" class="btn btn_NovoEndCarrinho"><i class="fa fa-plus"></i> Endereço</button></a>
                            </br>
                      
                            <div class="row">
@@ -273,10 +276,12 @@
                               <div class="col-md-6">
                                  <h5><%=d.getTipoEnd() %></h5>
                                  <p><%=d.getTipoResidencia() %> - <%=d.getObservacoes()%></p>
-                                 <p><%=d.getLogradouro() %></p>
+                                 <p><%=d.getLogradouro() %>, <%=d.getNumero() %></p>
                                  <p><%=d.getCidade() %> - <%=d.getEstado() %>  / CEP <%=d.getCep() %></p>
-                                 <input type="radio" name="selecioneEndereco" value="<%=d.getId() %>" class="btn" />
-                                 <i class="fa fa-check-square"></i> Selecionar
+                                 <div class="radioEndereco"> 
+	                                 <input type="radio" name="selecioneEndereco" value="<%=d.getId() %>" class="btn" />
+	                                 <i class="fa fa-check-square"></i> Selecionar
+	                             </div>
                                  </br></br>
                               </div>
                               <%
@@ -287,19 +292,19 @@
                                  <div class="checkout-payment">
                                     <div class="payment-methods">
                                        </br>
-                                       <hr size="12">
+                                       <hr size="1">
                                        </br>
                                        <h3>Forma de Pagamento</h3>
-                                       <a href="../JSP/novoCartao.jsp"><button class="btn btn_cadCartao"><i class="fa fa-plus"></i> Cartão</button></a>
+                                       
                                        <br>
                                        <div class="payment-method">
                                           <div class="custom-control custom-radio">
-                                             <input type="radio" class="custom-control-input" id="payment-1" name=selecioneCartao1"  />
+                                             <input type="radio" class="custom-control-input" id="payment-1" name=""  />
                                              <label class="custom-control-label" for="payment-1">Pagar com 1 Cartão de Crédito</label>
                                           </div>
                                           <div class="payment-content" id="payment-1-show">
                                              <div class="col-md-12">
-                                                <select class="form-control" type="text" name=selecioneCartao1" >
+                                                <select class="form-control" type="text" name="selecioneCartao1" >
                                                    <option selected disabled>Selecione o cartão</option>
                                                    <%
                                                       for(CartaoCredito c : cartoes){
@@ -317,11 +322,11 @@
                                        <div class="payment-method">
                                           <div class="custom-control custom-radio">
                                              <input type="radio" class="custom-control-input" id="payment-2" />
-                                             <label class="custom-control-label" for="payment-2" name=selecioneCartao1" >Pagar com 2 Cartões de Crédito</label>
+                                             <label class="custom-control-label" for="payment-2" name="" >Pagar com 2 Cartões de Crédito</label>
                                           </div>
                                           <div class="payment-content" id="payment-2-show">
                                              <div class="col-md-12">
-                                                <select class="form-control" type="text" name="selecioneCartao1">
+                                                <select class="form-control" name="selecioneCartao1">
                                                    <option selected disabled>Selecione o 1º cartão</option>
                                                    <%
                                                       for(CartaoCredito c : cartoes){
@@ -332,6 +337,7 @@
                                                    <%
                                                       }
                                                       %>
+                                                      
                                                 </select>
                                              </div>
                                              <div class="col-md-12">
@@ -390,17 +396,17 @@
                                     </thead>
                                     <tbody>
                                        <tr>
-                                          <td>promo10</td>
-                                          <td>10,00</td>
+                                          <td>s/n</td>
+                                          <td>0,00</td>
                                           <td>
-                                          	<input type="checkbox" name="cupom"/>
+                                          	<input type="checkbox"  disabled name="cupom"/>
                                           </td>
                                        </tr>
                                        <tr>
-                                          <td>troca</td>
-                                          <td>90,00</td>
+                                          <td>s/n</td>
+                                          <td>0,00</td>
                                           <td>
-                                          	<input type="checkbox" name="cupom"/>
+                                          	<input type="checkbox" disabled name="cupom"/>
                                           </td>
                                        </tr>
                                     </tbody>
@@ -432,6 +438,7 @@
             </div>
          </div>
       </div>
+      <a href="../JSP/novocartao.jsp"><button class="btn btn_cadCartao"><i class="fa fa-plus"></i> Cartão</button></a>
       <!-- Fim do Carrinho -->
       <!-- Início do Footer -->
       <div class="footer">

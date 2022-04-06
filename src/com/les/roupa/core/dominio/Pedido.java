@@ -20,15 +20,17 @@ public class Pedido extends EntidadeDominio{
 	private String total_cupons;
 	private String trocado;
 	private String todosItensTrocado;
-	private List<Produto> produtos;
-	private List<Cupom> cupons;
-	private String id_cliente_consulta;
-	private List<Pedido> pedidosCliente;
 	private String nome_cliente;
 	private String dar_baixa_estoque;
+	private String id_cliente_consulta;
+	
+	private List<Produto> produtos;
+	private List<Cupom> cupons;
+	private List<Pedido> pedidosCliente;
+	private List<ItemPedido> itemPedido;
 	
 	private Endereco endereco;
-	
+
 	private Pedido pedidoSelecionado;
 	
 	
@@ -164,6 +166,13 @@ public class Pedido extends EntidadeDominio{
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 	
 	// Metodo

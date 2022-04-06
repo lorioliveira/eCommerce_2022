@@ -110,21 +110,6 @@ public class PedidoHelper implements IViewHelper {
 			pedido.setProdutos(produtosDaSessao);
 			pedido.setCupons(cuponsDaSessao);
 			pedido.setData_Cadastro(dataAtual);
-			
-			//// ajuste do bug de quando o pedido não tiver nenhum Cupom vinculado,
-			//if (id_cupom.equals("null")) {
-        	//	// quando for finalizar o Pedido, e não tiver nenhum Cupom vinculado,
-        	//	// o valor do "id_cupom" será "null", em formato de String, 
-        	//	// então não atribui o valor ao objeto "pedido",
-        	//	// pq se o valor for "null" em formato de String, irá acusar ERRO ao salvar o Pedido na DAO.
-        	//	System.out.println("entrou !!");
-        	//}
-        	//else {
-        	//	// caso contrário, se tiver algum Cupom para vincular,
-        	//	// o valor será atribuido no Pedido
-        	//	pedido.setIdCupom(id_cupom);
-        	//}
-			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
@@ -157,14 +142,28 @@ public class PedidoHelper implements IViewHelper {
 				
 				
 				// pendura o "idPedido" na requisição para poder mandar para o arquivo .JSP
-				request.setAttribute("pedidoSelecionado", pedidoSelecionado);
-				//request.setAttribute("endereco", pedidoSelecionado.getEndereco());
+				request.setAttribute("pedidoSelecionado", pedidoSelecionado.getPedidosCliente().get(0));
+				request.setAttribute("itensPedidoSelecionado", pedidoSelecionado.getItemPedido());
+				
+				
 				
 				request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
+				
+				
+				Usuario usuarioLogado = new Usuario();
+		        HttpSession sessao = request.getSession();
+		        usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+		        
+				sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente());
+				
+		        //Caso usuario logado for Admin 
+				if(usuarioLogado.getTipoCliente().equals("admin")) {
+					request.getRequestDispatcher("JSP/detalhePedidoAdmin2.jsp").forward(request, response);
+				}
 			}
+				
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -177,7 +176,6 @@ public class PedidoHelper implements IViewHelper {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				List<Cupom> cuponsVazio = new ArrayList<>();
 				List<Produto> produtosVazio = new ArrayList<>();
-
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 
@@ -197,6 +195,7 @@ public class PedidoHelper implements IViewHelper {
 				
 				// Redireciona para o arquivo .jsp
 				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
+				
 			}
 			else {
 				// mostra as mensagens de ERRO se houver

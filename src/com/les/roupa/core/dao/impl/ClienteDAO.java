@@ -95,8 +95,8 @@ public class ClienteDAO extends AbstractJdbcDAO {
 				ResultSet rs = stmt.executeQuery();
 				
 				while (rs.next()) {
-					// criando o objeto Cliente, onde tambem possui dados do Usuario
 					
+					// criando o objeto Cliente, onde tambem possui dados do Usuario
 					Cliente clienteAltera = new Cliente();
 					Usuario usuarioCliente = new Usuario();
 					
@@ -203,7 +203,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Listar (CONSULTAR) o Cliente
+	 * Metodo para CONSULTAR (LISTAR) o Cliente
 	 * @param entidade
 	 * @return
 	 */
@@ -215,8 +215,8 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
-				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
 				
@@ -256,13 +256,13 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		openConnection();
 		try {
 			List<Cliente> client = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from cliente where id=? ");
+			PreparedStatement stmt = connection.prepareStatement("select * from cliente where id = ?");
 			stmt.setString(1, idCliente);
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
-				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				
+				// criando o objeto Cliente, onde tambem possui dados do Usuario
 				Cliente cliente = new Cliente();
 				Usuario usuario = new Usuario();
 				
@@ -290,7 +290,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // fim Listar CLiente por ID
+	} // fim Listar Cliente por ID
 	
 	
 	/**
@@ -338,7 +338,7 @@ public class ClienteDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Método para Listar/Verificar o status do Usuario (ativo/inativo) -- ADMIN
+	 * Método para Listar/Verificar o status do Usuario (ativo/inativo) -- opção como ADMIN
 	 * @param entidade
 	 * @return
 	 */
@@ -384,6 +384,4 @@ public class ClienteDAO extends AbstractJdbcDAO {
 			throw new RuntimeException(e);
 		}
 	} // fim Listar/Verificar Usuario por status ativo/inativo
-	
-	
 }

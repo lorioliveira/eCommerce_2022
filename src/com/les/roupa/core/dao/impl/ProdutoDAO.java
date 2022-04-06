@@ -10,10 +10,15 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para PRODUTO
+ * @author Lorena Oliveira 
+ * 
+ */
 public class ProdutoDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para SALVAR 
+	 * Metodo para SALVAR - opção como Admin
 	 */
 	public void salvar(EntidadeDominio entidade) {
 		/*

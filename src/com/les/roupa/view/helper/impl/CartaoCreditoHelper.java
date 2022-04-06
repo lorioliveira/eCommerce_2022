@@ -119,11 +119,8 @@ public class CartaoCreditoHelper implements IViewHelper {
         }
 
         return cartaoCredito;
-
     }
 
-    
-    
     // SET VIEW
     
     @Override
@@ -146,9 +143,7 @@ public class CartaoCreditoHelper implements IViewHelper {
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR CARTAO DE CREDITO!");
 				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				
             }
-            
             
         } else if (("SALVAR").equals(operacao)) {
             if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {

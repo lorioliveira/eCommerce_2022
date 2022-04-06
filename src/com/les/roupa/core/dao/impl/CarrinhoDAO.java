@@ -12,11 +12,16 @@ import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Produto;
+/**
+ * DAO PARA CARRINHO
+ * @author Lorena Oliveira
+ *
+ */
 
 public class CarrinhoDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para salvar o Carrinho
+	 * Metodo para SALVAR o Carrinho 
 	 * @param entidade
 	 */
 	@Override
@@ -25,21 +30,19 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 		
 		ProdutoDAO dao = new ProdutoDAO();
 		
-		// pesquisa no banco o produto selecionado,
-		// conforme o ID do produto que foi pega na tela
+		// pesquisa no BD o produto selecionado conforme o ID que foi pego
 		List<Produto> produtoSelecionado = dao.consultarProdutoById(carrinho.getDetalheProduto().getProduto().getId());
 		
-		// adiciona o produto pesquisado no banco,
-		// para o produto que esta selecionado na tela, para poder pegar todos os dados do produto,
+		// adiciona o produto selecionado para poder pegar todos os dados do produto,
 		// o Carrinho (entidade) que veio como parametro, esse objeto esta sendo alterado como REFERENCIA,
-		// logo consigo buscar esse objeto no resultado no SetView do ViewHelper do CarrinhoHelper
+		// logo consigo buscar esse objeto no resultado no SetView do CarrinhoHelper
 		carrinho.getDetalheProduto().setProduto(produtoSelecionado.get(0));
 		
-	} // Salvar
+	} // Salvar Carrinho
 	
 	
 	/**
-	 * Metodo para alterar o Carrinho
+	 * Metodo para ALTERAR o Carrinho
 	 * @param entidade
 	 */
 	@Override
@@ -48,21 +51,19 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 		
 		ProdutoDAO dao = new ProdutoDAO();
 		
-		// pesquisa no banco o produto selecionado,
-		// conforme o ID do produto que foi pega na tela
+		// pesquisa no BD o produto selecionado conforme o ID que foi pego
 		List<Produto> produtoSelecionado = dao.consultarProdutoById(carrinho.getDetalheProduto().getProduto().getId());
 		
-		// adiciona o produto pesquisado no banco,
-		// para o produto que esta selecionado na tela, para poder pegar todos os dados do produto,
+		// adiciona o produto selecionado para poder pegar todos os dados do produto,
 		// o Carrinho (entidade) que veio como parametro, esse objeto esta sendo alterado como REFERENCIA,
-		// logo consigo buscar esse objeto no resultado no SetView do ViewHelper do CarrinhoHelper
+		// logo consigo buscar esse objeto no resultado no SetView do CarrinhoHelper
 		carrinho.getDetalheProduto().setProduto(produtoSelecionado.get(0));
 		
-	} // Alterar
+	} // Alterar Carrinho
 	
 	
 	/**
-	 * Metodo para excluir o Carrinho
+	 * Metodo para EXCLUIR o Carrinho
 	 * @param entidade
 	 */
 	@Override
@@ -71,21 +72,19 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 		
 		ProdutoDAO dao = new ProdutoDAO();
 		
-		// pesquisa no banco o produto selecionado,
-		// conforme o ID do produto que foi pega na tela
+		// pesquisa no BD o produto selecionado conforme o ID que foi pego
 		List<Produto> produtoSelecionado = dao.consultarProdutoById(carrinho.getDetalheProduto().getProduto().getId());
 		
-		// adiciona o produto pesquisado no banco,
-		// para o produto que esta selecionado na tela, para poder pegar todos os dados do produto,
+		// adiciona o produto selecionado para poder pegar todos os dados do produto,
 		// o Carrinho (entidade) que veio como parametro, esse objeto esta sendo alterado como REFERENCIA,
-		// logo consigo buscar esse objeto no resultado no SetView do ViewHelper do CarrinhoHelper
+		// logo consigo buscar esse objeto no resultado no SetView do CarrinhoHelper
 		carrinho.getDetalheProduto().setProduto(produtoSelecionado.get(0));
 		
-	} // Excluir
+	} // Excluir Carrinho
 	
 	
 	/**
-	 * Metodo para Consultar o Carrinho
+	 * Metodo para CONSULTAR o Carrinho
 	 * @param entidade
 	 */
 	@Override
@@ -96,10 +95,11 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 			Carrinho novoCarrinho = new Carrinho();
 			List<EntidadeDominio> listCarrinho = new ArrayList<>();
 			
-			PreparedStatement stmt = connection.prepareStatement("select * from endereco where id_cliente=?");
+			PreparedStatement stmt = connection.prepareStatement("select * from endereco where id_cliente = ?");
 			stmt.setString(1, carrinho.getIdCliente());
 			ResultSet rs = stmt.executeQuery();
 			
+			// Lista de Endereços
 			List<Endereco> enderecos = new ArrayList<>();
 			while (rs.next()) {
 				// criando o objeto Endereço
@@ -122,7 +122,7 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 				enderecos.add(endAltera);
 			}
 			
-			stmt = connection.prepareStatement("select * from cartao_de_credito where id_cliente=?");
+			stmt = connection.prepareStatement("select * from cartaoCredito where id_cliente=?");
 			stmt.setString(1, carrinho.getIdCliente());
 			rs = stmt.executeQuery();
 			

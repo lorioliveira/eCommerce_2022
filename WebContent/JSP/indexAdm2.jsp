@@ -12,8 +12,6 @@
     <meta charset="utf-8">
     <title>[Admin] Mirror Fashion</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="eCommerce HTML Template Free Download" name="keywords">
-    <meta content="eCommerce HTML Template Free Download" name="description">
 
     <!-- Favicon -->
     <link href="./img/favicon.ico" rel="icon">
@@ -43,7 +41,7 @@
     // Pega o ID daquele cliente logado -> admin
     List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
- 	 //pega todos os pedidos do cliente logado
+ 	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
     %>
@@ -230,8 +228,7 @@
                                             <td>R$ <%=pedido.getTotalPedido() %></td>
                                             <td><%=pedido.getStatus() %></td>
                                             <td>
-                                                <a href="./JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
-                                                
+                                            	<a href="/eCommerce/cadastroPedido?id=<%= pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -230,8 +230,7 @@
                                             <td>R$ <%=pedido.getTotalPedido() %></td>
                                             <td><%=pedido.getStatus() %></td>
                                             <td>
-                                                <a href="../JSP/detalhePedidoAdmin.jsp"><button class="btn"><i class="fa fa-eye"></i></button></a>
-                                                
+                                               <a href="/eCommerce/cadastroPedido?id=<%=pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>                      
                                             </td>
                                         </tr>
                                     </tbody>

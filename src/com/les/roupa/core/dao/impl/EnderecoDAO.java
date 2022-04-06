@@ -10,6 +10,11 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Usuario;
 
+/**
+ * DAO para ENDEREÇO
+ * @author Lorena Oliveira 
+ * 
+ */
 public class EnderecoDAO extends AbstractJdbcDAO {
 	
 	/**
@@ -23,7 +28,6 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				"(cep,logradouro,numero,bairro,cidade,estado,pais,"
 				+ "tipoResidencia,observacoes,tipoEndereco,id_cliente,data_cadastro)" +
 				"values (?,?,?,?,?,?,?,?,?,?,?,?)";
-		
 		try {
 			Endereco endereco = (Endereco) entidade;
 			
@@ -74,7 +78,6 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				enderecosCliente.add(endAltera);
 			}
 			
-			//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
 			endereco.setTodosEnderecos(enderecosCliente);
 			
 			rs.close();
@@ -84,8 +87,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		}
 	} // Salvar
 	
-	
-	
+		
 	/**
 	 * Metodo para ALTERAR o Endereco
 	 * @param entidade
@@ -149,12 +151,10 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 					enderecosCliente.add(endAltera);
 				}
 				
-				//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
 				endereco.setTodosEnderecos(enderecosCliente);
 				
 				rs.close();
 				stmt.close();
-				
 				
 			}else {
 				
@@ -186,7 +186,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 					enderecosCliente.add(endAltera);
 				}
 
-				//cliente.getUsuario().setEnderecosCliente(enderecosCliente);
+				
 				endereco.setTodosEnderecos(enderecosCliente);
 				
 				rs.close();
@@ -197,7 +197,6 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		}
 	} // Fim Alterar Endereco
 	
-
 	
 	/**
 	 * Metodo para EXCLUIR o endereco

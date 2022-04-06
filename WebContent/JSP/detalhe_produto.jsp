@@ -150,10 +150,9 @@
                                         <img src="<%=produtoSelecionado.getFoto() %>" alt="Foto do produto">
                                         <img src="<%=produtoSelecionado.getFoto() %>" alt="Foto do produto">
                                     </div>
-                                    <div class="product-slider-single-nav normal-slider">
+                                    <!-- <div class="product-slider-single-nav normal-slider">
                                         <div class="slider-nav-img"><img src="../img/produtos/fotoindisponivel.png" alt="Foto do produto"> </div>
-                                        
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-content">
@@ -176,13 +175,7 @@
 	                                        <div class="quantity">
 	                                            <h4>Qtde.:</h4>
 	                                            <div class="qty">
-	                                                <button class="btn-minus"><i class="fa fa-minus"></i>
-	                                                </button>
-	                                                
-	                                                <input type="text" name="quantidadeSelecionada" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="2">
-	                                                
-	                                                <button class="btn-plus"><i class="fa fa-plus"></i>
-	                                                </button>
+	                                                <input type="text" name="quantidadeSelecionada" onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" maxlength="2" value="0">
 	                                            </div>
 	                                        </div>
 	                                        <div class="p-size">

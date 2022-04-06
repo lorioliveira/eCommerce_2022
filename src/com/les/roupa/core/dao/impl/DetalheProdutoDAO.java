@@ -10,11 +10,16 @@ import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para DETALHE DO PRODUTO
+ * @author Lorena Oliveira 
+ * 
+ */
 public class DetalheProdutoDAO extends AbstractJdbcDAO {
 	
-	
 	/**
-	 * Metodo para SALVAR 
+	 * Metodo para SALVAR
+	 * @param entidade
 	 */
 	public void salvar(EntidadeDominio entidade) {
 		DetalheProduto detalheProduto = (DetalheProduto) entidade;
@@ -173,8 +178,48 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 			}
 		} // Produto por categoria VESTIDO
 		
-	
-	
+		 /** Metodo para Listar Produto por categoria Acessorios
+		 * @param entidade
+		 * @return
+		 */
+		public List<EntidadeDominio> consultarProdutoByCategoriaAcessorios (EntidadeDominio entidade){
+			openConnection();
+			try {
+				List<EntidadeDominio> produtos = new ArrayList<>();
+				PreparedStatement stmt = connection.prepareStatement("select * from produto where categoria='acessorios' and status ='ativo'");
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Produto
+					
+					Produto prod = new Produto();
+									
+					prod.setId(rs.getString("id"));
+					prod.setNome(rs.getString("nome"));
+					prod.setDescricao(rs.getString("descricao"));
+					prod.setCategoria(rs.getString("categoria"));
+					prod.setCores(rs.getString("cores"));
+					prod.setTamanho(rs.getString("tamanho"));
+					prod.setPrecoCompra(rs.getString("precoCompra"));
+					prod.setPrecoVenda(rs.getString("precoVenda"));
+					prod.setQtdeEstoque(rs.getString("qtdeEstoque"));
+					prod.setFoto(rs.getString("foto"));
+					prod.setData_Cadastro(rs.getString("dt_cadastro"));
+					prod.setStatus(rs.getString("status"));
+					prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
+				
+					
+					// adicionando o objeto à lista
+					produtos.add(prod);
+				}
+				rs.close();
+				stmt.close();
+				return produtos;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		} // Produto por categoria ACESSORIOS
+		
 	
 	/**
 	 * Metodo para Listar Produto

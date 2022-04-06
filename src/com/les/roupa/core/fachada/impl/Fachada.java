@@ -65,7 +65,7 @@ import com.les.roupa.core.strategy.IStrategy;
 
 
 /**
- * Classe Fachada - Mirror Fashion
+ * FACHADA - Mirror Fashion
  * @author Lorena Oliveira
 */
 
@@ -76,7 +76,7 @@ public class Fachada implements IFachada {
 
 	/* ------------ Declaracao de TODAS as Strategy's ------------ */
 	
-	/* ---- CLIENTE -----*/
+	/* ---- SALVAR/ALTERAR CLIENTE -----*/
 	ValidarEmail vEmail = new ValidarEmail();
 	ValidarNome vNome = new ValidarNome();
 	//ValidarCPF vCPF = new ValidarCPF();
@@ -86,14 +86,14 @@ public class Fachada implements IFachada {
 	ValidarStatus vStatus = new ValidarStatus();
 	ValidarSenhaConfSenha vSenhaConfSenhaIgual = new ValidarSenhaConfSenha();
 	ValidarSenha vSenha = new ValidarSenha();
+	
 	//ValidarCPF_Alt vCPFAlterado = new ValidarCPF_Alt();
 	ValidarNome_Alt vNomeAlterado = new ValidarNome_Alt();
 	ValidarDataNascimento_Alt vDtNascimentoAlterado = new ValidarDataNascimento_Alt();
 	ValidarGenero_Alt vGeneroAlterado = new ValidarGenero_Alt();
 
-	
-	/* ---- ENDERECO -----*/
-	/* ---- Salvar Novo Endereï¿½o ---- */
+
+	/* ---- SALVAR/ALTERAR ENDEREÇO ---- */
 	//ValidarCEP vcep = new ValidarCEP();
 	ValidarLogradouro vLogradouro = new ValidarLogradouro();
 	ValidarNumero vNumero = new ValidarNumero();
@@ -102,8 +102,7 @@ public class Fachada implements IFachada {
 	ValidarEstado vEstado = new ValidarEstado();
 	ValidarPais vPais = new ValidarPais();
 	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
-	
-	/* ---- Alterar um Endereï¿½o Salvo ------ */
+
 	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
 	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
 	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
@@ -112,21 +111,18 @@ public class Fachada implements IFachada {
 	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
 	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
 	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
-//	
 	
-	/* ---- CARTAO DE CREDITO -----*/
-	/* ----- SALVAR ---- */
 	
+	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
 	ValidarNumCartao vNumCartao = new ValidarNumCartao();
 	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
 //	ValidarCVV vCVV = new ValidarCVV();
 //	ValidarNomeCartao vNomeCartao = new ValidarNomeCartao();
-//	
+	
 //	ValidarNomeCartao_Alt vNomeCartaoAlterado = new ValidarNomeCartao_Alt();
 //	ValidarCVV_Alt vCVVAlterado = new ValidarCVV_Alt();
 //	ValidarNumeroCartao_Alt vNumCartaoAlterado = new ValidarNumeroCartao_Alt();
 		
-	
 	/* ---- LOGIN -----*/
 	ValidarExisteEmail vExisteEmail = new ValidarExisteEmail();
 	ValidarExisteEmailSenha vExisteEmailSenha = new ValidarExisteEmailSenha();
@@ -151,11 +147,10 @@ public class Fachada implements IFachada {
 	//ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
 	//ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
 	
-	
 	/* --- GRAFICO --- */
 	//ValidarDatasGraficoAnalise vGrafico = new ValidarDatasGraficoAnalise();
 	
-	/* ------------------------------------------------------------ */
+	/* ------------------------------------------------------------------------------------------------------------------- */
 	
 	/* ------------ Declaracao das Listas de Strategy's dos Dominios ------------ */
 	/* ------------ SALVAR ------------ */
@@ -206,6 +201,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasExcluirEndereco = new ArrayList<>();
 	List<IStrategy> regrasExcluirCartaoCredito = new ArrayList<>();
 	List<IStrategy> regrasExcluirLogin = new ArrayList<>();
+	List<IStrategy> regrasExcluirProduto = new ArrayList<>();
 	List<IStrategy> regrasExcluirCarrinho = new ArrayList<>();
 	List<IStrategy> regrasExcluirPedido = new ArrayList<>();
 	List<IStrategy> regrasExcluirCupom = new ArrayList<>();
@@ -214,7 +210,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasExcluirEstoque = new ArrayList<>();
 	List<IStrategy> regrasExcluirGrafico= new ArrayList<>();
 	
-	/* -------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------------------------- */
 	
 	/* ------------ Declaracao dos MAP's das Regras de Negocios dos Dominios ------------ */
 	Map<String, List<IStrategy>> regrasCliente = new HashMap<>();
@@ -231,19 +227,21 @@ public class Fachada implements IFachada {
 	Map<String, List<IStrategy>> regrasEstoque = new HashMap<>();
 	Map<String, List<IStrategy>> regrasGrafico = new HashMap<>();
 	
-	/* ----------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------------------------ */
 	
 	/* ------------ Declaracao da Regra de Negocio Geral ------------ */
+	
 	Map<String, Map<String, List<IStrategy>>> regrasGeral = new HashMap<>();
-	/* --------------------------------------------------------------- */
+	
+	/* ------------------------------------------------------------------------------------------------------------------- */
 
-	// Construtor da Fachada
+	// CONSTRUTOR DA FACHADA
 	public Fachada() {
 		// Mapa dos DAO's
 		daos = new HashMap<String, IDAO>();
 
 		// Criando instancias dos DAOS a serem utilizados,
-		// adicionando cada dado no MAP indexado pelo nome da classe
+		// adicionando cada dado no MAP indexado pelo nome da classe correspondente
 		daos.put(Cliente.class.getName(), new ClienteDAO());
 		daos.put(Endereco.class.getName(), new EnderecoDAO());
 		daos.put(CartaoCredito.class.getName(), new CartaoCreditoDAO());
@@ -252,13 +250,16 @@ public class Fachada implements IFachada {
 		daos.put(DetalheProduto.class.getName(), new DetalheProdutoDAO());
 		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		daos.put(Pedido.class.getName(), new PedidoDAO());
+		
 		//daos.put(Cupom.class.getName(), new CupomDAO());
 		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
 		//daos.put(PedioTroca.class.getName(), new PedidoTrocaDAO());
 		//daos.put(Estoque.class.getName(), new EstoqueDAO());
 		//daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
-		/* ----- Adicionando as Strategy's na lista do Cliente ----- */
+	/* ---------------------------------------------------------------------------------------------------------------- */
+		
+		/* ----- Adicionando as Strategy's na lista do CLIENTE ----- */
 		
 		/* ----- SALVAR ----- */
 		regrasSalvarCliente.add(vNome);
@@ -280,10 +281,10 @@ public class Fachada implements IFachada {
 		regrasAlterarCliente.add(vTelefone);
 		regrasAlterarCliente.add(vGeneroAlterado);
 		
-		/* ---------------------------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------------------- */
 
 		
-		/* ----- Adicionando as Strategy's na lista do Endereï¿½o ----- */
+		/* ----- Adicionando as Strategy's na lista do ENDEREÇO ----- */
 		
 		/* ----- SALVAR ----- */
 		//regrasSalvarEndereco.add(vcep);
@@ -295,7 +296,7 @@ public class Fachada implements IFachada {
 		regrasSalvarEndereco.add(vPais);
 		regrasSalvarEndereco.add(vTipoResidencia);
 		
-//		/* ----- ALTERAR ----- */
+		/* ----- ALTERAR ----- */
 		regrasAlterarEndereco.add(vCEPAlterado);
 		regrasAlterarEndereco.add(vLogradouroAlterado);
 		regrasAlterarEndereco.add(vNumAlterado);
@@ -305,24 +306,25 @@ public class Fachada implements IFachada {
 		regrasAlterarEndereco.add(vPaisAlterado);
 		regrasAlterarEndereco.add(vTipoResidenciaAlterado);
 		
-		/* ---------------------------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
-		/* --- Adicionando as Strategy's do Cartao de Credito ------- */
+		/* --- Adicionando as Strategy's do CARTÃO DE CRÉDITO ------- */
 		
 		/* ----- SALVAR ----- */
 		regrasSalvarCartaoCredito.add(vNumCartao);
 		regrasSalvarCartaoCredito.add(vBandeiraCartao);
+		
 //		regrasSalvarCartaoCredito.add(vCVV);
 //		regrasSalvarCartaoCredito.add(vNomeCartao);
-//		
+		
 //		/* ----- ALTERAR ----- */
 //		regrasAlterarCartaoCredito.add(vNumCartaoAlterado);
 //		regrasAlterarCartaoCredito.add(vCVVAlterado);
 //		regrasAlterarCartaoCredito.add(vNomeCartaoAlterado);
 		
-		/* ---------------------------------------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------ */
 		
-		/* ----- Adicionando as Strategy's na lista do Login ----- */
+		/* ----- Adicionando as Strategy's na lista do LOGIN ----- */
 		/* ----- SALVAR ----- */
 		regrasSalvarLogin.add(vExisteEmailSenha);
 		
@@ -330,46 +332,44 @@ public class Fachada implements IFachada {
 		regrasConsultarLogin.add(vExisteEmailSenha);
 		regrasConsultarLogin.add(vSenhaLogin); 
 		
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
-		
-		/* ---------------------------------------------------------- */
-		
-		/* ----- Adicionando as Strategy's na lista do Produto ----- */
+		/* ----- Adicionando as Strategy's na lista do PRODUTO ----- */
 //		regrasAlterarProduto.add(vNomeProduto);
 //		regrasAlterarProduto.add(vCategoria);
 //		regrasAlterarProduto.add(vPrecoCompra);
 //		regrasAlterarProduto.add(vPrecoVenda);
 //		regrasAlterarProduto.add(vDtCadastro);
 //		regrasAlterarProduto.add(vFoto);
-//		//regrasAlterarProduto.add(vQtde);
+//		regrasAlterarProduto.add(vQtde);
 //		regrasAlterarProduto.add(vDescricao);
 //		regrasAlterarProduto.add(vStatusProduto);
 //		regrasAlterarProduto.add(vGrupoPrecificacao);
 		
-		/* ---------------------------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- Adicionando as Strategy's na lista do Carrinho ----- */
+		/* ----- Adicionando as Strategy's na lista do CARRINHO ----- */
 		//regrasAlterarCarrinho.add(vValorQtdeCarrinho);
 		
-		/* ---------------------------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- Adicionando as Strategy's na lista do Pedido ----- */
+		/* ----- Adicionando as Strategy's na lista do PEDIDO ----- */
 		
-		/* ---------------------------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- Adicionando as Strategy's na lista do Estoque ----- */
+		/* ----- Adicionando as Strategy's na lista do ESTOQUE ----- */
 		/* ----- SALVAR ----- */
 		//regrasSalvarEstoque.add(vEntradaEstoque);
 		//regrasSalvarEstoque.add(vSaidaEstoque);
 		
-		/* ---------------------------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- Adicionando as Strategy's na lista do Grafico ----- */
+		/* ----- Adicionando as Strategy's na lista do GRÁFICO ----- */
 		
 		/* ----- CONSULTAR ----- */
 		//regrasConsultarGrafico.add(vGrafico);
-		/* ---------------------------------------------------------- */
 		
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		
 		/* ----- REGRAS DA ENTIDADE CLIENTE ----- */
@@ -381,9 +381,9 @@ public class Fachada implements IFachada {
 		regrasCliente.put("ALTERAR", regrasAlterarCliente);
 		/* ----- EXCLUIR ----- */
 		regrasCliente.put("EXCLUIR", regrasExcluirCliente);
-		/* -------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 
-		/* ----- REGRAS DA ENTIDADE ENDEREï¿½O ----- */
+		/* ----- REGRAS DA ENTIDADE ENDEREÇO ----- */
 		/* ----- SALVAR ----- */
 		regrasEndereco.put("SALVAR", regrasSalvarEndereco);
 		/* ----- CONSULTAR ----- */
@@ -392,7 +392,7 @@ public class Fachada implements IFachada {
 		regrasEndereco.put("ALTERAR", regrasAlterarEndereco);
 		/* ----- EXCLUIR ----- */
 		regrasEndereco.put("EXCLUIR", regrasExcluirEndereco);
-		/* --------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE CARTAO DE CREDITO ----- */
 		/* ----- SALVAR ----- */
@@ -403,7 +403,7 @@ public class Fachada implements IFachada {
 		regrasCartaoCredito.put("ALTERAR", regrasAlterarCartaoCredito);
 		/* ----- EXCLUIR ----- */
 		regrasCartaoCredito.put("EXCLUIR", regrasExcluirCartaoCredito);
-		/* --------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE LOGIN ----- */
 		/* ----- SALVAR ----- */
@@ -414,7 +414,7 @@ public class Fachada implements IFachada {
 		regrasLogin.put("ALTERAR", regrasAlterarLogin);
 		/* ----- EXCLUIR ----- */
 		regrasLogin.put("EXCLUIR", regrasExcluirLogin);
-		/* --------------------------------------- */
+		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE PRODUTO ----- */
 		/* ----- SALVAR ----- */
@@ -424,15 +424,14 @@ public class Fachada implements IFachada {
 		/* ----- ALTERAR ----- */
 		regrasProduto.put("ALTERAR", regrasAlterarProduto);
 		/* ----- EXCLUIR ----- */
-			//regrasProduto.put("EXCLUIR", regrasExcluirProduto);
-		/* --------------------------------------- */
+		regrasProduto.put("EXCLUIR", regrasExcluirProduto);
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE DETALHE DO PRODUTO ----- */
 		/* ----- SALVAR ----- */
 		regrasDetalheProduto.put("SALVAR", regrasSalvarDetalheProduto);
 		
-		/* --------------------------------------- */
-		
+		/* -------------------------------------------------------------------------------------------------------------- */
 		/* ----- REGRAS DA ENTIDADE CARRINHO ----- */
 		/* ----- SALVAR ----- */
 		regrasCarrinho.put("SALVAR", regrasSalvarCarrinho);
@@ -442,7 +441,7 @@ public class Fachada implements IFachada {
 		regrasCarrinho.put("ALTERAR", regrasAlterarCarrinho);
 		/* ----- EXCLUIR ----- */
 		regrasCarrinho.put("EXCLUIR", regrasExcluirCarrinho);
-		/* -------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE PEDIDO ----- */
 		/* ----- SALVAR ----- */
@@ -453,8 +452,7 @@ public class Fachada implements IFachada {
 		regrasPedido.put("ALTERAR", regrasAlterarPedido);
 		/* ----- EXCLUIR ----- */
 		regrasPedido.put("EXCLUIR", regrasExcluirPedido);
-		/* -------------------------------------- */
-		
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE CUPOM ----- */
 		/* ----- SALVAR ----- */
@@ -465,9 +463,9 @@ public class Fachada implements IFachada {
 		regrasCupom.put("ALTERAR", regrasAlterarCupom);
 		/* ----- EXCLUIR ----- */
 		regrasCupom.put("EXCLUIR", regrasExcluirCupom);
-		/* -------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- REGRAS DA ENTIDADE CUPOM Carrinho ----- */
+		/* ----- REGRAS DA ENTIDADE CUPOM CARRINHO ----- */
 		/* ----- SALVAR ----- */
 		regrasCupomCarrinho.put("SALVAR", regrasSalvarCupomCarrinho);
 		/* ----- CONSULTAR ----- */
@@ -476,7 +474,7 @@ public class Fachada implements IFachada {
 		regrasCupomCarrinho.put("ALTERAR", regrasAlterarCupomCarrinho);
 		/* ----- EXCLUIR ----- */
 		regrasCupomCarrinho.put("EXCLUIR", regrasExcluirCupomCarrinho);
-		/* -------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE PEDIDO TROCA ----- */
 		/* ----- SALVAR ----- */
@@ -487,7 +485,7 @@ public class Fachada implements IFachada {
 		regrasPedidoTroca.put("ALTERAR", regrasAlterarPedidoTroca);
 		/* ----- EXCLUIR ----- */
 		regrasPedidoTroca.put("EXCLUIR", regrasExcluirPedidoTroca);
-		/* -------------------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------- */
 		
 		
 		/* ----- REGRAS DA ENTIDADE ESTOQUE ----- */
@@ -499,7 +497,7 @@ public class Fachada implements IFachada {
 		regrasEstoque.put("ALTERAR", regrasAlterarEstoque);
 		/* ----- EXCLUIR ----- */
 		regrasEstoque.put("EXCLUIR", regrasExcluirEstoque);
-		/* -------------------------------------- */
+		/* ----------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE GRAFICO ----- */
 		/* ----- SALVAR ----- */
@@ -510,12 +508,10 @@ public class Fachada implements IFachada {
 		regrasGrafico.put("ALTERAR", regrasAlterarGrafico);
 		/* ----- EXCLUIR ----- */
 		regrasGrafico.put("EXCLUIR", regrasExcluirGrafico);
-		/* -------------------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------ */
 		
 		
-		
-		
-		/* ----- REGRAS GERAIS ----- */
+		/* -------------- REGRAS GERAIS ----------- */
 		regrasGeral.put(Cliente.class.getName(), regrasCliente);
 		regrasGeral.put(Endereco.class.getName(), regrasEndereco);
 		regrasGeral.put(CartaoCredito.class.getName(), regrasCartaoCredito);
@@ -524,15 +520,16 @@ public class Fachada implements IFachada {
 		regrasGeral.put(DetalheProduto.class.getName(), regrasDetalheProduto);
 		regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
 		regrasGeral.put(Pedido.class.getName(), regrasPedido);
+		
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
 		//regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
 		//regrasGeral.put(Estoque.class.getName(), regrasEstoque);
 		//regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
-		/* -------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------ */
 	}
 
-	/*---SALVAR---*/
+	/*------- SALVAR -------*/
 	@Override
 	public Resultado salvar(EntidadeDominio entidade) {
 		resultado = new Resultado();
@@ -542,13 +539,13 @@ public class Fachada implements IFachada {
 		String msg = executarRegras(entidade, "SALVAR");
 
 		if (msg == null || msg == "") {
-			// Obtï¿½m o DAO correspondente ao nome do pacote com o nome da classe,
+			// Obtçm o DAO correspondente ao nome do pacote com o nome da classe,
 			// que esta dentro do HashMap do "daos"
 			IDAO dao = daos.get(nmClasse);
 			try {
 				dao.salvar(entidade);
 
-				// cria uma lista para mostrar os clientes salvos
+				// cria uma lista para mostrar os salvos
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
@@ -562,7 +559,7 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	/*---ALTERAR---*/
+	/*--------- ALTERAR -----------*/
 	@Override
 	public Resultado alterar(EntidadeDominio entidade) {
 		resultado = new Resultado();
@@ -575,7 +572,7 @@ public class Fachada implements IFachada {
 			try {
 				dao.alterar(entidade);
 
-				// cria uma lista para mostrar os clientes alterados
+				// cria uma lista para mostrar os alterados
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
@@ -589,7 +586,7 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	/*---EXCLUIR---*/
+	/*--------- EXCLUIR --------*/
 	@Override
 	public Resultado excluir(EntidadeDominio entidade) {
 		resultado = new Resultado();
@@ -602,7 +599,7 @@ public class Fachada implements IFachada {
 			try {
 				dao.excluir(entidade);
 
-				// cria uma lista para mostrar os clientes excluidos
+				// cria uma lista para mostrar os excluidos
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
@@ -616,7 +613,7 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	/*---CONSULTAR---*/
+	/*--------- CONSULTAR ---------*/
 	@Override
 	public Resultado consultar(EntidadeDominio entidade) {
 		resultado = new Resultado();
@@ -638,7 +635,7 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	// Mï¿½todo para executar as regras de negocio / Strategy
+	// Mçtodo para executar as regras de negocio / Strategy
 	private String executarRegras(EntidadeDominio entidade, String operacao) {
 		String msg = "";
 
@@ -648,10 +645,10 @@ public class Fachada implements IFachada {
 		// com o nome da classe, ele pega o MAP com as suas respectivas regras de dominio (exemplo: regrasCliente),
 		Map<String, List<IStrategy>> regrasDaEntidade = regrasGeral.get(nmClasse);
 		
-		// depois ele pega a "operaï¿½ï¿½o"que deseja ser realizada (exemplo: "salvar")
+		// depois ele pega a "operaçço"que deseja ser realizada (exemplo: "salvar")
 		List<IStrategy> regrasDaOperacao = regrasDaEntidade.get(operacao);
 		
-		// para cada "regra" em "regrasDaOperacao", ele irï¿½ chamar as Strategy's 
+		// para cada "regra" em "regrasDaOperacao", ele irá chamar as Strategy's 
 		// que estiver dentro da lista (exemplo: regrasSalvarCliente)
 		for (IStrategy regra : regrasDaOperacao) {
 			String resultado = regra.validar(entidade);

@@ -22,10 +22,9 @@ import com.les.roupa.core.dominio.Usuario;
 public class CartaoCreditoDAO extends AbstractJdbcDAO{
 	
 	/**
-	 * SALVAR CARTAO
-	 *
+	 * Metodo para SALVAR o Cartao 
+	 * @param entidade
 	 */
-	
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		
@@ -85,8 +84,8 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 	} // Salvar
 	
 	/**
-	 * Método para ALTERAR CARTÃO
-	 * 
+	 * Metodo para SALVAR o Cartao 
+	 * @param entidade
 	 */
 	@Override
 	public void alterar(EntidadeDominio entidade) {
@@ -107,7 +106,6 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 				PreparedStatement stmt = connection.prepareStatement(sql);
 				
 				// seta os valores
-	
 				stmt.setString(1,cartaocredito.getNumCartao());
 				stmt.setString(2,cartaocredito.getBandeira());
 				stmt.setString(3,cartaocredito.getNome());
@@ -152,7 +150,7 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 			
 			}else {
 				
-				//Listar todos os dados de um Cartao de Credito para alterar
+				//Listar todos os dados de um Cartao de Credito para Alterar
 				List<CartaoCredito> cartoesCliente = new ArrayList<>();
 				PreparedStatement stmt = connection.prepareStatement("select * from cartaoCredito where id = ?");
 				stmt.setString(1, cartaocredito.getId());
@@ -232,7 +230,7 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Excluir
+	} // Excluir Cartao
 	
 	/**
 	 * Método para CONSULTAR todos os cartoes
@@ -276,7 +274,7 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 
 
 	/**
-	 * Método para Listar Cartao de Credito por ID
+	 * Método para LISTAR Cartao de Credito por ID
 	 * @param entidade
 	 * @return
 	 */
@@ -285,7 +283,7 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 		try {
 			
 			List<CartaoCredito> cartoes = new ArrayList<>();
-			PreparedStatement stmt = connection.prepareStatement("select * from cartaoCredito where id=?");
+			PreparedStatement stmt = connection.prepareStatement("select * from cartaoCredito where id = ?");
 			stmt.setString(1, idCartao);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -356,7 +354,4 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 			throw new RuntimeException(e);
 		}
 	} // Listar Cartao - Carrinho
-	
-
-
 }
