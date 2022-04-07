@@ -126,40 +126,62 @@
   </div>
   <!-- Fim do Breadcrumb -->
   <!-- Inicio do Checkout  -->
+  <div class="cart-page">
   <div class="checkout">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-8">
           <div class="checkout-inner">
-            <div class="billing-address">
-              <h2>Endereços</h2>
-              <div class="row">
-                <div class="col-md-6">
-                  <h5>Entrega e Cobrança</h5>
-                  <p>casa vo</p>
-                  <p>Av. Alameda Azul, 98</p>
-                  <p>Mogi - SP / CEP 00089-930</p>
-                  <button class="btn">
-                    <i class="fa fa-check-square"></i> Selecionar</button>
-                </div>
-                <div class="col-lg-6">
-                  <h5>Entrega</h5>
-                  <p>casa tia</p>
-                  <p>Av. Santana, 102</p>
-                  <p>Salvador - BA / CEP 43700-000</p>
-                  <button class="btn">
-                    <i class="fa fa-check-square"></i> Selecionar </button>
-                </div>
-                <div class="col-md-12"><br /></div>
-                <!-- CADASTRO DE UM NOVO ENDEREÇO  -->
-                <div class="col-md-12">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="shipto" />
-                    <label class="custom-control-label" for="shipto">Cadastrar novo endereço</label>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <table class="table table-bordered">
+                           <thead class="thead-dark">
+                              <tr>
+                                 <th>Produto</th>
+                                 <th>Preço</th>
+                                 <th>Quantidade</th>
+                                 <th>Total</th>
+                                 <th>Excluir</th>
+                              </tr>
+                           </thead>
+                           <tbody class="align-middle">
+                              <tr>
+                                 <td>
+                                    <div class="img">
+                                       <a href="#"><img alt="Image" /></a>
+                                       <p></p>
+                                    </div>
+                                 </td>
+                                 <td>R$ </td>
+                                 <td>
+                                    <form class="form" action="http://localhost:8080/eCommerce/carrinho">
+                                       <div >
+                                          <button class="btn-minus" name="tipoDeOperacao"	value="subtracao">
+                                          <i class="fa fa-minus"></i>
+                                          </button>
+                                          <input type="text" name="quantidadeSelecionada"	onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" value="" />
+                                          <button class="btn-plus" name="tipoDeOperacao" value="adicao">
+                                          <i class="fa fa-plus"></i>
+                                          </button>
+                                       </div>
+                                       <!-- operação que é acionada através do form -->
+                                       <input type="hidden" name="operacao" id="operacao" value="ALTERAR">
+                                       <!-- ID do Produto -->
+                                       <input type="hidden" name="idProduto" id="idProduto" value="">
+                                       <!-- ID do Cliente -->
+                                       <input type="hidden" name="idCliente" id="idCliente" value="">
+                                    </form>
+                                 </td>
+                                 <td>
+                                    <!-- form responsavel por excluir o item inteiro do carrinho selecionado -->
+                                    <form class="form" action="http://localhost:8080/eCommerce/carrinho">
+                                       <button name="operacao" value="EXCLUIR"><i class="fa fa-trash"></i></button>
+                                       <!-- ID do Produto -->
+                                       <input type="hidden" name="idProduto" id="idProduto" value="">
+                                    </form>
+                                 </td>
+                              </tr>
+                           </tbody>
+                           
+                        </table>
           </div>
         </div>
         <div class="col-lg-4">
@@ -238,6 +260,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!-- Checkout End -->
   <!-- Footer Start -->

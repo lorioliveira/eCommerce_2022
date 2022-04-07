@@ -2450,6 +2450,7 @@ h2 {
 .btn_NovoEndereco{
 	margin-left: 73%;
 	position: static;
+	padding: revert;
 }
 
 .btn_NovoEndCarrinho{
@@ -2605,31 +2606,36 @@ h2 {
  
  .radioEndereco {
 	 background-color: #FF6F61;
-	 border: 1px solid #FF6F61;
+	 border: 1px solid #FF6F61 !important;
     box-sizing: border-box;
     float: left;
-    /* height: 25px; */
-    /* position: relative; */
-    width: 30%;
+    height: 25px;
+    position: relative; 
+    width: 30% !important;
     border-radius: 3px;
     /*margin-left: 3px; */
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10%;
+    height: 15%;
     white-space: nowrap;
     z-index: 1;
     position: absolute;
-    color: #ffffff;
-    
+    color: #ffffff;    
  }
-  .radioEndereco input[type=radio]{
-  background-color: #FF6F61;
+ 
+  .radioEndereco input:checked{
+  background-color: #FF6F61 !important;
+  color: #FF6F61 !important;
+  height: 30px !important;
+  width: 20px !important;
   }
+
 
  .radioCores label input[type=radio]:checked {
     background-color: #FF6F61;
+    visibility: hidden;
  }
 
  .radioTam {
@@ -2754,11 +2760,11 @@ h2 {
     border-radius: 5px;
 }
 .btn_cadCartao{
-	 margin:0 5px 6px 50%;
-	 position: relative;
-	 bottom: 353px;
-	 top: 50%;
-	 
+	  margin-top: 25%;
+	  margin-left: -12%;
+	 position: absolute;
+	 padding: revert;
+	 /* bottom: -12px; */
 }
 
 /* MODAL - TESTE */
@@ -2839,8 +2845,9 @@ h2 {
 	font-size: 1.5rem;
 }
 .btnFinalizarCompra:hover{
-	background-color: #24be0e;
-	border: 1px solid #24be0e;
+	background-color: #24be0e !important;
+	border: 1px solid #24be0e !important;
+	color: #FFFFFF !important;
 }
 
 /************* TOOLTIP **************/

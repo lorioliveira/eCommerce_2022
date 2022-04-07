@@ -66,8 +66,8 @@
    
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                           <a href="./JSP/index.jsp" class="nav-item nav-link active">Home</a>
-                         <a href="./JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                           <a href="./JSP/index.jsp" class="nav-item nav-link ">Home</a>
+                         <a href="./JSP/produtos.jsp" class="nav-item nav-link active">Produtos</a>
                         </div>
                         
                         <div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
@@ -84,6 +84,7 @@
 		                                </form>
                                     </a>
                                </div>
+                           </div>
                         </div>
                     </div>
                 </nav>

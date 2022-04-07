@@ -89,16 +89,26 @@
          <div class="container-fluid">
             <div class="row align-items-center">
                <div class="col-md-3">
+                  <!-- LOGO -->
                   <div class="logo">
                      <a href="../JSP/index.jsp">
                      <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
                      </a>
                   </div>
                </div>
+               <!-- BARRA DE PESQUISA -->
                <div class="col-md-6">
-                  <div class="search">
-                     <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
+                  <!-- <div class="search">
+                     <input type="text" placeholder="Procuro por ...">
+                     <button><i class="fa fa-search"></i></button>
+                  </div> -->
+               </div>
+               <!-- MINHA SACOLA -->
+               <div class="col-md-2">
+                  <div class="user">
+                     <a href="../JSP/carrinho.jsp" class="btn cart">
+                     Minha Sacola <i class="fas fa-shopping-bag"></i>
+                     </a>
                   </div>
                </div>
             </div>
