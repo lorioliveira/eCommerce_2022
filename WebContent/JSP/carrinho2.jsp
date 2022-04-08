@@ -16,6 +16,8 @@
       <link
          href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
          rel="stylesheet" />
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
       <!-- Biblioteca CSS - Bootstrap-->
       <link
          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -25,6 +27,7 @@
          rel="stylesheet" />
       <link href="./lib/slick/slick.css" rel="stylesheet" />
       <link href="./lib/slick/slick-theme.css" rel="stylesheet" />
+      
       <!-- CSS Principal do Projeto -->
       <link href="./css/style.css" rel="stylesheet" />
    </head>
@@ -265,7 +268,7 @@
                               <form class="form"
                                  action="http://localhost:8080/eCommerce/carrinho">
                                  <button name="operacao" value="EXCLUIR">
-                                 <i class="fa fa-trash"></i>
+                                 <span class="material-icons md-24">delete_forever</span>
                                  </button>
                                  <!-- ID do Produto -->
                                  <input type="hidden" name="idProduto" id="idProduto"
@@ -316,8 +319,7 @@
                               </p>
                               <div class="radioEndereco">
                                  <input type="radio" name="selecioneEndereco"
-                                    value="<%=d.getId()%>" class="btn" /> <i
-                                    class="fa fa-check-square"></i> Selecionar
+                                    value="<%=d.getId()%>" class="btn" /> Selecionar
                               </div>
                               </br> </br>
                            </div>
@@ -359,105 +361,106 @@
          <div class="checkout-inner">
          <div class="checkout-summary">
          <div class="cart-summary">
-         <div class="cart-content">
          <h1>Resumo</h1>
          <p>
          Subtotal<span>R$ <%=total_itens%></span>
          </p>
+         <hr>
          <p>
          Frete<span>R$ <%=total_frete%>
          </span>
          </p>
+         <hr>
          <p>
          Descontos<span class="desconto">- R$ <%=desconto_cupons%></span>
          </p>
          <h2>
          Total<span>R$ <%=total_pedido%></span>
          </h2>
-         </div>
+         
          </div>
          </div>
          <div class="checkout-payment">
-         <div class="payment-methods">
-         <h1>Forma de Pagamento</h1>
-         <div class="payment-method">
-         <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input"
-            id="payment-1" name="payment" /> <label
-            class="custom-control-label" for="payment-1">Pagar
-         com 1 Cartão de Crédito</label>
-         </div>
-         <div class="payment-content" id="payment-1-show">
-         <div class="col-md-12">
-         <select class="form-control" type="text"
-            name="selecioneCartao1">
-         <option selected disabled>Selecione o cartão</option>
-         <%
-            for (CartaoCredito c : cartoes) {
-            %>
-         <option name="id_cartao_1" value="<%=c.getId()%>">
-         <%=c.getNome()%> -
-         <%=c.getBandeira()%> /
-         <%=c.getValidade()%>
-         </option>
-         <%
-            }
-            %>
-         </select>
-         </div>
-         </div>
-         </div>
-         <div class="payment-method">
-         <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input"
-            id="payment-2" name="payment" /> <label
-            class="custom-control-label" for="payment-2">Pagar
-         com 2 Cartões de Crédito</label>
-         </div>
-         <div class="payment-content" id="payment-2-show">
-         <div class="col-md-12">
-         <select class="form-control" name="selecioneCartao1">
-         <option selected disabled>Selecione o 1º cartão</option>
-         <%
-            for (CartaoCredito c : cartoes) {
-            %>
-         <option name="id_cartao_1" value="<%=c.getId()%>">
-         <%=c.getNome()%> -
-         <%=c.getBandeira()%> /
-         <%=c.getValidade()%>
-         </option>
-         <%
-            }
-            %>
-         </select>
-         </div>
-         <div class="col-md-12">
-         <select class="form-control" type="text"
-            name="selecioneCartao2">
-         <option selected disabled>Selecione o 2º cartão</option>
-         <%
-            for (CartaoCredito c : cartoes) {
-            %>
-         <option name="id_cartao_2" value="<%=c.getId()%>">
-         <%=c.getNome()%> -
-         <%=c.getBandeira()%> /
-         <%=c.getValidade()%>
-         </option>
-         <%
-            }
-            %>
-         </select>
-         </div>
-         </div>
-         </div>
-         </div>
-         <!-- BOTÃO FINALIZAR COMPRA -->
-         <div class="checkout-btn ">
-         <button class="btn btnFinalizarCompra" name="operacao"
-            value="SALVAR">
-         <i class="fa fa-check-circle"></i> Finalizar Compra
-         </button>
-         </div>
+	         <div class="payment-methods">
+		         <h1>Forma de Pagamento</h1>
+		         <div class="payment-method">
+			         <div class="custom-control custom-radio">
+			         <input type="radio" class="custom-control-input"
+			            id="payment-1" name="payment" /> <label
+			            class="custom-control-label" for="payment-1">Pagar
+			         com 1 Cartão de Crédito</label>
+			         </div>
+			         <div class="payment-content" id="payment-1-show">
+			         <div class="col-md-9">
+			         <select class="form-control" type="text"
+			            name="selecioneCartao1">
+			         <option selected disabled>Selecione o cartão</option>
+			         <%
+			            for (CartaoCredito c : cartoes) {
+			            %>
+			         <option name="id_cartao_1" value="<%=c.getId()%>">
+			         <%=c.getBandeira()%> /
+			         <%=c.getValidade()%>
+			         </option>
+			         <%
+			            }
+			            %>
+			          <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1"  maxlength="5"/>
+			         </select>
+			         </div>
+			         </div>
+		         </div>
+		         <div class="payment-method">
+		         <div class="custom-control custom-radio">
+		         <input type="radio" class="custom-control-input"
+		            id="payment-2" name="payment" /> <label
+		            class="custom-control-label" for="payment-2">Pagar
+		         com 2 Cartões de Crédito</label>
+		         </div>
+		         <div class="payment-content" id="payment-2-show">
+		         <div class="col-md-9">
+		         <select class="form-control" name="selecioneCartao1">
+		         <option selected disabled>Selecione o 1º cartão</option>
+		         <%
+		            for (CartaoCredito c : cartoes) {
+		            %>
+		         <option name="id_cartao_1" value="<%=c.getId()%>">
+		         <%=c.getBandeira()%> /
+		         <%=c.getValidade()%>
+		         </option>
+		         <%
+		            }
+		            %>
+		         </select>
+		         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
+		         </div>
+		         <div class="col-md-9">
+		         <select class="form-control" type="text"
+		            name="selecioneCartao2">
+		         <option selected disabled>Selecione o 2º cartão</option>
+		         <%
+		            for (CartaoCredito c : cartoes) {
+		            %>
+		         <option name="id_cartao_2" value="<%=c.getId()%>">
+		         <%=c.getBandeira()%> /
+		         <%=c.getValidade()%>
+		         </option>
+		         <%
+		            }
+		            %>
+		         </select>
+		         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
+		         </div>
+		         </div>
+		         </div>
+	         </div>
+	         <!-- BOTÃO FINALIZAR COMPRA -->
+	         <div class="checkout-btn ">
+	         <button class="btn btnFinalizarCompra" name="operacao"
+	            value="SALVAR">
+	         <i class="fa fa-check-circle"></i> Finalizar Compra
+	         </button>
+	         </div>
          </div>
          <!-- ID do Cliente -->
          <input type="hidden" name="idCliente" id="idCliente"
@@ -580,5 +583,6 @@
       <script src="./lib/slick/slick.min.js"></script>
       <!--  Javascript -->
       <script src="./js/main.js"></script>
+      
    </body>
 </html>

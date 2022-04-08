@@ -1,5 +1,4 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
-
 <%@page import="java.util.List"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -9,8 +8,6 @@
         <meta charset="utf-8">
         <title>Mirror Fashion</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">
 
         <!-- Favicon -->
         <link href="../img/favicon.ico" rel="icon">
@@ -130,7 +127,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label> Data de Nascimento</label>
-                                    <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" placeholder="Data de Nascimento" >
+                                    <input class="form-control" type="date" name="data_Nascimento"  class="fa fa-birthday-cake" min="1900-01-31" max="2004-12-31" >
                             </div>
                                 <div class="col-md-6">
                                     <label>E-mail</label>
@@ -138,11 +135,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Senha</label>
-                                    <input class="form-control" type="password" name="senha" placeholder="Senha" min="8">
+                                    <input class="form-control" type="password" name="senha" placeholder="Senha" min="8" maxlength="15">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Confirme a Senha</label>
-                                    <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8">
+                                    <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8"  maxlength="15">
                                 </div>
                                 <div class="col-md-9">
                                     <button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>

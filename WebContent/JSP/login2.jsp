@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <label>Senha</label>
-                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8" placeholder="Senha">
+                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8"  maxlength="15" placeholder="Senha">
                                     </div>
                                     
                                     <div class="col-md-12">
@@ -128,7 +128,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p>Ou registre-se aqui</p>
-                                        <a class="btn" href="./JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</a>
+                                        <a class="btn" href="./JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova Conta</a>
                                     </div>
                                 </div>
                             </div>

@@ -164,7 +164,7 @@
                                  <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" value="<%=usuarioLogado.getCpf() %>" readonly>
                               </div>
                               <div class="col-md-6">
-                                 <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" value="<%=usuarioLogado.getData_Nascimento() %>">
+                                 <input class="form-control" type="date" name="data_Nascimento" class="fa fa-birthday-cake" min="1900-01-31" max="2004-12-31" value="<%=usuarioLogado.getData_Nascimento() %>">
                               </div>
                               <div class="col-md-6">
                                  <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" value="<%=usuarioLogado.getTelefone() %>">
