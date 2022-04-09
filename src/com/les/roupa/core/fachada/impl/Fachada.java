@@ -9,6 +9,7 @@ import com.les.roupa.core.dao.IDAO;
 import com.les.roupa.core.dao.impl.CarrinhoDAO;
 import com.les.roupa.core.dao.impl.CartaoCreditoDAO;
 import com.les.roupa.core.dao.impl.ClienteDAO;
+import com.les.roupa.core.dao.impl.CupomDAO;
 import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
@@ -18,6 +19,7 @@ import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.Carrinho;
 import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
@@ -32,16 +34,19 @@ import com.les.roupa.core.strategy.impl.ValidarCEP;
 import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
 import com.les.roupa.core.strategy.impl.ValidarCPF_Alt;
+import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarCidade;
 import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
 import com.les.roupa.core.strategy.impl.ValidarEmail;
+import com.les.roupa.core.strategy.impl.ValidarEnderecoPedido;
 import com.les.roupa.core.strategy.impl.ValidarEstado;
 import com.les.roupa.core.strategy.impl.ValidarEstado_Alt;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmail;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmailSenha;
+import com.les.roupa.core.strategy.impl.ValidarFormaDePagamento;
 import com.les.roupa.core.strategy.impl.ValidarGenero;
 import com.les.roupa.core.strategy.impl.ValidarGenero_Alt;
 import com.les.roupa.core.strategy.impl.ValidarLogradouro;
@@ -103,6 +108,7 @@ public class Fachada implements IFachada {
 	ValidarEstado vEstado = new ValidarEstado();
 	ValidarPais vPais = new ValidarPais();
 	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
+	
 
 	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
 	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
@@ -115,7 +121,9 @@ public class Fachada implements IFachada {
 	
 	/* ---------- PEDIDO ------------ */
 	ValidarTotalPedido vTotalPedido = new ValidarTotalPedido();
-	
+	ValidarEnderecoPedido vEnderecoPedido = new ValidarEnderecoPedido();
+	ValidarFormaDePagamento vFormaDePagamentoPedido = new ValidarFormaDePagamento();
+	ValidarCartaoPedido vCartaoPedido = new ValidarCartaoPedido();
 	
 	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
 	ValidarNumCartao vNumCartao = new ValidarNumCartao();
@@ -254,8 +262,8 @@ public class Fachada implements IFachada {
 		daos.put(DetalheProduto.class.getName(), new DetalheProdutoDAO());
 		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		daos.put(Pedido.class.getName(), new PedidoDAO());
+		daos.put(Cupom.class.getName(), new CupomDAO());
 		
-		//daos.put(Cupom.class.getName(), new CupomDAO());
 		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
 		//daos.put(PedioTroca.class.getName(), new PedidoTrocaDAO());
 		//daos.put(Estoque.class.getName(), new EstoqueDAO());
@@ -359,6 +367,18 @@ public class Fachada implements IFachada {
 		
 		/* ----- Adicionando as Strategy's na lista do PEDIDO ----- */
 		regrasSalvarPedido.add(vTotalPedido);
+		regrasSalvarPedido.add(vEnderecoPedido);
+		regrasSalvarPedido.add(vFormaDePagamentoPedido);
+		regrasSalvarPedido.add(vCartaoPedido);
+		 /** regrasSalvarPedido.add(vCupomBonificacaoPedido);
+		 * regrasSalvarPedido.add(vStatusPedido); 
+		 * regrasSalvarPedido.add(VDataCadastro);
+		 */
+		
+		/* --------------------------------------------------------------------------------------------------------------- */
+		
+		/* ----- Adicionando as Strategy's na lista do CUPOM ----- */
+		
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
@@ -658,7 +678,7 @@ public class Fachada implements IFachada {
 		for (IStrategy regra : regrasDaOperacao) {
 			String resultado = regra.validar(entidade);
 			if (resultado != null) {
-				msg += "- " + resultado + "\n";
+				msg += " " + resultado + "<br>";
 			}
 		}
 

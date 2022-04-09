@@ -1576,6 +1576,14 @@ h2 {
     border-radius: 4px;
 }
 
+.couponB button {
+	padding-top: 2px !important;
+	margin: 0 0px 17px 0 !important;
+}
+.couponB input[type=text]:active{
+	border-color: #FF6F61 !important;
+}
+
 .cart-page .coupon button:hover {
     color: #ffffff;
     background: #FF6F61;
@@ -2970,6 +2978,30 @@ h2 {
 /*********** DESCONTO - CARRINHO *****************/
 .desconto{
 	color: red;
+}
+
+/*********** MODAL  *****************/
+.modal-titulo{
+	color: #000000;
+}
+
+.modal-body{
+	color: #6f6f6f!important;
+}
+.modal-body p{
+	font-style: italic; 
+	font-size: 18px;
+}
+
+.modal-content{
+	border-radius: 13px;
+}
+
+.modal-header .close{
+	margin: 14px 1rem 0 !important;
+	color: #000000;
+	padding: 0px 0 1px 0px;
+	background-color:  #d6d6d6;
 }
 
 /********************** MATERIAL ICONS - GOOGLE FONTS ************************/

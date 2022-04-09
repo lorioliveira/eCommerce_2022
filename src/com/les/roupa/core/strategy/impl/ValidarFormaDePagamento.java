@@ -5,17 +5,18 @@ import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.strategy.IStrategy;
 
 /**
- * Classe para validar o total do Pedido
+ * Classe para validar o campo forma de pagamento do Pedido
  */
-public class ValidarTotalPedido implements IStrategy {
+public class ValidarFormaDePagamento implements IStrategy {
 
 	@Override
 	public String validar(EntidadeDominio entidade) {
 		
 		Pedido pedido = (Pedido) entidade;
 		
-		if(pedido.getTotalPedido() == null || pedido.getTotalPedido().equals("") || pedido.getTotalPedido().equals("0.0")) {
-			return ("Insira algum Produto ao Carrinho antes de finalizar a compra!");
+		if(pedido.getFormaPagamento() == null || pedido.getFormaPagamento().equals("")) {
+			pedido.setFormaPagamento("");		
+			return ("Favor selecione uma Forma de Pagamento.");
 		}
 		else {
 			return null;

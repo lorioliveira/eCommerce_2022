@@ -340,28 +340,7 @@
                   </div>
                   <hr size="3">
                   <br>
-                  <table class="table table-bordered">
-                  <thead class="thead-dark">
-                  <th class="tit_tabela_cupons" colspan="3">Cupons ativos</th>
-                  <tr>
-                  <th>Nome</th>
-                  <th>Valor R$</th>
-                  <th>Ação</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                  <td>s/n</td>
-                  <td>0,00</td>
-                  <td><input type="checkbox" disabled name="cupom" /></td>
-                  </tr>
-                  <tr>
-                  <td>s/n</td>
-                  <td>0,00</td>
-                  <td><input type="checkbox" disabled name="cupom" /></td>
-                  </tr>
-                  </tbody>
-                  </table>
+                  
                </div>
             </div>
          </div>
@@ -391,86 +370,67 @@
          </div>
          </div>
          <div class="checkout-payment">
-	         <div class="payment-methods">
-		         <h1>Forma de Pagamento</h1>
-		         <div class="payment-method">
-			         <div class="custom-control custom-radio">
-			         <input type="radio" class="custom-control-input"
-			            id="payment-1" name="payment" /> <label
-			            class="custom-control-label" for="payment-1">Pagar
-			         com 1 Cartão de Crédito</label>
-			         </div>
-			         <div class="payment-content" id="payment-1-show">
-			         <div class="col-md-9">
-			         <select class="form-control" type="text"
-			            name="selecioneCartao1">
-			         <option selected disabled>Selecione o cartão</option>
-			         <%
-			            for (CartaoCredito c : cartoes) {
-			            %>
-			         <option name="id_cartao_1" value="<%=c.getId()%>">
-			         <%=c.getBandeira()%> /
-			         <%=c.getValidade()%>
-			         </option>
-			         <%
-			            }
-			            %>
-			          <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1"  maxlength="5"/>
-			         </select>
-			         </div>
-			         </div>
-		         </div>
-		         <div class="payment-method">
-		         <div class="custom-control custom-radio">
-		         <input type="radio" class="custom-control-input"
-		            id="payment-2" name="payment" /> <label
-		            class="custom-control-label" for="payment-2">Pagar
-		         com 2 Cartões de Crédito</label>
-		         </div>
-		         <div class="payment-content" id="payment-2-show">
-		         <div class="col-md-9">
-		         <select class="form-control" name="selecioneCartao1">
-		         <option selected disabled>Selecione o 1º cartão</option>
-		         <%
-		            for (CartaoCredito c : cartoes) {
-		            %>
-		         <option name="id_cartao_1" value="<%=c.getId()%>">
-		         <%=c.getBandeira()%> /
-		         <%=c.getValidade()%>
-		         </option>
-		         <%
-		            }
-		            %>
-		         </select>
-		         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
-		         </div>
-		         <div class="col-md-9">
-		         <select class="form-control" type="text"
-		            name="selecioneCartao2">
-		         <option selected disabled>Selecione o 2º cartão</option>
-		         <%
-		            for (CartaoCredito c : cartoes) {
-		            %>
-		         <option name="id_cartao_2" value="<%=c.getId()%>">
-		         <%=c.getBandeira()%> /
-		         <%=c.getValidade()%>
-		         </option>
-		         <%
-		            }
-		            %>
-		         </select>
-		         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
-		         </div>
-		         </div>
-		         </div>
-	         </div>
-	         <!-- BOTÃO FINALIZAR COMPRA -->
-	         <div class="checkout-btn ">
-	         <button class="btn btnFinalizarCompra" name="operacao"
-	            value="SALVAR">
-	         <i class="fa fa-check-circle"></i> Finalizar Compra
-	         </button>
-	         </div>
+         <div class="payment-methods">
+         <h1>Forma de Pagamento</h1>
+         <div class="payment-method">
+         <div class="custom-control custom-radio">
+         
+         
+         <input type="radio" class="custom-control-input" id="payment-1" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="boleto"/> 
+            <label class="custom-control-label" for="payment-1" >Pagar com Boleto</label>
+         </div>
+         <!-- <div class="payment-content" id="payment-1-show">
+         <div class="col-md-9">
+         </div>
+         </div> -->
+         </div>
+         <div class="payment-method">
+         <div class="custom-control custom-radio">
+         <input type="radio" class="custom-control-input"  id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> <label
+            class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
+         </div>
+         <div class="payment-content" id="payment-2-show">
+         <div class="col-md-9">
+         <select class="form-control" name="selecioneCartao1">
+         <option selected disabled>Selecione o 1º cartão</option>
+         <%
+            for (CartaoCredito c : cartoes) {
+            %>
+         <option name="id_cartao_1" value="<%=c.getId()%>">
+         <%=c.getBandeira()%> /
+         <%=c.getValidade()%>
+         </option>
+         <%
+            }
+            %>
+         </select>
+         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
+         </div>
+         <div class="col-md-9">
+         <select class="form-control" name="selecioneCartao2">
+         <option selected disabled>Selecione o 2º cartão</option>
+         <%
+            for (CartaoCredito c : cartoes) {
+            %>
+         <option name="id_cartao_2" value="<%=c.getId()%>">
+         <%=c.getBandeira()%> / <%=c.getValidade()%>
+         </option>
+         <%
+            }
+            %>
+         </select>
+         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
+         </div>
+         </div>
+         </div>
+         </div>
+         <!-- BOTÃO FINALIZAR COMPRA -->
+         <div class="checkout-btn ">
+         <button class="btn btnFinalizarCompra" name="operacao"
+            value="SALVAR">
+         <i class="fa fa-check-circle"></i> Finalizar Compra
+         </button>
+         </div>
          </div>
          <!-- ID do Cliente -->
          <input type="hidden" name="idCliente" id="idCliente"
@@ -487,11 +447,39 @@
          <!-- Total do Pedido -->
          <input type="hidden" name="total_pedido" id="total_pedido"
             value="<%=total_pedido%>">
-         <!-- Forma de Pagamento - Setado apenas como Cartao -->
-         <input type="hidden" name="selecioneFormadePagamento"
-            id="selecioneFormadePagamento" value="cartao">
          </form>
          </div>
+        
+         <form action="http://localhost:8080/eCommerce/cupom">
+	         <table class="table table-bordered">
+	             <thead class="thead-dark">
+	             <th class="tit_tabela_cupons" colspan="3">Cupons ativos</th>
+	             <tr>
+	             <th>Nome</th>
+	             <th>Valor R$</th>
+	             <th>Ação</th>
+	             </tr>
+	             </thead>
+	             <tbody>
+	             <tr>
+	             <td>s/n</td>
+	             <td>0,00</td>
+	             <td><input type="checkbox" disabled name="cupom" /></td>
+	             </tr>
+	             <tr>
+	             <td>s/n</td>
+	             <td>0,00</td>
+	             <td><input type="checkbox" disabled name="cupom" /></td>
+	             </tr>
+	             </tbody>
+	             </table>
+	             <div class="coupon couponB cart-page-inner" >
+                    <input type="text" placeholder="Insira um Cupom">
+                    <button class="btn" >Aplicar</button>
+                    <input type="text" />
+	             </div>
+	      </form>
+         
          </div>
          </div>
          </div>
@@ -601,14 +589,14 @@
 	   		<div class="modal-content">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-	                <h4 class="modal-title">Mensagem</h4>
+	                <h3 class="modal-titulo">Atenção</h3>
 	            </div>
 	            <div class="modal-body">
 	                <p><% out.println(mensagemStrategy); %></p>
 	            </div>
-	            <div class="modal-footer">
-	                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
 	        </div>
 	    </div>
 	</div>
