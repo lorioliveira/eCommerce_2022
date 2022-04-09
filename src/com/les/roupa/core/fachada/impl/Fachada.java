@@ -60,6 +60,7 @@ import com.les.roupa.core.strategy.impl.ValidarStatus;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
+import com.les.roupa.core.strategy.impl.ValidarTotalPedido;
 import com.les.roupa.view.helper.impl.DetalheProdutoHelper;
 import com.les.roupa.core.strategy.IStrategy;
 
@@ -111,6 +112,9 @@ public class Fachada implements IFachada {
 	ValidarEstado_Alt vEstadoAlterado = new ValidarEstado_Alt();
 	ValidarPais_Alt vPaisAlterado = new ValidarPais_Alt();
 	ValidarTipoResidencia_Alt vTipoResidenciaAlterado = new ValidarTipoResidencia_Alt();
+	
+	/* ---------- PEDIDO ------------ */
+	ValidarTotalPedido vTotalPedido = new ValidarTotalPedido();
 	
 	
 	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
@@ -354,6 +358,7 @@ public class Fachada implements IFachada {
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do PEDIDO ----- */
+		regrasSalvarPedido.add(vTotalPedido);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		

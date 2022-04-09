@@ -16,8 +16,7 @@
       <link
          href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
          rel="stylesheet" />
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+         
       <!-- Biblioteca CSS - Bootstrap-->
       <link
          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -99,8 +98,19 @@
       // faz o arredondamento da variavel "desconto_cupons" para 2 casas decimais
       desconto_cupons = Math.round(desconto_cupons * 100);
       desconto_cupons = desconto_cupons / 100;
+      
+  	 // pega a mensagem que estava pendurado na requisição,
+   		// que foi enviado pelo arquivo "ClienteHelper"
+   		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+   		  
+   		// IF adicionado para não estourar NullPointerException na variavel
+   		// "mensagemStrategy", pois quando ela esta sendo aberta pela primeira vez,
+   		// (apos validar o Login), ela fica nula
+   		/* if(mensagemStrategy == null){
+   			mensagemStrategy = "Bem Vindo(a) ao site Drink Fast !";
+   		} */
       %>
-   <body>
+   <body onload="AtivaModal()">
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
          <div class="container-fluid">
@@ -268,7 +278,7 @@
                               <form class="form"
                                  action="http://localhost:8080/eCommerce/carrinho">
                                  <button name="operacao" value="EXCLUIR">
-                                 <span class="material-icons md-24">delete_forever</span>
+                                 <i class="fa fa-trash"></i>
                                  </button>
                                  <!-- ID do Produto -->
                                  <input type="hidden" name="idProduto" id="idProduto"
@@ -583,6 +593,39 @@
       <script src="./lib/slick/slick.min.js"></script>
       <!--  Javascript -->
       <script src="./js/main.js"></script>
+      
+      
+      <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h4 class="modal-title">Mensagem</h4>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
       
    </body>
 </html>

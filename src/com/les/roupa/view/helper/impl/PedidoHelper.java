@@ -110,6 +110,21 @@ public class PedidoHelper implements IViewHelper {
 			pedido.setProdutos(produtosDaSessao);
 			pedido.setCupons(cuponsDaSessao);
 			pedido.setData_Cadastro(dataAtual);
+			
+			//// ajuste do bug de quando o pedido não tiver nenhum Cupom vinculado,
+			//if (id_cupom.equals("null")) {
+        	//	// quando for finalizar o Pedido, e não tiver nenhum Cupom vinculado,
+        	//	// o valor do "id_cupom" será "null", em formato de String, 
+        	//	// então não atribui o valor ao objeto "pedido",
+        	//	// pq se o valor for "null" em formato de String, irá acusar ERRO ao salvar o Pedido na DAO.
+        	//	System.out.println("entrou !!");
+        	//}
+        	//else {
+        	//	// caso contrário, se tiver algum Cupom para vincular,
+        	//	// o valor será atribuido no Pedido
+        	//	pedido.setIdCupom(id_cupom);
+        	//}
+			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {

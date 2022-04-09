@@ -245,7 +245,7 @@ public class CarrinhoHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/produtos2.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 				}
 				
 				// se não, a quantidade selecionada é igual a ZERO, então mostra mensagem de erro na JSP
