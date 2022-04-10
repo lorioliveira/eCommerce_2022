@@ -1,5 +1,5 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
-
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
@@ -35,14 +35,21 @@
 	    	    
 	    //pega o pedido a ser visualizado
 		Pedido pedidoSelecionado = (Pedido)request.getAttribute("pedidoSelecionado");
-	    
-		Endereco enderecoDoPedidoSelecionado = (Endereco)request.getAttribute("enderecoDoPedidoSelecionado");
 		
 		List<ItemPedido> itensPedidoSelecionado = (List<ItemPedido>)request.getAttribute("itensPedidoSelecionado");
+		
+		List<PedidoTroca> itensPedidoTrocaEmSessao = new ArrayList<>();
+		// pega o objeto salvo em Sessão com o nome "itensPedidoTroca",
+		// e passa para o "itensPedidoTrocaEmSessao" (fazendo o CAST para o tipo List<PedidoTroca>)
+		itensPedidoTrocaEmSessao = (List<PedidoTroca>) sessao.getAttribute("itensPedidoTroca");
+		
+		// pega a mensagem que estava pendurado na requisição,
+  		// que foi enviado pelo arquivo "ClienteHelper"
+  		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
     %>
    
 
-    <body>
+    <body onload="AtivaModal()">
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
          <div class="container-fluid">
@@ -169,8 +176,16 @@
                                                 <th>R$ Valor Produto</th>
                                                 <th>Qtde.</th>
                                                 <th>Status</th>
-                                                <th>Ação</th>
-                                            </tr>
+										<%
+										if(pedidoSelecionado.getStatus().equals("ENTREGA REALIZADA")) {
+										%>
+										<th>Qtde p/ Troca</th>
+										<th></th>
+										<th>Total p/ Troca</th>
+										<%
+										}
+										%>
+									</tr>
                                         </thead>
                                         <%
                                         	for(ItemPedido i : itensPedidoSelecionado){
@@ -182,15 +197,54 @@
                                                 <td><%=d.getProduto().getPrecoVenda() %></td>
                                                 <td><%=d.getProduto().getQuantidadeSelecionada() %></td>
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="5"><%=pedidoSelecionado.getStatus() %></td>
-                                                <td class="centrarlizarStatus_BtnAcao" rowspan="7">
-                                                  <button class="btn" disabled> <i class="fa fa-edit"></i> Solicitar Troca</button>
-                                                </td>
+                                                
+                                                
+                        <% if(pedidoSelecionado.getStatus().equals("ENTREGA REALIZADA")) { %>
+						<form class="form_form" action="http://localhost:8080/eCommerce/pedidoTroca">
+							<td>
+								<!-- Quantidade do Item para ser Trocado -->
+								<input style="width: 50px; height: 30px;" type="text" class="form-control" name="qtdeItemParaTroca" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" required>
+							</td>
+							
+							<td><button class="btn btn-danger" name="operacao" value="CONSULTAR">Solicitar Troca</button></td>
+					
+							<!-- ID do Pedido -->
+		  					<input type="hidden" name="idPedido" value="<%=pedidoSelecionado.getId() %>">
+		  					<!-- ID do Item do Pedido -->
+		  					<input type="hidden" name="idItemPedido" value="<%=d.getId() %>">
+						</form>
+					<% } %>
+					
+					<!-- verifica se esse item do pedido foi acionado para troca, 
+					caso esse item esteja na lista de troca, será mostrado a quantidade dele na tela,
+					para poder saber a quantidade do item que esta sendo trocado -->
+					<% for (PedidoTroca exchange : itensPedidoTrocaEmSessao){
+						// o ID do item que esta salvo na Sessão, é IGUAL ao ID do item da lista atual
+						if (exchange.getItemPedido().getId().equals(d.getId())){ %>
+							<td>
+								<!-- Mostra a quantidade do Item que esta sendo Trocado -->
+								<input style="width: 50px; height: 30px;" type="text" class="form-control" name="qtdeItemParaTroca" value="<%=exchange.getItemPedido().getProduto().getQuantidadeSelecionada()%>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" required>
+							</td>
+					<%
+						}
+					 } %>
+                                                
                                             </tr>
+                                            
+                                            
                                         </tbody>
                                         <%
                                         	}
                                         %>
                                     </table>
+                                    
+                                    <!-- se tiver itens na lista "itensPedidoTroca" na Sessão, ele mostra o botão para finalizar a troca -->
+								<% if (itensPedidoTrocaEmSessao.size() > 0) {
+								%>
+									<a href="/eCommerce/pedidoTroca?trocaPedidoInteiro=<%= "0"%>&operacao=SALVAR"><button class="btn btn-success" style="margin-top: 10px; float: right">Finalizar Troca</button></a>
+								<%
+								}
+								%>
                                 </div>
                             </div>
                         </div>
@@ -295,5 +349,38 @@
         
         <!-- Template Javascript -->
         <script src="./js/main.js"></script>
+        
+        <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h3 class="modal-titulo">Atenção</h3>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
+        
     </body>
 </html>

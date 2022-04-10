@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.dominio.ItemPedido;
@@ -227,16 +228,26 @@ public class PedidoTrocaHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// pendura o "Pedido inteiro" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("pedidoInteiro", pedidoTrocaEntidade.getPedidos().get(0));
+					//request.setAttribute("pedidoInteiro", pedidoTrocaEntidade.getPedidos().get(0));
 					
 					// pendura os " Itens do Pedido" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("itensPedido", pedidoTrocaEntidade.getTodosItensPedido());
+					//request.setAttribute("itensPedido", pedidoTrocaEntidade.getTodosItensPedido());
 					
 					// pendura o "Endereço do Pedido" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("enderecoPedido", pedidoTrocaEntidade.getEnderecoPedido().get(0));
+					//request.setAttribute("enderecoPedido", pedidoTrocaEntidade.getEnderecoPedido().get(0));
+					
+					
+					// pendura o "idPedido" na requisição para poder mandar para o arquivo .JSP
+					Endereco enderecoPedidoParaTela = new Endereco();
+					enderecoPedidoParaTela = pedidoTrocaEntidade.getEnderecoPedido().get(0);
+					pedidoTrocaEntidade.getPedidos().get(0).setEndereco(enderecoPedidoParaTela);
+					
+					request.setAttribute("pedidoSelecionado",  pedidoTrocaEntidade.getPedidos().get(0));
+					request.setAttribute("itensPedidoSelecionado", pedidoTrocaEntidade.getTodosItensPedido());
+					
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/detalhe_pedido-mensagem.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
 				}
 				else {
 					// caso contrário, o Item do Pedido selecionado não é do mesmo Pedido que ja existe na Sessão,
@@ -246,17 +257,28 @@ public class PedidoTrocaHelper implements IViewHelper {
 					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
+					// adiciona na lista de itens de troca do Pedido selecionado da sessão
+					// atualiza o objeto "itensPedidoTroca" que esta salvo em sessão, com o novo item selecionado
+					sessao.setAttribute("itensPedidoTroca", itensParaAdicionarAoPedidoTroca);
+					
 					// pendura o "Pedido inteiro" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("pedidoInteiro", pedidoTrocaEntidade.getPedidos().get(0));
+					//request.setAttribute("pedidoInteiro", pedidoTrocaEntidade.getPedidos().get(0));
 					
 					// pendura os " Itens do Pedido" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("itensPedido", pedidoTrocaEntidade.getTodosItensPedido());
+					//request.setAttribute("itensPedido", pedidoTrocaEntidade.getTodosItensPedido());
 					
 					// pendura o "Endereço do Pedido" na requisição para poder mandar para o arquivo .JSP
-					request.setAttribute("enderecoPedido", pedidoTrocaEntidade.getEnderecoPedido().get(0));
+					//request.setAttribute("enderecoPedido", pedidoTrocaEntidade.getEnderecoPedido().get(0));
+					
+					Endereco enderecoPedidoParaTela = new Endereco();
+					enderecoPedidoParaTela = pedidoTrocaEntidade.getEnderecoPedido().get(0);
+					pedidoTrocaEntidade.getPedidos().get(0).setEndereco(enderecoPedidoParaTela);
+					
+					request.setAttribute("pedidoSelecionado",  pedidoTrocaEntidade.getPedidos().get(0));
+					request.setAttribute("itensPedidoSelecionado", pedidoTrocaEntidade.getTodosItensPedido());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/detalhe_pedido-mensagem.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
 				}
 			}
 			else {
@@ -265,7 +287,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 		}
 		
@@ -287,7 +309,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
@@ -295,11 +317,14 @@ public class PedidoTrocaHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
+			
+			// ADMIN - ALTERAR STATUS PEDIDO
+			
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// foi utilizado o getEntidades do resultado para poder pegar o PedidoTroca no sistema
 				List<EntidadeDominio> entidades = resultado.getEntidades();
@@ -329,7 +354,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
 				else {					
 					// atribui a nova mensagem para poder mostra na pagina .JSP
@@ -339,7 +364,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
 			}
 			else {
@@ -348,7 +373,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/Home_Page.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			}
 		}
 		

@@ -1,5 +1,5 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
-
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
@@ -35,7 +35,13 @@
 	    	    
 	    //pega o pedido a ser visualizado
 		Pedido pedidoSelecionado = (Pedido)request.getAttribute("pedidoSelecionado");
-	    
+		
+		List<ItemPedido> itensPedidoSelecionado = (List<ItemPedido>)request.getAttribute("itensPedidoSelecionado");
+		
+		List<PedidoTroca> itensPedidoTrocaEmSessao = new ArrayList<>();
+		// pega o objeto salvo em Sessão com o nome "itensPedidoTroca",
+		// e passa para o "itensPedidoTrocaEmSessao" (fazendo o CAST para o tipo List<PedidoTroca>)
+		itensPedidoTrocaEmSessao = (List<PedidoTroca>) sessao.getAttribute("itensPedidoTroca");
     %>
    
 
@@ -166,21 +172,75 @@
                                                 <th>R$ Valor Produto</th>
                                                 <th>Qtde.</th>
                                                 <th>Status</th>
-                                                <th>Ação</th>
-                                            </tr>
+										<%
+										if(pedidoSelecionado.getStatus().equals("ENTREGA REALIZADA")) {
+										%>
+										<th>Qtde p/ Troca</th>
+										<th></th>
+										<th>Total p/ Troca</th>
+										<%
+										}
+										%>
+									</tr>
                                         </thead>
+                                        <%
+                                        	for(ItemPedido i : itensPedidoSelecionado){
+                                        		ItemPedido d = (ItemPedido) i;
+                                        %>
                                         <tbody>
                                             <tr>
-                                                <td>Blusinha</td>
-                                                <td>//</td>
-                                                <td>1</td>
+                                                <td><%=d.getProduto().getNome() %></td>
+                                                <td><%=d.getProduto().getPrecoVenda() %></td>
+                                                <td><%=d.getProduto().getQuantidadeSelecionada() %></td>
                                                 <td class="centrarlizarStatus_BtnAcao" rowspan="5"><%=pedidoSelecionado.getStatus() %></td>
-                                                <td class="centrarlizarStatus_BtnAcao" rowspan="7">
-                                                  <button class="btn" disabled> <i class="fa fa-edit"></i> Solicitar Troca</button>
-                                                </td>
+                                                
+                                                
+                        <% if(pedidoSelecionado.getStatus().equals("ENTREGA REALIZADA")) { %>
+						<form class="form_form" action="http://localhost:8080/eCommerce/pedidoTroca">
+							<td>
+								<!-- Quantidade do Item para ser Trocado -->
+								<input style="width: 50px; height: 30px;" type="text" class="form-control" name="qtdeItemParaTroca" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" required>
+							</td>
+							
+							<td><button class="btn btn-danger" name="operacao" value="CONSULTAR">Solicitar Troca</button></td>
+					
+							<!-- ID do Pedido -->
+		  					<input type="hidden" name="idPedido" value="<%=pedidoSelecionado.getId() %>">
+		  					<!-- ID do Item do Pedido -->
+		  					<input type="hidden" name="idItemPedido" value="<%=d.getId() %>">
+						</form>
+					<% } %>
+					
+					<!-- verifica se esse item do pedido foi acionado para troca, 
+					caso esse item esteja na lista de troca, será mostrado a quantidade dele na tela,
+					para poder saber a quantidade do item que esta sendo trocado -->
+					<% for (PedidoTroca exchange : itensPedidoTrocaEmSessao){
+						// o ID do item que esta salvo na Sessão, é IGUAL ao ID do item da lista atual
+						if (exchange.getItemPedido().getId().equals(d.getId())){ %>
+							<td>
+								<!-- Mostra a quantidade do Item que esta sendo Trocado -->
+								<input style="width: 50px; height: 30px;" type="text" class="form-control" name="qtdeItemParaTroca" value="<%=exchange.getItemPedido().getProduto().getQuantidadeSelecionada()%>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" required>
+							</td>
+					<%
+						}
+					 } %>
+                                                
                                             </tr>
+                                            
+                                            
                                         </tbody>
+                                        <%
+                                        	}
+                                        %>
                                     </table>
+                                    
+                                    <!-- se tiver itens na lista "itensPedidoTroca" na Sessão, ele mostra o botão para finalizar a troca -->
+								<% if (itensPedidoTrocaEmSessao.size() > 0) {
+								%>
+									<a href="/eCommerce/pedidoTroca?trocaPedidoInteiro=<%= "0"%>&operacao=SALVAR"><button class="btn btn-success" style="margin-top: 10px; float: right">Finalizar Troca</button></a>
+								<%
+								}
+								%>
                                 </div>
                             </div>
                         </div>

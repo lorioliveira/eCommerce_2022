@@ -84,6 +84,11 @@
     <url-pattern>/trocaPedido</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>/pedidoTroca</url-pattern>
+  </servlet-mapping>
+  
   
    <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>

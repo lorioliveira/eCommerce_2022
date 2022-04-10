@@ -84,7 +84,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			// faz o calculo dos itens que serão solicitados para a troca
 			// calculo do total dos itens (quantidade do item (*) o valor do item "preço de venda")
-			total_itens += (Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getQuantidadeSelecionada()) * Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getPrecoDeVenda()));
+			total_itens += (Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getQuantidadeSelecionada()) * Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getPrecoVenda()));
 		}
 		
 		novoPedido.setTotalItens("0");
@@ -100,7 +100,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		novoPedido.setValorCartao2(pedidoOriginal.get(0).getValorCartao2());
 		novoPedido.setTotalCupons("0");
 		novoPedido.setTrocado("sim");
-		novoPedido.setDtCadastro(dataAtual);
+		novoPedido.setData_Cadastro(dataAtual);
 		novoPedido.setDarBaixaEstoque("NAO");
 		
 		// salva o novo Pedido com o status TROCA SOLICITADA,
@@ -117,7 +117,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			novoItemPedido.setProduto(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto());
 			novoItemPedido.setIdPedido(ultimoPedido.get(0).getId());
 			novoItemPedido.setTrocado("sim");
-			novoItemPedido.setDtCadastro(ultimoPedido.get(0).getDtCadastro());
+			novoItemPedido.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
 			
 			// salva o novo Item do Pedido
 			itemPedidoDAO.salvar(novoItemPedido);
@@ -229,7 +229,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					List<Produto> produtoSelecionado = produtoDAO.consultarProdutoById(order_items.getProduto().getId());
 					
 					// faz a conta de soma da quantidade de entrada, mais a quantidade que já tinha no produto
-					quantidadeFinal = (Integer.parseInt(order_items.getProduto().getQuantidadeSelecionada()) + Integer.parseInt(produtoSelecionado.get(0).getQuantidade()));
+					quantidadeFinal = (Integer.parseInt(order_items.getProduto().getQuantidadeSelecionada()) + Integer.parseInt(produtoSelecionado.get(0).getQuantidadeSelecionada()));
 					
 					// realiza a ReEntrada no Estoque,
 					// altera a quantidade do estoque do Produto
@@ -247,11 +247,11 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					estoque.setIdProduto(order_items.getProduto().getId());
 					estoque.setTipo("entrada");
 					estoque.setQuantidadeEntradaSaida(order_items.getProduto().getQuantidadeSelecionada());
-					estoque.setValorCusto(produtoSelecionado.get(0).getPrecoDeCompra());
+					estoque.setValorCusto(produtoSelecionado.get(0).getPrecoCompra());
 					estoque.setFornecedor("Entrada no Estoque pelo Pedido: " + order_items.getIdPedido());
 					estoque.setDtEntrada(dataAtual);
 					estoque.setQuantidadeFinal(Integer.toString(quantidadeFinal));
-					estoque.setDtCadastro(dataAtual);
+					estoque.setData_Cadastro(dataAtual);
 					
 					// cria a entrada do produto no "Estoque"
 					estoqueDAO.salvar(estoque);
@@ -270,7 +270,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				cupom.setValor(pedidoTrocaEntidade.getTotalPedido());
 				cupom.setUtilizado("nao");
 				cupom.setIdCliente(pedidoTrocaEntidade.getIdCliente());
-				cupom.setDtCadastro(dataAtual);
+				cupom.setData_Cadastro(dataAtual);
 				
 				// gera o novo Cupom
 				cupomDAO.salvar(cupom);
@@ -330,7 +330,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
 				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
 				pedidoItem.setTrocado(rs.getString("trocado"));
-				pedidoItem.setDtCadastro(rs.getString("dt_cadastro"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
 				
 				// adicionando o objeto à lista
 				pedidos.add(pedidoItem);
@@ -350,13 +350,13 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				
 				produto.setId(rs.getString("id_produto"));
 				produto.setNome(rs.getString("nome"));
-				produto.setPrecoDeVenda(rs.getString("valor_de_venda"));
+				produto.setPrecoVenda(rs.getString("valor_de_venda"));
 				produto.setQuantidadeSelecionada(rs.getString("quantidade"));
 				item_pedidoItem.setProduto(produto);
 				
 				item_pedidoItem.setIdPedido(rs.getString("id_pedido"));
 				item_pedidoItem.setTrocado(rs.getString("trocado"));
-				item_pedidoItem.setDtCadastro(rs.getString("dt_cadastro"));
+				item_pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
 				
 				// adicionando o objeto à lista
 				item_pedido_selecionado.add(item_pedidoItem);
@@ -376,13 +376,13 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				
 				produto.setId(rs.getString("id_produto"));
 				produto.setNome(rs.getString("nome"));
-				produto.setPrecoDeVenda(rs.getString("valor_de_venda"));
+				produto.setPrecoVenda(rs.getString("valor_de_venda"));
 				produto.setQuantidadeSelecionada(rs.getString("quantidade"));
 				item_pedidoItem.setProduto(produto);
 				
 				item_pedidoItem.setIdPedido(rs.getString("id_pedido"));
 				item_pedidoItem.setTrocado(rs.getString("trocado"));
-				item_pedidoItem.setDtCadastro(rs.getString("dt_cadastro"));
+				item_pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
 				
 				// adicionando o objeto à lista
 				todos_itens_pedido.add(item_pedidoItem);
@@ -398,18 +398,17 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				Endereco enderecoItem = new Endereco();
 				
 				enderecoItem.setId(rs.getString("id"));
-				enderecoItem.setApelido(rs.getString("apelido"));
 				enderecoItem.setCep(rs.getString("cep"));
-				enderecoItem.setEstado(rs.getString("estado"));
-				enderecoItem.setCidade(rs.getString("cidade"));
+				enderecoItem.setLogradouro(rs.getString("logradouro"));
 				enderecoItem.setNumero(rs.getString("numero"));
 				enderecoItem.setBairro(rs.getString("bairro"));
-				enderecoItem.setLogradouro(rs.getString("logradouro"));
-				enderecoItem.setTipoResidencia(rs.getString("tipo_residencia"));
+				enderecoItem.setCidade(rs.getString("cidade"));
+				enderecoItem.setEstado(rs.getString("estado"));
 				enderecoItem.setPais(rs.getString("pais"));
-				enderecoItem.setTipo_Endereco(rs.getString("tipo_endereco"));
-				enderecoItem.setObservacao(rs.getString("observacao"));
-				enderecoItem.setDtCadastro(rs.getString("dt_cadastro"));
+				enderecoItem.setTipoResidencia(rs.getString("tipoResidencia"));
+				enderecoItem.setObservacoes(rs.getString("observacoes"));
+				enderecoItem.setTipoEnd(rs.getString("tipoEndereco"));
+				enderecoItem.setData_Cadastro(rs.getString("data_Cadastro"));
 				
 				enderecoItem.setIdCliente(rs.getString("id_cliente"));
 				

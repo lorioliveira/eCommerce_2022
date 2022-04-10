@@ -3,136 +3,75 @@ package com.les.roupa.core.dominio;
 import java.util.List;
 
 /**
- * Classe para representar o Endereco - Cliente
+ * Classe para representar o Estoque
  */
 public class Estoque extends EntidadeDominio {
-	public String logradouro;
-	private String numero;
-	private String bairro;
-	private String cep;
-	private String cidade;
-	private String estado;
-	private String pais;
-	private String tipoResidencia;
-	private String observacoes;
-	private String tipoEndereco;
-	private String idCliente;
-	private String status;
-	
-	private String alteraEndereco;
-	
-	private List<Estoque> todosEnderecos;
-	
-	
-//	LOGRADOURO
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	// NUMERO
-	public String getNumero() {
-		return numero;
-	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-	
-	//BAIRRO
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	
-	//CEP
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-	
-	//CIDADE
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	
-	//ESTADO
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
-	// PAIS
-	public String getPais() {
-		return pais;
-	}
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-	
-	//TIPO ENDERECO
-	public String getTipoResidencia() {
-        return tipoResidencia;
-    }
-    public void setTipoResidencia(String tipoResidencia) {
-        this.tipoResidencia = tipoResidencia;
-    }
-    
-    // OBS
-    public String getObservacoes() {
-    	return observacoes;
-    }
-    public void setObservacoes(String observacoes) {
-    	this.observacoes = observacoes;
-    }
-    
- // TIPO DE ENDERECO - COBRANCA/ENTREGA
-    public String getTipoEnd() {
-    	return tipoEndereco;
-    }
-    public void setTipoEnd(String tipoEndereco) {
-    	this.tipoEndereco = tipoEndereco;
-    }
-    
-  //ID 
-  	public String getIdCliente() {
-  		return idCliente;
-  	}
-  	public void setIdCliente(String idCliente) {
-  		this.idCliente = idCliente;
-  	}
-    
- // STATUS = ATIVO OU INATIVO
-    public String getStatus() {
-    	return status;
-    }
-    public void setStatus(String status) {
-    	this.status = status;
-    }
-    
-    /* ALTERA ENDERECO */
-	public String getAlteraEndereco() {
-		return alteraEndereco;
-	}
-	public void setAlteraEndereco(String alteraEndereco) {
-		this.alteraEndereco = alteraEndereco;
-	}
-	
-	/* ENDERECOS DO CLIENTE */
-	public List<Estoque> getTodosEnderecos() {
-		return todosEnderecos;
-	}
+	private String id_produto;
+	private String tipo;
+	private String quantidade_entrada_saida;
+	private String valor_custo;
+	private String fornecedor;
+	private String dt_entrada;
+	private String quantidade_final;
+	private List<Estoque> estoqueDoProduto;
+	private String nome_produto;
 
-	public void setTodosEnderecos(List<Estoque> todosEnderecos) {
-		this.todosEnderecos = todosEnderecos;
+	
+	public String getIdProduto() {
+		return id_produto;
 	}
+	public void setIdProduto(String id_produto) {
+		this.id_produto = id_produto;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public String getQuantidadeEntradaSaida() {
+		return quantidade_entrada_saida;
+	}
+	public void setQuantidadeEntradaSaida(String quantidade_entrada_saida) {
+		this.quantidade_entrada_saida = quantidade_entrada_saida;
+	}
+	public String getValorCusto() {
+		return valor_custo;
+	}
+	public void setValorCusto(String valor_custo) {
+		this.valor_custo = valor_custo;
+	}
+	public String getFornecedor() {
+		return fornecedor;
+	}
+	public void setFornecedor(String fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+	public String getDtEntrada() {
+		return dt_entrada;
+	}
+	public void setDtEntrada(String dt_entrada) {
+		this.dt_entrada = dt_entrada;
+	}
+	public String getQuantidadeFinal() {
+		return quantidade_final;
+	}
+	public void setQuantidadeFinal(String quantidade_final) {
+		this.quantidade_final = quantidade_final;
+	}
+	
+	public List<Estoque> getEstoqueDoProduto() {
+        return estoqueDoProduto;
+    }
+    public void setEstoqueDoProduto(List<Estoque> estoqueDoProduto) {
+        this.estoqueDoProduto = estoqueDoProduto;
+    }
+    
+	public String getNomeProduto() {
+		return nome_produto;
+	}
+	public void setNomeProduto(String nome_produto) {
+		this.nome_produto = nome_produto;
+	}
+	
 }
