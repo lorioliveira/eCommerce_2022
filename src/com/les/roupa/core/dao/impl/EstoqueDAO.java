@@ -138,7 +138,7 @@ public class EstoqueDAO extends AbstractJdbcDAO {
 		openConnection();
 		
 		String sql = "update produto set " +
-					 "quantidade=? " +
+					 "qtdeEstoque=? " +
 					 "where id=?";
 		
 		try {

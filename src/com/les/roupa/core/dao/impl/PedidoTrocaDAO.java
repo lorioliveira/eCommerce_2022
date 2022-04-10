@@ -229,7 +229,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					List<Produto> produtoSelecionado = produtoDAO.consultarProdutoById(order_items.getProduto().getId());
 					
 					// faz a conta de soma da quantidade de entrada, mais a quantidade que já tinha no produto
-					quantidadeFinal = (Integer.parseInt(order_items.getProduto().getQuantidadeSelecionada()) + Integer.parseInt(produtoSelecionado.get(0).getQuantidadeSelecionada()));
+					quantidadeFinal = (Integer.parseInt(order_items.getProduto().getQuantidadeSelecionada()) + Integer.parseInt(produtoSelecionado.get(0).getQtdeEstoque()));
 					
 					// realiza a ReEntrada no Estoque,
 					// altera a quantidade do estoque do Produto

@@ -247,7 +247,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 					
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/detalhePedido3_msg.jsp").forward(request, response);
 				}
 				else {
 					// caso contrário, o Item do Pedido selecionado não é do mesmo Pedido que ja existe na Sessão,
@@ -278,7 +278,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 					request.setAttribute("itensPedidoSelecionado", pedidoTrocaEntidade.getTodosItensPedido());
 					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/detalhePedido3_msg.jsp").forward(request, response);
 				}
 			}
 			else {
