@@ -2453,8 +2453,8 @@ h2 {
     padding: 30px;
     background: #ffffff;
     margin-bottom: 30px;
-    margin-top: -20px;
-    margin-left: 3.7rem;
+    /* margin-top: -7rem; */
+    margin-left: 4.8rem;
 }
 
 .registrar__novoEndereco {
@@ -3068,4 +3068,10 @@ h2 {
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+.divPrincipal{
+	display: flex;
+}
+.divResumo{
+	margin-top: -14.5rem;
+}
 

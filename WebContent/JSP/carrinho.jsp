@@ -239,7 +239,7 @@
                         <tr>
                            <td>
                               <div class="img">
-                                 <a href="#"><img src= <%=produtoCarrinho.getFoto()%>
+                                 <a href="#"><img src=.<%=produtoCarrinho.getFoto()%>
                                     alt="Image" /></a>
                                  <p><%=produtoCarrinho.getNome()%></p>
                               </div>
@@ -310,6 +310,7 @@
              <!-- form para o cadastro do pedido -->
          <form action="http://localhost:8080/eCommerce/cadastroPedido">
             <!-- ENDEREÇOS -->
+        <div class="divPrincipal">
             <div class="col-lg-12">
                <div class="checkout-inner">
                   <div class="billing-address">
@@ -356,7 +357,7 @@
          
          
          <!-- RESUMO / FORMA DE PAGAMENTO -->
-	         <div class="col-lg-4">
+	         <div class="col-lg-6 divResumo">
 	       		<div class="checkout-inner">
 			         <div class="checkout-summary">
 				         <div class="cart-summary">
@@ -438,6 +439,7 @@
 		         <input type="hidden" name="total_pedido" id="total_pedido"value="<%=total_pedido%>">
 	         </div>
 	         </div>
+	    </div>
 	         </form>
          </div>
         </div>
@@ -445,10 +447,23 @@
       
       
        <!-- CUPONS -->
-     <div class="col-lg-7 divCupom registrar__novaconta">
+     <div class="col-lg-7 divCupom">
      	<div class="checkout-inner">
         	<div class="billing-address">
-	    		<h4>Cupons aplicados no Pedido</h4>
+        	
+		             <!-- Cupons Disponíveis do Cliente -->
+				 <div class="form-group col-md-8">
+		  			 <h3>Cupons disponíveis</h3>
+				     <textarea class="form-control" name="cuponsDisponiveis" placeholder="Cupons disponíveis" rows="2" disabled><%=concatenacaoCuponsCliente %></textarea>
+		  		 </div>
+		  		 
+		      <form action="http://localhost:8080/eCommerce/verificaCupom">
+				 <div class="coupon couponB cart-page-inner" >
+			          <input type="text" placeholder="Insira um Cupom" name="cupom">
+			          <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
+				 </div>
+				       
+		  		 <h4>Cupons aplicados no Pedido</h4>
 	    		<table class="table table-bordered">
 	    			<thead class="thead-dark">
 	                  <tr>
@@ -469,18 +484,6 @@
 					%>
 	                 </tbody>
 	    		</table>
-			    	
-		      <form action="http://localhost:8080/eCommerce/verificaCupom">
-				 <div class="coupon couponB cart-page-inner" >
-			          <input type="text" placeholder="Insira um Cupom" name="cupom">
-			          <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
-				 </div>
-				             
-		             <!-- Cupons Disponíveis do Cliente -->
-				 <div class="form-group col-md-8">
-		  			 <label>Cupons disponíveis</label>
-				     <textarea class="form-control" name="cuponsDisponiveis" placeholder="Cupons disponíveis" rows="2" disabled><%=concatenacaoCuponsCliente %></textarea>
-		  		 </div>
 		             
 		             <!-- ID do Cliente -->
 					<input type="hidden" name="idCliente" id="idCliente" value="<%=usuarioLogado.getId() %>">
