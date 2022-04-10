@@ -31,7 +31,7 @@
       <link href="./css/style.css" rel="stylesheet" />
    </head>
   <%
-   List<Produto> produtosEmSessao = new ArrayList<>();
+   		 List<Produto> produtosEmSessao = new ArrayList<>();
          List<Cupom> cuponsSessao = new ArrayList<>();
          Usuario usuarioLogado = new Usuario();
          String concatenacaoCuponsCliente = "";
@@ -101,8 +101,8 @@
          desconto_cupons = desconto_cupons / 100;
          
      	 // pega a mensagem que estava pendurado na requisição,
-      		// que foi enviado pelo arquivo "ClienteHelper"
-      		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+      	 // que foi enviado pelo arquivo "ClienteHelper"
+      	 String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
       		
    		//pega todos cupons do Cliente que estao na sessao
    		List<Cupom> cupons = (List<Cupom>) sessao.getAttribute("cuponsCliente");

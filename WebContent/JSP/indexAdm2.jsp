@@ -44,9 +44,12 @@
  	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
+ 	// pega a mensagem que estava pendurado na requisição,
+    // que foi enviado pelo arquivo "ClienteHelper"
+    String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
     %>
 
-<body>
+<body onload="AtivaModal()">
     <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
     <div class="top-bar">
         <div class="container-fluid">
@@ -215,7 +218,7 @@
                                             <th>Cliente</th>
                                             <th>Valor</th>
                                             <th>Status</th>
-                                            <th>Ação</th>
+                                            <th class="thAcao">Ação</th>
                                         </tr>
                                     </thead>
                                     <%
@@ -229,12 +232,12 @@
                                             <td><%=pedido.getStatus() %></td>
                                             <td>
                                             	
-                        <form class="form_form" style="width: 500px !important;" action="http://localhost:8080/eCommerce/pedidoTroca">
+                        <form action="http://localhost:8080/eCommerce/pedidoTroca" class="tabelaPedido">
 						<div class="form-row">
-							<div class="form-group col-md-8">
-								<label>Status</label>
+							<div class="form-group col-md-7">
+								<label>Selecione o status:</label>
 
-					  			<select name="alterarStatusPedido" class="form-control" placeholder="Selecione um Status" required>
+					  			<select name="alterarStatusPedido" class="form-control borderSelect" placeholder="Selecione um Status" required>
 							      	<option value="" disabled selected>Selecione uma opção...</option>
 							      	<option value="EM PROCESSAMENTO">EM PROCESSAMENTO</option>
 							      	<option value="PAGAMENTO REALIZADO">PAGAMENTO REALIZADO</option>
@@ -243,18 +246,18 @@
 							      	<option value="TROCA AUTORIZADA">TROCA AUTORIZADA</option>
 							      	<option value="TROCA REJEITADA">TROCA REJEITADA</option>
 							      	<option value="TROCA ACEITA">TROCA ACEITA</option>
-							      	<option style="color: #008B00;" value="TROCA EFETUADA">TROCA EFETUADA</option>
+							      	<option style="color: #09cc17;" value="TROCA EFETUADA">TROCA EFETUADA</option>
 							      	<option value="CANCELAMENTO SOLICITADO">CANCELAMENTO SOLICITADO</option>
 							      	<option value="CANCELAMENTO REJEITADA">CANCELAMENTO REJEITADA</option>
 							      	<option value="CANCELAMENTO ACEITO">CANCELAMENTO ACEITO</option>
-							      	<option style="color: #008B00;" value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
+							      	<option style="color: #09cc17;" value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
 							      	<option value="ENTREGA REALIZADA">ENTREGA REALIZADA</option>
 						      	</select>
 							</div>
 							
-							<!-- Botões CRUD-->
+							<!-- Botão ALTERAR - Status-->
 							<div class="form-group col-md-4">
-								<div align="right" style="margin-top: 29px;">
+								<div style="margin-top: 29px;">
 									<button class="btn btn-warning" name="operacao" value="ALTERAR">Alterar</button>
 								</div>
 							</div>
@@ -487,6 +490,39 @@
     <!--  Javascript -->
     <script src="./js/main.js"></script>
     <script src="./js/all.js"></script>
+    
+     <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h3 class="modal-titulo">Atenção</h3>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
+    
 </body>
 
 </html>

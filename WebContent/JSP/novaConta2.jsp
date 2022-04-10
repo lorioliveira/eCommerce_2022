@@ -1,21 +1,16 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
-
 <%@page import="java.util.List"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
+        <meta charset="utf-8">
         <title>Mirror Fashion</title>
-        
-       	<meta charset="utf-8">
-       	
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">	
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="./favicon.ico">
+        <link href="./img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -29,8 +24,14 @@
         <!-- CSS Principal do Projeto -->
         <link href="./css/style.css" rel="stylesheet">
     </head>
+    
+    <%
+ 		// pega a mensagem que estava pendurado na requisição,
+    	// que foi enviado pelo arquivo "ClienteHelper"
+   		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+    %>
 
-    <body>
+    <body onload="AtivaModal()">
          <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
             <div class="container-fluid">
@@ -48,31 +49,38 @@
         </div>
         <!-- Fim da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         
-        <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
-        <div class="nav">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                            <a href="login.jsp" class="nav-item nav-link active">Home</a>
+      <!-- Inicio da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->
+      <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        <a href="./JSP/login.jsp" class="nav-item nav-link active">Home</a>
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                         <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a> 
                         </div>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </div>
+    </div>
        <!-- Fim da faixa de menu -  faixa rosa contendo home, produtos e minha conta -->        
         
-        <!-- Inicio da div contendo logo, barra de pesquisa e botÃ£o Minha Sacola-->
+        <!-- Inicio da div contendo logo, barra de pesquisa e botão Minha Sacola-->
         <div class="bottom-bar">
             <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="login.jsp">
+                        <a href="./JSP/login.jsp">
                         <img src="./img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -80,73 +88,79 @@
                 <!-- BARRA DE PESQUISA -->
                 <div class="col-md-6">
                     <div class="search">
-                        <!-- <input type="text" placeholder="Procuro por ...">
-                        <button><i class="fa fa-search"></i></button> -->
                     </div>
                 </div>
-                <!-- MINHA SACOLA -->
-                <!-- <div class="col-md-2">
-                    <div class="user">
-                        <a href="" class="btn cart">
-                        Minha Sacola <i class="fas fa-shopping-bag"></i>
-                        </a>
-                    </div>
-                </div> -->
             </div>
             </div>
         </div>
-        <!--- Fim da div contendo logo, barra de pesquisa e botao Minha Sacola -->       
+        <!--- Fim da div contendo logo, barra de pesquisa e botão Minha Sacola -->       
         
         
         <!-- Inicio do Breadcrumb -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Entre ou Registre-se</li>
+                    <li class="breadcrumb-item active">Criar nova conta</li>
                 </ul>
             </div>
         </div>
        <!-- Fim do Breadcrumb -->
         
-        <!-- Inicio do Login -->
-        <form action="http://localhost:8080/eCommerce/login" method="post">
-            <div class="login">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="login-form">
+        <!-- Inicio de Registrar nova conta -->
+        <div class="registrar__novaconta">
+            <div class="container-novaconta">
+                <div class="col-lg-9">   
+                    <div class="register-form">
+                        <form action="http://localhost:8080/eCommerce/cadastro" method="post">
+                            <h4>Crie sua conta para acessar a loja </h4><br>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label>E-mail</label>
-                                        <input class="form-control" type="email" name="email" placeholder="E-mail" >
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label>Senha</label>
-                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8" placeholder="Senha">
-                                    </div>
-                                    
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btnEntrar" name="operacao" value="CONSULTAR"><i class="fa fa-door-open"></i> Entrar</button>
-                                    </div>
+                                <div class="col-md-3">
+                                    <label>Nome</label>
+                                    <input class="form-control" type="text" name="nome" placeholder="Nome">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>CPF</label>
+                                    <input class="form-control" name="cpf" id="RegraCPF" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF apenas números" maxlength="14"  >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gênero: </label></br>
+                                    <input type="radio" name="genero" value="Feminino" >   <i class="fa fa-female"></i>   Feminino
+                                    <input type="radio" name="genero" value="Masculino" class="espacamento_genero" >       <i class="fa fa-male"></i>   Masculino 
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Celular</label>
+                                    <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" placeholder="Celular" pattern="\(\d{2}\)\s*\d{5}-\d{4}" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label> Data de Nascimento</label>
+                                    <input class="form-control" type="date" name="data_Nascimento"  class="fa fa-birthday-cake" min="1900-01-31" max="2004-12-31" >
+                            </div>
+                                <div class="col-md-6">
+                                    <label>E-mail</label>
+                                    <input class="form-control" name="email" type="email" placeholder="e-mail" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Senha</label>
+                                    <input class="form-control" type="password" name="senha" placeholder="Senha" min="8" maxlength="15">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Confirme a Senha</label>
+                                    <input class="form-control" type="password" name="confirmarSenha" placeholder="Insira novamente a senha" min="8"  maxlength="15">
+                                </div>
+                                <div class="col-md-9">
+                                    <button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
+                                    <button type="submit" class="btn" name="operacao" value="SALVAR"> <i class="fa fa-user-check"></i> Criar</button>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Criar nova conta -->
-                        <div class="col-lg-4">
-                            <div class="login-form divNovaConta_Login">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p>Ou registre-se aqui</p>
-                                        <a class="btn" href="./JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <input type="hidden" name="alteraCliente" value="0"/>
+                            <input type="hidden" name="status" value="ativo"/>
+                            <input type="hidden" name="tipoCliente" value="cliente"/>
+                        </form> 
                     </div>
-                </div>
+                </div>    
             </div>
-        </form>
-        <!-- Fim do Login -->
+        </div>
+        <!-- Login End -->
         
         <!-- Footer Start -->
         <div class="footer">
@@ -157,7 +171,7 @@
                             <h2>Contato</h2>
                             <div class="contact-info">
                                 <p><i class="fa fa-map-marker"></i>Mogi das Cruzes - SP</p>
-                                <p><i class="fa fa-envelope"></i>Lorena Oliveira </p>
+                                <p><i class="fa fa-envelope"></i>Lorena Oliveira</p>
                                 <p><i class="fa fa-phone"></i>+55 11 91234-5678</p>
                             </div>
                         </div>
@@ -198,7 +212,7 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="./img/payment-method.png" alt="Payment Method" />
+                            <img src="./img/payment-method.png" alt="metodo_pagamento_MF" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -219,7 +233,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -241,5 +255,39 @@
         
         <!-- Template Javascript -->
         <script src="./js/main.js"></script>
+        <script src="./js/all.js"></script>
+        
+         <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h3 class="modal-titulo">Atenção</h3>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
+        
     </body>
 </html>

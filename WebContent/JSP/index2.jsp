@@ -36,8 +36,13 @@
 	      //pega todos produtos que estao na sessao
 	      List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
 	      
+	   	  // pega a mensagem que estava pendurado na requisição,
+	      // que foi enviado pelo arquivo "ClienteHelper"
+	      String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+
+	      
 	      %>
-   <body>
+   <body onload="AtivaModal()">
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
          <div class="container-fluid">
@@ -295,5 +300,39 @@
       <script src="./lib/slick/slick.min.js"></script>
       <!--  Javascript -->
       <script src="./js/main.js"></script>
+      
+      <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h3 class="modal-titulo">Atenção</h3>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+	    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+	    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    	// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
+      
+      
    </body>
 </html>

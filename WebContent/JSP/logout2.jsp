@@ -1,4 +1,3 @@
-
 <%@page import='com.les.roupa.core.dominio.*'%>
 
 <%@page import="java.util.List"%>
@@ -32,9 +31,9 @@
     </head>
     
     <%
- 		// pega a mensagem que estava pendurado na requisição,
-    	// que foi enviado pelo arquivo "ClienteHelper"
-  		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+ 	// pega a mensagem que estava pendurado na requisição,
+    // que foi enviado pelo arquivo "ClienteHelper"
+    String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
     
     %>
 
@@ -88,8 +87,18 @@
                 <!-- BARRA DE PESQUISA -->
                 <div class="col-md-6">
                     <div class="search">
+                        <!-- <input type="text" placeholder="Procuro por ...">
+                        <button><i class="fa fa-search"></i></button> -->
                     </div>
                 </div>
+                <!-- MINHA SACOLA -->
+                <!-- <div class="col-md-2">
+                    <div class="user">
+                        <a href="" class="btn cart">
+                        Minha Sacola <i class="fas fa-shopping-bag"></i>
+                        </a>
+                    </div>
+                </div> -->
             </div>
             </div>
         </div>
@@ -120,7 +129,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <label>Senha</label>
-                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8"  maxlength="15" placeholder="Senha">
+                                        <input class="form-control" type="password" name="senha" value="" accesskey="S" min="8" placeholder="Senha">
                                     </div>
                                     
                                     <div class="col-md-12">
@@ -135,7 +144,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p>Ou registre-se aqui</p>
-                                        <a class="btn" href="./JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova Conta</a>
+                                        <a class="btn" href="./JSP/novaConta.jsp"><i class="fa fa-user-plus"></i> Nova conta</a>
                                     </div>
                                 </div>
                             </div>
@@ -217,9 +226,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="login.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
                     </div>
 
+                    <!-- <div class="col-md-6 template-by">
+                        <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -237,7 +249,7 @@
         <!-- Template Javascript -->
         <script src="./js/main.js"></script>
         
-        <!-- Modal -->
+         <!-- Modal -->
 	<div class="modal fade" id="modal-mensagem">
 	   <div class="modal-dialog">
 	   		<div class="modal-content">

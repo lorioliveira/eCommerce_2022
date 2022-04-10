@@ -27,7 +27,7 @@ public class ValidarExisteEmail implements IStrategy {
 		
 			if(!usuarios.isEmpty()) {
 				// Caso exista algo igual ao email
-				return (("Esse email já existe! Entre ou cadastre com outro email. <br>"));
+				return (("Esse email já existe! <br>Entre ou cadastre com outro email. "));
 			}
 			else {
 				return null;

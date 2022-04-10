@@ -12,8 +12,6 @@
     <meta charset="utf-8">
     <title>[Admin] Mirror Fashion</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="eCommerce HTML Template Free Download" name="keywords">
-    <meta content="eCommerce HTML Template Free Download" name="description">
 
     <!-- Favicon -->
     <link href="../img/favicon.ico" rel="icon">
@@ -43,7 +41,7 @@
     // Pega o ID daquele cliente logado -> admin
     List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
- 	 //pega todos os pedidos do cliente logado
+ 	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
     %>
@@ -230,7 +228,46 @@
                                             <td>R$ <%=pedido.getTotalPedido() %></td>
                                             <td><%=pedido.getStatus() %></td>
                                             <td>
-                                               <a href="/eCommerce/cadastroPedido?id=<%=pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>                      
+                                            	
+                        <form class="form_form" style="width: 500px !important;" action="http://localhost:8080/eCommerce/pedidoTroca">
+						<div class="form-row">
+							<div class="form-group col-md-8">
+								<label>Status</label>
+
+					  			<select name="alterarStatusPedido" class="form-control" placeholder="Selecione um Status" required>
+							      	<option value="" disabled selected>Selecione uma opção...</option>
+							      	<option value="EM PROCESSAMENTO">EM PROCESSAMENTO</option>
+							      	<option value="PAGAMENTO REALIZADO">PAGAMENTO REALIZADO</option>
+							      	<option value="EM TRANSPORTE">EM TRANSPORTE</option>
+							      	<option value="TROCA SOLICITADA">TROCA SOLICITADA</option>
+							      	<option value="TROCA AUTORIZADA">TROCA AUTORIZADA</option>
+							      	<option value="TROCA REJEITADA">TROCA REJEITADA</option>
+							      	<option value="TROCA ACEITA">TROCA ACEITA</option>
+							      	<option style="color: #008B00;" value="TROCA EFETUADA">TROCA EFETUADA</option>
+							      	<option value="CANCELAMENTO SOLICITADO">CANCELAMENTO SOLICITADO</option>
+							      	<option value="CANCELAMENTO REJEITADA">CANCELAMENTO REJEITADA</option>
+							      	<option value="CANCELAMENTO ACEITO">CANCELAMENTO ACEITO</option>
+							      	<option style="color: #008B00;" value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
+							      	<option value="ENTREGA REALIZADA">ENTREGA REALIZADA</option>
+						      	</select>
+							</div>
+							
+							<!-- Botões CRUD-->
+							<div class="form-group col-md-4">
+								<div align="right" style="margin-top: 29px;">
+									<button class="btn btn-warning" name="operacao" value="ALTERAR">Alterar</button>
+								</div>
+							</div>
+						</div>
+						
+						<!-- ID do Pedido -->
+			    		<input type="hidden" name="idPedido" id="idPedido" value="<%=pedido.getId() %>">
+			    		<!-- ID do Cliente -->
+			    		<input type="hidden" name="idCliente" id="idCliente" value="<%=pedido.getIdCliente() %>">
+			    		<!-- Total do Pedido -->
+			    		<input type="hidden" name="totalPedido" id="totalPedido" value="<%=pedido.getTotalPedido() %>">
+					</form>
+                                            	
                                             </td>
                                         </tr>
                                     </tbody>

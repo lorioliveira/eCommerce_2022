@@ -118,6 +118,12 @@ public class LoginHelper implements IViewHelper {
 				// Este apenas puxa apenas o cliente que sera alterado
 				sessao.setAttribute("clienteAlterado", usuario.getTodosClientes().get(0));
 				
+				// Mensagem de boas vindas para aparece na modal
+				resultado.setMensagem("Bem vinda(o) ao <b>Mirror Fashion</b>! ");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
 				//Caso usuario logado for Cliente ou Admin 
 				if(usuario.getTipoCliente().equals("cliente")) {
 					
@@ -132,37 +138,42 @@ public class LoginHelper implements IViewHelper {
 				// seja exibida na tela 'tela-mensagem.jsp'
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR LOGIN!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
-				
+				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// Requisicao da nova conta e redirecionada para tela de login
+				
+				// Mensagem de conta criada para aparece na modal 
+				resultado.setMensagem("Eba! Conta criada com sucesso! <br> Agora faça o seu login!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
+				// Requisicao da nova conta e redirecionada para tela de login para acessar
 				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 			else {
-				// mostra as mensagens de ERRO se houver
-				//  na 'tela-mensagem.jsp'
+				// mostra as mensagens de ERRO se houver na tela do formulário da Nova Conta
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR LOGIN!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/novaConta2.jsp").forward(request, response);
 			}
 		}
 		
 		//		ALTERAR SENHA
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-			// requisisao de alteracao de senha
+			// requisicao de alteracao de senha
 				
 			request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 		}
 		else {
-			// mostra as mensagens de ERRO se houver
+			// mostra as mensagens de ERRO se houver na tela Minha Conta (perfil do Cliente)
         	request.setAttribute("mensagemStrategy", resultado.getMensagem());
         	System.out.println("ERRO PARA ALTERAR LOGIN - (Senha)!");
-			request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+			request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 		}
 	}
 		
@@ -174,18 +185,20 @@ public class LoginHelper implements IViewHelper {
 				 
 				sessao.invalidate(); // destroi o cookie JSESSIONID inteiro e cria outro
 				
-				// pendura o "resultado" na requisisao para poder mandar para o arquivo .JSP
+				// Mensagem de logout para aparece na modal ao sair - tela de Logout
+				resultado.setMensagem("Logout foi realizado com sucesso! </br> Volte Sempre!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo de login apos sair da loja 
-				request.getRequestDispatcher("JSP/logout.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/logout2.jsp").forward(request, response);
 			}
 			else {
-				
-				// seja exibida na tela 'tela-mensagem.jsp'
+				// Mensagem de ERRO
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR LOGIN!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 				
 			}
 		}

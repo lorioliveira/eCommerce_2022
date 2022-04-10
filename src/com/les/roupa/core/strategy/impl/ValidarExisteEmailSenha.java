@@ -29,7 +29,7 @@ public class ValidarExisteEmailSenha implements IStrategy {
 			return ("Email e/ou senha invalidos. Por favor, tente novamente. <br>");
 		}
 		else if(clientes.get(0).getStatus().equals("inativo") || (clientes.get(0).getStatus().equals("Inativo"))) {
-			return ("Usuario temporariamente inativado. Entre em contato com o Administrador. <br>");
+			return ("Usuário temporariamente <b>inativado</b>. <br>Entre em contato com o Administrador. ");
 		}else {
 			return null;
 		}

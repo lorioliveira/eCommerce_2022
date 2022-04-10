@@ -155,25 +155,32 @@ public class ClienteHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				//Redirecionamento
+				//Redirecionamento normal para index com o usuario logado com sucesso
 					request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 						
 			else {
-				// se houver, mostra as mensagens de ERRO
+				// se houver, mostra as mensagens de ERRO logo na tela ao logar
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				
+				// Mensagem de conta criada para aparece na modal 
+				resultado.setMensagem("Eba! Conta criada com sucesso! <br> Agora faça o seu login!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
 				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+				// se houver, mostra as mensagens de ERRO 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/novaConta2.jsp").forward(request, response);
 			}
 		}
 		
@@ -198,6 +205,13 @@ public class ClienteHelper implements IViewHelper {
 				// No caso 'não', então ele encaminha para tela de alteração com os dados puxados do banco
 				if(alteraCliente.equals("0")) {
 					request.setAttribute("idCliente", id);
+					
+					// Mensagem de boas vindas para aparece na modal
+					resultado.setMensagem("Cliente alterado com sucesso! ");
+					
+					// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+					request.setAttribute("mensagemStrategy", resultado.getMensagem());
+					
 					request.getRequestDispatcher("JSP/alterarCliente2.jsp").forward(request, response);
 				}else {
 					// Redireciona para o arquivo .jsp

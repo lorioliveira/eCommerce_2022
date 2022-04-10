@@ -165,7 +165,7 @@ public class EnderecoHelper implements IViewHelper {
 			else {
 				// mostra as mensagens de ERRO se houver
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				System.out.println("ERRO PARA CONSULTAR ENDERECO!");
 			}
 		}
@@ -182,13 +182,20 @@ public class EnderecoHelper implements IViewHelper {
 				
 				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
 				
+				// Mensagem de conta criada para aparece na modal 
+				resultado.setMensagem("Endereço salvo com sucesso!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
 				// Redireciona para o arquivo
 				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+			
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				System.out.println("ERRO PARA SALVAR ENDERECO!");
 			
 			}
@@ -208,6 +215,14 @@ public class EnderecoHelper implements IViewHelper {
 				// Este apenas puxa apenas o endereço que sera alterado
 				sessao.setAttribute("enderecoAlterado", endereco.getTodosEnderecos().get(0));
 				
+
+				// Mensagem de conta criada para aparece na modal 
+				resultado.setMensagem("Endereço alterado com sucesso!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
+				
 				String alteraEndereco = request.getParameter("alteraEndereco");
 				String idEndereco = request.getParameter("id");
 				
@@ -221,8 +236,7 @@ public class EnderecoHelper implements IViewHelper {
 					request.getRequestDispatcher("JSP/alterarendereco.jsp").forward(request, response);
 				}
 				else {
-					
-					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+					// pendura o "resultado" - mensagem de ERRO na requisição 
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
@@ -233,7 +247,7 @@ public class EnderecoHelper implements IViewHelper {
 			else {
 				// mostra as mensagens de ERRO se houver
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				System.out.println("ERRO PARA ALTERAR ENDERECO!");
 			}
 		}
@@ -249,11 +263,17 @@ public class EnderecoHelper implements IViewHelper {
 				
 				//atualiza a sessao com todos os enderecos existentes
 				sessao.setAttribute("enderecosCliente", endereco.getTodosEnderecos());
-				
 
 				String idEndereco = request.getParameter("idEndereco");
 				// pendura o "idEndereco" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("idEndereco", idEndereco);
+				
+
+				// Mensagem de conta criada para aparece na modal 
+				resultado.setMensagem("Endereço excluído com sucesso!");
+								
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp, para poder listar os endereços novamente
 				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
@@ -261,7 +281,7 @@ public class EnderecoHelper implements IViewHelper {
 			else {
 				// mostra as mensagens de ERRO se houver
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				System.out.println("ERRO PARA EXCLUIR ENDERECO!");
 			}
 		}
