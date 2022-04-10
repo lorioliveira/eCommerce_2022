@@ -563,7 +563,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 		ItemPedidoDAO pedidoItemDAO = new ItemPedidoDAO();
 		//EstoqueDAO estoqueDAO = new EstoqueDAO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
-		//CupomDAO cupomDAO = new CupomDAO();
+		CupomDAO cupomDAO = new CupomDAO();
 		Pedido pedido = new Pedido();
 		ItemPedido item_pedido = new ItemPedido();
 		Estoque estoque = new Estoque();
@@ -578,7 +578,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			// altera o Cupom que foi selecionado no Pedido,
 			// para o status que "já foi utilizado",
 			// altera no banco a tabela "cupom" da coluna "utilizado" para "sim".
-			//cupomDAO.alterarUtilizacaoCupom(cupom.getId());
+			cupomDAO.alterarUtilizacaoCupom(cupom.getId());
 		}
 		
 		// após salvar o pedido, será salvo os itens do pedido,

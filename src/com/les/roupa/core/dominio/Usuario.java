@@ -23,9 +23,9 @@ public class Usuario extends EntidadeDominio {
 	private List<CartaoCredito> cartoesCliente;
 	private List<Produto> todosProdutos;
 	private List<Pedido> todosPedidos;
-	
-
 	private List<Pedido> pedidosCliente;
+	private List<Cupom> cuponsCliente;
+	private List<Cupom> todosCupons;
 	
 
 	/* Email */
@@ -161,6 +161,24 @@ public class Usuario extends EntidadeDominio {
 
 	public void setPedidosCliente(List<Pedido> pedidosCliente) {
 		this.pedidosCliente = pedidosCliente;
+	}
+	
+	/* Cupons do Cliente */
+	public List<Cupom> getCuponsCliente() {
+		return cuponsCliente;
+	}
+
+	public void setCuponsCliente(List<Cupom> cuponsCliente) {
+		this.cuponsCliente = cuponsCliente;
+	}
+	
+	// Lista de todos os Cupons - ADMIN
+	public List<Cupom> getTodosCupons() {
+		return todosCupons;
+	}
+
+	public void setTodosCupons(List<Cupom> todosCupons) {
+		this.todosCupons = todosCupons;
 	}
 	
 }

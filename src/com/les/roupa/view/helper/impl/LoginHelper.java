@@ -95,6 +95,8 @@ public class LoginHelper implements IViewHelper {
 				sessao.setAttribute("todosClientes", usuario.getTodosClientes());
 				sessao.setAttribute("pedidosCliente", usuario.getPedidosCliente());
 				sessao.setAttribute("todosPedidos", usuario.getTodosPedidos());
+				sessao.setAttribute("cuponsCliente", usuario.getCuponsCliente());
+				sessao.setAttribute("todosCupons", usuario.getTodosCupons());
 				
 				
 				List<Produto> detalheProduto = new ArrayList<>();

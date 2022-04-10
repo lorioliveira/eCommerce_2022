@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.les.roupa.core.dominio.CartaoCredito;
 import com.les.roupa.core.dominio.Cliente;
+import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Pedido;
@@ -352,6 +353,49 @@ public class LoginDAO extends AbstractJdbcDAO {
 					pedidosCliente.add(pedidoItem);
 				}
 				
+				// Lista os Cupons do Cliente
+				List<Cupom> cuponsCliente = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from cupom where id_cliente=? and utilizado='nao'");
+				stmt.setString(1, usuarios.get(0).getId());
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Cupom
+					Cupom cupomItem = new Cupom();
+					
+					cupomItem.setId(rs.getString("id"));
+					cupomItem.setNome(rs.getString("nome"));
+					cupomItem.setValor(rs.getString("valor"));
+					cupomItem.setTipo(rs.getString("tipo"));
+					cupomItem.setUtilizado(rs.getString("utilizado"));
+					cupomItem.setIdCliente(rs.getString("id_cliente"));
+					cupomItem.setData_Cadastro(rs.getString("dt_cadastro"));
+					
+					// adicionando o objeto à lista
+					cuponsCliente.add(cupomItem);
+				}
+				
+				// Lista TODOS os Cupons - Opção como ADMIN
+				List<Cupom> todosCupons = new ArrayList<>();
+				stmt = connection.prepareStatement("select * from cupom");
+				rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					// criando o objeto Cupom
+					Cupom cupomItem = new Cupom();
+					
+					cupomItem.setId(rs.getString("id"));
+					cupomItem.setNome(rs.getString("nome"));
+					cupomItem.setValor(rs.getString("valor"));
+					cupomItem.setTipo(rs.getString("tipo"));
+					cupomItem.setUtilizado(rs.getString("utilizado"));
+					cupomItem.setIdCliente(rs.getString("id_cliente"));
+					cupomItem.setData_Cadastro(rs.getString("dt_cadastro"));
+					
+					// adicionando o objeto à lista
+					todosCupons.add(cupomItem);
+				}
+				
 				
 				
 				
@@ -363,6 +407,8 @@ public class LoginDAO extends AbstractJdbcDAO {
 				novoUsuario.setTodosProdutos(todosProdutos);
 				novoUsuario.setTodosPedidos(todosPedidos);
 				novoUsuario.setPedidosCliente(pedidosCliente);
+				novoUsuario.setCuponsCliente(cuponsCliente);
+				novoUsuario.setTodosCupons(todosCupons);
 				
 				
 			rs.close();

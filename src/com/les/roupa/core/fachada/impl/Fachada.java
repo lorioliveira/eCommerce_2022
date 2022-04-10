@@ -15,6 +15,7 @@ import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.dao.impl.PedidoDAO;
 import com.les.roupa.core.dao.impl.ProdutoDAO;
+import com.les.roupa.core.dao.impl.VerificaCupomDAO;
 import com.les.roupa.core.fachada.IFachada;
 import com.les.roupa.core.dominio.Carrinho;
 import com.les.roupa.core.dominio.CartaoCredito;
@@ -27,6 +28,7 @@ import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
+import com.les.roupa.core.dominio.VerificaCupom;
 import com.les.roupa.core.strategy.impl.ValidarBairro;
 import com.les.roupa.core.strategy.impl.ValidarBairro_Alt;
 import com.les.roupa.core.strategy.impl.ValidarBandeiraCartao;
@@ -37,6 +39,7 @@ import com.les.roupa.core.strategy.impl.ValidarCPF_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarCidade;
 import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
+import com.les.roupa.core.strategy.impl.ValidarCupom;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
@@ -152,8 +155,9 @@ public class Fachada implements IFachada {
 //	ValidarStatusProduto vStatusProduto = new ValidarStatusProduto();
 //	ValidarGrupoPrecificacao vGrupoPrecificacao = new ValidarGrupoPrecificacao();	
 	
-	/* --- CARRINHO --- */
-	//ValidarValorOperacaoCarrinho vValorQtdeCarrinho = new ValidarValorOperacaoCarrinho();
+	/* --- CUPOM --- */
+	ValidarCupom vCupom = new ValidarCupom();
+	
 	
 	/* --- ESTOQUE - ENTRADA E SAIDA --- */
 	//ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
@@ -175,6 +179,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasSalvarCarrinho = new ArrayList<>();
 	List<IStrategy> regrasSalvarPedido = new ArrayList<>();
 	List<IStrategy> regrasSalvarCupom = new ArrayList<>();
+	List<IStrategy> regrasSalvarVerificaCupom = new ArrayList<>();
 	List<IStrategy> regrasSalvarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasSalvarPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasSalvarEstoque = new ArrayList<>();
@@ -189,6 +194,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasConsultarCarrinho = new ArrayList<>();
 	List<IStrategy> regrasConsultarPedido = new ArrayList<>();
 	List<IStrategy> regrasConsultarCupom = new ArrayList<>();
+	List<IStrategy> regrasConsultarVerificaCupom = new ArrayList<>();
 	List<IStrategy> regrasConsultarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasConsultarPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasConsultarEstoque = new ArrayList<>();
@@ -202,6 +208,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasAlterarProduto = new ArrayList<>();
 	List<IStrategy> regrasAlterarCarrinho = new ArrayList<>();
 	List<IStrategy> regrasAlterarPedido = new ArrayList<>();
+	List<IStrategy> regrasAlterarVerificaCupom = new ArrayList<>();
 	List<IStrategy> regrasAlterarCupom = new ArrayList<>();
 	List<IStrategy> regrasAlterarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasAlterarPedidoTroca = new ArrayList<>();
@@ -217,6 +224,7 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasExcluirCarrinho = new ArrayList<>();
 	List<IStrategy> regrasExcluirPedido = new ArrayList<>();
 	List<IStrategy> regrasExcluirCupom = new ArrayList<>();
+	List<IStrategy> regrasExcluirVerificaCupom = new ArrayList<>();
 	List<IStrategy> regrasExcluirCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasExcluirPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasExcluirEstoque = new ArrayList<>();
@@ -234,6 +242,7 @@ public class Fachada implements IFachada {
 	Map<String, List<IStrategy>> regrasCarrinho = new HashMap<>();
 	Map<String, List<IStrategy>> regrasPedido = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCupom = new HashMap<>();
+	Map<String, List<IStrategy>> regrasVerificaCupom = new HashMap<>();
 	Map<String, List<IStrategy>> regrasCupomCarrinho = new HashMap<>();
 	Map<String, List<IStrategy>> regrasPedidoTroca = new HashMap<>();
 	Map<String, List<IStrategy>> regrasEstoque = new HashMap<>();
@@ -263,6 +272,7 @@ public class Fachada implements IFachada {
 		daos.put(Carrinho.class.getName(), new CarrinhoDAO());
 		daos.put(Pedido.class.getName(), new PedidoDAO());
 		daos.put(Cupom.class.getName(), new CupomDAO());
+		daos.put(VerificaCupom.class.getName(), new VerificaCupomDAO());
 		
 		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
 		//daos.put(PedioTroca.class.getName(), new PedidoTrocaDAO());
@@ -378,7 +388,7 @@ public class Fachada implements IFachada {
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do CUPOM ----- */
-		
+		regrasConsultarVerificaCupom.add(vCupom);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
@@ -479,15 +489,13 @@ public class Fachada implements IFachada {
 		regrasPedido.put("EXCLUIR", regrasExcluirPedido);
 		/* -------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- REGRAS DA ENTIDADE CUPOM ----- */
+		/* ----- REGRAS DA ENTIDADE VERIFICA CUPOM ----- */
 		/* ----- SALVAR ----- */
-		regrasCupom.put("SALVAR", regrasSalvarCupom);
 		/* ----- CONSULTAR ----- */
-		regrasCupom.put("CONSULTAR", regrasConsultarCupom);
+		regrasVerificaCupom.put("CONSULTAR", regrasConsultarVerificaCupom);
 		/* ----- ALTERAR ----- */
-		regrasCupom.put("ALTERAR", regrasAlterarCupom);
 		/* ----- EXCLUIR ----- */
-		regrasCupom.put("EXCLUIR", regrasExcluirCupom);
+		/* --------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE CUPOM CARRINHO ----- */
@@ -545,6 +553,7 @@ public class Fachada implements IFachada {
 		regrasGeral.put(DetalheProduto.class.getName(), regrasDetalheProduto);
 		regrasGeral.put(Carrinho.class.getName(), regrasCarrinho);
 		regrasGeral.put(Pedido.class.getName(), regrasPedido);
+		regrasGeral.put(VerificaCupom.class.getName(), regrasVerificaCupom);
 		
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);

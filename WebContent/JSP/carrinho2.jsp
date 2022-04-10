@@ -31,85 +31,93 @@
       <link href="./css/style.css" rel="stylesheet" />
    </head>
    <%
-      List<Produto> produtosEmSessao = new ArrayList<>();
-      List<Cupom> cuponsSessao = new ArrayList<>();
-      Usuario usuarioLogado = new Usuario();
-      
-      HttpSession sessao = request.getSession();
-      
-      usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-      
-      // pega o objeto salvo em Sessão com o nome "itensCarrinho",
-      // e passa para o "produtosEmSessao" (fazendo o CAST para o tipo List<Produto>)
-      produtosEmSessao = (List<Produto>) sessao.getAttribute("itensCarrinho");
-      
-      // pega o objeto salvo em Sessão com o nome "cupons",
-      // e passa para o "cuponsSessao" (fazendo o CAST para o tipo List<Cupom>)
-      cuponsSessao = (List<Cupom>) sessao.getAttribute("cupons");
-      
-      //pega todos enderecos do Cliente que estao na sessao
-      List<Endereco> enderecos = (List<Endereco>) sessao.getAttribute("enderecosCliente");
-      
-      //pega todos cartões do Cliente que estao na sessao
-      List<CartaoCredito> cartoes = (List<CartaoCredito>) sessao.getAttribute("cartoesCliente");
-      
-      double total_itens = 0;
-      double total_frete = 0;
-      double total_pedido = 0;
-      double desconto_cupons = 0;
-      
-      // ajusta o bug de quando abrir o carrinho pela primeira vez,
-      // o valor do cupom criado na sessão, não seja atribuido com o valor nulo
-      if (!cuponsSessao.isEmpty()) {
-      	// calculo do desconto (todos os cupons vinculado na Sessão)
-      	for (Cupom cupomDaSessao : cuponsSessao) {
-      		desconto_cupons += Double.parseDouble(cupomDaSessao.getValor());
-      	}
-      }
-      
-      // faz a somatória dos itens selecionados no carrinho
-      for (Produto produto : produtosEmSessao) {
-      	// calculo do total dos itens (quantidade do item (*) o valor do item "preço de venda")
-      	total_itens += (Double.parseDouble(produto.getQuantidadeSelecionada())
-      	* Double.parseDouble(produto.getPrecoVenda()));
-      
-      	// calculo do frete (quantidade do item (*) 1 real e 15 centavos)
-      	total_frete += (Double.parseDouble(produto.getQuantidadeSelecionada()) * 1.15);
-      }
-      
-      // faz o arredondamento da variavel "total_itens" para 2 casas decimais
-      total_itens = Math.round(total_itens * 100);
-      total_itens = total_itens / 100;
-      
-      // faz o arredondamento da variavel "total_frete" para 2 casas decimais
-      total_frete = Math.round(total_frete * 100);
-      total_frete = total_frete / 100;
-      
-      // calculo do total do pedido (total dos itens (+) total do frete)
-      total_pedido = total_itens + total_frete;
-      
-      // calculo o total do pedido com o desconto dos cupons
-      total_pedido = (total_pedido - desconto_cupons);
-      
-      // faz o arredondamento da variavel "total_pedido" para 2 casas decimais
-      total_pedido = Math.round(total_pedido * 100);
-      total_pedido = total_pedido / 100;
-      
-      // faz o arredondamento da variavel "desconto_cupons" para 2 casas decimais
-      desconto_cupons = Math.round(desconto_cupons * 100);
-      desconto_cupons = desconto_cupons / 100;
-      
-  	 // pega a mensagem que estava pendurado na requisição,
-   		// que foi enviado pelo arquivo "ClienteHelper"
-   		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
-   		  
-   		// IF adicionado para não estourar NullPointerException na variavel
-   		// "mensagemStrategy", pois quando ela esta sendo aberta pela primeira vez,
-   		// (apos validar o Login), ela fica nula
-   		/* if(mensagemStrategy == null){
-   			mensagemStrategy = "Bem Vindo(a) ao site Drink Fast !";
-   		} */
-      %>
+   List<Produto> produtosEmSessao = new ArrayList<>();
+         List<Cupom> cuponsSessao = new ArrayList<>();
+         Usuario usuarioLogado = new Usuario();
+         String concatenacaoCuponsCliente = "";
+         
+         HttpSession sessao = request.getSession();
+         
+         usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+         
+         // pega o objeto salvo em Sessão com o nome "itensCarrinho",
+         // e passa para o "produtosEmSessao" (fazendo o CAST para o tipo List<Produto>)
+         produtosEmSessao = (List<Produto>) sessao.getAttribute("itensCarrinho");
+         
+         // pega o objeto salvo em Sessão com o nome "cupons",
+         // e passa para o "cuponsSessao" (fazendo o CAST para o tipo List<Cupom>)
+         cuponsSessao = (List<Cupom>) sessao.getAttribute("cupons");
+         
+         //pega todos enderecos do Cliente que estao na sessao
+         List<Endereco> enderecos = (List<Endereco>) sessao.getAttribute("enderecosCliente");
+         
+         //pega todos cartões do Cliente que estao na sessao
+         List<CartaoCredito> cartoes = (List<CartaoCredito>) sessao.getAttribute("cartoesCliente");
+         
+         double total_itens = 0;
+         double total_frete = 0;
+         double total_pedido = 0;
+         double desconto_cupons = 0;
+         
+         // ajusta o bug de quando abrir o carrinho pela primeira vez,
+         // o valor do cupom criado na sessão, não seja atribuido com o valor nulo
+         if (!cuponsSessao.isEmpty()) {
+         	// calculo do desconto (todos os cupons vinculado na Sessão)
+         	for (Cupom cupomDaSessao : cuponsSessao) {
+         		desconto_cupons += Double.parseDouble(cupomDaSessao.getValor());
+         	}
+         }
+         
+         // faz a somatória dos itens selecionados no carrinho
+         for (Produto produto : produtosEmSessao) {
+         	// calculo do total dos itens (quantidade do item (*) o valor do item "preço de venda")
+         	total_itens += (Double.parseDouble(produto.getQuantidadeSelecionada())
+         	* Double.parseDouble(produto.getPrecoVenda()));
+         
+         	// calculo do frete (quantidade do item (*) 1 real e 15 centavos)
+         	total_frete += (Double.parseDouble(produto.getQuantidadeSelecionada()) * 1.15);
+         }
+         
+         // faz o arredondamento da variavel "total_itens" para 2 casas decimais
+         total_itens = Math.round(total_itens * 100);
+         total_itens = total_itens / 100;
+         
+         // faz o arredondamento da variavel "total_frete" para 2 casas decimais
+         total_frete = Math.round(total_frete * 100);
+         total_frete = total_frete / 100;
+         
+         // calculo do total do pedido (total dos itens (+) total do frete)
+         total_pedido = total_itens + total_frete;
+         
+         // calculo o total do pedido com o desconto dos cupons
+         total_pedido = (total_pedido - desconto_cupons);
+         
+         // faz o arredondamento da variavel "total_pedido" para 2 casas decimais
+         total_pedido = Math.round(total_pedido * 100);
+         total_pedido = total_pedido / 100;
+         
+         // faz o arredondamento da variavel "desconto_cupons" para 2 casas decimais
+         desconto_cupons = Math.round(desconto_cupons * 100);
+         desconto_cupons = desconto_cupons / 100;
+         
+     	 // pega a mensagem que estava pendurado na requisição,
+      		// que foi enviado pelo arquivo "ClienteHelper"
+      		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+      		
+   		//pega todos cupons do Cliente que estao na sessao
+   		List<Cupom> cupons = (List<Cupom>) sessao.getAttribute("cuponsCliente");
+
+   		// verifica se não tem nenhum Cupom disponivel para o Cliente,
+   		// para poder setar uma mensagem na tela e não deixar vazia.
+   		if (cupons.isEmpty()) {
+		   	concatenacaoCuponsCliente = "Nenhum Cupom pessoal disponível !";
+		} else {
+		   	// faz a concatenação de todos os cupons disponiveis do cliente para poder mostrar na tela
+		   	for (Cupom coupon : cupons) {
+		   		concatenacaoCuponsCliente += (coupon.getNome() + " - R$:" + coupon.getValor() + "; \n");
+		   	}
+   		}
+   %>
    <body onload="AtivaModal()">
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
       <div class="top-bar">
@@ -203,11 +211,14 @@
          </div>
       </div>
       <!-- Fim do Breadcrumb -->
+      
+      
       <!-- Inicio do carrinho -->
       <div class="checkout cart-page">
       <div class="container-fluid">
       <div class="row">
-         <!-- TABELA DE PRODUTOS / ENDEREÇOS / FORMA DE PAGAMENTO-->
+      
+         <!-- TABELA DE PRODUTOS / ENDEREÇOS -->
          <div class="col-lg-8">
             <div class="cart-page-inner">
                <div class="table-responsive">
@@ -251,6 +262,7 @@
                                     <i class="fa fa-plus"></i>
                                     </button>
                                  </div>
+                                 
                                  <!-- operação que é acionada através do form -->
                                  <input type="hidden" name="operacao" id="operacao"
                                     value="ALTERAR">
@@ -280,6 +292,7 @@
                                  <button name="operacao" value="EXCLUIR">
                                  <i class="fa fa-trash"></i>
                                  </button>
+                                 
                                  <!-- ID do Produto -->
                                  <input type="hidden" name="idProduto" id="idProduto"
                                     value="<%=produtoCarrinho.getId()%>">
@@ -293,16 +306,15 @@
                   </table>
                </div>
             </div>
+            
+             <!-- form para o cadastro do pedido -->
+         <form action="http://localhost:8080/eCommerce/cadastroPedido">
             <!-- ENDEREÇOS -->
             <div class="col-lg-12 registrar__novaconta">
                <div class="checkout-inner">
                   <div class="billing-address">
-                     <!-- form para o cadastro do pedido -->
-                     <a href="./JSP/novoendereco.jsp"><button type="submit"
-                        class="btn btn_NovoEndCarrinho">
-                     <i class="fa fa-plus"></i> Endereço
-                     </button></a>
-                     <form action="http://localhost:8080/eCommerce/cadastroPedido">
+                  
+                    
                         <h3>Endereços</h3>
                         </br>
                         <div class="row">
@@ -338,153 +350,147 @@
                               %>
                         </div>
                   </div>
-                  <hr size="3">
-                  <br>
-                  
                </div>
             </div>
          </div>
-         <!-- FIM DOS PRODUTOS / ENDEREÇOS/ FORMA DE PAGAMENTO -->
-         <!-- RESUMO / CUPONS -->
-         <div class="col-lg-4">
-         <div class="checkout-inner">
-         <div class="checkout-summary">
-         <div class="cart-summary">
-         <h1>Resumo</h1>
-         <p>
-         Subtotal<span>R$ <%=total_itens%></span>
-         </p>
-         <hr>
-         <p>
-         Frete<span>R$ <%=total_frete%>
-         </span>
-         </p>
-         <hr>
-         <p>
-         Descontos<span class="desconto">- R$ <%=desconto_cupons%></span>
-         </p>
-         <h2>
-         Total<span>R$ <%=total_pedido%></span>
-         </h2>
-         
-         </div>
-         </div>
-         <div class="checkout-payment">
-         <div class="payment-methods">
-         <h1>Forma de Pagamento</h1>
-         <div class="payment-method">
-         <div class="custom-control custom-radio">
+         <!-- FIM DOS PRODUTOS / ENDEREÇOS-->
          
          
-         <input type="radio" class="custom-control-input" id="payment-1" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="boleto"/> 
-            <label class="custom-control-label" for="payment-1" >Pagar com Boleto</label>
+         <!-- RESUMO / FORMA DE PAGAMENTO -->
+	         <div class="col-lg-4">
+	       		<div class="checkout-inner">
+			         <div class="checkout-summary">
+				         <div class="cart-summary">
+				         	<h1>Resumo</h1>
+					         <p>Subtotal<span>R$ <%=total_itens%></span></p>
+					         <hr>
+					         <p>Frete<span>R$ <%=total_frete%></span></p>
+					         <hr>
+					         <p> Descontos<span class="desconto">- R$ <%=desconto_cupons%></span></p>
+					         <h2>Total<span>R$ <%=total_pedido%></span></h2>
+				         </div>
+			         </div>
+			         <div class="checkout-payment">
+				         <div class="payment-methods">
+				         	<h1>Forma de Pagamento</h1>
+						         <div class="payment-method">
+							         <div class="custom-control custom-radio">
+							         <input type="radio" class="custom-control-input" id="payment-1" name="selecioneFormadePagamento"  id="selecioneFormadePagamento" value="boleto"/> 
+							            <label class="custom-control-label" for="payment-1" >Pagar com Boleto</label>
+							         </div>
+						         </div>
+				         <div class="payment-method">
+						         <div class="custom-control custom-radio">
+							         <input type="radio" class="custom-control-input"
+							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> 
+							            	<label class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
+						         </div>
+					         <div class="payment-content" id="payment-2-show">
+						         <div class="col-md-9">
+							         <select class="form-control" name="selecioneCartao1">
+								         <option selected disabled>Selecione o 1º cartão</option>
+								         <%
+								            for (CartaoCredito c : cartoes) {
+								         %>
+								         <option name="id_cartao_1" value="<%=c.getId()%>">
+								         <%=c.getBandeira()%> /
+								         <%=c.getValidade()%>
+								         </option>
+								         <%
+								            }
+								          %>
+								      </select>
+							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
+						         </div>
+						         <div class="col-md-9">
+							         <select class="form-control" type="text" name="selecioneCartao2">
+								         <option selected disabled>Selecione o 2º cartão</option>
+								         <%
+								            for (CartaoCredito c : cartoes) {
+								            %>
+								         <option name="id_cartao_2" value="<%=c.getId()%>">
+								         <%=c.getBandeira()%> /
+								         <%=c.getValidade()%>
+								         </option>
+								         <%
+								            }
+								            %>
+							         </select>
+							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
+				         		</div>
+				         	</div>
+				         </div>
+				       </div>
+			         <!-- BOTÃO FINALIZAR COMPRA -->
+			         <div class="checkout-btn ">
+			         	<button class="btn btnFinalizarCompra" name="operacao" value="SALVAR"><i class="fa fa-check-circle"></i> Finalizar Compra </button>
+			         </div>
+			      </div>
+		      
+		         <!-- ID do Cliente -->
+		         <input type="hidden" name="idCliente" id="idCliente" value="<%=usuarioLogado.getId()%>">
+		         <!-- ID do Cupom -->
+		         <input type="hidden" name="total_cupons" id="total_cupons" value="<%=desconto_cupons%>">
+		         <!-- Total dos Itens -->
+		         <input type="hidden" name="total_itens" id="total_itens" value="<%=total_itens%>">
+		         <!-- Total do Frete -->
+		         <input type="hidden" name="total_frete" id="total_frete" value="<%=total_frete%>">
+		         <!-- Total do Pedido -->
+		         <input type="hidden" name="total_pedido" id="total_pedido"value="<%=total_pedido%>">
+	         </div>
+	         </div>
+	         </form>
          </div>
-         <!-- <div class="payment-content" id="payment-1-show">
-         <div class="col-md-9">
-         </div>
-         </div> -->
-         </div>
-         <div class="payment-method">
-         <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input"  id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> <label
-            class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
-         </div>
-         <div class="payment-content" id="payment-2-show">
-         <div class="col-md-9">
-         <select class="form-control" name="selecioneCartao1">
-         <option selected disabled>Selecione o 1º cartão</option>
-         <%
-            for (CartaoCredito c : cartoes) {
-            %>
-         <option name="id_cartao_1" value="<%=c.getId()%>">
-         <%=c.getBandeira()%> /
-         <%=c.getValidade()%>
-         </option>
-         <%
-            }
-            %>
-         </select>
-         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
-         </div>
-         <div class="col-md-9">
-         <select class="form-control" name="selecioneCartao2">
-         <option selected disabled>Selecione o 2º cartão</option>
-         <%
-            for (CartaoCredito c : cartoes) {
-            %>
-         <option name="id_cartao_2" value="<%=c.getId()%>">
-         <%=c.getBandeira()%> / <%=c.getValidade()%>
-         </option>
-         <%
-            }
-            %>
-         </select>
-         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
-         </div>
-         </div>
-         </div>
-         </div>
-         <!-- BOTÃO FINALIZAR COMPRA -->
-         <div class="checkout-btn ">
-         <button class="btn btnFinalizarCompra" name="operacao"
-            value="SALVAR">
-         <i class="fa fa-check-circle"></i> Finalizar Compra
-         </button>
-         </div>
-         </div>
-         <!-- ID do Cliente -->
-         <input type="hidden" name="idCliente" id="idCliente"
-            value="<%=usuarioLogado.getId()%>">
-         <!-- ID do Cupom -->
-         <input type="hidden" name="total_cupons" id="total_cupons"
-            value="<%=desconto_cupons%>">
-         <!-- Total dos Itens -->
-         <input type="hidden" name="total_itens" id="total_itens"
-            value="<%=total_itens%>">
-         <!-- Total do Frete -->
-         <input type="hidden" name="total_frete" id="total_frete"
-            value="<%=total_frete%>">
-         <!-- Total do Pedido -->
-         <input type="hidden" name="total_pedido" id="total_pedido"
-            value="<%=total_pedido%>">
-         </form>
-         </div>
-        
-         <form action="http://localhost:8080/eCommerce/cupom">
-	         <table class="table table-bordered">
-	             <thead class="thead-dark">
-	             <th class="tit_tabela_cupons" colspan="3">Cupons ativos</th>
-	             <tr>
-	             <th>Nome</th>
-	             <th>Valor R$</th>
-	             <th>Ação</th>
-	             </tr>
-	             </thead>
-	             <tbody>
-	             <tr>
-	             <td>s/n</td>
-	             <td>0,00</td>
-	             <td><input type="checkbox" disabled name="cupom" /></td>
-	             </tr>
-	             <tr>
-	             <td>s/n</td>
-	             <td>0,00</td>
-	             <td><input type="checkbox" disabled name="cupom" /></td>
-	             </tr>
-	             </tbody>
-	             </table>
-	             <div class="coupon couponB cart-page-inner" >
-                    <input type="text" placeholder="Insira um Cupom">
-                    <button class="btn" >Aplicar</button>
-                    <input type="text" />
-	             </div>
-	      </form>
-         
-         </div>
-         </div>
-         </div>
-         
+        </div>
       </div>
+       <!-- CUPONS -->
+     <div class="col-lg-4 registrar__novaconta">
+     	<div class="checkout-inner">
+        	<div class="billing-address">
+	    		<h4>Cupons aplicados no Pedido</h4>
+	    		<table class="table table-bordered">
+	    			<thead class="thead-dark">
+	                  <tr>
+		                  <th>Nome</th>
+		                  <th>Valor R$</th>
+	                  </tr>
+	                </thead>
+	                <%
+						for(Cupom cupomDaSessao : cuponsSessao) {
+					%>
+                 	 <tbody>
+		                  <tr>
+			                  <td><%=cupomDaSessao.getNome() %></td>
+			                  <td><%=cupomDaSessao.getValor() %></td>
+		                  </tr>
+		            <%
+						}
+					%>
+	                 </tbody>
+	    		</table>
+			    	
+		      <form action="http://localhost:8080/eCommerce/verificaCupom">
+				 <div class="coupon couponB cart-page-inner" >
+			          <input type="text" placeholder="Insira um Cupom" name="cupom">
+			          <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
+				 </div>
+				             
+		             <!-- Cupons Disponíveis do Cliente -->
+				 <div class="form-group col-md-8">
+		  			 <label>Cupons disponíveis</label>
+				     <textarea class="form-control" name="cuponsDisponiveis" placeholder="Cupons disponíveis" rows="2" disabled><%=concatenacaoCuponsCliente %></textarea>
+		  		 </div>
+		             
+		             <!-- ID do Cliente -->
+					<input type="hidden" name="idCliente" id="idCliente" value="<%=usuarioLogado.getId() %>">
+		      </form>
+      		</div>
+	 	</div>
+	 </div>
+      </div>
+		      
+      
+      
       <a href="./JSP/novocartao.jsp"><button class="btn btn_cadCartao">
       <i class="fa fa-plus"></i> Cartão
       </button></a>

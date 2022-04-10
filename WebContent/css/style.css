@@ -2448,6 +2448,15 @@ h2 {
     margin-bottom: 30px;
 }
 
+.divCupom{
+ position: relative;
+    padding: 30px;
+    background: #ffffff;
+    margin-bottom: 30px;
+    margin-top: -20px;
+    margin-left: 3.7rem;
+}
+
 .registrar__novoEndereco {
     position: relative;
     padding: 30px;
@@ -3058,3 +3067,5 @@ h2 {
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+

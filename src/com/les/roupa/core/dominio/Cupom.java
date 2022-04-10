@@ -3,7 +3,7 @@ package com.les.roupa.core.dominio;
 import java.util.List;
 
 /**
- * Classe para representar o Cupom do Cliente
+ * Classe para representar o Cupom
  */
 public class Cupom extends EntidadeDominio {
 	private String nome;

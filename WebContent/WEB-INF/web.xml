@@ -64,9 +64,14 @@
   </servlet-mapping>
   
   
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
     <url-pattern>/cupom</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>/verificaCupom</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
