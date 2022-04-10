@@ -67,6 +67,7 @@ import com.les.roupa.core.strategy.impl.ValidarSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaConfSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaLogin;
 import com.les.roupa.core.strategy.impl.ValidarStatus;
+import com.les.roupa.core.strategy.impl.ValidarStatusPedido;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
@@ -129,6 +130,7 @@ public class Fachada implements IFachada {
 	ValidarEnderecoPedido vEnderecoPedido = new ValidarEnderecoPedido();
 	ValidarFormaDePagamento vFormaDePagamentoPedido = new ValidarFormaDePagamento();
 	ValidarCartaoPedido vCartaoPedido = new ValidarCartaoPedido();
+	ValidarStatusPedido vStatusPedido = new ValidarStatusPedido();
 	
 	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
 	ValidarNumCartao vNumCartao = new ValidarNumCartao();
@@ -382,9 +384,11 @@ public class Fachada implements IFachada {
 		regrasSalvarPedido.add(vEnderecoPedido);
 		regrasSalvarPedido.add(vFormaDePagamentoPedido);
 		regrasSalvarPedido.add(vCartaoPedido);
+		regrasSalvarPedido.add(vStatusPedido); 
+		//regrasSalvarPedido.add(VDataCadastro);
+		
 		 /** regrasSalvarPedido.add(vCupomBonificacaoPedido);
-		 * regrasSalvarPedido.add(vStatusPedido); 
-		 * regrasSalvarPedido.add(VDataCadastro);
+		 * 
 		 */
 		
 		/* --------------------------------------------------------------------------------------------------------------- */

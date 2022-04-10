@@ -1,20 +1,24 @@
 package com.les.roupa.core.strategy.impl;
 
-import com.les.roupa.core.strategy.IStrategy;
-import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Pedido;
+import com.les.roupa.core.strategy.IStrategy;
 
 /**
- * Classe para validar o flg de ativo do cliente - ADMIN
+ * Classe para validar o status do Pedido
  */
-public class ValidarStatus implements IStrategy {
+public class ValidarStatusPedido implements IStrategy {
 
 	@Override
 	public String validar(EntidadeDominio entidade) {
-		Cliente cliente = (Cliente) entidade;
+		Pedido pedido = (Pedido) entidade;
 		
-		if(cliente.getStatus() == null || cliente.getStatus().equals("")) {
-			return ("Insira um status. <br>");
+		if(pedido.getStatus() == null || pedido.getStatus().equals("")) {
+			// seta o status do pedido como "EM PROCESSAMENTO",
+			// para quando for salvar o pedido, o primeiro status dele será "EM PROCESSAMENTO"
+			pedido.setStatus("EM PROCESSAMENTO");
+			
+			return null;
 		}
 		else {
 			return null;

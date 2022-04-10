@@ -44,7 +44,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			stmt.setString(1, pedido.getTotalItens());
 			stmt.setString(2, pedido.getTotalFrete());
 			stmt.setString(3, pedido.getTotalPedido());
-			stmt.setString(4, "EM PROCESSAMENTO");
+			stmt.setString(4, pedido.getStatus());
 			stmt.setString(5, pedido.getIdCliente());
 			stmt.setString(6, pedido.getIdEndereco());
 			stmt.setString(7, pedido.getFormaPagamento());
