@@ -350,13 +350,25 @@ public class PedidoTrocaHelper implements IViewHelper {
 						resultado.setMensagem("ReEntrada no Estoque e Cupom gerado com sucesso!");
 					}
 					
+					// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+					HttpSession sessao = request.getSession();
+					
+					// atualiza os pedidos conforme a alteração do status do mesmo
+					sessao.setAttribute("todosPedidos", pedidoTrocaEntidade.getPedidos());
+					
 					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}
-				else {					
+				else {
+					// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+					HttpSession sessao = request.getSession();
+					
+					// atualiza os pedidos conforme a alteração do status do mesmo
+					sessao.setAttribute("todosPedidos", pedidoTrocaEntidade.getPedidos());
+					
 					// atribui a nova mensagem para poder mostra na pagina .JSP
 					resultado.setMensagem("Status do Pedido alterado com sucesso!");
 					

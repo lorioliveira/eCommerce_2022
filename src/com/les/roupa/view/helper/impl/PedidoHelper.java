@@ -189,10 +189,18 @@ public class PedidoHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				// foi utilizado o getEntidades do resultado para poder pegar o Pedido do Cliente atualizado
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
+				Pedido pedidoAtualizado = (Pedido) entidades.get(0);
+				
 				List<Cupom> cuponsVazio = new ArrayList<>();
 				List<Produto> produtosVazio = new ArrayList<>();
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
+				
+				// atualiza a lista de pedidos do Cliente
+				sessao.setAttribute("pedidosCliente", pedidoAtualizado.getPedidosCliente());
 
 				// limpa os produtos selecionados do carrinho da sessão,
 				// atualiza o objeto "itensCarrinho" que esta salvo em sessão, com o novo objeto de produto vazio

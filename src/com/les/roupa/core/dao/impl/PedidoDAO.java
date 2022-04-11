@@ -64,6 +64,15 @@ public class PedidoDAO extends AbstractJdbcDAO {
 				// salva os itens do Pedido e da baixa no Estoque
 				salvarItensPedidoAndBaixaEstoque(pedido.getProdutos(), pedido.getCupons());
 			}
+			
+			// busca os pedidos do Cliente novamente,
+			// para poder atualizar a tela de pedidos do Cliente
+			List<Pedido> pedidosClienteAtualizado = new ArrayList<>();
+			pedidosClienteAtualizado = consultarPedidoByIdCliente(pedido.getIdCliente());
+			
+			// atualiza os pedidos por REFERENCIA
+			pedido.setPedidosCliente(pedidosClienteAtualizado);
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -281,6 +281,41 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			pedidoDAO.alterarStatusPedido(pedidoTrocaEntidade.getIdPedido(), pedidoTrocaEntidade.getNovoStatusPedido());
 		}
 		
+		// atualiza a lista de pedidos conforme a alteração do status do pedidos
+		openConnection();
+		
+		List<Pedido> pedidosAtualizados = new ArrayList<>();
+		PreparedStatement stmt = connection.prepareStatement("select * from pedido");
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			// criando o objeto Pedido
+			Pedido pedidoItem = new Pedido();
+			
+			pedidoItem.setId(rs.getString("id"));
+			pedidoItem.setTotalItens(rs.getString("total_itens"));
+			pedidoItem.setTotalFrete(rs.getString("total_frete"));
+			pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+			pedidoItem.setStatus(rs.getString("status"));
+			pedidoItem.setIdCliente(rs.getString("id_cliente"));
+			pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+			pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+			pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+			pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+			pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+			pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+			pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+			pedidoItem.setTrocado(rs.getString("trocado"));
+			pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+			
+			// adicionando o objeto à lista
+			pedidosAtualizados.add(pedidoItem);
+		}
+		
+		// na REFERENCIA de "pedidoTrocaEntidade", será setado os Pedidos atualizados,
+		// conforme a alteração do status do pedidos
+		pedidoTrocaEntidade.setPedidos(pedidosAtualizados);
+		
 	} // Alterar
 	
 	
