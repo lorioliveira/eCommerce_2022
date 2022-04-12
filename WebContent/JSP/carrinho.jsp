@@ -375,14 +375,14 @@
 				         	<h1>Forma de Pagamento</h1>
 						         <div class="payment-method">
 							         <div class="custom-control custom-radio">
-							         <input type="radio" class="custom-control-input" id="payment-1" name="selecioneFormadePagamento"  id="selecioneFormadePagamento" value="boleto"/> 
+							         <input type="radio" class="custom-control-input" id="payment-1" name="selecioneFormadePagamento"  id="selecioneFormadePagamento" value="Boleto"/> 
 							            <label class="custom-control-label" for="payment-1" >Pagar com Boleto</label>
 							         </div>
 						         </div>
 				         <div class="payment-method">
 						         <div class="custom-control custom-radio">
 							         <input type="radio" class="custom-control-input"
-							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> 
+							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="Cartao"/> 
 							            	<label class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
 						         </div>
 					         <div class="payment-content" id="payment-2-show">

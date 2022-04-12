@@ -168,7 +168,7 @@
                                         </div>
                                         <div class="price">
                                             <h4>Preço:</h4>
-                                            <p>R$ <%=produtoSelecionado.getPrecoVenda() %><span>R$179.00</span></p>
+                                            <p>R$ <%=produtoSelecionado.getPrecoVenda() %><span>R$169.00</span></p>
                                         </div>
                                         
                                         <form class="form" action="http://localhost:8080/eCommerce/carrinho">
@@ -228,9 +228,7 @@
                                 <div class="tab-content">
                                     <div id="description" class="container tab-pane active">
                                         <h4>Descrição</h4>
-                                        <p>
-                                            <%=produtoSelecionado.getDescricao() %>
-                                        </p>
+                                        <p><%=produtoSelecionado.getDescricao() %></p>
                                     </div>
                                     <div id="specification" class="container tab-pane fade">
                                         <h4>Especificação</h4>

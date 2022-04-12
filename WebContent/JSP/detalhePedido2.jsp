@@ -142,13 +142,9 @@
                                     <span><i>R$ <%=pedidoSelecionado.getTotalPedido() %></i></span>
                                 </div>
                                 <div class="col-md-4 formaPagamento_centralizado">
-                                    <label><b>Cartão</b></label>
-                                    <p><i><%=pedidoSelecionado.getIdCartao1() %></i></p>
-                                    <p><i><%=pedidoSelecionado.getIdCartao2() %></i></p>
-                                    
-                                    
+                                    <label><b>Forma de Pagamento</b></label>
+                                    <p><i><%=pedidoSelecionado.getFormaPagamento() %></i></p>
                                 </div>
-                                
                                 <div class="col-md-4 endereco_aDireita">
                                     <label><b>Entrega</b></label>
                                     <p><i><%=pedidoSelecionado.getEndereco().getLogradouro() %>, <%=pedidoSelecionado.getEndereco().getNumero() %></i></p>

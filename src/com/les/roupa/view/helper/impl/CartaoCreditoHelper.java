@@ -18,6 +18,12 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 
+/**
+ * ViewHelper - Cartão de Crédito
+ * @author Lorena Oliveira
+ * Março/2022 
+ */
+
 public class CartaoCreditoHelper implements IViewHelper {
 
     CartaoCredito cartaoCredito = null;
@@ -162,10 +168,9 @@ public class CartaoCreditoHelper implements IViewHelper {
 				// Mensagem de cartão criado para aparecer na modal 
 				resultado.setMensagem("Cartão salvo com sucesso!");
 				
-				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				// pendura o "resultado" na requisicao e manda para o arquivo minhaConta2.JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
-			            	
                 request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
                 
             } else {
