@@ -48,11 +48,11 @@ public class ItemPedidoHelper implements IViewHelper {
 			id_pedido = request.getParameter("id_pedido");
 			
 			
-			itemPedido.setIdProduto(id_produto);
-			itemPedido.setNome(nome);
-			itemPedido.setQtdeProduto(qtde_produto);
-			itemPedido.setPrecoVenda(precoVenda);
-			itemPedido.setIdPedido(id_pedido);		
+			/*
+			 * itemPedido.setIdProduto(id_produto); itemPedido.setNome(nome);
+			 * itemPedido.setQtdeProduto(qtde_produto);
+			 * itemPedido.setPrecoVenda(precoVenda); itemPedido.setIdPedido(id_pedido);
+			 */		
 			
 			
 		}
