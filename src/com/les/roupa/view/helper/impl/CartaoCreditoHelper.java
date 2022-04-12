@@ -139,10 +139,10 @@ public class CartaoCreditoHelper implements IViewHelper {
                 // Redireciona para o arquivo .jsp
                 request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
             } else {
-                // se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+                // se houver, mostra as mensagens de ERRO 
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR CARTAO DE CREDITO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
             }
             
         } else if (("SALVAR").equals(operacao)) {
@@ -150,6 +150,7 @@ public class CartaoCreditoHelper implements IViewHelper {
             	
             	// foi utilizado o getEntidades do resultado para poder pegar o cartao consultado
 				List<EntidadeDominio> entidades = resultado.getEntidades();
+				
 				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
 				CartaoCredito cartaoCredito = (CartaoCredito) entidades.get(0);
 				
@@ -157,14 +158,21 @@ public class CartaoCreditoHelper implements IViewHelper {
 				HttpSession sessao = request.getSession();
 				
 				sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
+				
+				// Mensagem de cartão criado para aparecer na modal 
+				resultado.setMensagem("Cartão salvo com sucesso!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
 			            	
                 request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
                 
             } else {
-                // se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+                // se houver, mostra as mensagens de ERRO
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR CARTAO DE CREDITO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
             }
         }
             else if (("ALTERAR").equals(operacao)) {
@@ -172,6 +180,7 @@ public class CartaoCreditoHelper implements IViewHelper {
     				
     				// foi utilizado o getEntidades do resultado para poder pegar o cartao consultado
     				List<EntidadeDominio> entidades = resultado.getEntidades();
+    				
     				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
     				CartaoCredito cartaoCredito = (CartaoCredito) entidades.get(0);
     				
@@ -183,26 +192,33 @@ public class CartaoCreditoHelper implements IViewHelper {
     				
     				// Se eu estiver pela tela de listagem de cartoes, chama o arquivo .JSP para edição do cartao
     				if (alteraPreferencial.contentEquals("0")) {	
-    					// Este apenas puxa apenas o cartao que sera alterado
+    					// Este apenas puxa apenas os dados do cartao que sera alterado
         				sessao.setAttribute("cartaoAlterado", cartaoCredito.getTodosCartoes().get(0));
         				
-    					// pendura o "id" do cartao na requisição para poder mandar para o arquivo .JSP
+    					// pendura o "id" do cartao na requisição para poder mandar para o arquivo alterarCartao.JSP
     					request.setAttribute("id", id);
     				    					
     					request.getRequestDispatcher("JSP/alterarCartao.jsp").forward(request, response);
     					
     				}else {
+    					// atualiza a lista de todos os cartoes do cliente
     					sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
+    					
+    					// Mensagem de cartão alterado para aparecer na modal 
+    					resultado.setMensagem("Cartão alterado com sucesso!");
+    					
+    					// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+    					request.setAttribute("mensagemStrategy", resultado.getMensagem());
     					
     					// Redireciona para o arquivo .jsp
     					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
     				}
     			} 
     			else {
-    				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+    				// se houver, mostra as mensagens de ERRO
     				request.setAttribute("mensagemStrategy", resultado.getMensagem());
     				System.out.println("ERRO PARA ALTERAR CARTAO DE CREDITO!");
-    				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+    				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
     			}
             
         } else if (("EXCLUIR").equals(operacao)) {
@@ -216,17 +232,24 @@ public class CartaoCreditoHelper implements IViewHelper {
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				
+				// lista com todos os cartoes do cliente
 				sessao.setAttribute("cartoesCliente", cartaoCredito.getTodosCartoes());
+				
+				// Mensagem de cartão excluído para aparecer na modal 
+				resultado.setMensagem("Cartão excluído com sucesso!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	      
                 // Redireciona para o arquivo .jsp
-                request.getRequestDispatcher("JSP/minhaConta.jsp").forward(request, response);
+                request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
                 
             } else {
             	
                 // se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR CARTAO DE CREDITO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
             }
         }
     }

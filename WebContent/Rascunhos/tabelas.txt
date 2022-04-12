@@ -1,15 +1,44 @@
 create database ecommerce;
 use ecommerce;
-select * from cliente;
 
----------------TABELA DE CLIENTES -----------------------
+insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
+values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
+
+insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
+values ('1', 'PROMOCIONAL10', '10.00', 'promocional', 'nao', null, '2022-04-11');
+
+insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
+values ('2', 'LORENA10', '10', 'troca', 'nao', 2, '2022/04/09');
+
+update pedido set status="TROCA SOLICITADA" where id = 74;
+
+select count(*) from pedido;
+
+select * from cliente;
+select * from endereco;
+select * from cartaoCredito;
+select * from produto;
+select * from pedido;
+select * from pedido_item;
+select * from cupom;
+select * from estoque;
+
+
+/*delete from pedido where id =5;
+	update carrinho set status = "inativo" where id = 4;
+	select * from pedido where id = 1;
+	delete from cliente where id =4;
+	delete from pedido where id = 19;
+	delete from pedido_item where id_pedido = 19;*/
+
+/*** CLIENTE ****/
 create table cliente (
 	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
 	nome		VARCHAR(50),
 	cpf		    VARCHAR(14),
 	data_Nascimento	DATE,
 	genero		VARCHAR(10),
-	telefone	VARCHAR(12),
+	telefone	VARCHAR(16),
 	email		VARCHAR(50),
 	senha		VARCHAR(20),
     status 		VARCHAR(10),
@@ -18,114 +47,146 @@ create table cliente (
 	primary	key	(id)
 );
 
-drop table cliente;
-
-
-insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
-values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
-
-
--------------------TABELA DE ENDERECOS ---------------------------
-create database ecommerce;
-use ecommerce;
-select * from endereco;
-
---Teste 1--
+/*** ENDEREÇO ****/
 create table endereco (
 	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
 	cep		      VARCHAR(10),
 	logradouro    VARCHAR(50),
-	numero		  VARCHAR(5),
+	numero		  VARCHAR(10),
 	bairro	      VARCHAR(30),
     cidade		  VARCHAR(50),
-    estado        VARCHAR(3),
-	pais		  VARCHAR(20),
+    estado        VARCHAR(20),
+	pais		  VARCHAR(10),
 	tipoResidencia	  VARCHAR(20),
-	observacoes	  VARCHAR(20),
-    cd_cliente BIGINT,
+	observacoes	  VARCHAR(30),
+    tipoEndereco  VARCHAR(20),
+    id_cliente BIGINT,
+    data_Cadastro DATE,
 	primary	key	(id),
-	CONSTRAINT fk_EnderecoCliente FOREIGN KEY (cd_cliente) REFERENCES cliente (id)
+	CONSTRAINT fk_EnderecoCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
 );
 
-
-drop table endereco;
-
--------------------TABELA DE ENDERECOS 2 ---------------------------
-
-create table endereco (
-	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
-	cep		      VARCHAR(10),
-	logradouro    VARCHAR(50),
-	numero		  VARCHAR(5),
-	bairro	      VARCHAR(30),
-    cidade		  VARCHAR(50),
-    estado        VARCHAR(3),
-	pais		  VARCHAR(20),
-	tipoResidencia	  VARCHAR(20),
-	observacoes	  VARCHAR(20),
-	primary	key	(id)
-);
-
--------------------TABELA DE CARTÕES DE CREDITO ---------------------------
+/***** CARTÃO DE CRÉDITO *****/
 create table cartaoCredito (
 	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
-	nCartao	      VARCHAR(20),
+	numCartao	      VARCHAR(20),
 	bandeira	  VARCHAR(15),
 	nome		  VARCHAR(30),
-	validade      DATE,
+	validade      VARCHAR(10),
     cvv			  VARCHAR(5),
     preferencial  VARCHAR(5),
-	pais		  VARCHAR(20),
-	primary	key	(id)
+	id_cliente BIGINT,
+    data_Cadastro	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_CartaoCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
 );
 
-
-------------------- TABELA DO CARRINHO ---------------------------
-create table carrinho (
-    id  BIGINT  NOT NULL    AUTO_INCREMENT,
-    id_cliente      BIGINT,
-    id_produto      BIGINT,
-    qtdeProduto     VARCHAR(10),
-    status          VARCHAR(10),
-    primary key (id),
-    CONSTRAINT fk_CarrinhoCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id),
-    CONSTRAINT fk_CarrinhoProduto FOREIGN KEY (id_produto) REFERENCES produto (id)
+/**** PEDIDO ***/
+create table pedido (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+    total_itens 	VARCHAR(10),
+    total_frete		VARCHAR(10),
+    total_pedido    VARCHAR(10),
+    status		    VARCHAR(30),
+    id_cliente	 	BIGINT,
+    id_endereco 	BIGINT,
+    forma_pagamento VARCHAR(10),
+    id_cartao_1 	BIGINT,
+    valor_cartao_1	VARCHAR(10),
+    id_cartao_2 	BIGINT,
+    valor_cartao_2	VARCHAR(10),
+	total_cupons	VARCHAR(10),
+	trocado		    VARCHAR(3),
+    dt_cadastro 	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_ClientePedido FOREIGN KEY (id_cliente) REFERENCES cliente (id),
+	CONSTRAINT fk_EnderecoPedido FOREIGN KEY (id_endereco) REFERENCES endereco (id),
+	CONSTRAINT fk_CartaoPedido_1 FOREIGN KEY (id_cartao_1) REFERENCES cartaoCredito (id),
+	CONSTRAINT fk_CartaoPedido_2 FOREIGN KEY (id_cartao_2) REFERENCES cartaoCredito (id)
 );
 
-------------------- TABELA DE PRODUTOS ---------------------------
+/**** ITENS DO PEDIDO ****/
+create table pedido_item (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	id_produto	 	BIGINT,
+    nome		    VARCHAR(30),
+    valor_de_venda  VARCHAR(10),
+    quantidade      VARCHAR(10),
+    id_pedido 		BIGINT,
+    trocado		    VARCHAR(3),
+    dt_cadastro 	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_ProdutoPedidoItem FOREIGN KEY (id_produto) REFERENCES produto (id),
+	CONSTRAINT fk_PedidoPedidoItem FOREIGN KEY (id_pedido) REFERENCES pedido (id)
+);
+
+/*** ESTOQUE ***/
+create table estoque (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	id_produto	  				  BIGINT,
+	tipo				    	  VARCHAR(10),
+	quantidade_entrada_saida	  VARCHAR(10),
+	valor_custo		      		  VARCHAR(10),
+	fornecedor		       		  VARCHAR(50),
+	dt_entrada  	   			  DATE,
+	quantidade_final			  VARCHAR(10),
+    dt_cadastro 	   			  DATE,
+	primary	key	(id),
+	CONSTRAINT fk_EstoqueProduto FOREIGN KEY (id_produto) REFERENCES produto (id)
+);
+
+/**** PRODUTO ****/
 create table produto (
-    id  BIGINT  NOT NULL    AUTO_INCREMENT,
+    id  BIGINT  NOT NULL   AUTO_INCREMENT,
     nome              VARCHAR(40),
     descricao         VARCHAR(300),
     categoria         VARCHAR(20),
-    cores             VARCHAR(50),
-    tamanho           VARCHAR(20),
+    cores			  VARCHAR(50),
+    tamanho			  VARCHAR(20),
     precoCompra       VARCHAR(10),
     precoVenda        VARCHAR(10),
-    qtde              VARCHAR(10),
-    foto              VARCHAR(50),
-    dtCadastro        DATE,
+    qtdeEstoque       VARCHAR(10),
+    foto              VARCHAR(100),
+    dt_cadastro        DATE,
     status            VARCHAR(10),
     grupoPrecificacao VARCHAR(30),
+    motivoStatus	VARCHAR(40),
     primary key (id)
 );
 
+/**** CUPOM ****/
+create table cupom (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	nome		       VARCHAR(50),
+	valor		       VARCHAR(10),
+	tipo	      	   VARCHAR(20),
+	utilizado	       VARCHAR(3),
+	id_cliente         BIGINT,
+    dt_cadastro 	   DATE,
+	primary	key	(id),
+	CONSTRAINT fk_CupomCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
+);
+
+select id_produto, sum(qtdeProduto) as quantidade_vendido from item_pedido where dt_pedido BETWEEN ('2021-11-01') AND ('2021-11-29') group by id_produto order by sum(qtdeProduto) desc LIMIT 3;
+select id_produto, sum(qtdeProduto) as quantidade_vendido  FROM item_pedido WHERE id_produto = 1 AND MONTH(dt_pedido) = '11' AND YEAR(dt_pedido) = '2021' group by id_produto;
 
 
+-- INSERT para o Pedido
+insert into pedido(total_itens, total_frete, total_pedido, status, id_cliente, id_endereco, forma_pagamento, total_cupons, trocado, dt_cadastro)
+values ('0', '0', '0', 'EM PROCESSAMENTO', '46', '4', 'boleto', '0', 'nao', '2021/10/20');
 
-insert into cliente (nome, cpf, dt_nasc, genero, telefone, email, senha, status, tipo)
-values ('Admin','79628190571','2021/08/01', 'feminino', '11945758990', 'admin@admin.com', '12345678', 'ativo', 'admin');
+-- INSERT para o Item do Pedido
+insert into pedido_item(id_produto, nome, valor_de_venda, quantidade, id_pedido, trocado, dt_cadastro)
+values ('3', 'blusa xxx', '0', '7', '37', 'nao', '2021/10/20');
 
 
-insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dtCadastro, status, grupoPrecificacao)
-values ('Blusa Manga Comprida', 'Excelente material italiano com estampa desenhada pelos artesãos da comunidade de Krotor nas ilhas gregas. Compre já e receba hoje mesmo pela nossa entrega a jato.', 'blusa','Amarela', '36', '20.00', '49.99', '30', './img/produtos/blusaamarela.png', '2021-09-07', 'ativo', 'grupo2');
+drop table cliente;
+drop table endereco;
+drop table cartaoCredito;
+drop table produto;
 
-insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dtCadastro, status, grupoPrecificacao)
-values ('Blusa Manga Curta','Excelente material nacional em um tecido maravilhoso. Comprimento midi, ajuste slim fit, perfeito para o Verão 2021. Compre já e receba hoje mesmo pela nossa entrega a jato.', 'blusa','Verde', '38','10.00', '59.99', '30', './img/produtos/blusaverde.png', '2021-09-07', 'ativo', 'grupo2');
+drop table pedido;
+drop table pedido_item;
+drop table cupom;
+drop table estoque;
 
-insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dtCadastro, status, grupoPrecificacao)
-values ('Calca de Elastico','Excelente material nacional em uma malha trabalhada no conforto. Comprimento capri, ajuste slim fit, perfeito para o trabalho ou lazer. Compre já e receba hoje mesmo pela nossa entrega a jato.', 'calca', 'Preta', '40', '30.00', '42.90', '30', './img/produtos/calcapreta.png', '2021-09-07', 'ativo', 'grupo2');
-
-insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dtCadastro, status, grupoPrecificacao)
-values ('Vestido Curto','Excelente material nacional em um tecido trabalhado no lápis. Comprimento midi, ajuste slim fit, perfeito para seu estilo de vida. Compre já e receba hoje mesmo pela nossa entrega a jato.', 'vestido', 'Rosa','38', '20.00', '39.90', '30', './img/produtos/vestidorosa.png', '2021-09-07', 'ativo', 'grupo2');
- 

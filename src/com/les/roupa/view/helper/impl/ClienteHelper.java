@@ -18,6 +18,12 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 
+/**
+ * ViewHelper - Cliente
+ * @author Lorena Oliveira
+ * Março/2022 
+ */
+
 public class ClienteHelper implements IViewHelper {
 	
 	Cliente cliente = null;
@@ -26,7 +32,7 @@ public class ClienteHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
-		// Verifica qual operação foi acionada
+		// Verifica qual operação do botão foi acionada - SALVAR/ALTERAR/CONSULTAR/EXCLUIR
 		String operacao = request.getParameter("operacao");
 		
         String email = null;
@@ -78,8 +84,7 @@ public class ClienteHelper implements IViewHelper {
 			usuario.setSenha(senha);
 			usuario.setConfirmarSenha(confirmarSenha);
 			cliente.setUsuario(usuario);
-			
-			
+						
 			cliente.setNome(nome);
 			cliente.setCpf(cpf);
 			cliente.setData_Nascimento(data_Nascimento);
@@ -142,12 +147,12 @@ public class ClienteHelper implements IViewHelper {
 	}
 
 	// SET VIEW 
-	
+
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// Verifica qual operação foi acionada
+		// Verifica qual operação do botão foi acionada - SALVAR/ALTERAR/CONSULTAR/EXCLUIR
 		String operacao = request.getParameter("operacao");
 		
 		// Usa para escrever na tela
@@ -155,12 +160,13 @@ public class ClienteHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				
 				//Redirecionamento normal para index com o usuario logado com sucesso
 					request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 						
 			else {
-				// se houver, mostra as mensagens de ERRO logo na tela ao logar
+				// se houver ERRO para logar, mostra as mensagens na tela de Login
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
@@ -172,19 +178,22 @@ public class ClienteHelper implements IViewHelper {
 				// Mensagem de conta criada para aparece na modal 
 				resultado.setMensagem("Eba! Conta criada com sucesso! <br> Agora faça o seu login!");
 				
-				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				// pendura o "resultado" na requisicao e manda para o arquivo login2.JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				request.getRequestDispatcher("JSP/login2.jsp").forward(request, response);
 			}
 			else {
-				// se houver, mostra as mensagens de ERRO 
+				// se houver ERRO ao criar conta, mostra as mensagens na tela do formulário 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				request.getRequestDispatcher("JSP/novaConta2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
+			
+			// Esse ALTERAR é na visão do Admin - ele tem poder de alterar os dados de um Cliente
+			
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// foi utilizado o getEntidades do resultado para poder pegar o Login consultado
 				List<EntidadeDominio> entidades = resultado.getEntidades();
@@ -193,47 +202,58 @@ public class ClienteHelper implements IViewHelper {
 				
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
-				// atualiza a sessao com todos os clientes alterados
+				
+				// Atualiza a sessao com todos os clientes alterados 
 				sessao.setAttribute("todosClientes", cliente.getUsuario().getTodosClientes());
-				//cliente selecionado para alteração - opcao ALTERAR
+				
+				//cliente selecionado para alteração - opcao ALTERAR na opção como ADMIN
 				sessao.setAttribute("clienteAlterado", cliente.getUsuario().getTodosClientes().get(0));
 				
 				String alteraCliente = request.getParameter("alteraCliente");
 				String id = request.getParameter("id");
 				
 				// É para alterar os campos do cliente agora? 
-				// No caso 'não', então ele encaminha para tela de alteração com os dados puxados do banco
+				// No caso 'não', ele encaminha para tela de formulário para alterar os dados puxados do banco
 				if(alteraCliente.equals("0")) {
 					request.setAttribute("idCliente", id);
 					
-					// Mensagem de boas vindas para aparece na modal
+					// Mensagem de cliente alterado para aparecer na modal
 					resultado.setMensagem("Cliente alterado com sucesso! ");
 					
-					// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+					//Atualiza a sessao com todos os clientes novamente
+					sessao.setAttribute("todosClientes", cliente.getUsuario().getTodosClientes());
+					
+					// pendura o "resultado" na requisicao e manda para o arquivo alterarCliente2.JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					request.getRequestDispatcher("JSP/alterarCliente2.jsp").forward(request, response);
 				}else {
+					// Mensagem de boas vindas para aparece na modal
+					resultado.setMensagem("Dados alterados com sucesso! ");
+					
+					// pendura o "resultado" na requisicao e manda para o arquivo minhaconta2.JSP
+					request.setAttribute("mensagemStrategy", resultado.getMensagem());
+					
 					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 				}
 			} 
 			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+				// se houver, mostra as mensagens de ERRO 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			}
 		}
-		//		TELA ADMIN
+			//	 ADMIN
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// Redireciona para o arquivo .jsp
 				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			} 
 			else {
-				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
+				// se houver, mostra as mensagens de ERRO
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			}
 		}
 	}

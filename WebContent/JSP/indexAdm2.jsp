@@ -197,7 +197,7 @@
                                         <td><%=c.getTelefone() %></td>
                                         <td><%=u.getEmail() %></td>
                                         <td><%=c.getStatus() %></td>
-                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                        <td><a href="/eCommerce/cadastro?id=<%=c.getId()%>&operacao=ALTERAR&alteraCliente=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit" ></i></button></a></td>
                                     </tr>
                                 </tbody>
                                 <%
@@ -312,18 +312,7 @@
                                                 <td>40</td>
                                                 <td>Ativo</td>
                                                 <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Blusa Manga Comprida</td>
-                                                <td>Blusa</td>
-                                                <td>20.00</td>
-                                                <td>69.99</td>
-                                                <td>21-06-2021</td>
-                                                <td>40</td>
-                                                <td>Ativo</td>
-                                                <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -356,25 +345,12 @@
                                             <td>Promocional</td>
                                             <td>R$ 20.00</td>
                                             <td>2022-01-02</td>
-                                            <td>Lorena</td>
+                                            <td>2</td>
                                             <td>Nao</td>
                                             <td>Ativo</td>
                                             <td>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>testePromo</td>
-                                            <td>Promocional</td>
-                                            <td>R$ 20.00</td>
-                                            <td>2022-01-02</td>
-                                            <td>Juliana</td>
-                                            <td>Nao</td>
-                                            <td>Ativo</td>
-                                            <td>
-                                                <a href="./JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-edit"></i></button></a>
-                                                <a href="./JSP/detalhePedido.jsp"><button class="btn"><i class="fa fa-eraser"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit" data-tooltip="Editar" data-flow="bottom"></i></button></a>
+                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser" data-tooltip="Excluir" data-flow="bottom"></i></button></a>
                                             </td>
                                         </tr>
                                     </tbody>

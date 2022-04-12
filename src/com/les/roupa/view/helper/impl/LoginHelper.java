@@ -162,10 +162,17 @@ public class LoginHelper implements IViewHelper {
 			}
 		}
 		
-		//		ALTERAR SENHA
+		//		ALTERAR SENHA - CLIENTE 
+		
 		else if (("ALTERAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 			// requisicao de alteracao de senha
+				
+				// Mensagem de senha alterada para aparece na modal 
+				resultado.setMensagem("Senha alterada com sucesso!");
+				
+				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 			request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
 		}

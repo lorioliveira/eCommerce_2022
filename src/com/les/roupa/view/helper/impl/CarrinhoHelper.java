@@ -17,6 +17,12 @@ import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.view.helper.IViewHelper;
 
+/**
+ * ViewHelper - Carrinho
+ * @author Lorena Oliveira
+ * Abril/2022 
+ */
+
 public class CarrinhoHelper implements IViewHelper {
 
 	Carrinho carrinho = null;
@@ -26,7 +32,7 @@ public class CarrinhoHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operação do botão foi acionada - SALVAR/ALTERAR/CONSULTAR/EXCLUIR
 		String operacao = request.getParameter("operacao");
 		
 		String id = null;
@@ -37,7 +43,6 @@ public class CarrinhoHelper implements IViewHelper {
 		if (("CONSULTAR").equals(operacao)) {
 			carrinho = new Carrinho();
 			
-			// capturando os valores do HTML
 			idCliente = request.getParameter("idCliente");
 			
 			carrinho.setIdCliente(idCliente);
@@ -48,17 +53,19 @@ public class CarrinhoHelper implements IViewHelper {
 			detalheProduto = new DetalheProduto();
 			produto = new Produto();
 			
-			// capturando os valores do HTML e passando para o Produto, logo em sequencia passando para o Item Carrinho
+			// capturando os valores do HTML e passando para o Produto, 
+			// logo em sequencia passando para o Item Carrinho
 			id = request.getParameter("idProduto");
 			quantidadeSelecionada = request.getParameter("quantidadeSelecionada");
 			
-			// verificação necessaria para o usuario não clicar no botão de
-			// "adicionar ao carrinho" com o campo "quantidade" vazia
+			// Verificação necessaria para o usuario não clicar no botão de
+			// "Adicionar" (pro carrinho) com o campo "Quantidade" vazia
 			if (quantidadeSelecionada.equals("")) {
 				quantidadeSelecionada = "0";
 			}
 			
-			// Atribuindo os valores capturados do HTML para o Item Carrinho, logo em sequencia passando para o Carrinho
+			// Atribuindo os valores capturados do HTML para o Item Carrinho, 
+			// logo em sequencia passando para o Carrinho
 			produto.setId(id);
 			produto.setQuantidadeSelecionada(quantidadeSelecionada);
 			detalheProduto.setProduto(produto);
@@ -70,7 +77,8 @@ public class CarrinhoHelper implements IViewHelper {
 			detalheProduto = new DetalheProduto();
 			produto = new Produto();
 			
-			// capturando os valores do HTML e passando para o Produto, logo em sequencia passando para o Item Carrinho
+			// capturando os valores do HTML e passando para o Produto,
+			//logo em sequencia passando para o Item Carrinho
 			id = request.getParameter("idProduto");
 			quantidadeSelecionada = request.getParameter("quantidadeSelecionada");
 			tipoDeOperacao = request.getParameter("tipoDeOperacao");
@@ -100,7 +108,8 @@ public class CarrinhoHelper implements IViewHelper {
 				quantidadeSelecionada = Integer.toString(quantidadeSelecionadaInteiro);
 			}
 			
-			// Atribuindo os valores capturados do HTML para o Item Carrinho, logo em sequencia passando para o Carrinho
+			// Atribuindo os valores capturados do HTML para o Item Carrinho, 
+			// logo em sequencia passando para o Carrinho
 			produto.setId(id);
 			produto.setQuantidadeSelecionada(quantidadeSelecionada);
 			detalheProduto.setProduto(produto);
@@ -113,10 +122,12 @@ public class CarrinhoHelper implements IViewHelper {
 			detalheProduto = new DetalheProduto();
 			produto = new Produto();
 			
-			// capturando os valores do HTML e passando para o Produto, logo em sequencia passando para o Item Carrinho
+			// capturando os valores do HTML e passando para o Produto,
+			// logo em sequencia passando para o Item Carrinho
 			id = request.getParameter("idProduto");
 			
-			// Atribuindo os valores capturados do HTML para o Item Carrinho, logo em sequencia passando para o Carrinho
+			// Atribuindo os valores capturados do HTML para o Item Carrinho,
+			// logo em sequencia passando para o Carrinho
 			produto.setId(id);
 			detalheProduto.setProduto(produto);
 			carrinho.setDetalheProduto(detalheProduto);
@@ -125,11 +136,13 @@ public class CarrinhoHelper implements IViewHelper {
 		return carrinho;
 	}
 
+	// SET VIEW
+	
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// Verifica qual operação do botão foi acionada
+		// Verifica qual operação do botão foi acionada - SALVAR/ALTERAR/CONSULTAR/EXCLUIR
 		String operacao = request.getParameter("operacao");
 		
 		// Usa para escrever na tela
@@ -143,7 +156,8 @@ public class CarrinhoHelper implements IViewHelper {
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				
-				// salva na sessão os dados do Cliente (Endereço, Cartões e Cupons), pra poder usar na tela do Carrinho
+				// salva na sessão os dados do Cliente (Endereços, Cartões e Cupons (caso possua)),
+				// pra poder usar na tela do Carrinho
 				sessao.setAttribute("entidadesEnderecoCartaoCupom", entidades);
 				
 				// Redireciona para o arquivo .jsp
@@ -151,20 +165,20 @@ public class CarrinhoHelper implements IViewHelper {
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				writer.println(resultado.getMensagem());
+				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				System.out.println("ERRO PARA CONSULTAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
+				request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// capturando os valores do HTML
+				// capturando os valores de quantidade do HTML
 				String quantidadeSelecionada = request.getParameter("quantidadeSelecionada");
 				boolean adicionaNovoItemAoCarrinho = true;
 				
 				// verificação necessaria para o usuario não clicar no botão de
-				// "adicionar ao carrinho" com o campo "quantidade" vazia
+				// "adicionar" do Produto com o campo "quantidade" vazia
 				if (quantidadeSelecionada.equals("")) {
 					quantidadeSelecionada = "0";
 				}
@@ -179,7 +193,7 @@ public class CarrinhoHelper implements IViewHelper {
 				// se a quantidade selecionada é maior que ZERO, então adiciona o item selecionado na lista da Sessão
 				if (Integer.parseInt(quantidadeSelecionada) > 0) {
 					// guarda no produto, o valor da quantidade selecionada da tela, 
-					// para poder listar a quantidade selecionada no arquivo "lista-carrinho-scriptlet.jsp"
+					// para poder listar a quantidade selecionada no arquivo "carrinho2.jsp"
 					produtoSelecionado.setQuantidadeSelecionada(quantidadeSelecionada);
 					
 					// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
@@ -200,13 +214,14 @@ public class CarrinhoHelper implements IViewHelper {
 							// verifica se a somatoria das quantidades selecionadas é maior que a quantidade do estoque disponivel
 							if (somatoriaDasQuantidades > Integer.parseInt(produtoSelecionado.getQtdeEstoque())) {
 								// atribui a nova mensagem para poder mostra na pagina .JSP
-								resultado.setMensagem("Quantidade selecionada é maior que disponivel no estoque!");
+								resultado.setMensagem("A Quantidade selecionada é MAIOR que disponivel no estoque!");
 								
 								adicionaNovoItemAoCarrinho = false;
 								break;
 							}
 							else {
-								// feito o CAST de INT para String, para poder atualizar a quantidade selecionada com a somatoria
+								// feito o CAST de INT para String,
+								// para poder atualizar a quantidade selecionada com a somatoria
 								produtoSelecionado.setQuantidadeSelecionada(Integer.toString(somatoriaDasQuantidades));
 								
 								// ".set" do ArrayList faz o seguinte:
@@ -214,7 +229,7 @@ public class CarrinhoHelper implements IViewHelper {
 								// Substitui o i-ésimo elemento da lista pelo elemento especificado.
 								produtoParaAdicionarAoCarrinho.set(i, produtoSelecionado);
 								
-								// atribui a nova mensagem para poder mostra na pagina .JSP
+								// atribui a nova mensagem para poder mostrar na pagina carinho2.JSP
 								resultado.setMensagem("Item do Carrinho atualizado com sucesso!");
 								
 								adicionaNovoItemAoCarrinho = false;
@@ -230,7 +245,8 @@ public class CarrinhoHelper implements IViewHelper {
 					
 					// verifica se é para adicionar um novo item ao Carrinho
 					if (adicionaNovoItemAoCarrinho) {
-						// passa o produto selecionado para a variavel que será responsavel para atualizar a sessão dos itens do carrinho
+						// passa o produto selecionado para a variavel que será responsavel para atualizar
+						// a sessão dos itens do carrinho
 						produtoParaAdicionarAoCarrinho.add(produtoSelecionado);
 						
 						// atribui a nova mensagem para poder mostra na pagina .JSP
@@ -241,14 +257,14 @@ public class CarrinhoHelper implements IViewHelper {
 					// atualiza o objeto "itensCarrinho" que esta salvo em sessão, com o novo produto selecionado
 					sessao.setAttribute("itensCarrinho", produtoParaAdicionarAoCarrinho);
 					
-					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+					// pendura o "resultado" na requisição para poder mandar para o arquivo carrinho2.JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 				}
 				
-				// se não, a quantidade selecionada é igual a ZERO, então mostra mensagem de erro na JSP
+				// se não, a quantidade selecionada é igual a ZERO, então mostra mensagem de erro na página
 				else {
 					// atribui a nova mensagem para poder mostra na pagina .JSP
 					resultado.setMensagem("Selecione uma quantidade maior que ZERO!");
@@ -266,7 +282,7 @@ public class CarrinhoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 			}
 		}
 		
@@ -335,13 +351,14 @@ public class CarrinhoHelper implements IViewHelper {
 						}
 					}
 					
-					// atualiza o objeto "itensCarrinho" que esta salvo em sessão, com o novo produto selecionado atualizado
+					// atualiza o objeto "itensCarrinho" que esta salvo em sessão,
+					// com o novo produto selecionado atualizado
 					sessao.setAttribute("itensCarrinho", produtoParaAdicionarAoCarrinho);
 					
 					// atribui a nova mensagem para poder mostra na pagina .JSP
 					resultado.setMensagem("Item do Carrinho atualizado com sucesso!");
 					
-					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+					// pendura o "resultado" na requisição para poder mandar para o arquivo carrinho2.JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
@@ -384,7 +401,7 @@ public class CarrinhoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 			}
 		}
 		
@@ -399,6 +416,7 @@ public class CarrinhoHelper implements IViewHelper {
 				
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
+				
 				// pega o objeto salvo em Sessão com o nome "itensCarrinho",
 				// e passa para o "produtoParaAdicionarAoCarrinho" (fazendo o CAST para o tipo List<Produto>)
 				produtoParaAdicionarAoCarrinho = (List<Produto>) sessao.getAttribute("itensCarrinho");
@@ -418,7 +436,7 @@ public class CarrinhoHelper implements IViewHelper {
 				// atribui a nova mensagem para poder mostra na pagina .JSP
 				resultado.setMensagem("Item do Carrinho removido com sucesso!");
 				
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisição para poder mandar para o arquivo carrinho2.JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -430,7 +448,7 @@ public class CarrinhoHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/carrinho2.jsp").forward(request, response);
 			}
 		}
 		

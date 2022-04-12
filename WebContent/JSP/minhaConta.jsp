@@ -224,7 +224,7 @@
                                  <th>Nº Cartão</th>
                                  <th>Titular</th>
                                  <th>Validade</th>
-                                 <th>Cartão Prefer?</th>
+                                 <th>Cartão Preferido</th>
                                  <th>Ação</th>
                               </tr>
                            </thead>

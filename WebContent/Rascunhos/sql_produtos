@@ -48,3 +48,17 @@ values ('Vestido Curly Green','Excelente material nacional em um tecido trabalha
 insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dt_cadastro, status, grupoPrecificacao,motivoStatus)
 values ('Vestido Azul','Excelente vestido, simples e elegante, ainda mais em um material nacional todo trabalhado no design. Comprimento midi, ajuste slim fit, perfeito para seu estilo de vida. Compre já e receba hoje mesmo pela nossa entrega a jato.', 'vestido', 'Azul','40', '20.00', '59.90', '30', './img/produtos/vestidoazul.png', '2021-09-07', 'ativo', 'grupo2','com estoque');
 
+
+
+insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dt_cadastro, status, grupoPrecificacao,motivoStatus)
+values ('Carteira Kitty','Excelente material de courino bem trabalhado. Ajuste slim fit, perfeito para guardar aquele dindin do trabalho ou lazer. Compre e receba hoje mesmo pela nossa entrega a jato.', 'acessorios', 'Preta', 'UN', '25.00', '34.00', '10', './img/produtos/carteiragatinho.png', '2022-04-04', 'ativo', 'grupo1','com estoque');
+
+insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dt_cadastro, status, grupoPrecificacao,motivoStatus)
+values ('Cinto Heart','Excelente material de courino bem trabalhado. Ajuste slim fit, perfeito para guardar aquele dindin do trabalho ou lazer. Compre e receba hoje mesmo pela nossa entrega a jato.', 'acessorios', 'Caramelo', 'UN', '25.00', '34.00', '10', './img/produtos/cintocoracao.png', '2022-04-04', 'ativo', 'grupo1','com estoque');
+
+insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dt_cadastro, status, grupoPrecificacao,motivoStatus)
+values ('Kit Tiaras','Excelente material de courino bem trabalhado. Ajuste slim fit, perfeito para guardar aquele dindin do trabalho ou lazer. Compre e receba hoje mesmo pela nossa entrega a jato.', 'acessorios', 'Sortido', 'UN', '5.00', '20.00', '10', './img/produtos/kittiaras.png', '2022-04-04', 'ativo', 'grupo1','com estoque');
+
+insert into produto (nome, descricao, categoria, cores, tamanho, precoCompra, precoVenda, qtdeEstoque, foto, dt_cadastro, status, grupoPrecificacao,motivoStatus)
+values ('Carteira Transparente','Excelente material de courino bem trabalhado. Ajuste slim fit, perfeito para guardar aquele dindin do trabalho ou lazer. Compre e receba hoje mesmo pela nossa entrega a jato.', 'acessorios', 'Transparente', 'UN', '2.00', '15.00', '10', './img/produtos/carteiratransparente.png', '2022-04-04', 'ativo', 'grupo1','com estoque');
+
