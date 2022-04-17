@@ -114,7 +114,7 @@
 		} else {
 		   	// faz a concatenação de todos os cupons disponiveis do cliente para poder mostrar na tela
 		   	for (Cupom coupon : cupons) {
-		   		concatenacaoCuponsCliente += (coupon.getNome() + " - R$:" + coupon.getValor() + "; \n");
+		   		concatenacaoCuponsCliente += (coupon.getNome() + " - Valor R$: " + coupon.getValor() + " \n");
 		   	}
    		}
    %>
@@ -450,20 +450,23 @@
      <div class="col-lg-7 divCupom">
      	<div class="checkout-inner">
         	<div class="billing-address">
-        	
-		             <!-- Cupons Disponíveis do Cliente -->
-				 <div class="form-group col-md-8">
-		  			 <h3>Cupons disponíveis</h3>
-				     <textarea class="form-control" name="cuponsDisponiveis" placeholder="Cupons disponíveis" rows="2" disabled><%=concatenacaoCuponsCliente %></textarea>
-		  		 </div>
-		  		 
 		      <form action="http://localhost:8080/eCommerce/verificaCupom">
-				 <div class="coupon couponB cart-page-inner" >
-			          <input type="text" placeholder="Insira um Cupom" name="cupom">
+				 <div class="coupon couponB cart-page-inner cupom-session" >
+			         <h3>Cupons disponíveis</h3><br>
+		  			 <select class="selectCupom" name="cupom" >
+		  			 	<option>Selecione um cupom</option>
+		  			 	<%
+		  			 	for (Cupom coupon : cupons) {
+		  			 	%>
+		  			 	<option value="<%=coupon.getNome()%>" ><%=coupon.getNome() %> - R$ <%=coupon.getValor() %></option>
+		  			 	<%
+		  			 	}
+		  			 	%>
+		  			 </select>
 			          <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
 				 </div>
-				       
-		  		 <h4>Cupons aplicados no Pedido</h4>
+				       <hr>
+		  		 <h4>Cupons aplicados no Pedido</h4><br>
 	    		<table class="table table-bordered">
 	    			<thead class="thead-dark">
 	                  <tr>

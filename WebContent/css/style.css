@@ -1544,7 +1544,7 @@ h2 {
     position: relative;
     width: 100%;
     margin-bottom: 15px;
-    font-size: 0;
+    /* font-size: 0; */
 }
 
 .cart-page .coupon input {
@@ -1566,7 +1566,7 @@ h2 {
 
 .cart-page .coupon button {
     width: 120px;
-    height: 40px;
+    height: 39px; 
     padding: 2px 0;
     font-size: 16px;
     text-align: center;
@@ -1577,11 +1577,23 @@ h2 {
 }
 
 .couponB button {
-	padding-top: 2px !important;
-	margin: 0 0px 17px 0 !important;
+	/* padding-top: 2px !important; */
+	margin: 0 0px 0.3rem 9px !important;
 }
-.couponB input[type=text]:active{
-	border-color: #FF6F61 !important;
+
+.selectCupom{
+	border: 1px solid #FF6F61;
+	height: 40px;
+	border-radius: 5px;
+	color: #858585;	
+	width: 25em;
+	padding-left: 10px !important;
+}
+
+.cupom-session {
+	padding: 0 !important;
+    margin-bottom: 30px;
+    background: #ffffff;
 }
 
 .cart-page .coupon button:hover {
@@ -2450,10 +2462,10 @@ h2 {
 
 .divCupom{
  position: relative;
-    padding: 30px;
+    /* padding: 30px; */
     background: #ffffff;
     margin-bottom: 30px;
-    /* margin-top: -7rem; */
+    margin-top: -7rem; 
     margin-left: 4.8rem;
 }
 

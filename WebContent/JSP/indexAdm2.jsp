@@ -1,3 +1,4 @@
+
 <%@page import='com.les.roupa.core.dao.*'%>
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
@@ -246,11 +247,11 @@
 							      	<option value="TROCA AUTORIZADA">TROCA AUTORIZADA</option>
 							      	<option value="TROCA REJEITADA">TROCA REJEITADA</option>
 							      	<option value="TROCA ACEITA">TROCA ACEITA</option>
-							      	<option style="color: #09cc17;" value="TROCA EFETUADA">TROCA EFETUADA</option>
+							      	<option value="TROCA EFETUADA"><b>TROCA EFETUADA</b></option>
 							      	<option value="CANCELAMENTO SOLICITADO">CANCELAMENTO SOLICITADO</option>
 							      	<option value="CANCELAMENTO REJEITADA">CANCELAMENTO REJEITADA</option>
 							      	<option value="CANCELAMENTO ACEITO">CANCELAMENTO ACEITO</option>
-							      	<option style="color: #09cc17;" value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
+							      	<option value="CANCELAMENTO EFETUADO"><b>CANCELAMENTO EFETUADO</b></option>
 							      	<option value="ENTREGA REALIZADA">ENTREGA REALIZADA</option>
 						      	</select>
 							</div>

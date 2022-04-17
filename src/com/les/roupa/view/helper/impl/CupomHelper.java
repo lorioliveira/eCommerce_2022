@@ -14,6 +14,11 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.view.helper.IViewHelper;
 
+/**
+ * ViewHelper - Cupom (Cadastro - Admin)
+ * @author Lorena Oliveira
+ *
+ */
 public class CupomHelper implements IViewHelper{
 	
 	Cupom cupom = null;
@@ -77,8 +82,6 @@ public class CupomHelper implements IViewHelper{
         	
         	// ajuste do bug de quando o cupom não tiver nenhum Cliente vinculado,
         	if (idCliente == null) {
-        		// se eu estiver pela tela de listagem de Cupom (lista-todos-cupons-scriptletADMIN.jsp),
-        		// o valor do "idCliente" será NULL, então atribui o valor ao objeto "cupom"
         		cupom.setIdCliente(idCliente);
         	}
         	else if (idCliente.equals("null")) {
@@ -86,7 +89,7 @@ public class CupomHelper implements IViewHelper{
         		// o valor do "idCliente" será "null", em formato de String, 
         		// então não atribui o valor ao objeto "cupom",
         		// pq se o valor for "null" em formato de String, irá acusar ERRO na alteração do Cupom na DAO.
-        		System.out.println("entrou !!");
+        		System.out.println("erro !!");
         	}
         	else {
         		// caso contrário, se tiver algum Cliente para vincular,
@@ -119,12 +122,10 @@ public class CupomHelper implements IViewHelper{
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// foi utilizado o getEntidades do resultado para poder pegar o cartao
 				List<EntidadeDominio> entidades = resultado.getEntidades();
-				// feito o CAST de Entidade para o Cupom (pegando o primeiro indice de Entidade)
 				Cupom cupomEntidade = (Cupom) entidades.get(0);
 				
-				// pendura todos os cupons na requisição para poder mandar para o arquivo .JSP
+				// pendura todos os cupons na requisição
 				request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
 				
 				// Redireciona para o arquivo .jsp
@@ -132,7 +133,6 @@ public class CupomHelper implements IViewHelper{
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -142,10 +142,10 @@ public class CupomHelper implements IViewHelper{
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// atribui a nova mensagem para poder mostra na pagina .JSP
+				// atribui a nova mensagem
 				resultado.setMensagem("Cadastro do Cupom salvo com sucesso!");
 				
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisição
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -153,7 +153,6 @@ public class CupomHelper implements IViewHelper{
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -170,23 +169,18 @@ public class CupomHelper implements IViewHelper{
 				
 				String alteraCupom = request.getParameter("alteraCupom");
 				
-				// Se eu estiver pela tela de listagem de Cupom (lista-todos-cupons-scriptletADMIN.jsp),
-				// vou mandar o parametro "alteraCupom" igual a zero, para poder chamar o arquivo .JSP para edição do Cupom
 				if (alteraCupom.equals("0")) {
-					// pendura o obejto "cupom" na requisição para poder mandar para o arquivo .JSP
+					// pendura o objeto "cupom" na requisição 
 					request.setAttribute("cupomPesquisado", cupomEntidade.getCupomPesquisado());
 					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/alterarCupom2.jsp").forward(request, response);
 				}
-				// caso contrário, se eu estiver pela tela de edição do Cupom (editar_cupom.jsp),
-				// o parametro "alteraCupom" vai ser igual a um, então pode editar o cupom,
-				// dentro da DAO de Cupom, vai ter um IF verificando se tem o "alteraCupom"
 				else {
-					// atribui a nova mensagem para poder mostra na pagina .JSP
+					// atribui a nova mensagem
 					resultado.setMensagem("Cadastro do Cupom alterado com sucesso!");
 					
-					// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+					// pendura o "resultado" na requisição
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
@@ -195,7 +189,6 @@ public class CupomHelper implements IViewHelper{
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -205,12 +198,10 @@ public class CupomHelper implements IViewHelper{
 		
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// foi utilizado o getEntidades do resultado para poder pegar o cartao
 				List<EntidadeDominio> entidades = resultado.getEntidades();
-				// feito o CAST de Entidade para o Cupom (pegando o primeiro indice de Entidade)
 				Cupom cupomEntidade = (Cupom) entidades.get(0);
 				
-				// pendura todos os cupons na requisição para poder mandar para o arquivo .JSP
+				// pendura todos os cupons na requisição 
 				request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
 				
 				// Redireciona para o arquivo .jsp, para poder listar os cupons atualizados novamente
@@ -218,7 +209,6 @@ public class CupomHelper implements IViewHelper{
 			} 
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp

@@ -46,24 +46,19 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		dataAtual = dateFormat.format(date);
 		
 		// verifica se foi acionado o botão para realizar a troca inteira do Pedido,
-		// (acionado pela tela "lista-pedidos-scriptletCLIENTE.jsp"),
-		// caso foi acionado, será feito o preenchimento da lista "itensPedidoTroca" que esta salvo em Sessão,
-		// com os itens do Pedido que foi acionado a troca inteira
+		
 		if (pedidoTrocaEntidade.getTrocaPedidoInteiro().equals("1")) {
 			// seta o valor do ID do Pedido com o valor que foi enviado pela tela
 			itemPedidoTrocaInteira.setIdPedido(pedidoTrocaEntidade.getIdPedido());
 			
 			// busca os Itens do Pedido pelo ID do Pedido
 			List<EntidadeDominio> entidades = itemPedidoDAO.consultar(itemPedidoTrocaInteira);
-			// por causa da mudança na consulta do ItemPedidoDAO, tbm foi alterado o jeito que é chamada
+			
 			// feito o CAST de Entidade para o ItemPedido (pegando o primeiro indice de Entidade)
 			ItemPedido itemPedidoEntidade = (ItemPedido) entidades.get(0);
 			
 			for(ItemPedido order_items : itemPedidoEntidade.getItensPedido()) {
-				// Aplicado o CAST para poder popular os itens do pedido,
-				// fazendo o CAST para uma referência mais genérica, no caso para o item do pedido
-				//ItemPedido order_items = (ItemPedido) e;
-				
+				// Aplicado o CAST para poder popular os itens do pedido
 				// guarda o Item do Pedido no objeto "pedidoTroca"
 				PedidoTroca pedidoTroca = new PedidoTroca();
 				pedidoTroca.setItemPedido(order_items);
@@ -77,13 +72,12 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		}
 		
 		// buscar as informações do Pedido que esta vinculado no Item do Pedido de Troca da Sessão,
-		// para quando criar um novo Pedido, salvar com as mesmas informações do Pedido Original
+		// para salvar com as mesmas informações do Pedido Original
 		pedidoOriginal = pedidoDAO.consultarPedidoById(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido());
 		
-		// faz um laço para calcular o total dos itens do pedido de troca
+		//calcular o total dos itens do pedido de troca
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			// faz o calculo dos itens que serão solicitados para a troca
-			// calculo do total dos itens (quantidade do item (*) o valor do item "preço de venda")
 			total_itens += (Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getQuantidadeSelecionada()) * Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getPrecoVenda()));
 		}
 		
@@ -103,15 +97,12 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		novoPedido.setData_Cadastro(dataAtual);
 		novoPedido.setDarBaixaEstoque("NAO");
 		
-		// salva o novo Pedido com o status TROCA SOLICITADA,
-		// com base nos Itens do Pedido de Troca da Sessão,
+		// salva o novo Pedido com o status TROCA SOLICITADA
 		pedidoDAO.salvar(novoPedido);
 		
-		// consulta o ultimo Pedido cadastrado para poder pegar o ID do Pedido,
-		// para poder salvar na tabela "pedido_item"
+		// consulta o ultimo Pedido cadastrado para poder pegar o ID do Pedido
 		List<Pedido> ultimoPedido = pedidoDAO.consultarUltimoPedidoCadastrado(pedido);
 		
-		// faz um laço para percorrer todos os itens que esta na Sessão "itensPedidoTroca",
 		// para cria os novos Itens do Pedido
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			novoItemPedido.setProduto(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto());
@@ -123,8 +114,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			itemPedidoDAO.salvar(novoItemPedido);
 		}
 		
-		// altera a Quantidade e o Status do Item do Pedido que foi selecionado no Pedido,
-		// altera para o status que "já foi trocado", caso a quantidade do item do pedido seja igual a ZERO,
+		// altera a Quantidade e o Status do Item do Pedido que foi selecionado no Pedido
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			int novaQuantidadeDoItemPedido = 0;
 			
@@ -132,23 +122,21 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			alteraQtdeAndStatusItemPedido = itemPedidoDAO.consultarItemPedidoById(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getId());
 			
 			// faz o calculo do novo valor da quantidade do item do pedido
-			// calculo da nova quantidade (quantidade do item que esta salvo no banco (-) o valor da quantidade selecionada na Sessão)
 			novaQuantidadeDoItemPedido = (Integer.parseInt(alteraQtdeAndStatusItemPedido.get(0).getProduto().getQuantidadeSelecionada()) - Integer.parseInt(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getQuantidadeSelecionada()));
 			
 			// faz a alteração da nova quantidade do item do pedido no banco
 			itemPedidoDAO.alterarQuantidadeItemPedido(Integer.toString(novaQuantidadeDoItemPedido), pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getId());
 			
-			// se a quantidade do item do pedido ficar igual a ZERO,
-			// será trocado o status do item para "já foi trocado",
+			
+			// trocado o status do item para "já foi trocado",
 			// altera no banco a tabela "pedido_item" da coluna "trocado" para "sim".
 			if (novaQuantidadeDoItemPedido == 0) {
 				itemPedidoDAO.alterarTrocacaoItemPedido(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getId());
 			}
 		}
 		
-		// verifica se existe algum item desse Pedido selecionado, esta com o status "trocado" como "nao",
-		// pois se não estiver, logo todos os itens estará com o status "trocado" como "sim",
-		// então também altera o status do Pedido para "já foi trocado",.
+		// verifica se existe algum item desse Pedido selecionado, esta com o status "trocado" como "nao" e 
+		// altera o status do Pedido para "já foi trocado".
 		List<ItemPedido> pedidoComTodosOsItensJaTrocados = itemPedidoDAO.consultarItemPedidoByIdPedidoAndTrocadoNao(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido());
 		
 		if (pedidoComTodosOsItensJaTrocados.isEmpty()) {
@@ -189,8 +177,6 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		String dataAtual;
 		dataAtual = dateFormat.format(date);
 		
-		// na REFERENCIA de "pedidoTrocaEntidade", será setado um Pedido inteiro,
-		// conforme o idPedido que foi digitado na tela
 		pedidoTrocaEntidade.setPedido(listPedido.get(0));
 		
 		// se for algum desses status, será feito a ReEntrada no Estoque e gerado o Cupom de desconto do mesmo
@@ -205,26 +191,21 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				
 			}
 			else {
-				// caso contrário, será realizada a ReEntrada no Estoque e gerado o Cupom
-				// altera o status do Pedido conforme foi selecionado na tela
+				// caso contrário, será realizada a ReEntrada no Estoque e gerado o Cupom e altera o status
 				pedidoDAO.alterarStatusPedido(pedidoTrocaEntidade.getIdPedido(), pedidoTrocaEntidade.getNovoStatusPedido());
 				
-				// seta o valor do ID do Item Pedido com o valor que foi capturado na tela
+				
 				itemPedido.setIdPedido(pedidoTrocaEntidade.getIdPedido());
 				
-				// busca todos os itens desse Pedido para realizar a ReEntrada no Estoque,
-				// busca os Itens do Pedido pelo ID do Pedido
+				// busca todos os itens desse Pedido para realizar a ReEntrada no Estoque
 				List<EntidadeDominio> entidades = itemPedidoDAO.consultar(itemPedido);
-				// por causa da mudança na consulta do ItemPedidoDAO, tbm foi alterado o jeito que é chamada
-				// feito o CAST de Entidade para o ItemPedido (pegando o primeiro indice de Entidade)
+				
 				ItemPedido itens_pedido = (ItemPedido) entidades.get(0);
 				
 				for(EntidadeDominio e : itens_pedido.getItensPedido()) {
-		    		// Aplicado o CAST para poder popular os itens do pedido,
-					// fazendo o CAST para uma referência mais genérica, no caso para o item do pedido
 					ItemPedido order_items = (ItemPedido) e;
 					
-					// faz a consulta pelo ID do produto que esta no item do pedido, para poder somar a quantidade anterior do produto, 
+					// soma a quantidade anterior do produto, 
 					// com a quantidade que dará a entrada, para poder salvar a "Quantidade Final"
 					List<Produto> produtoSelecionado = produtoDAO.consultarProdutoById(order_items.getProduto().getId());
 					
@@ -235,15 +216,12 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					// altera a quantidade do estoque do Produto
 					estoqueDAO.alterarQuantidadeProduto(Integer.toString(quantidadeFinal), order_items.getProduto().getId());
 					
-					// ajuste do BUG de quando for realizar a ReEntrada de algum Produto,
-					// o mesmo será verificado se esta como "inativo", pois se ele estiver,
-					// ele voltará a ficar "ativo", pois com a ReEntrada ao Estque, terá mais quantidade para utilizar
+					// ajuste do BUG de quando for realizar a ReEntrada de algum Produto
 					if (produtoSelecionado.get(0).getStatus().equals("inativo")) {
 						estoqueDAO.ativarProdutoEstoque(produtoSelecionado.get(0).getId());
 					}
 					
-					// salva os atributos do ultimo Pedido cadastrado no Estoque, 
-					// pra poder dar a entrada no Estoque (tabela estoque)
+					// salva os atributos do ultimo Pedido cadastrado no Estoque
 					estoque.setIdProduto(order_items.getProduto().getId());
 					estoque.setTipo("entrada");
 					estoque.setQuantidadeEntradaSaida(order_items.getProduto().getQuantidadeSelecionada());
@@ -257,7 +235,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					estoqueDAO.salvar(estoque);
 				}
 				
-				// gera o Cupom de Troca ou de Devolução
+				// gera o Cupom de Troca
 				if(pedidoTrocaEntidade.getNovoStatusPedido().equals("TROCA EFETUADA")) {
 					cupom.setNome("TROCA" + pedidoTrocaEntidade.getIdPedido());
 					cupom.setTipo("troca");
@@ -312,7 +290,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			pedidosAtualizados.add(pedidoItem);
 		}
 		
-		// na REFERENCIA de "pedidoTrocaEntidade", será setado os Pedidos atualizados,
+		// Pedidos atualizados,
 		// conforme a alteração do status do pedidos
 		pedidoTrocaEntidade.setPedidos(pedidosAtualizados);
 		
@@ -320,7 +298,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para excluir a Troca do Pedido ou dos Itens do Pedido
+	 * Metodo para excluir
 	 * @param entidade
 	 */
 	@Override

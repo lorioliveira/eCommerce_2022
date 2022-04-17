@@ -24,6 +24,11 @@ import com.les.roupa.core.dominio.Resultado;
 import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.view.helper.IViewHelper;
 
+/**
+ * ViewHelper - Pedido
+ * @author Lorena Oliveira
+ *
+ */
 public class PedidoHelper implements IViewHelper {
 
 	Pedido pedido = null;
@@ -111,20 +116,6 @@ public class PedidoHelper implements IViewHelper {
 			pedido.setCupons(cuponsDaSessao);
 			pedido.setData_Cadastro(dataAtual);
 			
-			//// ajuste do bug de quando o pedido não tiver nenhum Cupom vinculado,
-			//if (id_cupom.equals("null")) {
-        	//	// quando for finalizar o Pedido, e não tiver nenhum Cupom vinculado,
-        	//	// o valor do "id_cupom" será "null", em formato de String, 
-        	//	// então não atribui o valor ao objeto "pedido",
-        	//	// pq se o valor for "null" em formato de String, irá acusar ERRO ao salvar o Pedido na DAO.
-        	//	System.out.println("entrou !!");
-        	//}
-        	//else {
-        	//	// caso contrário, se tiver algum Cupom para vincular,
-        	//	// o valor será atribuido no Pedido
-        	//	pedido.setIdCupom(id_cupom);
-        	//}
-			
 		}
 		
 		else if (("ALTERAR").equals(operacao)) {
@@ -160,8 +151,6 @@ public class PedidoHelper implements IViewHelper {
 				request.setAttribute("pedidoSelecionado", pedidoSelecionado.getPedidosCliente().get(0));
 				request.setAttribute("itensPedidoSelecionado", pedidoSelecionado.getItemPedido());
 				
-				
-				
 				request.getRequestDispatcher("JSP/detalhePedido2.jsp").forward(request, response);
 				
 				
@@ -189,31 +178,30 @@ public class PedidoHelper implements IViewHelper {
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				// foi utilizado o getEntidades do resultado para poder pegar o Pedido do Cliente atualizado
 				List<EntidadeDominio> entidades = resultado.getEntidades();
-				// feito o CAST de Entidade para o Usuario (pegando o primeiro indice de Entidade)
 				Pedido pedidoAtualizado = (Pedido) entidades.get(0);
 				
 				List<Cupom> cuponsVazio = new ArrayList<>();
 				List<Produto> produtosVazio = new ArrayList<>();
-				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				
+				// cria um objeto "sessao"
 				HttpSession sessao = request.getSession();
 				
 				// atualiza a lista de pedidos do Cliente
 				sessao.setAttribute("pedidosCliente", pedidoAtualizado.getPedidosCliente());
 
 				// limpa os produtos selecionados do carrinho da sessão,
-				// atualiza o objeto "itensCarrinho" que esta salvo em sessão, com o novo objeto de produto vazio
+				// atualiza o objeto "itensCarrinho" que esta salvo em sessão = vazio
 				sessao.setAttribute("itensCarrinho", produtosVazio);
 				
 				// limpa os cupons selecionados do carrinho da sessão,
-				// atualiza o objeto "cupons" que esta salvo em sessão, com o novo objeto de cupom vazio
+				// atualiza o objeto "cupons" que esta salvo em sessão = vazio
 				sessao.setAttribute("cupons", cuponsVazio);
 				
-				// atribui a nova mensagem para poder mostra na pagina .JSP
+				// atribui a nova mensagem 
 				resultado.setMensagem("Cadastro do Pedido salvo com sucesso!");
 				
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				// pendura o "resultado" na requisição 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
@@ -222,7 +210,6 @@ public class PedidoHelper implements IViewHelper {
 			}
 			else {
 				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
