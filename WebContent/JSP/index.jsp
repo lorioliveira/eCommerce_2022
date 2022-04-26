@@ -150,15 +150,18 @@
                      <div class="header-slider-item">
                         <img src="../img/banner1.png" alt="Slider Image" />
                      </div>
+                     <div class="header-slider-item">
+                        <img src="../img/cupom_promocional.png" alt="Slider Image" />
+                     </div>
                      <!-- Acessorios -->
                      <div class="header-slider-item">
                         <a href="#">
                            <img src="../img/3.png" alt="Slider Image" />
                         </a>
                      </div>
-                     <div class="header-slider-item">
+                     <!-- <div class="header-slider-item">
                         <img src="../img/banner2.png" alt="Slider Image" />
-                     </div>
+                     </div> -->
                   </div>
                </div>
                <!-- Fim do banner de Imagens -->

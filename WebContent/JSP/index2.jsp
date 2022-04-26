@@ -155,6 +155,9 @@
                      <div class="header-slider-item">
                         <img src="./img/banner1.png" alt="Slider Image" />
                      </div>
+                     <div class="header-slider-item">
+                        <img src="./img/cupom_promocional.png" alt="Slider Image" />
+                     </div>
                      <!-- Acessorios -->
                      <div class="header-slider-item">
                         <a href="#">

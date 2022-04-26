@@ -23,6 +23,7 @@ select * from pedido_item;
 select * from cupom;
 select * from estoque;
 
+update cupom set utilizado ="nao" where id = 1;
 
 /*delete from pedido where id =5;
 	update carrinho set status = "inativo" where id = 4;

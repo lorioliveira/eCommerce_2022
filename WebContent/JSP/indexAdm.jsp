@@ -1,4 +1,4 @@
-<%@page import='com.les.roupa.core.dao.*'%>
+
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
@@ -142,7 +142,7 @@
                    </div>
 					<!-- BOTAO SAIR -->
 					<form action="http://localhost:8080/eCommerce/login">
-						<button type="submit" class="btn col-md-12" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
+						<button type="submit" class="btn col-md-12 btnLogoutAdmin" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
 					</form>
                 </div>
                 <div class="col-md-10">

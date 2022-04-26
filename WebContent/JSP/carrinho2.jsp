@@ -450,12 +450,21 @@
        <!-- CUPONS -->
      <div class="col-lg-7 divCupom">
      	<div class="checkout-inner">
-        	<div class="billing-address">
-		      <form action="http://localhost:8080/eCommerce/verificaCupom">
+      	<div class="billing-address">
+
+			<form action="http://localhost:8080/eCommerce/verificaCupom">
+				<h3>Cupons disponíveis</h3>
+				<div class="coupon couponB cart-page-inner cupom-session">
+					<label>Digite um cupom promocional: </label> <input
+						class="inputCupom" type="text" placeholder="Insira um Cupom"
+						name="cupom" />
+					<button class="btn" name="operacao" value="CONSULTAR">Aplicar</button>
+				</div>
+			</form>
+			<form action="http://localhost:8080/eCommerce/verificaCupom">
 				 <div class="coupon couponB cart-page-inner cupom-session" >
-			         <h3>Cupons disponíveis</h3><br>
-		  			 <select class="selectCupom" name="cupom" >
-		  			 	<option>Selecione um cupom</option>
+		  			 <select class="selectCupom" name="cupom">
+		  			 	<option>Ou selecione um cupom</option>
 		  			 	<%
 		  			 	for (Cupom coupon : cupons) {
 		  			 	%>
@@ -464,7 +473,7 @@
 		  			 	}
 		  			 	%>
 		  			 </select>
-			          <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
+		  			 <button class="btn" name="operacao" value="CONSULTAR" >Aplicar</button>
 				 </div>
 				       <hr>
 		  		 <h4>Cupons aplicados no Pedido</h4><br>

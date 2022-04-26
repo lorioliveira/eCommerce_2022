@@ -1586,8 +1586,16 @@ h2 {
 	height: 40px;
 	border-radius: 5px;
 	color: #858585;	
-	width: 25em;
+	width: 18em;
 	padding-left: 10px !important;
+}
+
+.inputCupom{
+	width: 15em !important;
+	border: 1px solid #FF6F61 !important;
+	margin-right: 0 !important;
+	/* padding-left: 10px !important;
+	margin-bottom: 10px; */
 }
 
 .cupom-session {
@@ -2559,23 +2567,33 @@ h2 {
     margin-left: 83%;
 }
 .inputQuantidade{
-    width: 30%;
+    width: 6.5em;
 }
 .inputValorCompra{
-    width: 100px;
+    /* width: 16rem !important; */
 }
 .btnCadastrarEstoque{
     width: 30%;
-    margin: 1.5rem 0 15% ;
+    margin: 1.95rem 0 15%;
+    padding: 5px;
 }
 .divConsultarEstoque{
     margin: 0 18%;
+    margin-bottom: 7%;
 }
-.linkConsultarEstoque{
-    margin: 0 0 20%;
+.tabelaConsultarEstoque, .formRegistrarEstoque{
+    position: relative;
+    padding: 30px;
+    background: #ffffff;
 }
-.divSelecionarProduto{
-    margin: 0 10%;
+
+.selectSelecionarProduto{
+	display: inline;
+}
+
+.btnPesquisarProduto{
+	margin-top: -6px;
+	height: 35px;
 }
 .inputValorCupom{
     width: 60%;
@@ -2604,7 +2622,7 @@ h2 {
     margin: 5% 0%;
 }
 .selectSelecionarProduto{
-    width: 20%;
+    width: 14rem;
     margin-bottom: 5%;
 }
 .hide{
@@ -2670,7 +2688,7 @@ h2 {
 
  .radioCores label input[type=radio]:checked {
     background-color: #FF6F61;
-    visibility: hidden;
+    /* visibility: hidden; */
  }
 
  .radioTam {
@@ -3093,4 +3111,8 @@ h2 {
 
 .thAcao{
 	width: 140px;
+}
+
+.btnLogoutAdmin{
+	margin-top: 11%;
 }
