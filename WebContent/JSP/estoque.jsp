@@ -151,6 +151,7 @@
                      <label>Data</label> <input class="form-control" min="2022-01-01" max="2022-12-31" type="date">
                   </div>
                   <div class="col-md-4">
+                  <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEstoque"><i class="fa fa-ban"></i> Cancelar</button>
                      <button class="btn btnCadastrarEstoque">
                      <i class="fa fa-save"></i> Salvar
                      </button>

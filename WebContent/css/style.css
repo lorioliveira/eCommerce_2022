@@ -2567,7 +2567,7 @@ h2 {
     margin-left: 83%;
 }
 .inputQuantidade{
-    width: 6.5em;
+    width: auto; /*6.5em*/
 }
 .inputValorCompra{
     /* width: 16rem !important; */
@@ -2599,7 +2599,7 @@ h2 {
     width: 60%;
 }
 .clienteVinculado{
-    width: 50%;
+    width: auto;
 }
 
 .btnSalvarCupom, .btnCancelarCupom{
@@ -3115,4 +3115,8 @@ h2 {
 
 .btnLogoutAdmin{
 	margin-top: 11%;
+}
+
+.opcaoUtilizado{
+	margin-left: 30px;
 }

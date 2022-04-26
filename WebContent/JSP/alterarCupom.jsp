@@ -1,10 +1,7 @@
-<%@page import='com.les.roupa.core.dao.*'%>
-<%@page import='com.les.roupa.core.dominio.*'%>
-<%@page import='com.les.roupa.core.dao.impl.*'%>
-
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
+<%@page import='com.les.roupa.core.dominio.*'%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -31,6 +28,13 @@
         <!-- CSS Principal do Projeto -->
         <link href="../css/style.css" rel="stylesheet">
     </head>
+    <%
+    Usuario usuarioLogado = new Usuario();
+    
+    // Pega o usuário em sessão - Cliente logado -> admin
+    HttpSession sessao = request.getSession();
+    usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+    %>
     
     <body>
         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -65,18 +69,8 @@
                             <a href="../JSP/indexAdm.jsp" class="nav-item nav-link">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
-                         <div class="nav-item dropdown">
-                              <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
-                             <div class="dropdown-menu">
-                                    <a href="" class="dropdown-item">
-                                       <!-- BOTAO SAIR -->
-		                                <form action="http://localhost:8080/eCommerce/login">
-		                                    <button type="submit" class="btn" name="operacao" value="EXCLUIR"><i class="fa fa-sign-out-alt"></i>Logout</button>
-		                                </form>
-                                    </a>
-                             </div>
-                         </div>
-                     </div>
+                            
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -96,14 +90,16 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="search">
-                            <!-- <input type="text" placeholder="Procuro por ...">
-                            <button><i class="fa fa-search"></i></button> -->
-                        </div>
+                        <!-- <div class="search">
+                            <input type="text" placeholder="Procuro por ...">
+                            <button><i class="fa fa-search"></i></button>
+                        </div> -->
                     </div>
                     <div class="col-md-2">
                         <div class="user">
-                            <h6><div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div></h6>
+                            <h6>
+                            	<div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
+                            </h6>
                             <!-- <a href="cart.jsp" class="btn cart">
                                 Minha Sacola <i class="fas fa-shopping-bag"></i>
                                 </a> -->
@@ -129,7 +125,7 @@
         <!-- Inicio de Registrar nova conta -->
         <div class="registrar__novaconta">
             <div class="container-novaconta">
-                <div class="col-lg-9">   
+                <div class="col-lg-10">   
                     <div class="register-form">
                         <h4>Alterar Cupom </h4><br>
                             <div class="row">
@@ -139,36 +135,33 @@
                             </div>
                             <div class="col-md-4">
                                 <label>Tipo Cupom</label>
-                                <select class=" form-control" name="grupoPrecificacao">
+                                <select class="form-control" name="grupoPrecificacao">
                                     <option selected disabled>Selecione</option>
                                     <option value="Troca">Troca</option>
                                     <option value="Devolucao">Devolução</option>
                                     <option value="Promocional">Promocional</option>
-                                    <option value="Carteira">Carteira</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label>Valor R$ </label><br>
-                                <input class="inputValorCupom form-control" type="number" placeholder="000">
-                            </div>
-                            <div class="col-md-4">
-                                <label> Cliente Vinculado</label><br>
-                                <select class="clienteVinculado form-control" name="clienteVinculado">
-                                    <option selected disabled>Selecione</option>
-                                    <option value="Nome">Nome</option>
-                                </select>
-                           </div>
-                            <div class="col-md-4">
-                                <label>Utilizado</label><br>
-                                <select class="form-control" name="grupoPrecificacao">
-                                    <option selected disabled>Selecione</option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Nao">Não</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                            	<button class="btn btnCancelarCupom" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-                                <a href="../JSP/login.jsp"></a><button class="btn btnSalvarCupom"><i class="fa fa-save"></i> Salvar</button></a>
+                                <label>Valor R$ </label>
+                                <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" >
+                            </div>
+                            <div class="col-md-4">
+                                <label> Cliente Vinculado</label>
+                                <select class="clienteVinculado form-control" name="clienteVinculado">
+                                    <option selected disabled>Selecione</option>
+                                    <option value="Nome">nome XXXXXXXXXXX</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Utilizado</label><br>
+                                <input  type="radio" name="grupoPrecificacao" value="Sim">   Sim 
+                                <input class="opcaoUtilizado" type="radio" name="grupoPrecificacao" value="Nao" checked>  Não
+                            </div>
+                            
+                            <div class="col-md-5"><br>
+                             <!-- btnSalvarCupom --><button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
+                            <button class="btn "><i class="fa fa-plus"></i> Criar </button>
                             </div>
                         </div> 
                     </div>
@@ -226,7 +219,7 @@
                 <div class="row payment align-items-center">
                     <div class="col-md-6">
                         <div class="payment-method">
-                            <h2>Forma de pagamento</h2>
+                            <h2>Forma de Pagamento</h2>
                             <img src="../img/payment-method.png" alt="Payment Method" />
                         </div>
                     </div>
@@ -248,7 +241,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2021 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="../JSP/indexAdm.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                     </div>
 
                     <!-- <div class="col-md-6 template-by">
@@ -264,7 +257,7 @@
         
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/../js/bootstrap.bundle.min.js"></script>
         <script src="../lib/easing/easing.min.js"></script>
         <script src="../lib/slick/slick.min.js"></script>
         
