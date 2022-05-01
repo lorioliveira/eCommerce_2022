@@ -25,7 +25,7 @@ public class ValidarSaidaEstoque implements IStrategy {
 		
 		Estoque estoque = (Estoque) entidade;
 		
-		if(estoque.getTipo().equals("saida")) {
+		if(estoque.getTipo().equals("saida") || estoque.getTipo().equals("Saida")) {
 			// faz a consulta pelo ID do produto selecionado, para poder somar a quantidade anterior do produto, 
 			// com a quantidade de entrada, para poder salvar a "Quantidade Final"
 			produtoSelecionado = produtoDAO.consultarProdutoById(estoque.getIdProduto());

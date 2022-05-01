@@ -115,7 +115,7 @@ public class EstoqueHelper implements IViewHelper {
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/estoque2.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver

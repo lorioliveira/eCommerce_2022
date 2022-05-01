@@ -175,42 +175,46 @@
 	      </div>
 	    </form>
       <!-- Fim da parte do Estoque - Registrar  -->
+      
       <!-- Início da Consulta de Estoque - TABELA -->
-      <div class="col-md-9 divConsultarEstoque">
-         <div class="my-account">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-3">
-                     <h4> Consultar Estoque</h4>
-                     <div class="nav flex-column nav-pills "
-                        role="tablist" aria-orientation="vertical">
-                        <a class="txtConsultarEstoque nav-link " id="consultar-nav" data-toggle="pill"
-                           href="#consultar-tab" role="tab"><i class="fas fa-eye"></i>
-                        Consultar</a>
-                     </div>
-                     <br>
-                  </div>
-                  <div class="col-lg-7 tabelaConsultarEstoque">
-                     <div class="tab-pane fade  register-form"
-                        id="consultar-tab" role="tabpanel"
-                        aria-labelledby="consultar-nav">
-                        <label>Selecione o Produto:</label> 
-                        <select
-                           class="selectSelecionarProduto form-control" name="listaProduto"
-                           id="listaProduto">
-                           <option selected disabled>Selecione</option>
-                           <option value="Blusa Comprida">Blusa Comprida</option>
-                           <option value="Blusa Curta">Blusa Curta</option>
-                           <option value="Calca">Calça</option>
-                           <option value="Vestido">Vestido</option>
-                        </select>
-                        <button class="col-lg-3 btn btnPesquisarProduto "><a href="../JSP/estoque2.jsp"><i class="fas fa-search"></i> Pesquisar</a></button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      <form action="http://localhost:8080/eCommerce/cadastroEstoque">
+	      <div class="col-md-9 divConsultarEstoque">
+	         <div class="my-account">
+	            <div class="container-fluid">
+	               <div class="row">
+	                  <div class="col-md-3">
+	                     <h4> Consultar Estoque</h4>
+	                     <div class="nav flex-column nav-pills "
+	                        role="tablist" aria-orientation="vertical">
+	                        <a class="txtConsultarEstoque nav-link " id="consultar-nav" data-toggle="pill"
+	                           href="#consultar-tab" role="tab"><i class="fas fa-eye"></i>
+	                        Consultar</a>
+	                     </div>
+	                     <br>
+	                  </div>
+	                  <div class="col-lg-7 tabelaConsultarEstoque">
+	                     <div class="tab-pane fade  register-form"
+	                        id="consultar-tab" role="tabpanel"
+	                        aria-labelledby="consultar-nav">
+	                        <label>Selecione o Produto:</label> 
+	                        <select class="form-control" name="selecioneProduto" id="listaProduto">
+		                     	<option value="" disabled selected>Selecione..</option>
+		                        <% 
+							      	for(Produto prod : produtosAtivos) {
+								%> 
+						      		<option value="<%=prod.getId()%>"><%=prod.getNome()%></option>
+						      	<%
+									}
+								%>
+		                     </select>
+	                        <button class="col-lg-3 btn btnPesquisarProduto" name="operacao" value="CONSULTAR"><i class="fas fa-search"></i> Pesquisar</a></button>
+	                     </div>
+	                  </div>
+	               </div>
+	            </div>
+	         </div>
+	      </div>
+	    </form>
       <!-- Fim da Consulta de Estoque - TABELA -->
       <!-- Início do Footer -->
       <div class="footer">
