@@ -92,7 +92,7 @@
   
    <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
-    <url-pattern>/estoque</url-pattern>
+    <url-pattern>/cadastroEstoque</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

@@ -570,7 +570,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 	public void salvarItensPedidoAndBaixaEstoque(List<Produto> produtos, List<Cupom> cupons) {
 		PedidoDAO pedidoDAO = new PedidoDAO();
 		ItemPedidoDAO pedidoItemDAO = new ItemPedidoDAO();
-		//EstoqueDAO estoqueDAO = new EstoqueDAO();
+		EstoqueDAO estoqueDAO = new EstoqueDAO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		CupomDAO cupomDAO = new CupomDAO();
 		Pedido pedido = new Pedido();
@@ -604,41 +604,42 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			
 			// após salvar o item do pedido, o mesmo será dado a baixa no Estoque,
 			// faz a conta de subtração da quantidade selecionada, menos a quantidade que já tinha no produto
-			quantidadeFinal = (Integer.parseInt(produtos.get(i).getQuantidadeSelecionada()) - Integer.parseInt(produtos.get(i).getQuantidadeSelecionada()));
+			quantidadeFinal = (Integer.parseInt(produtos.get(i).getQtdeEstoque()) - Integer.parseInt(produtos.get(i).getQuantidadeSelecionada()));
 			
 			// altera a quantidade do estoque do Produto (tabela produto)
-			//estoqueDAO.alterarQuantidadeProduto(Integer.toString(quantidadeFinal), produtos.get(i).getId());
+			estoqueDAO.alterarQuantidadeProduto(Integer.toString(quantidadeFinal), produtos.get(i).getId());
 			
 			// faz a consulta pelo ID do produto do indice "i" do laço de repetição, 
 			// para verificar a quantidade do estoque atualizado (após a subtração feita a cima),
 			// se a quantidade for igual a ZERO, o produto será "inativado"
 			produtoAtualizado = produtoDAO.consultarProdutoById(produtos.get(i).getId());
-			/*
-			 * if(produtoAtualizado.get(0).getQuantidade().equals("0")) { String
-			 * motivo_inativacao; motivo_inativacao = " - SEM ESTOQUE";
-			 * 
-			 * // faz a concatenação da obeservação com a mensagem "SEM ESTOQUE"
-			 * produtoAtualizado.get(0).setMotivoStatus(produtoAtualizado.get(0).
-			 * getMotivoStatus() + motivo_inativacao);
-			 * 
-			 * estoqueDAO.inativaProdutoSemEstoque(produtoAtualizado.get(0).getId(),
-			 * produtoAtualizado.get(0).getMotivoStatus()); }
-			 */
+			
+			 if(produtoAtualizado.get(0).getQtdeEstoque().equals("0")) { 
+				String motivo_inativacao; 
+				motivo_inativacao = " - SEM ESTOQUE";
+			  
+			  // faz a concatenação da obeservação com a mensagem "SEM ESTOQUE"
+			  produtoAtualizado.get(0).setMotivoStatus(produtoAtualizado.get(0).
+			  getMotivoStatus() + motivo_inativacao);
+			  
+			  estoqueDAO.inativaProdutoSemEstoque(produtoAtualizado.get(0).getId(),
+			  produtoAtualizado.get(0).getMotivoStatus()); }
+			 
 			
 			// salva os atributos do ultimo Pedido cadastrado no Estoque, 
 			// pra poder dar a saida no Estoque (tabela estoque)
-			/*
-			 * estoque.setIdProduto(produtos.get(i).getId()); estoque.setTipo("saida");
-			 * estoque.setQuantidadeEntradaSaida(produtos.get(i).getQuantidadeSelecionada())
-			 * ; estoque.setValorCusto(produtos.get(i).getPrecoDeCompra());
-			 * estoque.setFornecedor("Saida no Estoque pelo Pedido: " +
-			 * ultimoPedido.get(0).getId());
-			 * estoque.setDtEntrada(ultimoPedido.get(0).getData_Cadastro());
-			 * estoque.setQuantidadeFinal(produtoAtualizado.get(0).getQuantidade());
-			 * estoque.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
-			 * 
-			 * // cria a saida do produto no "Estoque" estoqueDAO.salvar(estoque);
-			 */
+			
+			 estoque.setIdProduto(produtos.get(i).getId()); estoque.setTipo("saida");
+			 estoque.setQuantidadeEntradaSaida(produtos.get(i).getQuantidadeSelecionada()); 
+			 estoque.setValorCusto(produtos.get(i).getPrecoCompra());
+			 estoque.setFornecedor("Saida no Estoque pelo Pedido: " +
+			 ultimoPedido.get(0).getId());
+			 estoque.setDtEntrada(ultimoPedido.get(0).getData_Cadastro());
+			 estoque.setQuantidadeFinal(produtoAtualizado.get(0).getQtdeEstoque());
+			 estoque.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
+			 
+			 // cria a saida do produto no "Estoque" estoqueDAO.salvar(estoque);
+			
 		}
 		
 	} // Salvar itens do Pedido e dar baixa no Estoque

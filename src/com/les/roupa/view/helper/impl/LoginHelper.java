@@ -99,6 +99,9 @@ public class LoginHelper implements IViewHelper {
 				sessao.setAttribute("cuponsCliente", usuario.getCuponsCliente());
 				sessao.setAttribute("todosCupons", usuario.getTodosCupons());
 				
+				// ADMIN - salva na sessão o objeto "produtosAtivos", recebendo somente os produtos ativos do sistema - ESTOQUE
+				sessao.setAttribute("produtosAtivos", usuario.getProdutosAtivos());
+				
 				
 				List<PedidoTroca> itensPedidoTroca = new ArrayList<>();
 				// salva na sessão o objeto "itensPedidoTroca", para quando for clicado no botão de "Solicitar Troca",
@@ -193,7 +196,7 @@ public class LoginHelper implements IViewHelper {
 				sessao.invalidate(); // destroi o cookie JSESSIONID inteiro e cria outro
 				
 				// Mensagem de logout para aparece na modal ao sair - tela de Logout
-				resultado.setMensagem("Logout foi realizado com sucesso! </br> Volte Sempre!");
+				resultado.setMensagem("<b>Logout</b> foi realizado com sucesso! </br> Volte Sempre!");
 				
 				// pendura o "resultado" na requisicao e manda para o arquivo .JSP
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());

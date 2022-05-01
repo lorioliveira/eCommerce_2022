@@ -43,7 +43,6 @@
     
  	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
-    
     %>
 
 <body>

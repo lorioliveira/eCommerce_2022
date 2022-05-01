@@ -93,29 +93,29 @@ public class ItemPedidoHelper implements IViewHelper {
 		
 		if (("CONSULTAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				//String id = request.getParameter("idPedido");
-				//request.setAttribute("idPedido", id);
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/index.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
 				writer.println(resultado.getMensagem());
 				System.out.println("ERRO PARA CONSULTAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
 			}
+			// Redireciona para o arquivo .jsp
+			request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 		}
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
-				request.getRequestDispatcher("JSP/index_entrar.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
 				writer.println(resultado.getMensagem());
 				System.out.println("ERRO PARA SALVAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 		}
 		
@@ -123,27 +123,29 @@ public class ItemPedidoHelper implements IViewHelper {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/pedidos.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
 				writer.println(resultado.getMensagem());
 				System.out.println("ERRO PARA ALTERAR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 		}
 		
 		else if (("EXCLUIR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/pedidos.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			} 
 			else {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
 				writer.println(resultado.getMensagem());
 				System.out.println("ERRO PARA EXCLUIR!");
-				writer.println("<input type=\"button\" value=\"Voltar\" onclick=\"history.back()\">");
+				// Redireciona para o arquivo .jsp
+				request.getRequestDispatcher("JSP/index2.jsp").forward(request, response);
 			}
 		}
 	}

@@ -43,7 +43,6 @@ public class PedidoHelper implements IViewHelper {
 		String total_itens = null;
         String total_frete = null;
         String total_pedido = null;
-        String status = null;
         String id_cliente = null;
 		String id_endereco = null;
 		String forma_pagamento = null;
@@ -52,7 +51,6 @@ public class PedidoHelper implements IViewHelper {
         String id_cartao_2 = null;
         String valor_cartao_2 = null;
         String total_cupons = null;
-        String id_cliente_consulta = null;
         
         List<Produto> produtosDaSessao = new ArrayList<>();
         List<Cupom> cuponsDaSessao = new ArrayList<>();
@@ -199,7 +197,7 @@ public class PedidoHelper implements IViewHelper {
 				sessao.setAttribute("cupons", cuponsVazio);
 				
 				// atribui a nova mensagem 
-				resultado.setMensagem("Cadastro do Pedido salvo com sucesso!");
+				resultado.setMensagem("Pedido realizado com sucesso!");
 				
 				// pendura o "resultado" na requisição 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());

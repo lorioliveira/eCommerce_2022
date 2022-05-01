@@ -22,6 +22,7 @@ public class Usuario extends EntidadeDominio {
 	private List<Cliente> todosClientes;
 	private List<CartaoCredito> cartoesCliente;
 	private List<Produto> todosProdutos;
+	private List<Produto> produtosAtivos;
 	private List<Pedido> todosPedidos;
 	private List<Pedido> pedidosCliente;
 	private List<Cupom> cuponsCliente;
@@ -152,6 +153,14 @@ public class Usuario extends EntidadeDominio {
 
 	public void setTodosPedidos(List<Pedido> todosPedidos) {
 		this.todosPedidos = todosPedidos;
+	}
+	// Lista dos Produtos Ativos
+	public List<Produto> getProdutosAtivos() {
+		return produtosAtivos;
+	}
+
+	public void setProdutosAtivos(List<Produto> produtosAtivos) {
+		this.produtosAtivos = produtosAtivos;
 	}
 
 	// Lista de todos os Pedidos do Cliente

@@ -1,6 +1,8 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
    <head>
@@ -31,6 +33,10 @@
       // Pega o usuário em sessão - Cliente logado -> admin
       HttpSession sessao = request.getSession();
       usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+      
+	 // pega todos os produtos ativos do sistema salvo na sessão
+	 List<Produto> produtosAtivos = (List<Produto>)sessao.getAttribute("produtosAtivos");
+	 
       %>
    <body>
       <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
@@ -110,56 +116,64 @@
          </div>
       </div>
       <!-- Fim do Breadcrumb -->
+      
       <!-- Inicio da parte de Estoque - Registro  -->
-      <div class="formRegistrarEstoque">
-         <div class="container-novaconta">
-            <div class="col-lg-12">
-               <h4>Registrar Estoque</h4>
-               <br>
-               <div class="row">
-                  <div class="col-md-3">
-                     <label>Produto</label> 
-                     <select class="form-control"
-                        name="listaProduto" id="listaProduto">
-                        <option selected disabled>Selecione</option>
-                        <option value="Blusa Comprida">Blusa Comprida</option>
-                        <option value="Blusa Curta">Blusa Curta</option>
-                        <option value="Calca">Calça</option>
-                        <option value="Vestido">Vestido</option>
-                     </select>
-                  </div>
-                  <div class="col-md-3">
-                     <label>Tipo Estoque</label> 
-                     <select
-                        class="tipoEstoque form-control" name="tipoEstoque"
-                        id="tipoEstoque">
-                        <option selected disabled>Selecione</option>
-                        <option value="Entrada">Entrada</option>
-                        <option value="Saida">Saída</option>
-                     </select>
-                  </div>
-                  <div class="col-md-4">
-                     <label>Qtde</label> <input class="inputQuantidade form-control"
-                        type="number" placeholder="000">
-                  </div>
-                  <div class="col-md-3">
-                     <label>Valor de Compra do Produto</label> <input
-                        class="inputValorCompra form-control borderSelect" type="number"
-                        placeholder="000">
-                  </div>
-                  <div class="col-md-3">
-                     <label>Data</label> <input class="form-control" min="2022-01-01" max="2022-12-31" type="date">
-                  </div>
-                  <div class="col-md-4">
-                  <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEstoque"><i class="fa fa-ban"></i> Cancelar</button>
-                     <button class="btn btnCadastrarEstoque">
-                     <i class="fa fa-save"></i> Salvar
-                     </button>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      <form action="http://localhost:8080/eCommerce/cadastroEstoque">
+	      <div class="formRegistrarEstoque">
+	         <div class="container-novaconta">
+	            <div class="col-lg-12">
+	               <h4>Registrar Estoque</h4>
+	               <br>
+	               <div class="row">
+	                  <div class="col-md-3">
+	                     <label>Produto</label> 
+	                     <select class="form-control" name="selecioneProduto" id="listaProduto">
+	                     	<option value="" disabled selected>Selecione..</option>
+	                        <% 
+						      	for(Produto prod : produtosAtivos) {
+							%> 
+					      		<option value="<%=prod.getId()%>"><%=prod.getNome()%></option>
+					      	<%
+								}
+							%>
+	                     </select>
+	                  </div>              
+	                  <div class="col-md-3">
+	                     <label>Tipo Estoque</label> 
+	                     <select
+	                        class="tipoEstoque form-control" name="tipo" id="tipoEstoque">
+	                        <option selected disabled>Selecione</option>
+	                        <option value="entrada">Entrada</option>
+	                        <option value="saida">Saída</option>
+	                     </select>
+	                  </div>
+	                  <div class="col-md-4">
+	                     <label>Qtde</label> <input class="inputQuantidade form-control"
+	                        type="number" name="quantidade_entrada_saida" placeholder="000">
+	                  </div>
+	                  <div class="form-group col-md-3">
+				      <label>Fornecedor</label>
+				      <input type="text" class="form-control" name="fornecedor" placeholder="Fornecedor">
+				    </div>
+	                  <div class="col-md-3">
+	                     <label>Valor de Compra do Produto</label> <input
+	                        class="inputValorCompra form-control borderSelect" type="number" name="valor_custo"
+	                        placeholder="000">
+	                  </div>
+	                  <div class="col-md-3">
+	                     <label>Data</label> <input class="form-control" min="2022-01-01" max="2022-12-31" type="date" name="dt_entrada">
+	                  </div>
+	                  <div class="col-md-4">
+	                  <button type="submit" onclick="window.history.go(-1); return false;" class="btn btnCadastrarEstoque"><i class="fa fa-ban"></i> Cancelar</button>
+	                     <button class="btn btnCadastrarEstoque" name="operacao" value="SALVAR">
+	                     <i class="fa fa-save" ></i> Salvar
+	                     </button>
+	                  </div>
+	               </div>
+	            </div>
+	         </div>
+	      </div>
+	    </form>
       <!-- Fim da parte do Estoque - Registrar  -->
       <!-- Início da Consulta de Estoque - TABELA -->
       <div class="col-md-9 divConsultarEstoque">

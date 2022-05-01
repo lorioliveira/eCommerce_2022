@@ -12,6 +12,7 @@ import com.les.roupa.core.dao.impl.ClienteDAO;
 import com.les.roupa.core.dao.impl.CupomDAO;
 import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
+import com.les.roupa.core.dao.impl.EstoqueDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.dao.impl.PedidoDAO;
 import com.les.roupa.core.dao.impl.PedidoTrocaDAO;
@@ -25,6 +26,7 @@ import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
+import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Produto;
@@ -42,16 +44,19 @@ import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarCidade;
 import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCupom;
+import com.les.roupa.core.strategy.impl.ValidarDataEntradaSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
 import com.les.roupa.core.strategy.impl.ValidarEmail;
 import com.les.roupa.core.strategy.impl.ValidarEnderecoPedido;
+import com.les.roupa.core.strategy.impl.ValidarEntradaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarEstado;
 import com.les.roupa.core.strategy.impl.ValidarEstado_Alt;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmail;
 import com.les.roupa.core.strategy.impl.ValidarExisteEmailSenha;
 import com.les.roupa.core.strategy.impl.ValidarFormaDePagamento;
+import com.les.roupa.core.strategy.impl.ValidarFornecedorEstoque;
 import com.les.roupa.core.strategy.impl.ValidarGenero;
 import com.les.roupa.core.strategy.impl.ValidarGenero_Alt;
 import com.les.roupa.core.strategy.impl.ValidarLogradouro;
@@ -63,15 +68,20 @@ import com.les.roupa.core.strategy.impl.ValidarNumero;
 import com.les.roupa.core.strategy.impl.ValidarNumero_Alt;
 import com.les.roupa.core.strategy.impl.ValidarPais;
 import com.les.roupa.core.strategy.impl.ValidarPais_Alt;
+import com.les.roupa.core.strategy.impl.ValidarProdutoEstoque;
+import com.les.roupa.core.strategy.impl.ValidarQuantidadeEstoque;
+import com.les.roupa.core.strategy.impl.ValidarSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaConfSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaLogin;
 import com.les.roupa.core.strategy.impl.ValidarStatus;
 import com.les.roupa.core.strategy.impl.ValidarStatusPedido;
 import com.les.roupa.core.strategy.impl.ValidarTelefone;
+import com.les.roupa.core.strategy.impl.ValidarTipoEstoque;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia;
 import com.les.roupa.core.strategy.impl.ValidarTipoResidencia_Alt;
 import com.les.roupa.core.strategy.impl.ValidarTotalPedido;
+import com.les.roupa.core.strategy.impl.ValidarValorCustoEstoque;
 import com.les.roupa.view.helper.impl.DetalheProdutoHelper;
 import com.les.roupa.core.strategy.IStrategy;
 
@@ -164,8 +174,16 @@ public class Fachada implements IFachada {
 	
 	
 	/* --- ESTOQUE - ENTRADA E SAIDA --- */
-	//ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
-	//ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
+	ValidarProdutoEstoque vProdutoEstoque = new ValidarProdutoEstoque();
+	ValidarTipoEstoque vTipoEstoque = new ValidarTipoEstoque();
+	ValidarQuantidadeEstoque vQuantidadeEstoque = new ValidarQuantidadeEstoque(); 
+	ValidarValorCustoEstoque vValorCustoEstoque = new ValidarValorCustoEstoque();
+	ValidarFornecedorEstoque vFornecedorEstoque = new ValidarFornecedorEstoque();
+	ValidarDataEntradaSaidaEstoque vDataEntradaSaidaEstoque = new ValidarDataEntradaSaidaEstoque();
+	ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
+	ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
+	
+	
 	
 	/* --- GRAFICO --- */
 	//ValidarDatasGraficoAnalise vGrafico = new ValidarDatasGraficoAnalise();
@@ -278,9 +296,9 @@ public class Fachada implements IFachada {
 		daos.put(Cupom.class.getName(), new CupomDAO());
 		daos.put(VerificaCupom.class.getName(), new VerificaCupomDAO());
 		daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
+		daos.put(Estoque.class.getName(), new EstoqueDAO());
 		
-		//daos.put(CupomCarrinho.class.getName(), new CupomCarrinhoDAO());
-		//daos.put(Estoque.class.getName(), new EstoqueDAO());
+				
 		//daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
 	/* ---------------------------------------------------------------------------------------------------------------- */
@@ -400,8 +418,17 @@ public class Fachada implements IFachada {
 		
 		/* ----- Adicionando as Strategy's na lista do ESTOQUE ----- */
 		/* ----- SALVAR ----- */
-		//regrasSalvarEstoque.add(vEntradaEstoque);
-		//regrasSalvarEstoque.add(vSaidaEstoque);
+		regrasSalvarEstoque.add(vProdutoEstoque);
+		regrasSalvarEstoque.add(vTipoEstoque);
+		regrasSalvarEstoque.add(vQuantidadeEstoque);
+		regrasSalvarEstoque.add(vValorCustoEstoque);
+		regrasSalvarEstoque.add(vFornecedorEstoque);
+		regrasSalvarEstoque.add(vDataEntradaSaidaEstoque);
+		regrasSalvarEstoque.add(vEntradaEstoque);
+		regrasSalvarEstoque.add(vSaidaEstoque);
+		
+		/* ----- CONSULTAR ----- */
+		regrasConsultarEstoque.add(vProdutoEstoque);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
@@ -561,10 +588,11 @@ public class Fachada implements IFachada {
 		regrasGeral.put(Pedido.class.getName(), regrasPedido);
 		regrasGeral.put(VerificaCupom.class.getName(), regrasVerificaCupom);
 		regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
+		regrasGeral.put(Estoque.class.getName(), regrasEstoque);
+		
 		
 		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
-		//regrasGeral.put(Estoque.class.getName(), regrasEstoque);
 		//regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
 		/* ------------------------------------------------------------------------------------------------------------ */
 	}

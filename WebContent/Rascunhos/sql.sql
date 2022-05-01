@@ -10,6 +10,9 @@ values ('1', 'PROMOCIONAL10', '10.00', 'promocional', 'nao', null, '2022-04-11')
 insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
 values ('2', 'LORENA10', '10', 'troca', 'nao', 2, '2022/04/09');
 
+insert into estoque(id_produto, tipo, quantidade_entrada_saida, valor_custo, fornecedor, dt_entrada, quantidade_final, dt_cadastro)
+values ('1', 'entrada', '10', '5.99', 'Primeira entrada no Estoque', '2022/03/26', '10', '2022/03/26');
+
 update pedido set status="TROCA SOLICITADA" where id = 74;
 
 select count(*) from pedido;

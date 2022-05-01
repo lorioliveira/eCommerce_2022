@@ -263,6 +263,35 @@ public class LoginDAO extends AbstractJdbcDAO {
 					todosProdutos.add(listaProduto);
 				}
 				
+				// Listar os produtos ATIVOS
+				stmt = connection.prepareStatement("select * from produto where status='ativo'");
+				rs = stmt.executeQuery();
+				
+				List<Produto> produtosAtivos = new ArrayList<>();
+				while (rs.next()) {
+
+					// criando o objeto Produto
+					Produto listaProduto = new Produto();
+
+					listaProduto.setId(rs.getString("id"));
+					listaProduto.setNome(rs.getString("nome"));
+					listaProduto.setDescricao(rs.getString("descricao"));
+					listaProduto.setCategoria(rs.getString("categoria"));
+					listaProduto.setCores(rs.getString("cores"));
+					listaProduto.setTamanho(rs.getString("tamanho"));
+					listaProduto.setPrecoCompra(rs.getString("precoCompra"));
+					listaProduto.setPrecoVenda(rs.getString("precoVenda"));
+					listaProduto.setQtdeEstoque(rs.getString("qtdeEstoque"));
+					listaProduto.setFoto(rs.getString("foto"));
+					listaProduto.setData_Cadastro(rs.getString("dt_cadastro"));
+					listaProduto.setStatus(rs.getString("status"));
+					listaProduto.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
+					listaProduto.setMotivoStatus(rs.getString("motivoStatus"));
+
+					// adicionando o objeto a lista
+					produtosAtivos.add(listaProduto);
+				}
+				
 				//Listar todos os Clientes cadastrados - Opção como ADMIN
 				List<Cliente> todosClientes = new ArrayList<>();
 				stmt = connection.prepareStatement("select * from cliente where tipoCliente = 'cliente'");
@@ -397,14 +426,13 @@ public class LoginDAO extends AbstractJdbcDAO {
 				}
 				
 				
-				
-				
 				//TODAS AS LISTAS
 				Usuario novoUsuario = (Usuario) usuarios.get(0);
 				novoUsuario.setEnderecosCliente(enderecos);
 				novoUsuario.setTodosClientes(todosClientes);
 				novoUsuario.setTodosCartoes(cartoes);
 				novoUsuario.setTodosProdutos(todosProdutos);
+				novoUsuario.setProdutosAtivos(produtosAtivos);
 				novoUsuario.setTodosPedidos(todosPedidos);
 				novoUsuario.setPedidosCliente(pedidosCliente);
 				novoUsuario.setCuponsCliente(cuponsCliente);

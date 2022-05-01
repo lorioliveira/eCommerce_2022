@@ -144,7 +144,7 @@ public class CupomHelper implements IViewHelper{
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
 				// atribui a nova mensagem
-				resultado.setMensagem("Cadastro do Cupom salvo com sucesso!");
+				resultado.setMensagem("Cupom cadastrado com sucesso!");
 				
 				// pendura o "resultado" na requisição
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
@@ -179,7 +179,7 @@ public class CupomHelper implements IViewHelper{
 				}
 				else {
 					// atribui a nova mensagem
-					resultado.setMensagem("Cadastro do Cupom alterado com sucesso!");
+					resultado.setMensagem("Cupom alterado com sucesso!");
 					
 					// pendura o "resultado" na requisição
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
@@ -204,6 +204,9 @@ public class CupomHelper implements IViewHelper{
 				
 				// pendura todos os cupons na requisição 
 				request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
+				
+				// mostra as mensagens de ERRO se houver
+				resultado.setMensagem("Cupom excluído com sucesso!");
 				
 				// Redireciona para o arquivo .jsp, para poder listar os cupons atualizados novamente
 				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
