@@ -138,7 +138,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3">
-					<h4> Consultar Estoque</h4>
+					<h4> Consultar Estoque - <%=estoqueDoProduto.get(0).getNomeProduto() %></h4>
 					</div>
 					<div class="col-md-10 tabelaConsultarEstoque">
 						<div class="divSelecionarProduto register-form">

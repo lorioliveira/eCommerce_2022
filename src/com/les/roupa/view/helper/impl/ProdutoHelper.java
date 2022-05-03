@@ -159,7 +159,7 @@ public class ProdutoHelper implements IViewHelper {
 				// mostra as mensagens de ERRO se houver
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA CONSULTAR PRODUTO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 			}
 		}
 		
@@ -181,7 +181,7 @@ public class ProdutoHelper implements IViewHelper {
 				// se houver, mostra as mensagens de ERRO com botão para voltar a tela anterior
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR PRODUTO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				
 			}
 		}
@@ -208,8 +208,15 @@ public class ProdutoHelper implements IViewHelper {
 					request.setAttribute("idProduto", id);
 					
 					request.getRequestDispatcher("JSP/alterarProduto.jsp").forward(request, response);
+					
+					sessao.setAttribute("todosProdutos", produto.getTodosProdutos());
 				}else {
 					sessao.setAttribute("todosProdutos", produto.getTodosProdutos());
+					
+					// Mensagem de produto alterado para aparecer na modal
+					resultado.setMensagem("Produto alterado com sucesso! ");
+					
+					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
@@ -219,7 +226,7 @@ public class ProdutoHelper implements IViewHelper {
 				// mostra as mensagens de ERRO se houver
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA ALTERAR PRODUTO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				
 			}
 		}
@@ -248,7 +255,7 @@ public class ProdutoHelper implements IViewHelper {
 				// mostra as mensagens de ERRO se houver
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA EXCLUIR PRODUTO!");
-				request.getRequestDispatcher("JSP/tela-mensagem.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				
 			}
 		}

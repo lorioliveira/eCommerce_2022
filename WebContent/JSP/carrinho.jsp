@@ -314,8 +314,6 @@
             <div class="col-lg-12">
                <div class="checkout-inner">
                   <div class="billing-address">
-                  
-                    
                         <h3>Endereços</h3>
                         </br>
                         <div class="row">
@@ -357,8 +355,9 @@
          
          
          <!-- RESUMO / FORMA DE PAGAMENTO -->
-	         <div class="col-lg-6 divResumo">
-	       		<div class="checkout-inner">
+         <div class="divResumo col-lg-6">
+	         <div class="checkout-inner">
+	       		<div>
 			         <div class="checkout-summary">
 				         <div class="cart-summary">
 				         	<h1>Resumo</h1>
@@ -437,6 +436,7 @@
 		         <input type="hidden" name="total_frete" id="total_frete" value="<%=total_frete%>">
 		         <!-- Total do Pedido -->
 		         <input type="hidden" name="total_pedido" id="total_pedido"value="<%=total_pedido%>">
+	         </div>
 	         </div>
 	         </div>
 	    </div>

@@ -65,7 +65,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="login.jsp" class="nav-item nav-link active">Home</a>
+                            <a href="./JSP/login.jsp" class="nav-item nav-link active">Home</a>
                         </div>
                     </div>
                 </nav>
@@ -80,7 +80,7 @@
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="login.jsp">
+                        <a href="./JSP/login.jsp">
                         <img src="./img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
@@ -217,7 +217,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="login.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/login.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                     </div>
 
                 </div>

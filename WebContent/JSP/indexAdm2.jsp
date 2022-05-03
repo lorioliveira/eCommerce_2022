@@ -41,6 +41,9 @@
     // Pega o ID daquele cliente logado -> admin
     List<Cliente> client = dao.consultarClienteById(usuarioLogado.getId());
     
+  	//pega todos produtos 
+    List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
+    
  	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
@@ -293,6 +296,7 @@
                                             <tr>
                                                 <th>Nome</th>
                                                 <th>Categoria</th>
+                                                <th>Cor</th>
                                                 <th>R$ Compra</th>
                                                 <th>R$ Venda</th>
                                                 <th>Dt. Cadastro</th>
@@ -302,19 +306,26 @@
                                                 <th>Ação</th>
                                             </tr>
                                         </thead>
+                                        <%
+											for (Produto p : produtos) {
+										%>
                                         <tbody>
                                             <tr>
-                                                <td>Blusa Manga Comprida</td>
-                                                <td>Blusa</td>
-                                                <td>20.00</td>
-                                                <td>69.99</td>
-                                                <td>21-06-2021</td>
-                                                <td>40</td>
-                                                <td>Ativo</td>
-                                                <td>Grupo1</td>
-                                                <td><a href="./JSP/alterarProduto.jsp"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a></td>
+                                                <td><%=p.getNome() %></td>
+                                                <td><%=p.getCategoria() %></td>
+                                                <td><%=p.getCores() %></td>
+                                                <td><%=p.getPrecoCompra() %></td>
+                                                <td><%=p.getPrecoVenda()%></td>
+                                                <td><%=p.getData_Cadastro() %></td>
+                                                <td><%=p.getQtdeEstoque() %></td>
+                                                <td><%=p.getStatus() %></td>
+                                                <td><%=p.getGrupoPrecificacao() %></td>
+                                                <td><a href="/eCommerce/produto?id=<%= p.getId()%>&alteraProduto=0&operacao=ALTERAR"><button class="btn" data-tooltip="Editar" data-flow="top"><i class="fa fa-edit"></i></button></a></td>
                                             </tr>
                                         </tbody>
+                                        <%
+											}
+                                        %>
                                     </table>
                                 </div>
                             </div>
@@ -331,7 +342,6 @@
                                         <tr>
                                             <th>Nome</th>
                                             <th>Tipo Cupom</th>
-                                            <th>R$ Compra</th>
                                             <th>Valor R$</th>
                                             <th>Dt. Cadastro</th>
                                             <th>Cliente</th>
@@ -339,6 +349,7 @@
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
                                         <tr>
                                             <td>testePromo</td>
@@ -347,10 +358,9 @@
                                             <td>2022-01-02</td>
                                             <td>2</td>
                                             <td>Nao</td>
-                                            <td>Ativo</td>
                                             <td>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-edit" data-tooltip="Editar" data-flow="bottom"></i></button></a>
-                                                <a href="./JSP/alterarCupom.jsp"><button class="btn"><i class="fa fa-eraser" data-tooltip="Excluir" data-flow="bottom"></i></button></a>
+                                                <a href=""><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
+                                                <a href="."><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
                                             </td>
                                         </tr>
                                     </tbody>

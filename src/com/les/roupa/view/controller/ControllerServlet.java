@@ -63,6 +63,7 @@ public class ControllerServlet extends HttpServlet {
 		viewHelper.put("/eCommerce/produto", new ProdutoHelper());
 		viewHelper.put("/eCommerce/detalheProduto", new DetalheProdutoHelper());
 		viewHelper.put("/eCommerce/carrinho", new CarrinhoHelper());
+		viewHelper.put("/eCommerce/cupom", new CupomHelper());
 		viewHelper.put("/eCommerce/cadastroPedido", new PedidoHelper());
 		viewHelper.put("/eCommerce/verificaCupom", new VerificaCupomHelper());
 		viewHelper.put("/eCommerce/pedidoTroca", new PedidoTrocaHelper());

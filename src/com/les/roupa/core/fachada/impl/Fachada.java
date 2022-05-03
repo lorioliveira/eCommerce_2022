@@ -531,15 +531,15 @@ public class Fachada implements IFachada {
 		/* --------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- REGRAS DA ENTIDADE CUPOM CARRINHO ----- */
+		/* ----- REGRAS DA ENTIDADE CUPOM  ----- */
 		/* ----- SALVAR ----- */
-		regrasCupomCarrinho.put("SALVAR", regrasSalvarCupomCarrinho);
+		regrasCupom.put("SALVAR", regrasSalvarCupom);
 		/* ----- CONSULTAR ----- */
-		regrasCupomCarrinho.put("CONSULTAR", regrasConsultarCupomCarrinho);
+		regrasCupom.put("CONSULTAR", regrasConsultarCupom);
 		/* ----- ALTERAR ----- */
-		regrasCupomCarrinho.put("ALTERAR", regrasAlterarCupomCarrinho);
+		regrasCupom.put("ALTERAR", regrasAlterarCupom);
 		/* ----- EXCLUIR ----- */
-		regrasCupomCarrinho.put("EXCLUIR", regrasExcluirCupomCarrinho);
+		regrasCupom.put("EXCLUIR", regrasExcluirCupom);
 		/* -------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- REGRAS DA ENTIDADE PEDIDO TROCA ----- */
@@ -589,10 +589,8 @@ public class Fachada implements IFachada {
 		regrasGeral.put(VerificaCupom.class.getName(), regrasVerificaCupom);
 		regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
 		regrasGeral.put(Estoque.class.getName(), regrasEstoque);
+		regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		
-		
-		//regrasGeral.put(Cupom.class.getName(), regrasCupom);
-		//regrasGeral.put(CupomCarrinho.class.getName(), regrasCupomCarrinho);
 		//regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
 		/* ------------------------------------------------------------------------------------------------------------ */
 	}

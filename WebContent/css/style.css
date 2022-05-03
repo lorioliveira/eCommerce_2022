@@ -2593,7 +2593,8 @@ h2 {
 
 .btnPesquisarProduto{
 	margin-top: -6px;
-	height: 35px;
+	right: 0;
+	
 }
 .inputValorCupom{
     width: 60%;
@@ -2622,8 +2623,9 @@ h2 {
     margin: 5% 0%;
 }
 .selectSelecionarProduto{
-    width: 14rem;
+    width: 16rem;
     margin-bottom: 5%;
+    margin-right: 2%;
 }
 .hide{
     display: none;

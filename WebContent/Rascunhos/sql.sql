@@ -13,7 +13,7 @@ values ('2', 'LORENA10', '10', 'troca', 'nao', 2, '2022/04/09');
 insert into estoque(id_produto, tipo, quantidade_entrada_saida, valor_custo, fornecedor, dt_entrada, quantidade_final, dt_cadastro)
 values ('1', 'entrada', '10', '5.99', 'Primeira entrada no Estoque', '2022/03/26', '10', '2022/03/26');
 
-update pedido set status="TROCA SOLICITADA" where id = 74;
+update pedido set status="EM PROCESSAMENTO" where id = 3;
 
 select count(*) from pedido;
 
@@ -26,14 +26,17 @@ select * from pedido_item;
 select * from cupom;
 select * from estoque;
 
-update cupom set utilizado ="nao" where id = 1;
+update cupom set utilizado ="nao" where id = 6;
+update pedido set trocado = "nao" where id = 25;
 
-/*delete from pedido where id =5;
+/*
+delete from pedido where id = 2;
 	update carrinho set status = "inativo" where id = 4;
 	select * from pedido where id = 1;
 	delete from cliente where id =4;
 	delete from pedido where id = 8;
-	delete from pedido_item where id_pedido = 8;*/
+	delete from pedido_item where id_pedido = 2;
+    */
 
 /*** CLIENTE ****/
 create table cliente (

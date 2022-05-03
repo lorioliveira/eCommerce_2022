@@ -128,14 +128,15 @@
                 <div class="col-lg-10">   
                     <div class="register-form">
                         <h4>Cadastro de Cupom </h4><br>
+                        <form action="http://localhost:8080/eCommerce/cupom">
                             <div class="row">
                             <div class="col-md-4">
                                 <label>Nome</label>
-                                <input class="form-control" type="text" placeholder="Nome">
+                                <input class="form-control" type="text" placeholder="Nome" name="nome">
                             </div>
                             <div class="col-md-4">
                                 <label>Tipo Cupom</label>
-                                <select class="form-control" name="grupoPrecificacao">
+                                <select class="form-control" name="tipo">
                                     <option selected disabled>Selecione</option>
                                     <option value="Troca">Troca</option>
                                     <option value="Devolucao">Devolução</option>
@@ -144,20 +145,21 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Valor R$ </label>
-                                <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" >
+                                <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" name="valor">
                             </div>
                             <div class="col-md-5">
                                 <label> Cliente Vinculado</label>
-                                <select class="clienteVinculado form-control" name="clienteVinculado">
+                                <select class="clienteVinculado form-control" name="id_cliente">
                                     <option selected disabled>Selecione</option>
-                                    <option value="Nome">nome XXXXXXXXXXX</option>
+                                    <option value="1">nome XXXXXXX</option>
                                 </select>
                             </div>                            
                             <div class="col-md-9"><br>
                              <!-- btnSalvarCupom --><button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
-                            <button class="btn "><i class="fa fa-plus"></i> Criar </button>
+                            <button class="btn" name="operacao" value="SALVAR"><i class="fa fa-plus"></i> Criar </button>
                             </div>
                         </div> 
+                      </form>
                     </div>
                 </div>    
             </div>
