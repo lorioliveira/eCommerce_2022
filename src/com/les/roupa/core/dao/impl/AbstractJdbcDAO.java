@@ -7,8 +7,8 @@ import com.les.roupa.core.dao.IDAO;
 import com.les.roupa.util.Conexao;
 
 /**
- * Classe abstrata AbstractJdbcDAO, para abrir a conexão com o banco de dados.
- * @author Lorena Oliveira
+ * Classe abstrata AbstractJdbcDAO,
+ * para abrir a conexão com o banco de dados
  */
 
 public abstract class AbstractJdbcDAO implements IDAO {

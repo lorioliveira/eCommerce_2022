@@ -15,6 +15,7 @@ import com.les.roupa.core.dominio.Produto;
 /**
  * DAO PARA CARRINHO
  * @author Lorena Oliveira
+ * Mar/2022
  *
  */
 

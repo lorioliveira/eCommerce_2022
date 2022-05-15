@@ -34,7 +34,7 @@ delete from pedido where id = 2;
 	update carrinho set status = "inativo" where id = 4;
 	select * from pedido where id = 1;
 	delete from cliente where id =4;
-	delete from pedido where id = 8;
+	delete from cupom where id = 5;
 	delete from pedido_item where id_pedido = 2;
     */
 
