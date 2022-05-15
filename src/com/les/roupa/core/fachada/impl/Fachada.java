@@ -13,6 +13,7 @@ import com.les.roupa.core.dao.impl.CupomDAO;
 import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.EstoqueDAO;
+import com.les.roupa.core.dao.impl.GraficoAnaliseDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.dao.impl.PedidoDAO;
 import com.les.roupa.core.dao.impl.PedidoTrocaDAO;
@@ -27,6 +28,7 @@ import com.les.roupa.core.dominio.DetalheProduto;
 import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Estoque;
+import com.les.roupa.core.dominio.GraficoAnalise;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Produto;
@@ -47,6 +49,7 @@ import com.les.roupa.core.strategy.impl.ValidarCupom;
 import com.les.roupa.core.strategy.impl.ValidarDataEntradaSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
+import com.les.roupa.core.strategy.impl.ValidarDatasGraficoAnalise;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
 import com.les.roupa.core.strategy.impl.ValidarEmail;
 import com.les.roupa.core.strategy.impl.ValidarEnderecoPedido;
@@ -186,7 +189,7 @@ public class Fachada implements IFachada {
 	
 	
 	/* --- GRAFICO --- */
-	//ValidarDatasGraficoAnalise vGrafico = new ValidarDatasGraficoAnalise();
+	ValidarDatasGraficoAnalise vDatasGraficoAnalise = new ValidarDatasGraficoAnalise();
 	
 	/* ------------------------------------------------------------------------------------------------------------------- */
 	
@@ -205,7 +208,6 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasSalvarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasSalvarPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasSalvarEstoque = new ArrayList<>();
-	List<IStrategy> regrasSalvarGrafico = new ArrayList<>();
 	
 	/* ------------ CONSULTAR ------------ */
 	List<IStrategy> regrasConsultarCliente = new ArrayList<>();
@@ -220,7 +222,8 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasConsultarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasConsultarPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasConsultarEstoque = new ArrayList<>();
-	List<IStrategy> regrasConsultarGrafico = new ArrayList<>();
+	
+	List<IStrategy> regrasConsultarGraficoAnalise = new ArrayList<>();
 	
 	/* ------------ ALTERAR ------------ */
 	List<IStrategy> regrasAlterarCliente = new ArrayList<>();
@@ -235,7 +238,6 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasAlterarCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasAlterarPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasAlterarEstoque = new ArrayList<>();
-	List<IStrategy> regrasAlterarGrafico = new ArrayList<>();
 	
 	/* ------------ EXCLUIR ------------ */
 	List<IStrategy> regrasExcluirCliente = new ArrayList<>();
@@ -250,7 +252,6 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasExcluirCupomCarrinho = new ArrayList<>();
 	List<IStrategy> regrasExcluirPedidoTroca = new ArrayList<>();
 	List<IStrategy> regrasExcluirEstoque = new ArrayList<>();
-	List<IStrategy> regrasExcluirGrafico= new ArrayList<>();
 	
 	/* ------------------------------------------------------------------------------------------------------------------- */
 	
@@ -268,7 +269,7 @@ public class Fachada implements IFachada {
 	Map<String, List<IStrategy>> regrasCupomCarrinho = new HashMap<>();
 	Map<String, List<IStrategy>> regrasPedidoTroca = new HashMap<>();
 	Map<String, List<IStrategy>> regrasEstoque = new HashMap<>();
-	Map<String, List<IStrategy>> regrasGrafico = new HashMap<>();
+	Map<String, List<IStrategy>> regrasGraficoAnalise = new HashMap<>();
 	
 	/* ------------------------------------------------------------------------------------------------------------------ */
 	
@@ -297,9 +298,9 @@ public class Fachada implements IFachada {
 		daos.put(VerificaCupom.class.getName(), new VerificaCupomDAO());
 		daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
 		daos.put(Estoque.class.getName(), new EstoqueDAO());
+		daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
-				
-		//daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
+			
 		
 	/* ---------------------------------------------------------------------------------------------------------------- */
 		
@@ -435,7 +436,7 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do GRÁFICO ----- */
 		
 		/* ----- CONSULTAR ----- */
-		//regrasConsultarGrafico.add(vGrafico);
+		regrasConsultarGraficoAnalise.add(vDatasGraficoAnalise);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
@@ -565,15 +566,10 @@ public class Fachada implements IFachada {
 		regrasEstoque.put("EXCLUIR", regrasExcluirEstoque);
 		/* ----------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- REGRAS DA ENTIDADE GRAFICO ----- */
-		/* ----- SALVAR ----- */
-		regrasGrafico.put("SALVAR", regrasSalvarGrafico);
+		/* ----- Adicionando as Strategy's na lista do Grafico Analise ----- */
 		/* ----- CONSULTAR ----- */
-		regrasGrafico.put("CONSULTAR", regrasConsultarGrafico);
-		/* ----- ALTERAR ----- */
-		regrasGrafico.put("ALTERAR", regrasAlterarGrafico);
-		/* ----- EXCLUIR ----- */
-		regrasGrafico.put("EXCLUIR", regrasExcluirGrafico);
+		regrasGraficoAnalise.put("CONSULTAR", regrasConsultarGraficoAnalise);
+		/* ---------------------------------------------------------- */
 		/* ------------------------------------------------------------------------------------------------------------ */
 		
 		
@@ -590,8 +586,8 @@ public class Fachada implements IFachada {
 		regrasGeral.put(PedidoTroca.class.getName(), regrasPedidoTroca);
 		regrasGeral.put(Estoque.class.getName(), regrasEstoque);
 		regrasGeral.put(Cupom.class.getName(), regrasCupom);
+		regrasGeral.put(GraficoAnalise.class.getName(), regrasGraficoAnalise);
 		
-		//regrasGeral.put(GraficoAnalise.class.getName(), regrasGrafico);
 		/* ------------------------------------------------------------------------------------------------------------ */
 	}
 

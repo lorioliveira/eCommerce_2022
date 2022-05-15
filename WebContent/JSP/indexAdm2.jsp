@@ -2,6 +2,7 @@
 <%@page import='com.les.roupa.core.dominio.*'%>
 <%@page import='com.les.roupa.core.dao.impl.*'%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 
@@ -50,6 +51,8 @@
  	// pega a mensagem que estava pendurado na requisição,
     // que foi enviado pelo arquivo "ClienteHelper"
     String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+ 	
+ 	
     %>
 
 <body onload="AtivaModal()">
@@ -374,7 +377,28 @@
                             </br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    em breve....
+                                   <legend align="center"> 3 Produtos mais vendidos</legend>
+									<form action="http://localhost:8080/eCommerce/graficoAnalise">
+										<div class="form-row">
+											<div class="form-group col-md-4">
+										  		<!-- Data Inicio -->
+										      	<label>Data Inicio</label>
+										      	<input type="date" class="form-control" name="dtInicio" placeholder="Data Inicio" required>
+									  		</div>
+									  		
+									  		<div class="form-group col-md-4">
+										  		<!-- Data Fim -->
+										      	<label>Data Fim</label>
+										      	<input type="date" class="form-control" name="dtFim" placeholder="Data Fim" required>
+									  		</div>
+											
+											<div class="form-group col-md-4">
+												<div align="right" style="margin-top: 32px">
+										  			<button class="btn" name="operacao" value="CONSULTAR">Gerar</button>
+										  		</div>
+									  		</div>
+								  		</div>
+							  		</form>
                                 </div>
                             </div>
                         </div>
