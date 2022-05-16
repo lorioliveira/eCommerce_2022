@@ -3122,3 +3122,7 @@ h2 {
 .opcaoUtilizado{
 	margin-left: 30px;
 }
+.btnGerarGrafico{
+	margin-top: 6% !important;
+	position:fixed;
+}

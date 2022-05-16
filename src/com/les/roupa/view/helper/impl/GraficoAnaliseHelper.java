@@ -101,7 +101,7 @@ public class GraficoAnaliseHelper implements IViewHelper {
 				request.setAttribute("totalValorProduto3", graficoAnaliseEntidade.getTotalValorProduto3());
 				
 				// Redireciona para o arquivo .jsp
-				request.getRequestDispatcher("JSP/grafico_chart_2.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/grafico2.jsp").forward(request, response);
 			}
 			else {
 				// mostra as mensagens de ERRO se houver

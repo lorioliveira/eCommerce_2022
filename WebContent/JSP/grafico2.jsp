@@ -53,9 +53,57 @@
     String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
  	
  	
+ 	
+ 		/* GRAFICO */
+ 		List<String> totalColunasChart = new ArrayList<>();
+		List<String> totalProduto1Chart = new ArrayList<>();
+		List<String> totalProduto2Chart = new ArrayList<>();
+		List<String> totalProduto3Chart = new ArrayList<>();
+		
+		// pega a data inicio que foi digitado na tela, que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		String dtInicio = (String)request.getAttribute("dtInicio");
+		
+		// pega a data fim que foi digitado na tela, que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		String dtFim = (String)request.getAttribute("dtFim");
+		
+		// separa o dia-mês-ano que foi selecionado na tela,
+		// para poder exibir as datas no formato correto na tela
+		String[] resultInicio  = dtInicio.split("-");
+		String[] resultFim  = dtFim.split("-");
+				
+		// pega o nome do primeiro produto que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		String nomeProduto1 = (String)request.getAttribute("nomeProduto1");
+		
+		// pega o nome do segundo produto que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		String nomeProduto2 = (String)request.getAttribute("nomeProduto2");
+		
+		// pega o nome do terceiro produto que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		String nomeProduto3 = (String)request.getAttribute("nomeProduto3");
+		
+		// pega o total de colunas que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		totalColunasChart = (List<String>)request.getAttribute("totalColunas");
+		
+		// pega o total de valores do produto1 que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		totalProduto1Chart = (List<String>)request.getAttribute("totalValorProduto1");
+		
+		// pega o total de valores do produto2 que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		totalProduto2Chart = (List<String>)request.getAttribute("totalValorProduto2");
+				
+		// pega o total de valores do produto3 que estava pendurado na requisição,
+		// que foi enviado pelo arquivo "GraficoAnaliseHelper"
+		totalProduto3Chart = (List<String>)request.getAttribute("totalValorProduto3");
+ 	
     %>
 
-<body onload="AtivaModal()">
+<body onload="AtivaGrafico()">
     <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
     <div class="top-bar">
         <div class="container-fluid">
@@ -142,12 +190,12 @@
                 <div class="col-md-2">
                     <!-- MENU DO ADMIN -->
                     <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-caret-square-down"></i>Menu</a>
+                        <a class="nav-link " id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-caret-square-down"></i>Menu</a>
                         <a class="nav-link" id="clients-nav" data-toggle="pill" href="#clients-tab" role="tab"><i class="fas fa-user-friends"></i>Clientes</a>
                         <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-receipt"></i> Pedidos</a>
                         <a class="nav-link" id="products-nav" data-toggle="pill" href="#products-tab" role="tab"><i class="fa fa-barcode"></i> Produtos</a>
                         <a class="nav-link" id="coupons-nav" data-toggle="pill" href="#coupons-tab" role="tab"><i class="fa fa-tags"></i>Cupons</a>
-                        <a class="nav-link" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
+                        <a class="nav-link active" id="sales-nav" data-toggle="pill" href="#sales-tab" role="tab"><i class="fa fa-chart-line"></i>Análise de Vendas</a>
                    </div>
 					<!-- BOTAO SAIR -->
 					<form action="http://localhost:8080/eCommerce/login">
@@ -156,7 +204,7 @@
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel"
+                        <div class="tab-pane fade" id="dashboard-tab" role="tabpanel"
                             aria-labelledby="dashboard-nav">
                             <h4>Links</h4>
                             <br>
@@ -372,36 +420,103 @@
                         </div>
 
                         <!-- ANALISE DE VENDAS -->
-                        <div class="tab-pane fade" id="sales-tab" role="tabpanel" aria-labelledby="sales-nav">
+                        <div class="tab-pane fade show active" id="sales-tab" role="tabpanel" aria-labelledby="sales-nav">
                             <h4><i class="fa fa-chart-line"></i> Análise de Vendas </h4>
                             </br>
                             <div class="row">
                                 <div class="col-md-7">
-                                <label>Selecione o período a ser filtrado:</label>
-                                <p>OBS.: Dados por mês</p> 
-									<form action="http://localhost:8080/eCommerce/graficoAnalise">
-										<div class="form-row">
-											<div class="form-group col-md-4">
-										  		<!-- Data Inicio -->
-										      	<label>De</label>
-										      	<input type="date" class="form-control" name="dtInicio" required>
-									  		</div>
-									  		
-									  		<div class="form-group col-md-4">
-										  		<!-- Data Fim -->
-										      	<label>Até</label>
-										      	<input type="date" class="form-control" name="dtFim" required>
-									  		</div>
-											
-											<div class="form-group col-md-8">
-												<div>
-										  			<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
+	                                <label>Selecione o período:<br> <i>(OBS.: Dados filtrados por mês)</i></label>
+	                                
+										<form action="http://localhost:8080/eCommerce/graficoAnalise">
+											<div class="form-row">
+												<div class="col-md-4">
+												<label>De</label>
+											  		<!-- Data Inicio -->
+											      	
+											      	<input type="date" class="form-control" name="dtInicio" required>
 										  		</div>
+										  		
+										  		<div class="col-md-4">
+										  		<label>Até</label>
+											  		<!-- Data Fim -->
+											      	<input type="date" class="form-control" name="dtFim" required>
+										  		</div>
+												
+												<div class="col-md-4 btnGerarGrafico">
+											  		<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
+											  	</div>
+										  		<br>
 									  		</div>
-								  		</div>
-							  		</form>
+								  		</form>							  		
                                 </div>
                             </div>
+                            
+             <!-- Total de colunas (eixo X) no Chart.js -->
+	  		<select style="display: none" id="ColunasChart">
+				<% 
+					for(String coluna : totalColunasChart) {
+					      	
+					// lista todas as colunas dentro do "value", de cada TAG "<option>".
+				%>
+				<option value="<%=coluna%>"><%=coluna%></option>
+				<%
+					}
+				%>
+			</select>
+			
+			<!-- Total de valores do Produto1 (rosa) no Chart.js -->
+	  		<select style="display: none" id="Produto1Chart">
+				<% 
+					for(String valor : totalProduto1Chart) {
+					      	
+						// lista todos os valores de Produto1 dentro do "value", de cada TAG "<option>".
+				%>
+				<option value="<%=valor%>"><%=valor%></option>
+				<%
+					}
+				%>
+			</select>
+			
+			<!-- Total de valores do Produto2 (amarelo) no Chart.js -->
+	  		<select style="display: none" id="Produto2Chart">
+				<% 
+					for(String valor : totalProduto2Chart) {
+					      	
+						// lista todos os valores de Produto2 dentro do "value", de cada TAG "<option>".
+				%>
+				<option value="<%=valor%>"><%=valor%></option>
+				<%
+					}
+				%>
+			</select>
+			
+			<!-- Total de valores do Produto3 (azul) no Chart.js -->
+	  		<select style="display: none" id="Produto3Chart">
+				<% 
+					for(String valor : totalProduto3Chart) {
+					      	
+						// lista todos os valores de Produto3 dentro do "value", de cada TAG "<option>".
+				%>
+				<option value="<%=valor%>"><%=valor%></option>
+				<%
+					}
+				%>
+			</select>
+	  		
+	  		<!-- Nomes dos Produtos -->
+            <input type="hidden" name="nomeProduto1" id="nomeProduto1" value="<%=nomeProduto1 %>">
+            <input type="hidden" name="nomeProduto2" id="nomeProduto2" value="<%=nomeProduto2 %>">
+            <input type="hidden" name="nomeProduto3" id="nomeProduto3" value="<%=nomeProduto3%>">
+		</fieldset>
+		
+		<h5 style="text-align: center;">Período consultado: <%=resultInicio[2] %>/<%=resultInicio[1] %>/<%=resultInicio[0] %> até <%=resultFim[2] %>/<%=resultFim[1] %>/<%=resultFim[0] %></h5>
+		
+		<!-- Grafico gerado pelo Chart.js -->
+		<div style="width: 50%; height: 80%; margin-left: 270px;">
+			<canvas id="myChart"></canvas>
+		</div>
+		<!-- Fim Grafico gerado pelo Chart.js -->
+                            
                         </div>
                     </div>
                 </div>
@@ -501,38 +616,20 @@
     <!--  Javascript -->
     <script src="./js/main.js"></script>
     <script src="./js/all.js"></script>
-    
-     <!-- Modal -->
-	<div class="modal fade" id="modal-mensagem">
-	   <div class="modal-dialog">
-	   		<div class="modal-content">
-	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-	                <h3 class="modal-titulo">Atenção</h3>
-	            </div>
-	            <div class="modal-body">
-	                <p><% out.println(mensagemStrategy); %></p>
-	            </div>
-	            <!-- <div class="modal-footer">
-	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
-	            </div> -->
-	        </div>
-	    </div>
-	</div>
-		
-	<!-- Botão para chamar a Modal -->
-	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
-		Exibir mensagem da modal
-	</button>
-      
-      <script>
-    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
-    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
-	    function AtivaModal(){
-    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
-	    	document.getElementById('idModal').click();
-	    }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/chart.js"></script>
+  	  
+  	  <!-- Botão para chamar o grafico do Chart.js -->
+	  <button style="display: none" id="idGrafico" onclick="graficoChart()"></button>
+  	  
+  	  <script>
+ 	  // Função que irá ativar o grafico do Chart.js,
+	  // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+		  function AtivaGrafico(){
+		  	// metodo para poder ativar o "onClick" sem precisar clicar no botão
+		   	document.getElementById('idGrafico').click();
+		  }
+	  </script>
     
 </body>
 

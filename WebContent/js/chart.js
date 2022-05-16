@@ -4,13 +4,15 @@ function graficoChart(){
 	label2 = document.getElementById("nomeProduto2").value;
 	label3 = document.getElementById("nomeProduto3").value;
 	
-	// pega todas as colunas geradas, que esta no arquivo "grafico_chart_2.jsp"
+	/* VALORES DOS PRODUTOS */
+	
+	// pega todas as colunas geradas, que esta no arquivo "grafico2.jsp"
 	var selectColunasChart = document.getElementById('ColunasChart');
-	// pega todas de valores do Produto1 gerados, que esta no arquivo "grafico_chart_2.jsp"
+	// pega todas de valores do Produto1 gerados, que esta no arquivo "grafico2.jsp"
 	var selectProduto1Chart = document.getElementById('Produto1Chart');
-	// pega todas de valores do Produto2 gerados, que esta no arquivo "grafico_chart_2.jsp"
+	// pega todas de valores do Produto2 gerados, que esta no arquivo "grafico2.jsp"
 	var selectProduto2Chart = document.getElementById('Produto2Chart');
-	// pega todas de valores do Produto3 gerados, que esta no arquivo "grafico_chart_2.jsp"
+	// pega todas de valores do Produto3 gerados, que esta no arquivo "grafico2.jsp"
 	var selectProduto3Chart = document.getElementById('Produto3Chart');
 	
 	var colunas = [];
@@ -37,7 +39,7 @@ function graficoChart(){
 	console.log(ValoresProduto2);
 	console.log(ValoresProduto3);
 	
-	// gera o Gráfico com os 3 Produtos mais vendidos
+	// Gera o Gráfico com os 3 Produtos mais vendidos
 	var ctx = document.getElementById('myChart').getContext('2d');
 	
 	var chart = new Chart(ctx, {
@@ -50,20 +52,20 @@ function graficoChart(){
 	        datasets: [
 	        	{
 		            label: label1,
-		            backgroundColor: ['green'],
-		            borderColor: 'rgb(0,128,0)',
+		            backgroundColor: ['#FF6F61'],
+		            borderColor: '#FF6F61',
 		            data: ValoresProduto1
 	        	},
 	        	{
 		            label: label2,
-		            backgroundColor: ['blue'],
-		            borderColor: 'rgb(0,0,255)',
+		            backgroundColor: ['#FFE166'],
+		            borderColor: '#FFE166',
 		            data: ValoresProduto2
 	        	},
 	        	{
 		            label: label3,
-		            backgroundColor: ['yellow'],
-		            borderColor: 'rgb(255,255,0)',
+		            backgroundColor: ['#61A6FF'],
+		            borderColor: '#61A6FF',
 		            data: ValoresProduto3
 	        	}
 	        ]
@@ -79,5 +81,7 @@ function graficoChart(){
 	        }
 	    }
 	});
+	
+	
 
 }

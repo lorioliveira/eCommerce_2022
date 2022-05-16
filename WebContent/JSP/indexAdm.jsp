@@ -370,25 +370,26 @@
                             <h4><i class="fa fa-chart-line"></i> Análise de Vendas </h4>
                             </br>
                             <div class="row">
-                                <div class="col-md-6">
-                                   	<legend align="center"> 3 Produtos mais vendidos</legend>
+                                <div class="col-md-7">
+                                <label>Selecione o período a ser filtrado:</label>
+                                <p>OBS.: Dados por mês</p> 
 									<form action="http://localhost:8080/eCommerce/graficoAnalise">
 										<div class="form-row">
 											<div class="form-group col-md-4">
 										  		<!-- Data Inicio -->
-										      	<label>Data Inicio</label>
-										      	<input type="date" class="form-control" name="dtInicio" placeholder="Data Inicio" required>
+										      	<label>De</label>
+										      	<input type="date" class="form-control" name="dtInicio" required>
 									  		</div>
 									  		
 									  		<div class="form-group col-md-4">
 										  		<!-- Data Fim -->
-										      	<label>Data Fim</label>
-										      	<input type="date" class="form-control" name="dtFim" placeholder="Data Fim" required>
+										      	<label>Até</label>
+										      	<input type="date" class="form-control" name="dtFim" required>
 									  		</div>
 											
-											<div class="form-group col-md-4">
-												<div align="right" style="margin-top: 32px">
-										  			<button class="btn" name="operacao" value="CONSULTAR">Gerar</button>
+											<div class="form-group col-md-8">
+												<div>
+										  			<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
 										  		</div>
 									  		</div>
 								  		</div>
