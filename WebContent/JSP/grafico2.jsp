@@ -407,32 +407,31 @@
 	                            <div class="row">
 	                                <div class="col-md-7">
 		                                <label>Selecione o período:<br> <i>(OBS.: Vendas filtradas por mês)</i></label>
-		                                
-											<form action="http://localhost:8080/eCommerce/graficoAnalise">
-												<div class="form-row">
-													<div class="col-md-4">
-													<label>De</label>
-												  		<!-- Data Inicio -->
-												      	
-												      	<input type="date" class="form-control" name="dtInicio" required>
-											  		</div>
-											  		
-											  		<div class="col-md-4">
-											  		<label>Até</label>
-												  		<!-- Data Fim -->
-												      	<input type="date" class="form-control" name="dtFim" required>
-											  		</div>
-													
-													<div class="col-md-4 btnGerarGrafico">
-												  		<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
-												  	</div>
-											  		<br>
+										<form action="http://localhost:8080/eCommerce/graficoAnalise">
+											<div class="form-row">
+												<div class="col-md-4">
+												<label>De</label>
+											  		<!-- Data Inicio -->
+											      	
+											      	<input type="date" class="form-control" name="dtInicio" required>
 										  		</div>
-									  		</form>							  		
+										  		
+										  		<div class="col-md-4">
+										  		<label>Até</label>
+											  		<!-- Data Fim -->
+											      	<input type="date" class="form-control" name="dtFim" required>
+										  		</div>
+												
+												<div class="col-md-4 btnGerarGrafico">
+											  		<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
+											  	</div>
+										  		<br>
+									  		</div>
+								  		</form>							  		
 	                                </div>
 	                            </div>
 	                            
-	             <!-- Total de colunas (eixo X) no Chart.js -->
+	             <!-- Total de colunas (meses pesquisados) no Chart.js -->
 		  		<select style="display: none" id="ColunasChart">
 					<% 
 						for(String coluna : totalColunasChart) {
@@ -450,7 +449,7 @@
 					<% 
 						for(String valor : totalProduto1Chart) {
 						      	
-							// lista todos os valores de Produto1
+					// lista todos os valores de Produto1
 					%>
 					<option value="<%=valor%>"><%=valor%></option>
 					<%
@@ -463,7 +462,7 @@
 					<% 
 						for(String valor : totalProduto2Chart) {
 						      	
-							// lista todos os valores de Produto2
+					// lista todos os valores de Produto2
 					%>
 					<option value="<%=valor%>"><%=valor%></option>
 					<%
@@ -476,7 +475,7 @@
 					<% 
 						for(String valor : totalProduto3Chart) {
 						      	
-							// lista todos os valores de Produto3
+					// lista todos os valores de Produto3
 					%>
 					<option value="<%=valor%>"><%=valor%></option>
 					<%
@@ -488,13 +487,13 @@
 	            <input type="hidden" name="nomeProduto1" id="nomeProduto1" value="<%=nomeProduto1 %>">
 	            <input type="hidden" name="nomeProduto2" id="nomeProduto2" value="<%=nomeProduto2 %>">
 	            <input type="hidden" name="nomeProduto3" id="nomeProduto3" value="<%=nomeProduto3%>">
-			</fieldset>
 			
+			<hr>
 			<!-- Título do Gráfico com as datas pesquisadas -->
 			<h5 style="text-align: center;">Período consultado: <%=resultInicio[2] %>/<%=resultInicio[1] %>/<%=resultInicio[0] %> até <%=resultFim[2] %>/<%=resultFim[1] %>/<%=resultFim[0] %></h5>
 			
 			<!-- Tamanho do Grafico gerado pelo Chart.js -->
-			<div style="width: 65%; height: 80%; margin-left: 270px;">
+			<div style="width: 75%; height: 80%; margin-left: 170px;">
 				<canvas id="myChart"></canvas>
 			</div>
 			<!-- Fim Grafico gerado pelo Chart.js -->

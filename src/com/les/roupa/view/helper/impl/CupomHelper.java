@@ -184,6 +184,9 @@ public class CupomHelper implements IViewHelper{
 					// pendura o "resultado" (mensagem) na requisição
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
+					// pendura todos os cupons na requisição 
+					request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
+					
 					// Redireciona para o arquivo .jsp
 					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
 				}

@@ -1,3 +1,6 @@
+/***** GRÁFICO - CHART.JS *****/
+/*-------- Maio/2022 -------- */ 
+
 function graficoChart(){
 	// pega os nomes dos produtos (3 Produtos mais vendidos)
 	label1 = document.getElementById("nomeProduto1").value;
@@ -20,15 +23,15 @@ function graficoChart(){
 	var ValoresProduto2 = [];
 	var ValoresProduto3 = [];
 	
-	// faz um laço no "selectColunasChart", 
-	// e para cada item de "selectColunasChart", 
-	// será preenchido as colunas, que será responsável de apresentar o eixo X no gráfico,
-	// e também será preenchido os valores dos 3 produtos, que será responsável de apresentar as linhas do gráfico (eixo Y)
+	// faz um laço no "selectColunasChart", e para cada item de "selectColunasChart", 
+	// será preenchido as colunas, que será responsável de apresentar o eixo X no gráfico (que são as datas),
+	// e preenche também os valores dos 3 produtos, que será responsável de apresentar as linhas do gráfico (eixo Y - que é a quantidade)
+	
 	for (i = 0; i < selectColunasChart.length; i ++) {
-		// preenchimento das colunas
+		// preenchimento das colunas - datas
 	    colunas.push(selectColunasChart.options[i].value);
 	    
-	    // preenchimento dos valores dos produtos
+	    // preenchimento dos valores dos produtos - quantidade
 	    ValoresProduto1.push(selectProduto1Chart.options[i].value);
 	    ValoresProduto2.push(selectProduto2Chart.options[i].value);
 	    ValoresProduto3.push(selectProduto3Chart.options[i].value);
@@ -38,6 +41,8 @@ function graficoChart(){
 	console.log(ValoresProduto1);
 	console.log(ValoresProduto2);
 	console.log(ValoresProduto3);
+	
+	/* GERA O GRÁFICO DE FATO */
 	
 	// Gera o Gráfico com os 3 Produtos mais vendidos
 	var ctx = document.getElementById('myChart').getContext('2d');
