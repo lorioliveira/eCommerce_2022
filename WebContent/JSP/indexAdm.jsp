@@ -25,8 +25,7 @@
 	    <!-- CSS Principal do Projeto -->
 	    <link href="../css/style.css" rel="stylesheet">
 	</head>
-
-        
+ 
     <%
     Usuario usuarioLogado = new Usuario();
     
@@ -37,12 +36,14 @@
  	 //pega todos os clientes 
     List<Cliente> clientes = (List<Cliente>)sessao.getAttribute("todosClientes");
     
- 	 //pega todos produtos 
+ 	 //pega todos os produtos 
     List<Produto> produtos = (List<Produto>)sessao.getAttribute("todosProdutos");
   
  	//pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
- 		 
+ 	
+  	//pega todos os cupons
+    List<Cupom> cupons = (List<Cupom>)sessao.getAttribute("todosCupons"); 		 
     %>
 
 	<body>
@@ -331,21 +332,26 @@
 	                                            <th>Ação</th>
 	                                        </tr>
 	                                    </thead>
-	                                    
+	                                    <%
+			                              	for(Cupom cupom : cupons) {
+			                             %>
 	                                    <tbody>
 	                                        <tr>
-	                                            <td>testePromo</td>
-	                                            <td>Promocional</td>
-	                                            <td>R$ 20.00</td>
-	                                            <td>2022-01-02</td>
-	                                            <td>2</td>
-	                                            <td>Nao</td>
+	                                            <td><%=cupom.getNome() %></td>
+	                                            <td><%=cupom.getTipo() %></td>
+	                                            <td>R$ <%=cupom.getValor() %></td>
+	                                            <td><%=cupom.getData_Cadastro() %></td>
+	                                            <td><%=cupom.getIdCliente()%></td>
+	                                            <td><%=cupom.getUtilizado() %></td>
 	                                            <td>
-	                                                <a href=""><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
-	                                                <a href="."><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
+	                                                <a href="/eCommerce/cupom?id=<%= cupom.getId()%>&alteraCupom=0&operacao=ALTERAR"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
+	                                                <a href="/eCommerce/cupom?id=<%= cupom.getId()%>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
 	                                            </td>
 	                                        </tr>
 	                                    </tbody>
+	                                    <%
+			                              	}
+	                                    %>
 	                                </table>
 	                            </div>
 	                        </div>

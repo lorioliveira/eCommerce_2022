@@ -147,13 +147,18 @@
                                 <label>Valor R$ </label>
                                 <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" name="valor">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label> Cliente Vinculado</label>
                                 <select class="clienteVinculado form-control" name="id_cliente">
                                     <option selected disabled>Selecione</option>
                                     <option value="1">nome XXXXXXX</option>
                                 </select>
-                            </div>                            
+                            </div> 
+                            <div class="col-md-4">
+                                <label>Utilizado</label><br>
+                                <input  type="radio" name="grupoPrecificacao" value="Sim">   Sim 
+                                <input class="opcaoUtilizado" type="radio" name="grupoPrecificacao" value="Nao" checked>  Não
+                            </div>                           
                             <div class="col-md-9"><br>
                              <!-- btnSalvarCupom --><button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
                             <button class="btn" name="operacao" value="SALVAR"><i class="fa fa-plus"></i> Criar </button>

@@ -37,10 +37,14 @@
     //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
     
-    // pega a mensagem que estava pendurado na requisição,
-    // que foi enviado pelo arquivo "ClienteHelper"
+  	//pega todos os cupons
+    List<Cupom> cupons = (List<Cupom>)sessao.getAttribute("todosCupons"); 	
+    
+    // pega a mensagem que estava pendurado na requisição enviado pelo VH "ClienteHelper"
     String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
     %>
+    
+    
   <body onload="AtivaModal()">
     <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
     <div class="top-bar">
@@ -319,22 +323,33 @@
                         <th>Utilizado?</th>
                         <th>Ação</th>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>testePromo</td>
-                        <td>Promocional</td>
-                        <td>R$ 20.00</td>
-                        <td>2022-01-02</td>
-                        <td>2</td>
-                        <td>Nao</td>
-                        <td>
-                          <a href=""><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
-                          <a href="."><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+	                  </thead>
+					<%
+						for (Cupom cupom : cupons) {
+					%>
+						<tbody>
+							<tr>
+								<td><%=cupom.getNome()%></td>
+								<td><%=cupom.getTipo()%></td>
+								<td>R$ <%=cupom.getValor()%></td>
+								<td><%=cupom.getData_Cadastro()%></td>
+								<td><%=cupom.getIdCliente()%></td>
+								<td><%=cupom.getUtilizado()%></td>
+								<td><a
+									href="/eCommerce/cupom?id=<%=cupom.getId()%>&alteraCupom=0&operacao=ALTERAR"><button
+											class="btn" data-tooltip="Editar" data-flow="bottom">
+											<i class="fa fa-edit"></i>
+										</button></a> <a
+									href="/eCommerce/cupom?id=<%=cupom.getId()%>&operacao=EXCLUIR"><button
+											class="btn" data-tooltip="Excluir" data-flow="bottom">
+											<i class="fa fa-eraser"></i>
+										</button></a></td>
+							</tr>
+						</tbody>
+					<%
+						}
+					%>
+				</table>
                 </div>
               </div>
               

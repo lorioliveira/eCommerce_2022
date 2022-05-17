@@ -181,7 +181,7 @@ public class CupomHelper implements IViewHelper{
 					// atribui a nova mensagem
 					resultado.setMensagem("Cupom alterado com sucesso!");
 					
-					// pendura o "resultado" na requisição
+					// pendura o "resultado" (mensagem) na requisição
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
 					// Redireciona para o arquivo .jsp
@@ -205,7 +205,7 @@ public class CupomHelper implements IViewHelper{
 				// pendura todos os cupons na requisição 
 				request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
 				
-				// mostra as mensagens de ERRO se houver
+				// atribui a mensagem ao resultado
 				resultado.setMensagem("Cupom excluído com sucesso!");
 				
 				// Redireciona para o arquivo .jsp, para poder listar os cupons atualizados novamente
