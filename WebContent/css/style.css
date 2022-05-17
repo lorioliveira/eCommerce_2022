@@ -1588,6 +1588,7 @@ h2 {
 	color: #858585;	
 	width: 18em;
 	padding-left: 10px !important;
+	
 }
 
 .inputCupom{
@@ -3117,6 +3118,11 @@ h2 {
 
 .btnLogoutAdmin{
 	margin-top: 11%;
+}
+.negrito{
+	font-size:medium;
+	font-weight: 500;
+	color: #009700;
 }
 
 .opcaoUtilizado{

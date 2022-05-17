@@ -219,12 +219,12 @@
 	                                            <td>R$ <%=pedido.getTotalPedido() %></td>
 	                                            <td><%=pedido.getStatus() %></td>
 	                                            <td>
-	                                            	<form style="width: 500px !important;" action="http://localhost:8080/eCommerce/pedidoTroca">
+	                                            	<form action="http://localhost:8080/eCommerce/pedidoTroca">
 													<div class="form-row">
-														<div class="form-group col-md-8">
+														<div class="form-group col-md-7">
 															<label>Status</label>
 							
-												  			<select name="alterarStatusPedido" class="form-control" placeholder="Selecione um Status" required>
+												  			<select name="alterarStatusPedido" class="form-control" required>
 														      	<option value="" disabled selected>Selecione uma opção...</option>
 														      	<option value="EM PROCESSAMENTO">EM PROCESSAMENTO</option>
 														      	<option value="PAGAMENTO REALIZADO">PAGAMENTO REALIZADO</option>
@@ -233,17 +233,17 @@
 														      	<option value="TROCA AUTORIZADA">TROCA AUTORIZADA</option>
 														      	<option value="TROCA REJEITADA">TROCA REJEITADA</option>
 														      	<option value="TROCA ACEITA">TROCA ACEITA</option>
-														      	<option value="TROCA EFETUADA"><b>TROCA EFETUADA</b></option>
+														      	<option class="negrito" value="TROCA EFETUADA">TROCA EFETUADA</option>
 														      	<option value="CANCELAMENTO SOLICITADO">CANCELAMENTO SOLICITADO</option>
 														      	<option value="CANCELAMENTO REJEITADA">CANCELAMENTO REJEITADA</option>
 														      	<option value="CANCELAMENTO ACEITO">CANCELAMENTO ACEITO</option>
-														      	<option value="CANCELAMENTO EFETUADO"><b>CANCELAMENTO EFETUADO</b></option>
+														      	<option class="negrito" value="CANCELAMENTO EFETUADO">CANCELAMENTO EFETUADO</option>
 														      	<option value="ENTREGA REALIZADA">ENTREGA REALIZADA</option>
 													      	</select>
 														</div>
 														
 														<!-- Botões CRUD-->
-														<div class="form-group col-md-4">
+														<div class="col-md-3">
 															<div align="right" style="margin-top: 29px;">
 																<button class="btn btn-warning" name="operacao" value="ALTERAR">Alterar</button>
 															</div>
