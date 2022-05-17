@@ -3123,6 +3123,6 @@ h2 {
 	margin-left: 30px;
 }
 .btnGerarGrafico{
-	margin-top: 6% !important;
-	position:fixed;
+	margin-top: 4% !important;
+	position: relative;
 }

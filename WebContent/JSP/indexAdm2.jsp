@@ -373,33 +373,33 @@
 
                         <!-- ANALISE DE VENDAS -->
                         <div class="tab-pane fade" id="sales-tab" role="tabpanel" aria-labelledby="sales-nav">
-                            <h4><i class="fa fa-chart-line"></i> Análise de Vendas </h4>
+                            <h4><i class="fa fa-chart-line"></i> Análise de Vendas - Produtos </h4>
                             </br>
                             <div class="row">
                                 <div class="col-md-7">
-                                <label>Selecione o período a ser filtrado:</label>
-                                <p>OBS.: Dados por mês</p> 
-									<form action="http://localhost:8080/eCommerce/graficoAnalise">
-										<div class="form-row">
-											<div class="form-group col-md-4">
-										  		<!-- Data Inicio -->
-										      	<label>De</label>
-										      	<input type="date" class="form-control" name="dtInicio" required>
-									  		</div>
-									  		
-									  		<div class="form-group col-md-4">
-										  		<!-- Data Fim -->
-										      	<label>Até</label>
-										      	<input type="date" class="form-control" name="dtFim" required>
-									  		</div>
-											
-											<div class="form-group col-md-8">
-												<div>
-										  			<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
+	                                <label>Selecione o período:<br> <i>(OBS.: Dados filtrados por mês)</i></label>
+	                                
+										<form action="http://localhost:8080/eCommerce/graficoAnalise">
+											<div class="form-row">
+												<div class="col-md-4">
+												<label>De</label>
+											  		<!-- Data Inicio -->
+											      	
+											      	<input type="date" class="form-control" name="dtInicio" required>
 										  		</div>
+										  		
+										  		<div class="col-md-4">
+										  		<label>Até</label>
+											  		<!-- Data Fim -->
+											      	<input type="date" class="form-control" name="dtFim" required>
+										  		</div>
+												
+												<div class="col-md-4 btnGerarGrafico">
+											  		<button class="btn" name="operacao" value="CONSULTAR"><i class="fa fa-chart-area"></i> Gerar</button>
+											  	</div>
+										  		<br>
 									  		</div>
-								  		</div>
-							  		</form>
+								  		</form>							  		
                                 </div>
                             </div>
                         </div>

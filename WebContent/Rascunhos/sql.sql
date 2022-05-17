@@ -1,6 +1,7 @@
 create database ecommerce;
 use ecommerce;
 
+
 insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
 values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
 
@@ -174,13 +175,10 @@ create table cupom (
 	CONSTRAINT fk_CupomCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
 );
 
-select id_produto, sum(qtdeProduto) as quantidade_vendido from item_pedido where dt_pedido BETWEEN ('2021-11-01') AND ('2021-11-29') group by id_produto order by sum(qtdeProduto) desc LIMIT 3;
-select id_produto, sum(qtdeProduto) as quantidade_vendido  FROM item_pedido WHERE id_produto = 1 AND MONTH(dt_pedido) = '11' AND YEAR(dt_pedido) = '2021' group by id_produto;
-
 
 -- INSERT para o Pedido
 insert into pedido(total_itens, total_frete, total_pedido, status, id_cliente, id_endereco, forma_pagamento, total_cupons, trocado, dt_cadastro)
-values ('0', '0', '0', 'EM PROCESSAMENTO', '46', '4', 'boleto', '0', 'nao', '2021/10/20');
+values ('3', '0', '0', 'ENTREGA REALIZADA', '5', '4', 'boleto', '0', 'nao', '2022/05/05');
 
 -- INSERT para o Item do Pedido
 insert into pedido_item(id_produto, nome, valor_de_venda, quantidade, id_pedido, trocado, dt_cadastro)

@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.GraficoAnalise;
-import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.Produto;
 
 public class GraficoAnaliseDAO extends AbstractJdbcDAO {
@@ -126,7 +125,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		//
 		for(int i = 0; condicaoDeParada == 0; i++) {
 			// salva o mes e o ano em um array de String,
-			// que será mandado para a tela (grafico_chart_2.jsp)
+			// que será mandado para a tela (grafico2.jsp)
 			totalColunas.add(Integer.toString(auxMesInicio) + "/" + Integer.toString(auxAnoInicio));
 			
 			// o ano inicio é igual a ano fim?
@@ -188,7 +187,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				
@@ -208,7 +207,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				// verifica se naquele mes teve alguma qtde do produto 2 vendido,
@@ -218,7 +217,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 2 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto2.add(qtdeProdutoMesAno2.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				
@@ -239,7 +238,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				// verifica se naquele mes teve alguma qtde do produto 2 vendido,
@@ -249,7 +248,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 2 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto2.add(qtdeProdutoMesAno2.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				// verifica se naquele mes teve alguma qtde do produto 3 vendido,
@@ -259,7 +258,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				}
 				else {
 					// salva a qtde do produto 3 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico_chart_2.jsp)
+					// que será mandado para a tela (grafico2.jsp)
 					totalValorProduto3.add(qtdeProdutoMesAno3.get(0).getProduto().getQuantidadeSelecionada());
 				}
 			}

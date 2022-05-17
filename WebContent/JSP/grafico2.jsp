@@ -421,7 +421,7 @@
 
                         <!-- ANALISE DE VENDAS -->
                         <div class="tab-pane fade show active" id="sales-tab" role="tabpanel" aria-labelledby="sales-nav">
-                            <h4><i class="fa fa-chart-line"></i> Análise de Vendas </h4>
+                            <h4><i class="fa fa-chart-line"></i> Análise de Vendas - Produtos </h4>
                             </br>
                             <div class="row">
                                 <div class="col-md-7">
@@ -512,7 +512,7 @@
 		<h5 style="text-align: center;">Período consultado: <%=resultInicio[2] %>/<%=resultInicio[1] %>/<%=resultInicio[0] %> até <%=resultFim[2] %>/<%=resultFim[1] %>/<%=resultFim[0] %></h5>
 		
 		<!-- Grafico gerado pelo Chart.js -->
-		<div style="width: 50%; height: 80%; margin-left: 270px;">
+		<div style="width: 65%; height: 80%; margin-left: 270px;">
 			<canvas id="myChart"></canvas>
 		</div>
 		<!-- Fim Grafico gerado pelo Chart.js -->
