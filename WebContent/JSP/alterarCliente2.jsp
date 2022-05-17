@@ -33,8 +33,6 @@
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
     
-    //String idCliente = (String)request.getAttribute("idCliente");
-    
   	//pega cliente a ser alterado
     Cliente clienteAlterado = (Cliente)sessao.getAttribute("clienteAlterado");
         %>
