@@ -10,10 +10,15 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.GraficoAnalise;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO - GRÁFICO (Análise)
+ * @author Lorena Oliveira
+ *
+ */
 public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	/**
-	 * Metodo para salvar o Gráfico da Análise
+	 * Método para salvar o Gráfico da Análise
 	 * @param entidade
 	 */
 	@Override
@@ -24,7 +29,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para alterar o Gráfico da Análise
+	 * Método para alterar o Gráfico da Análise
 	 * @param entidade
 	 */
 	@Override
@@ -35,7 +40,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para excluir o Gráfico da Análise
+	 * Método para excluir o Gráfico da Análise
 	 * @param entidade
 	 */
 	@Override
@@ -46,7 +51,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para Consultar o Gráfico da Análise
+	 * Método para Consultar o Gráfico da Análise - (com verificações de datas)
 	 * @param entidade
 	 */
 	@Override
@@ -59,8 +64,10 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		
 		// busca os 3 produtos mais vendidos, conforme as datas selecionadas na tela como parametros
+		// no indexAdm.jsp
 		List<GraficoAnalise> produtosMaisVendidos = graficoDAO.consultar3ProdutosMaisVendidos(graficoAnaliseEntidade.getDtInicio(), graficoAnaliseEntidade.getDtFim());
 		
+		// Criação de listas a ser utilizadas
 		List<Produto> nomeProduto1 = new ArrayList<>();
 		List<Produto> nomeProduto2 = new ArrayList<>();
 		List<Produto> nomeProduto3 = new ArrayList<>();
@@ -69,12 +76,15 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		List<String> totalValorProduto2 = new ArrayList<>();
 		List<String> totalValorProduto3 = new ArrayList<>();
 		
+		// Criando e definindo variavel para produto VAZIO e ZERO quantidade,
+		// cao tenha algum produto com quantidade 0,
+		// para não quebrar o gráfico
 		Produto produtoVazio = new Produto();
 		produtoVazio.setNome("VAZIO");
 		produtoVazio.setQuantidadeSelecionada("0");
 		
 		// separa o dia-mês-ano que foi selecionado na tela,
-		// para poder criar as colunas (eixo X) na criação do gráfico Chart.js
+		// para poder criar as colunas no gráfico do arquivo .js - apenas usando MES e ANO
 		String[] resultInicio  = graficoAnaliseEntidade.getDtInicio().split("-");
 		String[] resultFim  = graficoAnaliseEntidade.getDtFim().split("-");
 		
@@ -89,78 +99,70 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		int auxAnoInicio = Integer.parseInt(anoInicio);
 		int auxMesInicio = Integer.parseInt(mesInicio);
 		
-		//
-		// preenchimento dos nomes dos Produtos do Gráfico Chart.js
-		//
+		/*** Preenche os nomes dos Produtos que serão usados no Gráfico - Chart.js ***/
+	
 		if (produtosMaisVendidos.size() == 0) {
-			// adição 3 Produtos VAZIO's, (nome dos produtos que serão usados no Gráfico)
+			// adição 3 Produtos VAZIO's
 			nomeProduto1.add(produtoVazio);
 			nomeProduto2.add(produtoVazio);
 			nomeProduto3.add(produtoVazio);
 		}
 		else if (produtosMaisVendidos.size() == 1) {
-			// adiciona somente 2 Produtos VAZIO's, (nomes dos produtos que serão usados no Gráfico)
+			// adiciona somente 2 Produtos VAZIO's
 			nomeProduto1 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(0).getProduto().getId());
 			nomeProduto2.add(produtoVazio);
 			nomeProduto3.add(produtoVazio);
 		}
 		else if (produtosMaisVendidos.size() == 2) {
-			// adiciona somente 1 Produto VAZIO, (nomes dos produtos que serão usados no Gráfico)
+			// adiciona somente 1 Produto VAZIO
 			nomeProduto1 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(0).getProduto().getId());
 			nomeProduto2 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(1).getProduto().getId());
 			nomeProduto3.add(produtoVazio);
 		}
 		else {
-			// busca os nomes dos produtos, conforme a consulta realizada acima (3 produtos mais vendidos)
+			// busca os produtos, conforme a consulta realizada acima (os que sao mais vendidos)
 			nomeProduto1 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(0).getProduto().getId());
 			nomeProduto2 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(1).getProduto().getId());
 			nomeProduto3 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(2).getProduto().getId());
 		}
-		//
-		// fim do preenchimento dos nomes dos Produtos do Gráfico Chart.js
-		//
 		
-		//
-		// laço de repetição para criar as colunas do Gráfico Chart.js
-		//
+		/*** Fim do preenchimento dos nomes dos Produtos - Chart.js ***/
+		
+		
+		/****** Laço para criar as colunas do Gráfico - mes/ano ******/
+		
 		for(int i = 0; condicaoDeParada == 0; i++) {
-			// salva o mes e o ano em um array de String,
-			// que será mandado para a tela (grafico2.jsp)
+			// salva o mes e o ano em um array de String
 			totalColunas.add(Integer.toString(auxMesInicio) + "/" + Integer.toString(auxAnoInicio));
 			
-			// o ano inicio é igual a ano fim?
-			// E
-			// o mes inicio é igual a mes fim?
-			// então para o laço de repetição
+			// se ano inicio é igual a ano fim e
+			// o mes inicio é igual a mes fim? - PARA O LAÇO
 			if (auxAnoInicio == Integer.parseInt(anoFim) && auxMesInicio == Integer.parseInt(mesFim)) {
 				break;
 			}
-			// se não, continua com as verificações
+			// senão, continua com as verificações
 			else {
-				// o mes data inicio ja esta em dezembro?
+				// o mes inicio ja esta em dezembro?
 				if (auxMesInicio == 12) {
 					// o mes retorna para janeiro
 					auxMesInicio = 1;
 					// acrescenta mais 1 no ano inicio
 					auxAnoInicio ++;
 				}
-				// se não, acrescenta mais 1 no mes inicio
+				// senão, acrescenta mais 1 no mes inicio
 				else {
 					auxMesInicio ++;
 				}
 			}
 		}
-		//
-		// fim criação das colunas do Gráfico Chart.js
-		//
+		/*** Fim criação das colunas do Gráfico ***/
 		
-		//
-		// laço para preencher os valores de cada produto,
-		// conforme a coluna criada a cima
-		//
+		
+		/*** Laço para preencher os valores de cada produto,
+		conforme a coluna (de datas) criada acima, de acordo com os produtos trazidos do BD ***/
+		
 		for(String coluna : totalColunas) {
 			// separa o mês-ano que esta na coluna,
-			// para poder passar para a DAO e devolver algum valor,
 			// conforme o mes, ano e o ID do produto
 			String[] resultColuna  = coluna.split("/");
 			
@@ -168,7 +170,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 			String mesColuna = resultColuna[0];
 			String anoColuna = resultColuna[1];
 			
-			// verifica as quantidades dos produtos mais vendidos, retornados do banco de dados,
+			// verifica as quantidades dos produtos, retornados do BD,
 			// se a lista dos produtos for menor que 3, será adicionado o valor ZERO no indice que não tem o Produto
 			if (produtosMaisVendidos.size() == 0) {						
 				// adição ZERO's na lista dos valores do produto
@@ -180,14 +182,13 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 				// busca os valores do produto vendido, conforme o id produto, mes e ano como parametros
 				List<GraficoAnalise> qtdeProdutoMesAno1 = graficoDAO.consultarQtdeProdutosVendidosByIdProdutoMesAno(produtosMaisVendidos.get(0).getProduto().getId(), mesColuna, anoColuna);
 				
-				// verifica se naquele mes teve alguma qtde do produto 1 vendido,
+				// verifica se naquele mes teve alguma qtde do produto1 vendido,
 				// se não tiver nada, será adicionado ZERO para não quebrar a tela
 				if (qtdeProdutoMesAno1.size() == 0) {
 					totalValorProduto1.add("0");
 				}
 				else {
-					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico2.jsp)
+				// salva a qtde do produto 1 vendido por mes e ano em um array de String
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				
@@ -206,8 +207,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 					totalValorProduto1.add("0");
 				}
 				else {
-					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico2.jsp)
+					// salva a qtde do produto 1 vendido por mes e ano em um array de String
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				// verifica se naquele mes teve alguma qtde do produto 2 vendido,
@@ -216,8 +216,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 					totalValorProduto2.add("0");
 				}
 				else {
-					// salva a qtde do produto 2 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico2.jsp)
+					// salva a qtde do produto 2 vendido por mes e ano em um array de String
 					totalValorProduto2.add(qtdeProdutoMesAno2.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				
@@ -237,8 +236,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 					totalValorProduto1.add("0");
 				}
 				else {
-					// salva a qtde do produto 1 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico2.jsp)
+					// salva a qtde do produto 1 vendido por mes e ano em um array de String
 					totalValorProduto1.add(qtdeProdutoMesAno1.get(0).getProduto().getQuantidadeSelecionada());
 				}
 				// verifica se naquele mes teve alguma qtde do produto 2 vendido,
@@ -257,15 +255,14 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 					totalValorProduto3.add("0");
 				}
 				else {
-					// salva a qtde do produto 3 vendido por mes e ano em um array de String,
-					// que será mandado para a tela (grafico2.jsp)
+					// salva a qtde do produto 3 vendido por mes e ano em um array de String
 					totalValorProduto3.add(qtdeProdutoMesAno3.get(0).getProduto().getQuantidadeSelecionada());
 				}
 			}
 		}
-		//
-		// fim do preenchimento dos valores de cada produto (conforme a coluna criada a cima)
-		//
+		
+		/*** Fim de preenchimento dos valores de cada produto, conforme a coluna (de datas) criada acima ***/
+		
 		
 		// recebe a REFERENCIA de "graficoAnaliseEntidade"
 		novoGraficoAnalise = graficoAnaliseEntidade;
@@ -285,7 +282,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar os 3 Produtos mais vendidos com filtros de datas
+	 * Método para consultar os 3 Produtos mais vendidos com filtro de datas - Query principal !!
 	 */
 	public List<GraficoAnalise> consultar3ProdutosMaisVendidos (String dtInicio, String dtFim) {
 		openConnection();
@@ -316,11 +313,12 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 			throw new RuntimeException(e);
 		}
 				
-	} // consultar os 3 Produtos mais vendidos com filtros de datas
+	} // Consultar os 3 Produtos mais vendidos com filtro de datas
 	
 	
 	/**
-	 * Metodo para consultar a quantidade de Produtos vendidos por ID Produto, Mes e Ano
+	 * Método para consultar a quantidade de Produtos vendidos por ID Produto, Mes e Ano 
+	 *
 	 */
 	public List<GraficoAnalise> consultarQtdeProdutosVendidosByIdProdutoMesAno (String idProduto, String mes, String ano) {
 		openConnection();
@@ -352,6 +350,6 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 			throw new RuntimeException(e);
 		}
 				
-	} // consultar a quantidade de Produtos vendidos por ID Produto, Mes e Ano
+	} // Consultar a quantidade de Produtos vendidos por ID Produto, Mes e Ano
 	
 }

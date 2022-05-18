@@ -7,7 +7,7 @@ function graficoChart(){
 	label2 = document.getElementById("nomeProduto2").value;
 	label3 = document.getElementById("nomeProduto3").value;
 	
-	/* VALORES DOS PRODUTOS */
+	/* VALORES DOS PRODUTOS -  HIDDEN */
 	
 	// pega todas as colunas geradas, que esta no arquivo "grafico2.jsp"
 	var selectColunasChart = document.getElementById('ColunasChart');

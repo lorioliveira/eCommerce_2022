@@ -5,7 +5,7 @@ import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.strategy.IStrategy;
 
 /**
- * Classe para validar o campo fornecedor do Estoque
+ * Classe para validar data entrada/saida - Estoque
  */
 public class ValidarDataEntradaSaidaEstoque implements IStrategy {
 

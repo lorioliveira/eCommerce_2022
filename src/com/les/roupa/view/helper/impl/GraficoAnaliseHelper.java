@@ -73,6 +73,8 @@ public class GraficoAnaliseHelper implements IViewHelper {
 				// feito o CAST de Entidade para o GraficoAnalise (pegando o primeiro indice de Entidade)
 				GraficoAnalise graficoAnaliseEntidade = (GraficoAnalise) entidades.get(0);
 				
+				// TODOS OS DADOS DA DAO
+				
 				// pendura o "dtInicio" na requisição, para poder mandar para o arquivo .JSP
 				request.setAttribute("dtInicio", graficoAnaliseEntidade.getDtInicio());
 				
@@ -104,8 +106,7 @@ public class GraficoAnaliseHelper implements IViewHelper {
 				request.getRequestDispatcher("JSP/grafico2.jsp").forward(request, response);
 			}
 			else {
-				// mostra as mensagens de ERRO se houver
-				// pendura o "resultado" na requisição para poder mandar para o arquivo .JSP
+				// mostra as mensagens de ERRO 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
 				
 				// Redireciona para o arquivo .jsp

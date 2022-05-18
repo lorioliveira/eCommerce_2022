@@ -1,6 +1,9 @@
 create database ecommerce;
 use ecommerce;
 
+SELECT id_produto, sum(quantidade) as quantidade_vendido  FROM pedido_item WHERE id_produto = 18 AND MONTH(dt_cadastro) = '02' AND YEAR(dt_cadastro) = '2022' group by id_produto;
+
+select id_produto, sum(quantidade) as quantidade_vendido from pedido_item where dt_cadastro BETWEEN ('2022-02-01') AND ('2022-05-03') group by id_produto order by sum(quantidade) desc LIMIT 3;
 
 insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
 values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');

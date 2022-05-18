@@ -41,15 +41,15 @@ public class ValidarDatasGraficoAnalise implements IStrategy {
 				
 				// data inicio vem depois (maior) que data atual?
 				if(dateInicio.after(dateAtual)) {
-					return ("Favor insira uma Data Inicio menor ou igual a Data Atual.");
+					return ("Insira uma Data Inicio menor ou igual a Data Atual.");
 				}
 				// data fim vem depois (maior) que data atual?
 				else if(dateFim.after(dateAtual)) {
-					return ("Favor insira uma Data Fim menor ou igual a Data Atual.");
+					return ("Insira uma Data Fim menor ou igual a Data Atual.");
 				}
 				// data inicio vem depois (maior) que data fim?
 				else if(dateInicio.after(dateFim)) {
-					return ("Favor insira uma Data Inicio menor do que a Data Fim.");
+					return ("Insira uma Data Inicio menor do que a Data Fim.");
 				}
 				else {
 					return null;

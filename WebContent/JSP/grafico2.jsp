@@ -43,6 +43,9 @@
     
  	 //pega todos os pedidos
     List<Pedido> pedidos = (List<Pedido>)sessao.getAttribute("todosPedidos");
+ 	 
+ 	 //pega todos os cupons
+    List<Cupom> cupons = (List<Cupom>)sessao.getAttribute("todosCupons"); 
     
  	// pega a mensagem que estava pendurado na requisição e enviado pelo VH "ClienteHelper"
     String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
@@ -382,20 +385,26 @@
 	                                        </tr>
 	                                    </thead>
 	                                    
+	                                    <%
+			                              	for(Cupom cupom : cupons) {
+			                             %>
 	                                    <tbody>
 	                                        <tr>
-	                                            <td>testePromo</td>
-	                                            <td>Promocional</td>
-	                                            <td>R$ 20.00</td>
-	                                            <td>2022-01-02</td>
-	                                            <td>2</td>
-	                                            <td>Nao</td>
+	                                            <td><%=cupom.getNome() %></td>
+	                                            <td><%=cupom.getTipo() %></td>
+	                                            <td>R$ <%=cupom.getValor() %></td>
+	                                            <td><%=cupom.getData_Cadastro() %></td>
+	                                            <td><%=cupom.getIdCliente()%></td>
+	                                            <td><%=cupom.getUtilizado() %></td>
 	                                            <td>
-	                                                <a href=""><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
-	                                                <a href="."><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
+	                                                <a href="/eCommerce/cupom?id=<%= cupom.getId()%>&alteraCupom=0&operacao=ALTERAR"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
+	                                                <a href="/eCommerce/cupom?id=<%= cupom.getId()%>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-eraser"></i></button></a>
 	                                            </td>
 	                                        </tr>
 	                                    </tbody>
+	                                    <%
+			                              	}
+	                                    %>
 	                                </table>
 	                            </div>
 	                        </div>
@@ -430,73 +439,75 @@
 								  		</form>							  		
 	                                </div>
 	                            </div>
-	                            
-	             <!-- Total de colunas (meses pesquisados) no Chart.js -->
-		  		<select style="display: none" id="ColunasChart">
-					<% 
-						for(String coluna : totalColunasChart) {
-						      	
-						// lista todas as colunas dentro do "value", de cada TAG "<option>".
-					%>
-					<option value="<%=coluna%>"><%=coluna%></option>
-					<%
-						}
-					%>
-				</select>
-				
-				<!-- Total de valores do Produto1 (rosa) no Chart.js -->
-		  		<select style="display: none" id="Produto1Chart">
-					<% 
-						for(String valor : totalProduto1Chart) {
-						      	
-					// lista todos os valores de Produto1
-					%>
-					<option value="<%=valor%>"><%=valor%></option>
-					<%
-						}
-					%>
-				</select>
-				
-				<!-- Total de valores do Produto2 (amarelo) no Chart.js -->
-		  		<select style="display: none" id="Produto2Chart">
-					<% 
-						for(String valor : totalProduto2Chart) {
-						      	
-					// lista todos os valores de Produto2
-					%>
-					<option value="<%=valor%>"><%=valor%></option>
-					<%
-						}
-					%>
-				</select>
-				
-				<!-- Total de valores do Produto3 (azul) no Chart.js -->
-		  		<select style="display: none" id="Produto3Chart">
-					<% 
-						for(String valor : totalProduto3Chart) {
-						      	
-					// lista todos os valores de Produto3
-					%>
-					<option value="<%=valor%>"><%=valor%></option>
-					<%
-						}
-					%>
-				</select>
-		  		
-		  		<!-- Nomes dos Produtos -->
-	            <input type="hidden" name="nomeProduto1" id="nomeProduto1" value="<%=nomeProduto1 %>">
-	            <input type="hidden" name="nomeProduto2" id="nomeProduto2" value="<%=nomeProduto2 %>">
-	            <input type="hidden" name="nomeProduto3" id="nomeProduto3" value="<%=nomeProduto3%>">
-			
-			<hr>
-			<!-- Título do Gráfico com as datas pesquisadas -->
-			<h5 style="text-align: center;">Período consultado: <%=resultInicio[2] %>/<%=resultInicio[1] %>/<%=resultInicio[0] %> até <%=resultFim[2] %>/<%=resultFim[1] %>/<%=resultFim[0] %></h5>
-			
-			<!-- Tamanho do Grafico gerado pelo Chart.js -->
-			<div style="width: 75%; height: 80%; margin-left: 170px;">
-				<canvas id="myChart"></canvas>
-			</div>
-			<!-- Fim Grafico gerado pelo Chart.js -->
+					             <!-- Total de colunas (meses pesquisados) no Chart.js -->
+						  		<select style="display: none" id="ColunasChart">
+									<% 
+										for(String coluna : totalColunasChart) {
+										      	
+										// lista todas as colunas dentro do "value", de cada TAG "<option>".
+									%>
+									<option value="<%=coluna%>"><%=coluna%></option>
+									<%
+										}
+									%>
+								</select>
+								
+								<!-- Total de valores do Produto1 (rosa) no Chart.js -->
+						  		<select style="display: none" id="Produto1Chart">
+									<% 
+										for(String valor : totalProduto1Chart) {
+										      	
+									// lista todos os valores de Produto1
+									%>
+									<option value="<%=valor%>"><%=valor%></option>
+									<%
+										}
+									%>
+								</select>
+								
+								<!-- Total de valores do Produto2 (amarelo) no Chart.js -->
+						  		<select style="display: none" id="Produto2Chart">
+									<% 
+										for(String valor : totalProduto2Chart) {
+										      	
+									// lista todos os valores de Produto2
+									%>
+									<option value="<%=valor%>"><%=valor%></option>
+									<%
+										}
+									%>
+								</select>
+								
+								<!-- Total de valores do Produto3 (azul) no Chart.js -->
+						  		<select style="display: none" id="Produto3Chart">
+									<% 
+										for(String valor : totalProduto3Chart) {
+										      	
+									// lista todos os valores de Produto3
+									%>
+									<option value="<%=valor%>"><%=valor%></option>
+									<%
+										}
+									%>
+								</select>
+						  		
+						  		<!-- Nomes dos Produtos para enviar ao chart.js -->
+					            <input type="hidden" name="nomeProduto1" id="nomeProduto1" value="<%=nomeProduto1 %>">
+					            <input type="hidden" name="nomeProduto2" id="nomeProduto2" value="<%=nomeProduto2 %>">
+					            <input type="hidden" name="nomeProduto3" id="nomeProduto3" value="<%=nomeProduto3%>">
+							
+								<hr>
+								
+								<!--  GRÁFICO  -->
+								
+								<!-- Título do Gráfico com as datas pesquisadas -->
+								<h5 style="text-align: center;">Período consultado: <%=resultInicio[2] %>/<%=resultInicio[1] %>/<%=resultInicio[0] %> até <%=resultFim[2] %>/<%=resultFim[1] %>/<%=resultFim[0] %></h5>
+								
+								<!-- Tamanho do Grafico gerado pelo Chart.js -->
+								<div style="width: 75%; height: 80%; margin-left: 170px;">
+									<canvas id="myChart"></canvas>
+								</div>
+								<!-- Fim Grafico gerado pelo Chart.js -->
 	                            
 	                        </div>
 	                    </div>
