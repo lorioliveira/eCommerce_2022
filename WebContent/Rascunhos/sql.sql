@@ -1,9 +1,22 @@
 create database ecommerce;
 use ecommerce;
 
-SELECT id_produto, sum(quantidade) as quantidade_vendido  FROM pedido_item WHERE id_produto = 18 AND MONTH(dt_cadastro) = '02' AND YEAR(dt_cadastro) = '2022' group by id_produto;
+SELECT p.categoria as categoria, COUNT(i.quantidade) as qtdeCategoria_vendido
+  FROM produto as p, pedido_item as i
+  WHERE MONTH(i.dt_cadastro) = '05' AND YEAR(i.dt_cadastro) = '2022' 
+  group by p.categoria;
+  
 
-select id_produto, sum(quantidade) as quantidade_vendido from pedido_item where dt_cadastro BETWEEN ('2022-02-01') AND ('2022-05-03') group by id_produto order by sum(quantidade) desc LIMIT 3;
+SELECT a.categoria as categoria, sum(i.quantidade) as quantidade_vendido  FROM pedido_item as i , produto as a WHERE
+ i.id_produto = 18 AND MONTH(i.dt_cadastro) = 02 AND YEAR(i.dt_cadastro) = 2022 group by a.categoria;
+
+SELECT id_produto, nome, sum(quantidade) as quantidade_vendido  FROM pedido_item WHERE
+ id_produto = 18 AND MONTH(dt_cadastro) = '02' AND YEAR(dt_cadastro) = '2021' group by id_produto;
+ 
+ 
+
+select id_produto, sum(quantidade) as quantidade_vendido from pedido_item where
+ dt_cadastro BETWEEN ('2022-02-01') AND ('2022-05-03') group by id_produto order by sum(quantidade) desc LIMIT 3;
 
 insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
 values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
@@ -223,3 +236,4 @@ create table estoqueANTIGO (
     primary	key	(id),
     CONSTRAINT fk_EstoqueProduto FOREIGN KEY (id_produto) REFERENCES produto (id)
 );
+
