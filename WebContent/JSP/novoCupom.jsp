@@ -34,6 +34,11 @@
     // Pega o usuário em sessão - Cliente logado -> admin
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+    
+    //pega todos os clientes 
+    List<Cliente> clientes = (List<Cliente>)sessao.getAttribute("todosClientes");
+    
+    
     %>
     
     <body>
@@ -149,9 +154,23 @@
                             </div>
                             <div class="col-md-4">
                                 <label> Cliente Vinculado</label>
-                                <select class="clienteVinculado form-control" name="id_cliente">
+                                <select class="clienteVinculado form-control" name="idCliente">
                                     <option selected disabled>Selecione</option>
-                                    <option value="1">nome XXXXXXX</option>
+                                   
+	                                <%
+	                               	    for(Cliente client : clientes){
+		
+		                                   // Aplicado o CAST para poder popular o cliente
+		                                   Cliente c = (Cliente) client;
+		                                   //Pega o usuario que esta dentro do cliente
+		                                   Usuario u = c.getUsuario();
+	                           		 %>   
+	                           		  <option value="<%=c.getId()%>"><%=c.getNome() %></option>
+	                           		 <%
+	                               	    }
+	                           		 %>
+                                   
+                                   
                                 </select>
                             </div> 
                             <div class="col-md-4">
@@ -160,10 +179,10 @@
                                 <input class="opcaoUtilizado" type="radio" name="grupoPrecificacao" value="Nao" checked>  Não
                             </div>                           
                             <div class="col-md-9"><br>
-                             <!-- btnSalvarCupom --><button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
-                            <button class="btn" name="operacao" value="SALVAR"><i class="fa fa-plus"></i> Criar </button>
+                            	<button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
+                            	<button class="btn" name="operacao" value="SALVAR"><i class="fa fa-plus"></i> Salvar </button>
                             </div>
-                        </div> 
+                        </div>
                       </form>
                     </div>
                 </div>    

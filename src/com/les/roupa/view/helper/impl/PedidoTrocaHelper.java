@@ -21,6 +21,7 @@ import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Produto;
 import com.les.roupa.core.dominio.Resultado;
+import com.les.roupa.core.dominio.Usuario;
 import com.les.roupa.view.helper.IViewHelper;
 
 /**
@@ -338,6 +339,7 @@ public class PedidoTrocaHelper implements IViewHelper {
 				else {
 					
 					HttpSession sessao = request.getSession();
+					Usuario usuarioLogado = new Usuario();
 					
 					// atualiza os pedidos conforme a alteração do status do mesmo
 					sessao.setAttribute("todosPedidos", pedidoTrocaEntidade.getPedidos());
@@ -348,8 +350,16 @@ public class PedidoTrocaHelper implements IViewHelper {
 					// pendura o "resultado" na requisição 
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
-					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+					usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+					
+					if(usuarioLogado.getTipoCliente().equals("admin")) {
+						// Redireciona para o arquivo .jsp
+						request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+					}
+					else {
+						// Redireciona para o arquivo .jsp
+						request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+					}
 				}
 			}
 			else {

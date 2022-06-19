@@ -34,6 +34,12 @@
     // Pega o usuário em sessão - Cliente logado -> admin
     HttpSession sessao = request.getSession();
     usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+       
+  	//pega cupom a ser alterado
+    Cupom cupomPesquisado = (Cupom)sessao.getAttribute("cupomPesquisado");
+  	
+ 	 //pega todos os clientes 
+    List<Cliente> clientes = (List<Cliente>)sessao.getAttribute("todosClientes");
     %>
     
     <body>
@@ -100,9 +106,6 @@
                             <h6>
                             	<div class="ml-autonavbar-collapse justify-content-between">Olá ${usuarioLogado.nome}</div>
                             </h6>
-                            <!-- <a href="cart.jsp" class="btn cart">
-                                Minha Sacola <i class="fas fa-shopping-bag"></i>
-                                </a> -->
                         </div>
                     </div>
                 </div>
@@ -128,14 +131,15 @@
                 <div class="col-lg-10">   
                     <div class="register-form">
                         <h4>Alterar Cupom </h4><br>
+                        <form action="http://localhost:8080/eCommerce/cupom">
                             <div class="row">
                             <div class="col-md-4">
                                 <label>Nome</label>
-                                <input class="form-control" type="text" placeholder="Nome">
+                                <input class="form-control" type="text" value="<%=cupomPesquisado.getNome()%>">
                             </div>
                             <div class="col-md-4">
                                 <label>Tipo Cupom</label>
-                                <select class="form-control" name="grupoPrecificacao">
+                                <select class="form-control" name="grupoPrecificacao" value="<%=cupomPesquisado.getTipo()%>">
                                     <option selected disabled>Selecione</option>
                                     <option value="Troca">Troca</option>
                                     <option value="Devolucao">Devolução</option>
@@ -144,13 +148,13 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Valor R$ </label>
-                                <input class="inputValorCupom form-control" type="number" class="form-control" placeholder="000" >
+                                <input class="inputValorCupom form-control" type="number" class="form-control" value="<%=cupomPesquisado.getValor()%>" >
                             </div>
                             <div class="col-md-4">
                                 <label> Cliente Vinculado</label>
                                 <select class="clienteVinculado form-control" name="clienteVinculado">
                                     <option selected disabled>Selecione</option>
-                                    <option value="Nome">nome XXXXXXXXXXX</option>
+	                           		 <option value="<%=cupomPesquisado.getIdCliente()%>"><%=cupomPesquisado.getNomeClienteNoCupom()%></option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -160,10 +164,15 @@
                             </div>
                             
                             <div class="col-md-5"><br>
-                             <!-- btnSalvarCupom --><button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
-                            <button class="btn "><i class="fa fa-plus"></i> Criar </button>
+	                            <button type="submit" onclick="window.history.go(-1); return false;" class="btn"><i class="fa fa-ban"></i> Cancelar</button>
+	                            <button class="btn" name="operacao" value="ALTERAR"><i class="fa fa-plus"></i> Salvar Alterações </button>
                             </div>
                         </div> 
+                        
+                        	<input type="hidden" name="alteraCupom" value="1"/>
+							<input type="hidden" name="id" value="<%=cupomPesquisado.getId()%>"/>
+	                   
+                       </form>
                     </div>
                 </div>    
             </div>

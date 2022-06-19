@@ -2,6 +2,9 @@ package com.les.roupa.view.helper.impl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,6 +40,12 @@ public class CupomHelper implements IViewHelper{
         String idCliente = null;
         String AlteraCupom = null;
         
+     // salva a data atual na tabela
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+ 		Date date = new Date();
+ 		String dataAtual;
+ 		dataAtual = dateFormat.format(date);
+        
         if (("CONSULTAR").equals(operacao)) {
         	cupom = new Cupom();
         }
@@ -59,6 +68,7 @@ public class CupomHelper implements IViewHelper{
         	cupom.setUtilizado(utilizado);
         	cupom.setIdCliente(idCliente);
         	cupom.setAlteraCupom(AlteraCupom);
+        	cupom.setData_Cadastro(dataAtual);
         }
         
         else if (("ALTERAR").equals(operacao)) {
@@ -80,6 +90,7 @@ public class CupomHelper implements IViewHelper{
         	cupom.setTipo(tipo);
         	cupom.setUtilizado(utilizado);
         	cupom.setAlteraCupom(AlteraCupom);
+        	cupom.setData_Cadastro(dataAtual);
         	
         	// ajuste do bug de quando o cupom não tiver nenhum Cliente vinculado,
         	if (idCliente == null) {
@@ -110,6 +121,8 @@ public class CupomHelper implements IViewHelper{
 		
 		return cupom;
 	}
+	
+	// SET VIEW
 
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
@@ -143,11 +156,17 @@ public class CupomHelper implements IViewHelper{
 		
 		else if (("SALVAR").equals(operacao)) {
 			if (resultado.getMensagem() == null || resultado.getMensagem().equals("")) {
+				List<EntidadeDominio> entidades = resultado.getEntidades();
+				Cupom cupomEntidade = (Cupom) entidades.get(0);
+				
 				// atribui a nova mensagem
 				resultado.setMensagem("Cupom cadastrado com sucesso!");
 				
 				// pendura o "resultado" na requisição
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
+				
+				// pendura todos os cupons na requisição
+				request.setAttribute("todosCuponsSistema", cupomEntidade.getTodosCupons());
 				
 				// Redireciona para o arquivo .jsp
 				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);

@@ -79,7 +79,7 @@
                 <div class="col-md-3">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="login.jsp">
+                        <a href="./JSP/login.jsp">
                         <img src="./img/mir.svg" alt="Logo Mirror Fashion" >
                         </a>
                     </div>
