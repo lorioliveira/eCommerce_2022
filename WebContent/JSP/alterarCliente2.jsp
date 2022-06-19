@@ -137,14 +137,6 @@
 	                    <div class="register-form">
 	                        <h4>Alterar Cadastro de Cliente</h4><br>
 	                        
-	                         <div id="openModal" class="modalDialog">
-    <div>
-      <a href="#close" title="Close" class="close">X</a>
-      <h2>Eba!!</h2>
-      <p>Seu pedido foi concluído e recebido pela nossa equipe!</p>
-      <p>Você pode visualizar esse e outros pedidos <a href="../JSP/minhaConta.jsp">aqui</a></p>
-    </div>
-  </div>
 	                            <div class="row">
 		                            <div class="col-md-4">
 		                                <label>Nome</label>
@@ -177,7 +169,7 @@
 		                           
 		                            <div class="col-md-9">
 		                                <button class="btn" onclick="window.history.go(-1); return false;"> <i class="fa fa-times-circle"></i> Cancelar </button>
-		                                <button type="submit" class="btn" name="operacao" value="ALTERAR" href="#openModal" class="btnModal"> <i class="fa fa-save"></i> Salvar </button>
+		                                <button type="submit" class="btn" name="operacao" value="ALTERAR"> <i class="fa fa-save"></i> Salvar </button>
 		                            </div>
 		                            <input type="hidden" name="tipoCliente" value="cliente"/>
 				                    <input type="hidden" name="alteraCliente" value="1"/>

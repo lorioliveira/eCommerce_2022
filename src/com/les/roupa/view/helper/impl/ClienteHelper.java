@@ -203,6 +203,9 @@ public class ClienteHelper implements IViewHelper {
 				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
 				HttpSession sessao = request.getSession();
 				
+				Usuario usuarioLogado = new Usuario();
+				usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+				
 				// Atualiza a sessao com todos os clientes alterados 
 				sessao.setAttribute("todosClientes", cliente.getUsuario().getTodosClientes());
 				
@@ -217,15 +220,15 @@ public class ClienteHelper implements IViewHelper {
 				if(alteraCliente.equals("0")) {
 					request.setAttribute("idCliente", id);
 					
-					// Mensagem de cliente alterado para aparecer na modal
-					resultado.setMensagem("Cliente alterado com sucesso! ");
-					
 					//Atualiza a sessao com todos os clientes novamente
 					sessao.setAttribute("todosClientes", cliente.getUsuario().getTodosClientes());
 					
+					// Mensagem de cliente alterado para aparecer na modal
+					resultado.setMensagem("Cliente alterado com sucesso! ");
+					
 					// pendura o "resultado" na requisicao e manda para o arquivo alterarCliente2.JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
-					
+															
 					request.getRequestDispatcher("JSP/alterarCliente2.jsp").forward(request, response);
 				}else {
 					// Mensagem de boas vindas para aparece na modal
@@ -234,8 +237,14 @@ public class ClienteHelper implements IViewHelper {
 					// pendura o "resultado" na requisicao e manda para o arquivo minhaconta2.JSP
 					request.setAttribute("mensagemStrategy", resultado.getMensagem());
 					
-					// Redireciona para o arquivo .jsp
-					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+					if (usuarioLogado.getTipoCliente().equals("admin")) {						
+						// Redireciona para o arquivo .jsp
+						request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+					}
+					else {
+						// Redireciona para o arquivo .jsp
+						request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+					}
 				}
 			} 
 			else {

@@ -22,7 +22,7 @@ public class ValidarCartaoPedido implements IStrategy {
 		if (pedido.getFormaPagamento().equals("cartao")) {
 			if((pedido.getIdCartao1() == null || pedido.getIdCartao1().equals("")) &&
 				(pedido.getIdCartao2() == null || pedido.getIdCartao2().equals(""))) {
-				return ("Favor selecione algum Cartão de Crédito ou cadastre um novo.");
+				return ("Favor selecione algum cartão de crédito ou cadastre um novo.");
 			}
 			// se tiver cupom sendo utilizado, o valor minimo no cartão é até R$ 5,00
 			else if (!pedido.getTotalCupons().equals("0.0")) {
@@ -41,7 +41,7 @@ public class ValidarCartaoPedido implements IStrategy {
 					double total_cartoes = 0;
 					total_cartoes = ((Double.parseDouble(pedido.getValorCartao1())) + (Double.parseDouble(pedido.getValorCartao2())));
 					if (!Double.toString(total_cartoes).equals(pedido.getTotalPedido())) {
-						return ("A soma entre os valores dos Cartões, não se correspondem com o total do Pedido.");
+						return ("A soma entre os valores dos Cartões, não correspondem com o total do Pedido. <br>Tente novamente!");
 					}
 					else {
 						return null;
@@ -53,7 +53,7 @@ public class ValidarCartaoPedido implements IStrategy {
 					//	return ("Valor mínimo no 1º Cartão de Crédito deve ser maior que R$ 5,00.");
 					//}
 					if (!pedido.getValorCartao1().equals(pedido.getTotalPedido())) {
-						return ("O valor do 1º Cartão, não se corresponde com o total do Pedido.");
+						return ("O valor do 1º Cartão, não corresponde com o total do Pedido. <br>Tente novamente!");
 					}
 					else {
 						return null;
@@ -65,7 +65,7 @@ public class ValidarCartaoPedido implements IStrategy {
 					//	return ("Valor mínimo no 2º Cartão de Crédito deve ser maior que R$ 5,00.");
 					//}
 					if (!pedido.getValorCartao2().equals(pedido.getTotalPedido())) {
-						return ("O valor do 2º Cartão, não se corresponde com o total do Pedido.");
+						return ("O valor do 2º Cartão, não corresponde com o total do Pedido. <br>Tente novamente!");
 					}
 					else {
 						return null;
@@ -92,7 +92,7 @@ public class ValidarCartaoPedido implements IStrategy {
 					double total_cartoes = 0;
 					total_cartoes = ((Double.parseDouble(pedido.getValorCartao1())) + (Double.parseDouble(pedido.getValorCartao2())));
 					if (!Double.toString(total_cartoes).equals(pedido.getTotalPedido())) {
-						return ("A soma entre os valores dos Cartões, não se correspondem com o total do Pedido.");
+						return ("A soma entre os valores dos Cartões, não correspondem com o total do Pedido. <br>Tente novamente!");
 					}
 					else {
 						return null;

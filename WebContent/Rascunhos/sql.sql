@@ -1,20 +1,6 @@
 create database ecommerce;
 use ecommerce;
 
-SELECT p.categoria as categoria, COUNT(i.quantidade) as qtdeCategoria_vendido
-  FROM produto as p, pedido_item as i
-  WHERE MONTH(i.dt_cadastro) = '05' AND YEAR(i.dt_cadastro) = '2022' 
-  group by p.categoria;
-  
-
-SELECT a.categoria as categoria, sum(i.quantidade) as quantidade_vendido  FROM pedido_item as i , produto as a WHERE
- i.id_produto = 18 AND MONTH(i.dt_cadastro) = 02 AND YEAR(i.dt_cadastro) = 2022 group by a.categoria;
-
-SELECT id_produto, nome, sum(quantidade) as quantidade_vendido  FROM pedido_item WHERE
- id_produto = 18 AND MONTH(dt_cadastro) = '02' AND YEAR(dt_cadastro) = '2021' group by id_produto;
- 
- 
-
 select id_produto, sum(quantidade) as quantidade_vendido from pedido_item where
  dt_cadastro BETWEEN ('2022-02-01') AND ('2022-05-03') group by id_produto order by sum(quantidade) desc LIMIT 3;
 
@@ -52,8 +38,9 @@ delete from pedido where id = 2;
 	select * from pedido where id = 1;
 	delete from cliente where id =4;
 	delete from cupom where id = 5;
-	delete from pedido_item where id_pedido = 2;
+	delete from pedido where id = 7;
     */
+    
 
 /*** CLIENTE ****/
 create table cliente (

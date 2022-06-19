@@ -383,7 +383,7 @@
 				         <div class="payment-method">
 						         <div class="custom-control custom-radio">
 							         <input type="radio" class="custom-control-input"
-							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="Cartao"/> 
+							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> 
 							            	<label class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
 						         </div>
 					         <div class="payment-content" id="payment-2-show">
@@ -393,15 +393,15 @@
 								         <%
 								            for (CartaoCredito c : cartoes) {
 								         %>
-								         <option name="id_cartao_1" value="<%=c.getId()%>">
-								         <%=c.getBandeira()%> /
-								         <%=c.getValidade()%>
+								         <option value="<%=c.getId()%>">
+								          <%=c.getBandeira()%> /
+								         <%=c.getValidade()%> 
 								         </option>
 								         <%
 								            }
 								          %>
 								      </select>
-							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="5"/>
+							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="6" value="0" />
 						         </div>
 						         <div class="col-md-9">
 							         <select class="form-control" type="text" name="selecioneCartao2">
@@ -409,7 +409,7 @@
 								         <%
 								            for (CartaoCredito c : cartoes) {
 								            %>
-								         <option name="id_cartao_2" value="<%=c.getId()%>">
+								         <option value="<%=c.getId()%>">
 								         <%=c.getBandeira()%> /
 								         <%=c.getValidade()%>
 								         </option>
@@ -417,7 +417,7 @@
 								            }
 								            %>
 							         </select>
-							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="5"/>
+							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao2"  maxlength="6" value="0" />
 				         		</div>
 				         	</div>
 				         </div>

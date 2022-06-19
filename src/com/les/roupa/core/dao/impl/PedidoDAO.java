@@ -629,7 +629,8 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			// salva os atributos do ultimo Pedido cadastrado no Estoque, 
 			// pra poder dar a saida no Estoque (tabela estoque)
 			
-			 estoque.setIdProduto(produtos.get(i).getId()); estoque.setTipo("saida");
+			 estoque.setIdProduto(produtos.get(i).getId()); 
+			 estoque.setTipo("Saida");
 			 estoque.setQuantidadeEntradaSaida(produtos.get(i).getQuantidadeSelecionada()); 
 			 estoque.setValorCusto(produtos.get(i).getPrecoCompra());
 			 estoque.setFornecedor("Saida no Estoque pelo Pedido: " +
@@ -638,7 +639,8 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			 estoque.setQuantidadeFinal(produtoAtualizado.get(0).getQtdeEstoque());
 			 estoque.setData_Cadastro(ultimoPedido.get(0).getData_Cadastro());
 			 
-			 // cria a saida do produto no "Estoque" estoqueDAO.salvar(estoque);
+			 // cria a saida do produto no "Estoque" 
+			 estoqueDAO.salvar(estoque);
 			
 		}
 		

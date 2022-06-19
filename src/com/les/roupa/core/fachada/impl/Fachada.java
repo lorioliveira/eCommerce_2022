@@ -14,7 +14,6 @@ import com.les.roupa.core.dao.impl.DetalheProdutoDAO;
 import com.les.roupa.core.dao.impl.EnderecoDAO;
 import com.les.roupa.core.dao.impl.EstoqueDAO;
 import com.les.roupa.core.dao.impl.GraficoAnaliseDAO;
-import com.les.roupa.core.dao.impl.GraficoCategoriaDAO;
 import com.les.roupa.core.dao.impl.LoginDAO;
 import com.les.roupa.core.dao.impl.PedidoDAO;
 import com.les.roupa.core.dao.impl.PedidoTrocaDAO;
@@ -30,7 +29,6 @@ import com.les.roupa.core.dominio.Endereco;
 import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.dominio.GraficoAnalise;
-import com.les.roupa.core.dominio.GraficoCategoria;
 import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Produto;
@@ -304,7 +302,6 @@ public class Fachada implements IFachada {
 		daos.put(PedidoTroca.class.getName(), new PedidoTrocaDAO());
 		daos.put(Estoque.class.getName(), new EstoqueDAO());
 		daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
-		daos.put(GraficoCategoria.class.getName(), new GraficoCategoriaDAO());
 		
 			
 		
@@ -590,7 +587,6 @@ public class Fachada implements IFachada {
 		regrasGeral.put(Estoque.class.getName(), regrasEstoque);
 		regrasGeral.put(Cupom.class.getName(), regrasCupom);
 		regrasGeral.put(GraficoAnalise.class.getName(), regrasGraficoAnalise);
-		regrasGeral.put(GraficoCategoria.class.getName(), regrasGraficoCategoria);
 		
 		
 		/* ------------------------------------------------------------------------------------------------------------ */
