@@ -41,7 +41,6 @@ import com.les.roupa.core.strategy.impl.ValidarBandeiraCartao;
 import com.les.roupa.core.strategy.impl.ValidarCEP;
 import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
-import com.les.roupa.core.strategy.impl.ValidarCPF_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarCidade;
 import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
@@ -51,7 +50,8 @@ import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
 import com.les.roupa.core.strategy.impl.ValidarDatasGraficoAnalise;
 import com.les.roupa.core.strategy.impl.ValidarDtCadastro;
-import com.les.roupa.core.strategy.impl.ValidarEmail;
+import com.les.roupa.core.strategy.impl.ValidarEmailVazio;
+import com.les.roupa.core.strategy.impl.ValidarEmail_Alt;
 import com.les.roupa.core.strategy.impl.ValidarEnderecoPedido;
 import com.les.roupa.core.strategy.impl.ValidarEntradaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarEstado;
@@ -102,9 +102,9 @@ public class Fachada implements IFachada {
 	/* ------------ Declaracao de TODAS as Strategy's ------------ */
 	
 	/* ---- SALVAR/ALTERAR CLIENTE -----*/
-	ValidarEmail vEmail = new ValidarEmail();
+	ValidarEmailVazio vEmail = new ValidarEmailVazio();
 	ValidarNome vNome = new ValidarNome();
-	//ValidarCPF vCPF = new ValidarCPF();
+	ValidarCPF vCPF = new ValidarCPF();
 	ValidarDataNascimento vDt_nasc = new ValidarDataNascimento();
 	ValidarTelefone vTelefone = new ValidarTelefone();
 	ValidarGenero vGenero = new ValidarGenero();
@@ -112,7 +112,7 @@ public class Fachada implements IFachada {
 	ValidarSenhaConfSenha vSenhaConfSenhaIgual = new ValidarSenhaConfSenha();
 	ValidarSenha vSenha = new ValidarSenha();
 	
-	//ValidarCPF_Alt vCPFAlterado = new ValidarCPF_Alt();
+	ValidarEmail_Alt vEmailAlterado = new ValidarEmail_Alt();
 	ValidarNome_Alt vNomeAlterado = new ValidarNome_Alt();
 	ValidarDataNascimento_Alt vDtNascimentoAlterado = new ValidarDataNascimento_Alt();
 	ValidarGenero_Alt vGeneroAlterado = new ValidarGenero_Alt();
@@ -311,7 +311,7 @@ public class Fachada implements IFachada {
 		
 		/* ----- SALVAR ----- */
 		regrasSalvarCliente.add(vNome);
-		//regrasSalvarCliente.add(vCPF);
+		regrasSalvarCliente.add(vCPF);
 		regrasSalvarCliente.add(vEmail);
 		regrasSalvarCliente.add(vExisteEmail);
 		regrasSalvarCliente.add(vSenha);
@@ -321,8 +321,7 @@ public class Fachada implements IFachada {
 		
 		/* ------ ALTERAR -------- */
 		regrasAlterarCliente.add(vNomeAlterado);
-		//regrasAlterarCliente.add(vCPFAlterado);
-		regrasAlterarCliente.add(vEmail);
+		regrasAlterarCliente.add(vEmailAlterado);
 		//regrasAlterarCliente.add(vSenha);
 		regrasAlterarCliente.add(vSenhaConfSenhaIgual);
 		regrasAlterarCliente.add(vDtNascimentoAlterado);

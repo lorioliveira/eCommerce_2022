@@ -8,7 +8,7 @@ import com.les.roupa.core.dominio.Usuario;
 /**
  * Classe para validar Email vazio ao alterar Cliente
  */
-public class ValidarEmail implements IStrategy {
+public class ValidarEmail_Alt implements IStrategy {
 
 	
 	public String validar(EntidadeDominio entidade) {
@@ -19,12 +19,12 @@ public class ValidarEmail implements IStrategy {
 		// se o "alteraCliente" for igual a 1, executa essa regra
 		if(cliente.getAlteraCliente().contentEquals("1")) {
 			if(usuario.getEmail() == null || usuario.getEmail().equals("")) {
-				return (" Insira um email. <br>");
+				return (" Insira um email completo. <br>");
 			}
 			else {
 				return null;
 			}
-		}// se o "alteraCliente" é igual a 0, passa reto da validação
+		}// se o "alteraCliente" for igual a 0, passa reto da validacao
 		else {
 			return null;
 		}

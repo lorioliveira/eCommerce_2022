@@ -250,7 +250,22 @@ public class ClienteHelper implements IViewHelper {
 			else {
 				// se houver, mostra as mensagens de ERRO 
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+				
+				// cria um objeto "sessao" para poder usar o JSESSAOID criado pelo TomCat
+				HttpSession sessao = request.getSession();
+				
+				Usuario usuarioLogado = new Usuario();
+				usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+				
+				if (usuarioLogado.getTipoCliente().equals("admin")) {						
+					// Redireciona para o arquivo .jsp
+					request.getRequestDispatcher("JSP/indexAdm2.jsp").forward(request, response);
+				}
+				else {
+					// Redireciona para o arquivo .jsp
+					request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+				}
+				
 			}
 		}
 			//	 ADMIN

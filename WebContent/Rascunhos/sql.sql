@@ -11,6 +11,9 @@ insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
 values ('1', 'PROMOCIONAL10', '10.00', 'promocional', 'nao', null, '2022-04-11');
 
 insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
+values ('10', 'TROCA97', '15.00', 'promocional', 'nao', 16, '2022-06-21');
+
+insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
 values ('2', 'LORENA10', '10', 'troca', 'nao', 2, '2022/04/09');
 
 insert into estoque(id_produto, tipo, quantidade_entrada_saida, valor_custo, fornecedor, dt_entrada, quantidade_final, dt_cadastro)
@@ -19,6 +22,8 @@ values ('1', 'entrada', '10', '5.99', 'Primeira entrada no Estoque', '2022/03/26
 update pedido set status="EM PROCESSAMENTO" where id = 3;
 
 select count(*) from pedido;
+
+delete from cliente where id = 13;
 
 select * from cliente;
 select * from endereco;
@@ -29,9 +34,21 @@ select * from pedido_item;
 select * from cupom;
 select * from estoque;
 
-update cupom set utilizado ="nao" where id = 6;
-update pedido set trocado = "nao" where id = 25;
+delete from cliente where id = 16;
+delete from endereco where id_cliente = 16;
+delete from cartaoCredito where id_cliente = 16;
+delete from cupom where id_cliente = 15;
 
+
+delete from pedido where id = 100;
+delete from pedido_item where id = 257;
+
+
+update cupom set tipo = "Troca" where id = 6;
+update cupom set valor = 30.00 where id = 6;
+update pedido set status = "EM PROCESSAMENTO" where id = 89;
+
+update cliente set email = "teste20@hotmail.com" where id = 16;
 /*
 delete from pedido where id = 2;
 	update carrinho set status = "inativo" where id = 4;
