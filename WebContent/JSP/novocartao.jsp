@@ -159,11 +159,11 @@
 	                                    </div>
 	                                    <div class="col-md-5">
 	                                        <label>Nome do títular</label>
-	                                        <input class="form-control" type="text" placeholder="digite como consta no cartão" name="nome">
+	                                        <input class="form-control" type="text" placeholder="digite como consta no cartão" name="nome" required>
 	                                    </div>
 	                                    <div class="col-md-4">
 	                                        <label>Validade</label>
-	                                        <input class="form-control" type="month" name="validade">
+	                                        <input class="form-control" type="month" name="validade" required>
 	                                    </div>
 	                                    <div class="col-md-6">
 	                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>

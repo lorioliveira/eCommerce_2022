@@ -26,11 +26,11 @@ public class ValidarCupom implements IStrategy {
 		
 		// 1º verifica se o Cupom foi digitado na tela
 		if(verificaCupom.getCupom().getNome() == null || verificaCupom.getCupom().getNome().equals("")) {
-			return ("Favor insira um Cupom.");
+			return ("Insira um Cupom. <br>");
 		}
 		// 2º verifica se existe algum Cupom com o nome digitado na tela
 		else if(cupons.isEmpty()) {
-			return ("Cupom inexistente! Por favor, tente novamente.");
+			return ("Cupom inexistente! Por favor, tente novamente com um cupom válido.<br>");
 		}
 		// 3º se existe algum Cupom com esse nome, ele passa para a proxima verificação
 		else {
@@ -46,7 +46,7 @@ public class ValidarCupom implements IStrategy {
 			if (!cupomPromocional) {
 				// 5º verifica se esse Cupom existe para o Usuário logado que digitou
 				if(cuponsCliente.isEmpty()) {
-					return ("Cupons inexistentes para esse Usuário!.");
+					return ("Não há cupons vinculados a você.<br>");
 				}
 				// 6º se esse Cupom existe para esse Usuário, passa para a proxima verificação
 				else {
@@ -61,7 +61,7 @@ public class ValidarCupom implements IStrategy {
 					// será verificado a variavel "cupomUtilizado",
 					// ser for "true", ele mostrará a mensagem
 					if (cupomUtilizado) {
-						return ("Cupom já utilizado!.");
+						return ("Cupom já foi utilizado! Tente com outro cupom.<br>");
 					}
 					// caso contrário, ele pode usar esse cupom que ainda não foi utilizado
 					else {

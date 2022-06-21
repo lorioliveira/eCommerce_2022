@@ -38,7 +38,6 @@ import com.les.roupa.core.dominio.VerificaCupom;
 import com.les.roupa.core.strategy.impl.ValidarBairro;
 import com.les.roupa.core.strategy.impl.ValidarBairro_Alt;
 import com.les.roupa.core.strategy.impl.ValidarBandeiraCartao;
-import com.les.roupa.core.strategy.impl.ValidarCEP;
 import com.les.roupa.core.strategy.impl.ValidarCEP_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCPF;
 import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
@@ -99,9 +98,9 @@ public class Fachada implements IFachada {
 	private Resultado resultado;
 	private static Map<String, IDAO> daos;
 
-	/* ------------ Declaracao de TODAS as Strategy's ------------ */
+	/* --------------------------------- Declaracao de TODAS as Strategy's ------------------------------------ */
 	
-	/* ---- SALVAR/ALTERAR CLIENTE -----*/
+	/* ---- CLIENTE -----*/
 	ValidarEmailVazio vEmail = new ValidarEmailVazio();
 	ValidarNome vNome = new ValidarNome();
 	ValidarCPF vCPF = new ValidarCPF();
@@ -118,8 +117,7 @@ public class Fachada implements IFachada {
 	ValidarGenero_Alt vGeneroAlterado = new ValidarGenero_Alt();
 
 
-	/* ---- SALVAR/ALTERAR ENDEREÇO ---- */
-	//ValidarCEP vcep = new ValidarCEP();
+	/* ---- ENDEREÇO ---- */
 	ValidarLogradouro vLogradouro = new ValidarLogradouro();
 	ValidarNumero vNumero = new ValidarNumero();
 	ValidarBairro vBairro = new ValidarBairro();
@@ -128,7 +126,6 @@ public class Fachada implements IFachada {
 	ValidarPais vPais = new ValidarPais();
 	ValidarTipoResidencia vTipoResidencia = new ValidarTipoResidencia();
 	
-
 	ValidarBairro_Alt vBairroAlterado = new ValidarBairro_Alt();
 	ValidarCEP_Alt vCEPAlterado = new ValidarCEP_Alt();
 	ValidarLogradouro_Alt vLogradouroAlterado = new ValidarLogradouro_Alt();
@@ -148,30 +145,12 @@ public class Fachada implements IFachada {
 	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
 	ValidarNumCartao vNumCartao = new ValidarNumCartao();
 	ValidarBandeiraCartao vBandeiraCartao = new ValidarBandeiraCartao();
-//	ValidarCVV vCVV = new ValidarCVV();
-//	ValidarNomeCartao vNomeCartao = new ValidarNomeCartao();
-	
-//	ValidarNomeCartao_Alt vNomeCartaoAlterado = new ValidarNomeCartao_Alt();
-//	ValidarCVV_Alt vCVVAlterado = new ValidarCVV_Alt();
-//	ValidarNumeroCartao_Alt vNumCartaoAlterado = new ValidarNumeroCartao_Alt();
 		
 	/* ---- LOGIN -----*/
 	ValidarExisteEmail vExisteEmail = new ValidarExisteEmail();
 	ValidarExisteEmailSenha vExisteEmailSenha = new ValidarExisteEmailSenha();
 	ValidarSenhaLogin vSenhaLogin = new ValidarSenhaLogin();
-	
-	/* ---- PRODUTO -----*/
-//	ValidarNomeProduto vNomeProduto = new ValidarNomeProduto();
-//	ValidarCategoria vCategoria = new ValidarCategoria();
-//	ValidarPrecoCompra vPrecoCompra = new ValidarPrecoCompra();
-//	ValidarPrecoVenda vPrecoVenda = new ValidarPrecoVenda();
-//	ValidarDtCadastro vDtCadastro = new ValidarDtCadastro();
-//	ValidarFoto vFoto = new ValidarFoto();
-//	ValidarQtdeProduto vQtde = new ValidarQtdeProduto();
-//	ValidarDescricao vDescricao = new ValidarDescricao();
-//	ValidarStatusProduto vStatusProduto = new ValidarStatusProduto();
-//	ValidarGrupoPrecificacao vGrupoPrecificacao = new ValidarGrupoPrecificacao();	
-	
+		
 	/* --- CUPOM --- */
 	ValidarCupom vCupom = new ValidarCupom();
 	
@@ -181,11 +160,10 @@ public class Fachada implements IFachada {
 	ValidarTipoEstoque vTipoEstoque = new ValidarTipoEstoque();
 	ValidarQuantidadeEstoque vQuantidadeEstoque = new ValidarQuantidadeEstoque(); 
 	ValidarValorCustoEstoque vValorCustoEstoque = new ValidarValorCustoEstoque();
-	ValidarFornecedorEstoque vFornecedorEstoque = new ValidarFornecedorEstoque();
+	//ValidarFornecedorEstoque vFornecedorEstoque = new ValidarFornecedorEstoque();
 	ValidarDataEntradaSaidaEstoque vDataEntradaSaidaEstoque = new ValidarDataEntradaSaidaEstoque();
 	ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
 	ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
-	
 	
 	
 	/* --- GRAFICO --- */
@@ -224,7 +202,6 @@ public class Fachada implements IFachada {
 	List<IStrategy> regrasConsultarEstoque = new ArrayList<>();
 	
 	List<IStrategy> regrasConsultarGraficoAnalise = new ArrayList<>();
-	List<IStrategy> regrasConsultarGraficoCategoria = new ArrayList<>();
 	
 	
 	/* ------------ ALTERAR ------------ */
@@ -271,8 +248,7 @@ public class Fachada implements IFachada {
 	Map<String, List<IStrategy>> regrasCupomCarrinho = new HashMap<>();
 	Map<String, List<IStrategy>> regrasPedidoTroca = new HashMap<>();
 	Map<String, List<IStrategy>> regrasEstoque = new HashMap<>();
-	Map<String, List<IStrategy>> regrasGraficoAnalise = new HashMap<>();	
-	Map<String, List<IStrategy>> regrasGraficoCategoria = new HashMap<>();
+	Map<String, List<IStrategy>> regrasGraficoAnalise = new HashMap<>();
 	
 	/* ------------------------------------------------------------------------------------------------------------------ */
 	
@@ -304,7 +280,6 @@ public class Fachada implements IFachada {
 		daos.put(GraficoAnalise.class.getName(), new GraficoAnaliseDAO());
 		
 			
-		
 	/* ---------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do CLIENTE ----- */
@@ -322,7 +297,6 @@ public class Fachada implements IFachada {
 		/* ------ ALTERAR -------- */
 		regrasAlterarCliente.add(vNomeAlterado);
 		regrasAlterarCliente.add(vEmailAlterado);
-		//regrasAlterarCliente.add(vSenha);
 		regrasAlterarCliente.add(vSenhaConfSenhaIgual);
 		regrasAlterarCliente.add(vDtNascimentoAlterado);
 		regrasAlterarCliente.add(vTelefone);
@@ -334,7 +308,6 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do ENDEREÇO ----- */
 		
 		/* ----- SALVAR ----- */
-		//regrasSalvarEndereco.add(vcep);
 		regrasSalvarEndereco.add(vLogradouro);
 		regrasSalvarEndereco.add(vNumero);
 		regrasSalvarEndereco.add(vBairro);
@@ -361,14 +334,6 @@ public class Fachada implements IFachada {
 		regrasSalvarCartaoCredito.add(vNumCartao);
 		regrasSalvarCartaoCredito.add(vBandeiraCartao);
 		
-//		regrasSalvarCartaoCredito.add(vCVV);
-//		regrasSalvarCartaoCredito.add(vNomeCartao);
-		
-//		/* ----- ALTERAR ----- */
-//		regrasAlterarCartaoCredito.add(vNumCartaoAlterado);
-//		regrasAlterarCartaoCredito.add(vCVVAlterado);
-//		regrasAlterarCartaoCredito.add(vNomeCartaoAlterado);
-		
 		/* ------------------------------------------------------------------------------------------------------------ */
 		
 		/* ----- Adicionando as Strategy's na lista do LOGIN ----- */
@@ -381,40 +346,18 @@ public class Fachada implements IFachada {
 		
 		/* -------------------------------------------------------------------------------------------------------------- */
 		
-		/* ----- Adicionando as Strategy's na lista do PRODUTO ----- */
-//		regrasAlterarProduto.add(vNomeProduto);
-//		regrasAlterarProduto.add(vCategoria);
-//		regrasAlterarProduto.add(vPrecoCompra);
-//		regrasAlterarProduto.add(vPrecoVenda);
-//		regrasAlterarProduto.add(vDtCadastro);
-//		regrasAlterarProduto.add(vFoto);
-//		regrasAlterarProduto.add(vQtde);
-//		regrasAlterarProduto.add(vDescricao);
-//		regrasAlterarProduto.add(vStatusProduto);
-//		regrasAlterarProduto.add(vGrupoPrecificacao);
-		
-		/* --------------------------------------------------------------------------------------------------------------- */
-		
-		/* ----- Adicionando as Strategy's na lista do CARRINHO ----- */
-		//regrasAlterarCarrinho.add(vValorQtdeCarrinho);
-		
-		/* --------------------------------------------------------------------------------------------------------------- */
-		
 		/* ----- Adicionando as Strategy's na lista do PEDIDO ----- */
+		/* -------- SALVAR ------- */
 		regrasSalvarPedido.add(vTotalPedido);
 		regrasSalvarPedido.add(vEnderecoPedido);
 		regrasSalvarPedido.add(vFormaDePagamentoPedido);
 		regrasSalvarPedido.add(vCartaoPedido);
 		regrasSalvarPedido.add(vStatusPedido); 
-		//regrasSalvarPedido.add(VDataCadastro);
-		
-		 /** regrasSalvarPedido.add(vCupomBonificacaoPedido);
-		 * 
-		 */
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
 		/* ----- Adicionando as Strategy's na lista do CUPOM ----- */
+		/* ----- CONSULTAR ----- */
 		regrasConsultarVerificaCupom.add(vCupom);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
@@ -425,7 +368,7 @@ public class Fachada implements IFachada {
 		regrasSalvarEstoque.add(vTipoEstoque);
 		regrasSalvarEstoque.add(vQuantidadeEstoque);
 		regrasSalvarEstoque.add(vValorCustoEstoque);
-		regrasSalvarEstoque.add(vFornecedorEstoque);
+		//regrasSalvarEstoque.add(vFornecedorEstoque);
 		regrasSalvarEstoque.add(vDataEntradaSaidaEstoque);
 		regrasSalvarEstoque.add(vEntradaEstoque);
 		regrasSalvarEstoque.add(vSaidaEstoque);
@@ -438,7 +381,6 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do GRÁFICO ----- */
 		/* ----- CONSULTAR ----- */
 		regrasConsultarGraficoAnalise.add(vDatasGraficoAnalise);
-		regrasConsultarGraficoCategoria.add(vDatasGraficoAnalise);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
 		
@@ -567,7 +509,6 @@ public class Fachada implements IFachada {
 		/* ----- Adicionando as Strategy's na lista do Grafico Analise ----- */
 		/* ----- CONSULTAR ----- */
 		regrasGraficoAnalise.put("CONSULTAR", regrasConsultarGraficoAnalise);
-		regrasGraficoCategoria.put("CONSULTAR", regrasConsultarGraficoCategoria);
 		/* ---------------------------------------------------------- */
 		/* ------------------------------------------------------------------------------------------------------------ */
 		
@@ -697,7 +638,8 @@ public class Fachada implements IFachada {
 		return resultado;
 	}
 
-	// Mçtodo para executar as regras de negocio / Strategy
+	
+	/** METODO PARA EXECUTAR AS STRATEGYS - MENSAGEM DE SUCESSO / ERRO **/
 	private String executarRegras(EntidadeDominio entidade, String operacao) {
 		String msg = "";
 

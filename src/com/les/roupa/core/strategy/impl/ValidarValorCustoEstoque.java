@@ -15,7 +15,7 @@ public class ValidarValorCustoEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getValorCusto() == null || estoque.getValorCusto().equals("")) {
-			return ("Favor insira um valor de custo no Estoque.");
+			return ("Insira um valor de custo no Estoque.<br>");
 		}
 		else {
 			return null;

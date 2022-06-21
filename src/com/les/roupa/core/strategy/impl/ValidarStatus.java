@@ -14,7 +14,7 @@ public class ValidarStatus implements IStrategy {
 		Cliente cliente = (Cliente) entidade;
 		
 		if(cliente.getStatus() == null || cliente.getStatus().equals("")) {
-			return ("Insira um status. <br>");
+			return ("Insira um status para o cliente. <br>");
 		}
 		else {
 			return null;

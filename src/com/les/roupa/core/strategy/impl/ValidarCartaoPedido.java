@@ -22,14 +22,14 @@ public class ValidarCartaoPedido implements IStrategy {
 		if (pedido.getFormaPagamento().equals("cartao")) {
 			if((pedido.getIdCartao1() == null || pedido.getIdCartao1().equals("")) &&
 				(pedido.getIdCartao2() == null || pedido.getIdCartao2().equals(""))) {
-				return ("Favor selecione algum cartão de crédito ou cadastre um novo.");
+				return ("Favor selecione algum cartão de crédito ou cadastre um novo. <br>");
 			}
 			// se tiver cupom sendo utilizado, o valor minimo no cartão é até R$ 5,00
 			else if (!pedido.getTotalCupons().equals("0.0")) {
 				// se foi selecionado 2 cartões de créditos
 				if ((pedido.getIdCartao1() != null) && (pedido.getIdCartao2() != null )) {
 					if (pedido.getIdCartao1().equals(pedido.getIdCartao2())) {
-						return ("Os Cartões de Créditos selecionados devem ser diferentes");
+						return ("Os Cartões de Créditos selecionados devem ser diferentes. <br>");
 					}
 					if ((Double.parseDouble(pedido.getValorCartao1())) < 5) {
 						return ("Valor mínimo no 1º Cartão de Crédito deve ser R$ 5,00.");

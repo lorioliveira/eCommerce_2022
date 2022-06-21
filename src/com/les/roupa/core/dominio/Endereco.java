@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Classe para representar o Endereco - Cliente
+ * @author Lorena Oliveira
  */
 public class Endereco extends EntidadeDominio {
 	public String logradouro;
@@ -24,7 +25,7 @@ public class Endereco extends EntidadeDominio {
 	private List<Endereco> todosEnderecos;
 	
 	
-//	LOGRADOURO
+	//	LOGRADOURO
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -95,7 +96,7 @@ public class Endereco extends EntidadeDominio {
     	this.observacoes = observacoes;
     }
     
- // TIPO DE ENDERECO - COBRANCA/ENTREGA
+    // TIPO DE ENDERECO - COBRANCA/ENTREGA
     public String getTipoEnd() {
     	return tipoEndereco;
     }
@@ -103,7 +104,7 @@ public class Endereco extends EntidadeDominio {
     	this.tipoEndereco = tipoEndereco;
     }
     
-  //ID 
+    //ID 
   	public String getIdCliente() {
   		return idCliente;
   	}
@@ -111,7 +112,7 @@ public class Endereco extends EntidadeDominio {
   		this.idCliente = idCliente;
   	}
     
- // STATUS = ATIVO OU INATIVO
+  	// STATUS = ATIVO OU INATIVO
     public String getStatus() {
     	return status;
     }

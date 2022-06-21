@@ -15,7 +15,7 @@ public class ValidarEnderecoPedido implements IStrategy {
 		Pedido pedido = (Pedido) entidade;
 		
 		if(pedido.getIdEndereco() == null || pedido.getIdEndereco().equals("")) {
-			return ("Favor selecione algum Endereço de Entrega ou cadastre um novo.");
+			return ("Selecione algum Endereço ou cadastre um novo. <br>");
 		}
 		else {
 			return null;

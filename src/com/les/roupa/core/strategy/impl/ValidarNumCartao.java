@@ -6,7 +6,6 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 
 /**
  * Classe para validar o campo Numero do Cartao
- * CartaoCredito cartaoCredito = new CartaoCredito();
  */
 
 public class ValidarNumCartao implements IStrategy {
@@ -16,7 +15,7 @@ public class ValidarNumCartao implements IStrategy {
 		CartaoCredito cartaoCredito = (CartaoCredito) entidade;
 		
 		if(cartaoCredito.getNumCartao() == null ||cartaoCredito.getNumCartao().equals("")) {
-			return ("Insira o numero do cartao.");
+			return ("Insira o numero do cartao. <br>");
 		}
 		else {
 			return null;

@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Classe para representar os Itens do Pedido
+ * @author Lorena Oliveira
  */
 public class ItemPedido extends EntidadeDominio {
 	private String id_pedido;

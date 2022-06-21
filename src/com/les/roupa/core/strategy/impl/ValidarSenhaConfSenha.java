@@ -6,7 +6,7 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Usuario;
 
 /**
- * Classe para validar a senha do cliente ao Alterar Cliente
+ * Classe para validar a senha do cliente ao Alterar Cliente - Alterar Senha
  */
 public class ValidarSenhaConfSenha implements IStrategy {
 

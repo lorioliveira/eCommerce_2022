@@ -27,10 +27,10 @@ public class ValidarDatasGraficoAnalise implements IStrategy {
 		dataAtual = dateFormat.format(date);
 		
 		if(grafico.getDtInicio() == null || grafico.getDtInicio().equals("")) {
-			return ("Favor insira uma Data Inicio.");
+			return ("Insira uma Data de Inicio.<br>");
 		}
 		else if(grafico.getDtFim() == null || grafico.getDtFim().equals("")) {
-			return ("Favor insira uma Data Fim.");
+			return ("Insira uma Data de Fim.<br>");
 		}
 		else {
 			try {
@@ -41,15 +41,15 @@ public class ValidarDatasGraficoAnalise implements IStrategy {
 				
 				// data inicio vem depois (maior) que data atual?
 				if(dateInicio.after(dateAtual)) {
-					return ("Insira uma Data Inicio menor ou igual a Data Atual.");
+					return ("Insira uma Data de Inicio menor ou igual a Data Atual.<br>");
 				}
 				// data fim vem depois (maior) que data atual?
 				else if(dateFim.after(dateAtual)) {
-					return ("Insira uma Data Fim menor ou igual a Data Atual.");
+					return ("Insira uma Data de Fim menor ou igual a Data Atual.<br>");
 				}
 				// data inicio vem depois (maior) que data fim?
 				else if(dateInicio.after(dateFim)) {
-					return ("Insira uma Data Inicio menor do que a Data Fim.");
+					return ("Insira uma Data de Inicio menor do que a Data de Fim.<br>");
 				}
 				else {
 					return null;
@@ -57,7 +57,7 @@ public class ValidarDatasGraficoAnalise implements IStrategy {
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return ("Erro de Exception nas datas do gráfico!");
+				return ("Erro de Exception nas datas do gráfico! Verifique. <br>");
 			}
 		}
 	}

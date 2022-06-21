@@ -17,7 +17,7 @@ public class ValidarNumero_Alt implements IStrategy {
 		// se o "alteraEndereco" for igual a 1, executa essa regra
 		if(endereco.getAlteraEndereco().contentEquals("1")) {
 			if(endereco.getNumero() == null || endereco.getNumero().equals("")) {
-				return (" Insira um número do endereco.  <br>");
+				return (" Insira um número para o endereco.  <br>");
 			}
 			else {
 				return null;

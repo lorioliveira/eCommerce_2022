@@ -18,6 +18,12 @@ import com.les.roupa.core.dominio.Pedido;
 import com.les.roupa.core.dominio.PedidoTroca;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para TROCA DO PEDIDO
+ * @author Lorena Oliveira
+ *
+ */
+
 public class PedidoTrocaDAO extends AbstractJdbcDAO {
 	
 	/**
@@ -45,8 +51,8 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		String dataAtual;
 		dataAtual = dateFormat.format(date);
 		
-		// verifica se foi acionado o botão para realizar a troca inteira do Pedido,
 		
+		/** VERIFICA SE USUARIO SELECIONOU PARA REALIZAR A TROCA DE TODO O PEDIDO **/
 		if (pedidoTrocaEntidade.getTrocaPedidoInteiro().equals("1")) {
 			// seta o valor do ID do Pedido com o valor que foi enviado pela tela
 			itemPedidoTrocaInteira.setIdPedido(pedidoTrocaEntidade.getIdPedido());
@@ -75,12 +81,13 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		// para salvar com as mesmas informações do Pedido Original
 		pedidoOriginal = pedidoDAO.consultarPedidoById(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido());
 		
-		//calcular o total dos itens do pedido de troca
+		/** CALCULAR O TOTAL DOS ITENS DO PEDIDO DE TROCA **/
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			// faz o calculo dos itens que serão solicitados para a troca
 			total_itens += (Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getQuantidadeSelecionada()) * Double.parseDouble(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto().getPrecoVenda()));
 		}
 		
+		/** CRIA NOVO PEDIDO COM STATUS DE TROCA SOLICITADA **/
 		novoPedido.setTotalItens("0");
 		novoPedido.setTotalFrete("0");
 		novoPedido.setTotalPedido(Double.toString(total_itens));
@@ -97,13 +104,13 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		novoPedido.setData_Cadastro(dataAtual);
 		novoPedido.setDarBaixaEstoque("NAO");
 		
-		// salva o novo Pedido com o status TROCA SOLICITADA
+		// salva o novo Pedido
 		pedidoDAO.salvar(novoPedido);
 		
 		// consulta o ultimo Pedido cadastrado para poder pegar o ID do Pedido
 		List<Pedido> ultimoPedido = pedidoDAO.consultarUltimoPedidoCadastrado(pedido);
 		
-		// para cria os novos Itens do Pedido
+		// para criar os novos Itens do Pedido
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
 			novoItemPedido.setProduto(pedidoTrocaEntidade.getItensPedidoTroca().get(i).getItemPedido().getProduto());
 			novoItemPedido.setIdPedido(ultimoPedido.get(0).getId());
@@ -113,6 +120,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 			// salva o novo Item do Pedido
 			itemPedidoDAO.salvar(novoItemPedido);
 		}
+		/*********************************************************/
 		
 		// altera a Quantidade e o Status do Item do Pedido que foi selecionado no Pedido
 		for (int i = 0; i< pedidoTrocaEntidade.getItensPedidoTroca().size(); i++) {
@@ -136,15 +144,15 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 		}
 		
 		// verifica se existe algum item desse Pedido selecionado, esta com o status "trocado" como "nao" e 
-		// altera o status do Pedido para "já foi trocado".
+		// altera o status do Pedido para "sim".
 		List<ItemPedido> pedidoComTodosOsItensJaTrocados = itemPedidoDAO.consultarItemPedidoByIdPedidoAndTrocadoNao(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido());
 		
 		if (pedidoComTodosOsItensJaTrocados.isEmpty()) {
-			// altera o status do Pedido selecionado para "já foi trocado",
+			// altera o status do Pedido e
 			// altera no banco a tabela "pedido" da coluna "trocado" para "sim".
 			pedidoDAO.alterarTrocacaoPedido(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido());
 			
-			// altera o status do Pedido selecionado para CANCELAMENTO ACEITO
+			// altera o status do Pedido selecionado para CANCELAMENTO ACEITO - TROCA
 			pedidoDAO.alterarStatusPedido(pedidoTrocaEntidade.getItensPedidoTroca().get(0).getItemPedido().getIdPedido(), "CANCELAMENTO ACEITO");
 		}
 		
@@ -235,7 +243,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 					estoqueDAO.salvar(estoque);
 				}
 				
-				// gera o Cupom de Troca
+				/** GERA O CUPOM DE TROCA E DEVOLUCAO (CANCELAMENTO) **/
 				if(pedidoTrocaEntidade.getNovoStatusPedido().equals("TROCA EFETUADA")) {
 					cupom.setNome("TROCA" + pedidoTrocaEntidade.getIdPedido());
 					cupom.setTipo("troca");
@@ -252,6 +260,7 @@ public class PedidoTrocaDAO extends AbstractJdbcDAO {
 				
 				// gera o novo Cupom
 				cupomDAO.salvar(cupom);
+				/**********************************************************/
 			}
 		}
 		else {

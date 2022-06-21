@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Classe para representar o Carrinho
- * 
+ * @author Lorena Oliveira
  */
 public class Carrinho extends EntidadeDominio {
 	private DetalheProduto detalheProduto;
@@ -13,6 +13,8 @@ public class Carrinho extends EntidadeDominio {
 	private List<Cupom> cupons;
 	private String idCliente;
 	
+	
+	/* DETALHE DO PRODUTO */
 	public DetalheProduto getDetalheProduto() {
         return detalheProduto;
     }
@@ -20,6 +22,7 @@ public class Carrinho extends EntidadeDominio {
         this.detalheProduto = detalheProduto;
     }
     
+    /* ENDERECO */
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -27,6 +30,7 @@ public class Carrinho extends EntidadeDominio {
         this.enderecos = enderecos;
     }
     
+    /* CARTAO DE CREDITO */
     public List<CartaoCredito> getCartoes() {
         return cartoes;
     }
@@ -34,6 +38,7 @@ public class Carrinho extends EntidadeDominio {
         this.cartoes = cartoes;
     }
     
+    /* CUPOM */
     public List<Cupom> getCupons() {
         return cupons;
     }
@@ -41,6 +46,7 @@ public class Carrinho extends EntidadeDominio {
         this.cupons = cupons;
     }
     
+    /* ID DO CLIENTE */
 	public String getIdCliente() {
 		return idCliente;
 	}

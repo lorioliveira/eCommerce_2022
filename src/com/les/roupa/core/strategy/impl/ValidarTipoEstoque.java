@@ -15,7 +15,7 @@ public class ValidarTipoEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getTipo() == null || estoque.getTipo().equals("")) {
-			return ("Favor insira um tipo no Estoque.");
+			return ("Favor insira um tipo de Estoque.<br>");
 		}
 		else {
 			return null;

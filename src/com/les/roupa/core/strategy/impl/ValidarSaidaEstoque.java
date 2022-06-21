@@ -32,7 +32,7 @@ public class ValidarSaidaEstoque implements IStrategy {
 			
 			// verifica se a quantidade de saida é maior do que tem disponivel no estoque daquele produto
 			if(Integer.parseInt(estoque.getQuantidadeEntradaSaida()) > Integer.parseInt(produtoSelecionado.get(0).getQtdeEstoque())) {
-				return ("Quantidade de Saida é maior que disponivel no estoque!");
+				return ("Quantidade de Saida é maior que disponivel no estoque!<br>");
 			}
 			else {
 				// faz a conta de subtração da quantidade de saida, menos a quantidade que já tinha no produto

@@ -141,7 +141,7 @@
 	                  <div class="col-md-3">
 	                     <label>Tipo Estoque</label> 
 	                     <select
-	                        class="tipoEstoque form-control" name="tipo" id="tipoEstoque">
+	                        class="tipoEstoque form-control" name="tipo" id="tipoEstoque" required>
 	                        <option selected disabled>Selecione</option>
 	                        <option value="entrada">Entrada</option>
 	                        <option value="saida">Saída</option>
@@ -149,16 +149,16 @@
 	                  </div>
 	                  <div class="col-md-3">
 	                     <label>Qtde</label> <input class="inputQuantidade form-control"
-	                        type="number" name="quantidade_entrada_saida" placeholder="000">
+	                        type="number" name="quantidade_entrada_saida" placeholder="000" >
 	                  </div>
 	                  <div class="col-md-4">
 				      <label>Fornecedor</label>
-				      <input type="text" class="form-control" name="fornecedor" placeholder="Fornecedor">
+				      <input type="text" class="form-control" name="fornecedor" placeholder="Fornecedor" required>
 				    </div>
 	                  <div class="col-md-3">
-	                     <label>Valor de Compra do Produto</label> <input
+	                     <label>Valor de Custo do Produto</label> <input
 	                        class="inputValorCompra form-control borderSelect" type="number" name="valor_custo"
-	                        placeholder="000">
+	                        placeholder="000" required>
 	                  </div>
 	                  <div class="col-md-3">
 	                     <label>Data</label> <input class="form-control" min="2022-01-01" max="2022-12-31" type="date" name="dt_entrada">

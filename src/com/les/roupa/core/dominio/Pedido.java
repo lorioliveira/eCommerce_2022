@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Classe para representar o Pedido
+ * 
  */
 public class Pedido extends EntidadeDominio{
 	private String total_itens;
@@ -175,8 +176,4 @@ public class Pedido extends EntidadeDominio{
 		this.itemPedido = itemPedido;
 	}
 	
-	// Metodo
-	public void ValidarPrimieraCompra() {
-		
-	}
 }

@@ -62,6 +62,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 			
 			if (pedido.getDarBaixaEstoque() == null) {
 				// salva os itens do Pedido e da baixa no Estoque
+				// caso tenha Cupons, também salva
 				salvarItensPedidoAndBaixaEstoque(pedido.getProdutos(), pedido.getCupons());
 			}
 			
@@ -197,8 +198,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 				itens_pedido.add(item_pedidoItem);
 			}
 			
-			
-			
+						
 			// se achou algum pedido do Cliente, também pesquisa se todos os itens desse pedido foi trocado.
 			if (pedidos.size() > 0) {
 				for(Pedido order: pedidos) {
@@ -219,13 +219,11 @@ public class PedidoDAO extends AbstractJdbcDAO {
 					List<Cliente> cliente = clienteDAO.consultarClienteById(order.getIdCliente());
 					
 					order.setNomeCliente(cliente.get(0).getNome());
+					
 					// salva o endereço do pedido
 					if(enderecosCliente.size() > 0)
 						order.setEndereco(enderecosCliente.get(0));
 				
-				//salva os itens do pedido
-				/*if(itens_pedido.size() > 0) 
-					order.setItemDoPedido(itens_pedido.get(0));*/
 				
 				}
 			}
@@ -509,8 +507,7 @@ public class PedidoDAO extends AbstractJdbcDAO {
 		
 		for(Cupom cupom : cupons) {
 			// altera o Cupom que foi selecionado no Pedido,
-			// para o status que "já foi utilizado",
-			// altera no banco a tabela "cupom" da coluna "utilizado" para "sim".
+			// para alterar no banco a tabela "cupom" da coluna "utilizado" para "sim".
 			cupomDAO.alterarUtilizacaoCupom(cupom.getId());
 		}
 		

@@ -311,7 +311,7 @@ public class CartaoCreditoDAO extends AbstractJdbcDAO{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	} // Listar
+	} // Listar Cartão - por ID
 	
 
 	/**

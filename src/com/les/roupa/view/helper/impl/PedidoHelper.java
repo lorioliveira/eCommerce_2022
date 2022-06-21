@@ -156,6 +156,7 @@ public class PedidoHelper implements IViewHelper {
 		        HttpSession sessao = request.getSession();
 		        usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
 		        
+		        //Lista os pedidos do cliente
 				sessao.setAttribute("pedidosCliente", usuarioLogado.getPedidosCliente());
 				
 		        //Caso usuario logado for Admin 

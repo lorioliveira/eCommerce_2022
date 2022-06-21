@@ -16,37 +16,47 @@ public class Cupom extends EntidadeDominio {
 	private Cupom cupomPesquisado;
 	private String nomeClienteNoCupom;
 	
-	
+	/* NOME */
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	/* VALOR */
 	public String getValor() {
 		return valor;
 	}
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+	
+	/* TIPO DO CUPOM */
 	public String getTipo() {
 		return tipo;
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	/* CUPOM - UTILIZADO */
 	public String getUtilizado() {
 		return utilizado;
 	}
 	public void setUtilizado(String utilizado) {
 		this.utilizado = utilizado;
 	}
+	
+	/* ID DO CLIENTE */
 	public String getIdCliente() {
 		return id_cliente;
 	}
 	public void setIdCliente(String idCliente) {
 		this.id_cliente = idCliente;
 	}
+	
+	/* ALTERAR CUPOM */
 	public String getAlteraCupom() {
 		return AlteraCupom;
 	}
@@ -54,6 +64,7 @@ public class Cupom extends EntidadeDominio {
 		this.AlteraCupom = AlteraCupom;
 	}
 	
+	/* LISTA DE CUPONS */
 	public List<Cupom> getTodosCupons() {
         return todosCupons;
     }
@@ -61,6 +72,7 @@ public class Cupom extends EntidadeDominio {
         this.todosCupons = todosCupons;
     }
     
+    /* CUPOM PESQUISADO */
 	public Cupom getCupomPesquisado() {
 		return cupomPesquisado;
 	}
@@ -68,6 +80,7 @@ public class Cupom extends EntidadeDominio {
 		this.cupomPesquisado = cupomPesquisado;
 	}
 	
+	/* NOME DO CLIENTE NO CUPOM */
 	public String getNomeClienteNoCupom() {
 		return nomeClienteNoCupom;
 	}

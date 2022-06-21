@@ -63,8 +63,8 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		GraficoAnaliseDAO graficoDAO = new GraficoAnaliseDAO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		
-		// busca os 3 produtos mais vendidos, conforme as datas selecionadas na tela como parametros
-		// no indexAdm.jsp
+		
+		/** BUSCA 3 PRODUTOS + VENDIDOS, DE ACORDO COM A DATA INCLUSA COMO PARÂMETRO NO 1º .JSP **/
 		List<GraficoAnalise> produtosMaisVendidos = graficoDAO.consultar3ProdutosMaisVendidos(graficoAnaliseEntidade.getDtInicio(), graficoAnaliseEntidade.getDtFim());
 		
 		// Criação de listas a ser utilizadas
@@ -76,9 +76,10 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 		List<String> totalValorProduto2 = new ArrayList<>();
 		List<String> totalValorProduto3 = new ArrayList<>();
 		
-		// Criando e definindo variavel para produto VAZIO e ZERO quantidade,
-		// cao tenha algum produto com quantidade 0,
-		// para não quebrar o gráfico
+		/** Criando e definindo variavel para produto VAZIO e ZERO quantidade,
+		 caso tenha algum produto com quantidade 0,
+		 para não quebrar o gráfico
+		**/
 		Produto produtoVazio = new Produto();
 		produtoVazio.setNome("VAZIO");
 		produtoVazio.setQuantidadeSelecionada("0");
@@ -282,7 +283,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Método para consultar os 3 Produtos mais vendidos com filtro de datas - Query principal !!
+	 * Método para consultar os 3 Produtos mais vendidos com filtro de datas - QUERY PRINCIPAL!!
 	 */
 	public List<GraficoAnalise> consultar3ProdutosMaisVendidos (String dtInicio, String dtFim) {
 		openConnection();

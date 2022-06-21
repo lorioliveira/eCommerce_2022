@@ -9,6 +9,13 @@ import com.les.roupa.core.dominio.Cliente;
 import com.les.roupa.core.dominio.Cupom;
 import com.les.roupa.core.dominio.EntidadeDominio;
 
+
+/**
+ * DAO para CUPOM
+ * @author Lorena Oliveira
+ *
+ */
+
 public class CupomDAO extends AbstractJdbcDAO {
 	
 	/**
@@ -152,9 +159,10 @@ public class CupomDAO extends AbstractJdbcDAO {
 			if (cupons.size() > 0) {
 				for(Cupom coupon : cupons) {
 					
-					// ajusta o BUG de quando o noome do cliente no Cupom for NULL
+					// ajusta o BUG de quando o nome do cliente no Cupom for NULL
+					// tipo: cupom promocional
 					if (coupon.getIdCliente() != null) {
-						// busca o Cliente do Cupom, pelo ID do cliente no Cupom
+						// busca o Cliente do Cupom, pelo ID do cliente
 						List<Cliente> clientes = clienteDAO.consultarClienteById(coupon.getIdCliente());
 						
 						// salva o nome do Cliente no cupom
@@ -212,8 +220,9 @@ public class CupomDAO extends AbstractJdbcDAO {
 				for(Cupom coupon : cupons) {
 					
 					// ajusta o BUG de quando o noome do cliente no Cupom for NULL
+					// tipo: cupom promocional
 					if (coupon.getIdCliente() != null) {
-						// busca o Cliente do Cupom, pelo ID do cliente no Cupom
+						// busca o Cliente do Cupom, pelo ID do cliente
 						List<Cliente> clientes = clienteDAO.consultarClienteById(coupon.getIdCliente());
 						
 						// salva o nome do Cliente no cupom

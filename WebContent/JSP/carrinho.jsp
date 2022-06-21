@@ -31,7 +31,7 @@
       <link href="../css/style.css" rel="stylesheet" />
    </head>
    <%
-   List<Produto> produtosEmSessao = new ArrayList<>();
+   		 List<Produto> produtosEmSessao = new ArrayList<>();
          List<Cupom> cuponsSessao = new ArrayList<>();
          Usuario usuarioLogado = new Usuario();
          String concatenacaoCuponsCliente = "";

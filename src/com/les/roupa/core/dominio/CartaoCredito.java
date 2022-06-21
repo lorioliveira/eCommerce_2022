@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Classe para representar o Cartão de Credito
+ * @author Lorena Oliveira
  * 
  */
 public class CartaoCredito extends Cliente {

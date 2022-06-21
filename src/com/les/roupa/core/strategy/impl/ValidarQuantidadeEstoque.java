@@ -15,10 +15,10 @@ public class ValidarQuantidadeEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getQuantidadeEntradaSaida() == null || estoque.getQuantidadeEntradaSaida().equals("")) {
-			return ("Favor insira uma quantidade no Estoque.");
+			return ("Insira uma quantidade no Estoque.<br>");
 		}
 		else if (Integer.parseInt(estoque.getQuantidadeEntradaSaida()) <= 0) {
-			return ("Selecione uma quantidade no Estoque maior que ZERO!");
+			return ("Selecione uma quantidade no Estoque maior que ZERO!<br>");
 		}
 		else {
 			return null;

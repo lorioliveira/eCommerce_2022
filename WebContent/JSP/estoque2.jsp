@@ -148,6 +148,7 @@
 									<tr>
 										<th>Nome</th>
 										<th>Tipo</th>
+										<th>Obs.</th>
 										<th>Qtde.</th>
 										<th>R$ Custo</th>
 										<th>Data</th>
@@ -160,6 +161,7 @@
 										<tr>
 											<td><%=estoq.getNomeProduto() %></td>
 											<td><%=estoq.getTipo()%></td>
+											<td><%=estoq.getFornecedor()%></td>
 											<td><%=estoq.getQuantidadeEntradaSaida() %></td>
 											<td><%=estoq.getValorCusto() %></td>
 											<td><%=estoq.getDtEntrada()%></td>

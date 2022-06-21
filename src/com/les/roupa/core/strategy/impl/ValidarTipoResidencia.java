@@ -16,7 +16,7 @@ public class ValidarTipoResidencia implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if(endereco.getTipoResidencia() == null || endereco.getTipoResidencia().equals("")) {
-				return ((" Selecione um tipo de endereço. <br>"));
+				return ((" Selecione um tipo para o endereço. <br>"));
 			}
 			else {
 				return null;

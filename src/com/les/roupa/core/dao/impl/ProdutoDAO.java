@@ -13,7 +13,6 @@ import com.les.roupa.core.dominio.Produto;
 
 /**
  * DAO para PRODUTO
- * 
  * @author Lorena Oliveira
  * 
  */
@@ -422,6 +421,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 			 * // adicionando o objeto à lista produtos.add(produtoItem); } rs.close();
 			 * stmt.close(); return produtos; } catch (Exception e) { throw new
 			 * RuntimeException(e); } } // Listar os Produtos pela Pesquisa por Filtro
+			 *
 			 */
 	
 	/**

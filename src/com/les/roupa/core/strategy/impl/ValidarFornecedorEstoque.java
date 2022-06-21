@@ -15,7 +15,7 @@ public class ValidarFornecedorEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getFornecedor() == null || estoque.getFornecedor().equals("")) {
-			return ("Favor insira um fornecedor no Estoque.");
+			return ("Insira um fornecedor no Estoque.");
 		}
 		else {
 			return null;

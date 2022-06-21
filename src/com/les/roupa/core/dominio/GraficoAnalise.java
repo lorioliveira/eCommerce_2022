@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Classe para representar o Gráfico da Análise
+ * @author Lorena Oliveira
  */
 public class GraficoAnalise extends EntidadeDominio {
 	private Produto produto;
@@ -37,6 +38,8 @@ public class GraficoAnalise extends EntidadeDominio {
 		this.dtFim = dtFim;
 	}
 	
+	
+	
 	public List<Produto> getNomeProduto1() {
         return nomeProduto1;
     }
@@ -58,12 +61,16 @@ public class GraficoAnalise extends EntidadeDominio {
         this.nomeProduto3 = nomeProduto3;
     }
     
+    
+    
 	public List<String> getTotalColunas() {
         return totalColunas;
     }
     public void setTotalColunas(List<String> totalColunas) {
         this.totalColunas = totalColunas;
     }
+    
+    
     
 	public List<String> getTotalValorProduto1() {
         return totalValorProduto1;

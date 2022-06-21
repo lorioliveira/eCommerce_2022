@@ -17,7 +17,7 @@ public class ValidarBandeiraCartao implements IStrategy {
 		CartaoCredito cartaoCredito = (CartaoCredito) entidade;
 		
 		if(cartaoCredito.getBandeira() == null ||cartaoCredito.getBandeira().equals("")) {
-			return ("Insira a bandeira do cartao.");
+			return ("Insira a bandeira do cartao.<br>");
 		}
 		else {
 			return null;

@@ -15,7 +15,7 @@ public class ValidarProdutoEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getIdProduto() == null || estoque.getIdProduto().equals("")) {
-			return ("Favor insira um produto no Estoque.");
+			return ("Insira um produto no Estoque. <br>");
 		}
 		else {
 			return null;

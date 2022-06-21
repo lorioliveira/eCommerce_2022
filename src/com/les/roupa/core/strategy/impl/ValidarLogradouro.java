@@ -16,7 +16,7 @@ public class ValidarLogradouro implements IStrategy {
 		Endereco endereco = (Endereco) entidade;
 		
 			if(endereco.getLogradouro() == null || endereco.getLogradouro().equals("")) {
-				return (" Insira um logradouro.  <br>");
+				return (" Insira um logradouro para o endereço.  <br>");
 			}
 			else {
 				return null;

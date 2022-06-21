@@ -19,7 +19,7 @@ public class ValidarEmailVazio implements IStrategy {
 		Usuario usuario = cliente.getUsuario();
 		
 			if(usuario.getEmail() == null || usuario.getEmail().equals("")) {
-				return (" Insira um email. <br>");
+				return (" Insira um email completo. <br>");
 			}
 			else {
 				return null;

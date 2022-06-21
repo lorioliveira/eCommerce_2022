@@ -15,7 +15,7 @@ public class ValidarDataEntradaSaidaEstoque implements IStrategy {
 		Estoque estoque = (Estoque) entidade;
 		
 		if(estoque.getDtEntrada() == null || estoque.getDtEntrada().equals("")) {
-			return ("Favor insira uma data de entrada/saida no Estoque.");
+			return ("Insira uma data de entrada/saida do produto no Estoque.<br>");
 		}
 		else {
 			return null;

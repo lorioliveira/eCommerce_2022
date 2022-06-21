@@ -17,7 +17,7 @@ public class ValidarTelefone implements IStrategy {
 		// se o "alteraCliente" for igual a 1, executa essa regra
 		if(cliente.getAlteraCliente().contentEquals("1")) {
 			if(cliente.getTelefone() == null || cliente.getTelefone().equals("")) {
-				return (" Insira um telefone. <br>");
+				return (" Insira um celular. <br>");
 			}
 			else {
 				return null;

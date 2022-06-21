@@ -10,6 +10,12 @@ import com.les.roupa.core.dominio.EntidadeDominio;
 import com.les.roupa.core.dominio.Estoque;
 import com.les.roupa.core.dominio.Produto;
 
+/**
+ * DAO para ESTOQUE 
+ * @author Lorena Oliveira
+ *
+ */
+
 public class EstoqueDAO extends AbstractJdbcDAO {
 	
 	/**
@@ -106,16 +112,16 @@ public class EstoqueDAO extends AbstractJdbcDAO {
 				estoques.add(estqoueItem);
 			}
 			
+			/** BUSCA O PRODUTO NO ESTOQUE PELO ID DO CLIENTE **/
 			if (estoques.size() > 0) {
 				for(Estoque stock : estoques) {
-					// busca o Produto do Estoque, pelo ID do cliente no Estoque
+					// busca o Produto do Estoque
 					List<Produto> produto = produtoDAO.consultarProdutoById(stock.getIdProduto());
 					
 					// salva o nome do Produto no Estoque
 					stock.setNomeProduto(produto.get(0).getNome());
 				}
 			}
-			
 			novoEstoque.setEstoqueDoProduto(estoques);
 			
 			listEstoque.add(novoEstoque);

@@ -231,7 +231,7 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 	} // Listar
 	
 	/**
-	 * Metodo para Listar Produto por ID 
+	 * Metodo para Listar Produto por ID - tela Detalhe do produto
 	 * @param entidade
 	 * @return
 	 */
@@ -251,16 +251,8 @@ public class DetalheProdutoDAO extends AbstractJdbcDAO {
 				prod.setId(rs.getString("id"));
 				prod.setNome(rs.getString("nome"));
 				prod.setDescricao(rs.getString("descricao"));
-				//prod.setCategoria(rs.getString("categoria"));
-				//prod.setCores(rs.getString("cores"));
-				//prod.setTamanho(rs.getString("tamanho"));
-				//prod.setPrecoCompra(rs.getString("precoCompra"));
 				prod.setPrecoVenda(rs.getString("precoVenda"));
-				//prod.setQtde(rs.getString("qtde"));
 				prod.setFoto(rs.getString("foto"));
-				//prod.setDtCadastro(rs.getString("dtCadastro"));
-				//prod.setStatus(rs.getString("status"));
-				//prod.setGrupoPrecificacao(rs.getString("grupoPrecificacao"));
 				
 				
 				

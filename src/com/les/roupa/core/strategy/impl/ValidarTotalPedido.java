@@ -15,7 +15,7 @@ public class ValidarTotalPedido implements IStrategy {
 		Pedido pedido = (Pedido) entidade;
 		
 		if(pedido.getTotalPedido() == null || pedido.getTotalPedido().equals("") || pedido.getTotalPedido().equals("0.0")) {
-			return ("Insira algum Produto ao Carrinho antes de finalizar a compra!");
+			return ("Insira algum Produto ao Carrinho antes de finalizar a compra!<br>");
 		}
 		else {
 			return null;

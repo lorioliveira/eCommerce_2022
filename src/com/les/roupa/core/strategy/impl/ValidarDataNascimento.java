@@ -14,7 +14,7 @@ public class ValidarDataNascimento implements IStrategy {
 		Cliente cliente = (Cliente) entidade;
 		
 			if(cliente.getData_Nascimento() == null || cliente.getData_Nascimento().equals("")) {
-				return (" Insira uma Data de Nascimento.  <br>");
+				return (" Insira uma Data de Nascimento. <br>");
 			}
 			else {
 				return null;

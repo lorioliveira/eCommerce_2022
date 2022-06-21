@@ -123,6 +123,7 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 				enderecos.add(endAltera);
 			}
 			
+			// Lista de Cartoes de Credito
 			stmt = connection.prepareStatement("select * from cartaoCredito where id_cliente=?");
 			stmt.setString(1, carrinho.getIdCliente());
 			rs = stmt.executeQuery();
@@ -145,6 +146,7 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 				cartoes.add(cartaoAltera);
 			}
 			
+			// Lista de Cupons do Cliente
 			stmt = connection.prepareStatement("select * from cupom where id_cliente=?");
 			stmt.setString(1, carrinho.getIdCliente());
 			rs = stmt.executeQuery();
@@ -166,6 +168,7 @@ public class CarrinhoDAO extends AbstractJdbcDAO {
 				cupons.add(cupomItem);
 			}
 			
+			// Listagem de todos os dados para ser visualizado no carrinho
 			novoCarrinho.setEnderecos(enderecos);
 			novoCarrinho.setCartoes(cartoes);
 			novoCarrinho.setCupons(cupons);

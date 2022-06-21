@@ -242,7 +242,7 @@
                                  <td><%=c.getValidade() %></td>
                                  <td><%=c.getPreferencial() %></td>
                                  <td>
-	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-eye"></i></button></a>
+	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=ALTERAR&alteraPreferencial=0"><button class="btn" data-tooltip="Editar" data-flow="bottom"><i class="fa fa-edit"></i></button></a>
 	                                 <a href="/eCommerce/cartao?id=<%= c.getId()%>&idCliente=<%=usuarioLogado.getId() %>&operacao=EXCLUIR"><button class="btn" data-tooltip="Excluir" data-flow="bottom"><i class="fa fa-trash"></i></button></a>
 	                             </td> 
                               </tr>

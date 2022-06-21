@@ -114,6 +114,7 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 				itens_pedido.add(item_pedidoItem);
 			}
 			
+			// Lista de Pedidos
 			stmt = connection.prepareStatement("select * from pedido where id=?");
 			stmt.setString(1, item_pedido_entidade.getIdPedido());
 			rs = stmt.executeQuery();
@@ -143,6 +144,7 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 				pedidos.add(pedidoItem);
 			}
 			
+			// Lista de Enderecos
 			stmt = connection.prepareStatement("select * from endereco where id=?");
 			stmt.setString(1, pedidos.get(0).getIdEndereco());
 			rs = stmt.executeQuery();
@@ -230,7 +232,7 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para alterar a trocação do Item do Pedido
+	 * Metodo para alterar o sttaus de "trocado?" do Item do Pedido
 	 * @param entidade
 	 */
 	public void alterarTrocacaoItemPedido (String idItemPedido) {
@@ -255,7 +257,8 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar se exite algum Item do Pedido que esteja com o status de trocado como "nao"
+	 * Metodo para consultar se existe algum Item do Pedido
+	 *  que esteja com o status de trocado como "nao"
 	 */
 	public List<ItemPedido> consultarItemPedidoByIdPedidoAndTrocadoNao (String idPedido) {
 		openConnection();
@@ -297,7 +300,8 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar se exite algum Item do Pedido que esteja com o status de trocado como "sim"
+	 * Metodo para consultar se exite algum Item do Pedido
+	 *  que esteja com o status de trocado como "sim"
 	 */
 	public List<ItemPedido> consultarItemPedidoByIdPedidoAndTrocadoSim (String idPedido) {
 		openConnection();
@@ -339,7 +343,7 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para consultar os 3 Produtos mais vendidos
+	 * Metodo para consultar os 3 Produtos mais vendidos - GRAFICO
 	 */
 	public List<ItemPedido> consultar3ProdutosMaisVendidos () {
 		openConnection();
@@ -372,7 +376,7 @@ public class ItemPedidoDAO extends AbstractJdbcDAO {
 	
 	
 	/**
-	 * Metodo para alterar a nova quantidade do Item do Pedido
+	 * Metodo para alterar a nova quantidade do Item do Pedido - TROCA DO ITEM NO PEDIDO
 	 * @param entidade
 	 */
 	public void alterarQuantidadeItemPedido (String qtdeItemPedido, String idItemPedido) {

@@ -16,7 +16,7 @@ public class ValidarFormaDePagamento implements IStrategy {
 		
 		if(pedido.getFormaPagamento() == null || pedido.getFormaPagamento().equals("")) {
 			pedido.setFormaPagamento("");		
-			return ("Favor selecione uma Forma de Pagamento.");
+			return ("Selecione uma Forma de Pagamento.<br>");
 		}
 		else {
 			return null;

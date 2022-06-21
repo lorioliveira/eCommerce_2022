@@ -1,6 +1,5 @@
 
 <%@page import='com.les.roupa.core.dominio.*'%>
-<%@page import='com.les.roupa.core.dao.impl.*'%>
 
 <%@page import="java.util.List"%>  
 
@@ -162,7 +161,7 @@
 	                                    </div>
 	                                    <div class="col-md-5">
 	                                        <label>Logradouro</label>
-	                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro">
+	                                        <input class="form-control" type="text" placeholder="Logradouro" name="logradouro" >
 	                                    </div>
 	                                    <div class="col-md-2">
 	                                        <label>Número</label>
