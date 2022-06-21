@@ -220,7 +220,7 @@
       
          <!-- TABELA DE PRODUTOS / ENDEREÇOS -->
          <div class="col-lg-8">
-            <div class="cart-page-inner">
+            <div class="cart-page-inner ">
                <div class="table-responsive">
                   <table class="table table-bordered">
                      <thead class="thead-dark">
@@ -338,10 +338,14 @@
                                  / CEP
                                  <%=d.getCep()%>
                               </p>
-                              <div class="radioEndereco">
-                                 <input type="radio" name="selecioneEndereco"
-                                    value="<%=d.getId()%>" class="btn" /> Selecionar
+                              <div class="radioEnd">
+	                            <label>
+                                 <input type="radio" name="selecioneEndereco" value="<%=d.getId()%>">
+                                  <span>Selecionar</span>
+                              </label>
                               </div>
+                              <%-- <input type="radio" name="selecioneEndereco"
+                                    value="<%=d.getId()%>" class="btn" /> Selecionar --%>
                               </br> </br>
                            </div>
                            <%
@@ -355,9 +359,8 @@
          
          
          <!-- RESUMO / FORMA DE PAGAMENTO -->
-         <div class="divResumo col-lg-6">
+         <div class="col-lg-6 divResumo">
 	         <div class="checkout-inner">
-	       		<div>
 			         <div class="checkout-summary">
 				         <div class="cart-summary">
 				         	<h1>Resumo</h1>
@@ -378,15 +381,15 @@
 							            <label class="custom-control-label" for="payment-1" >Pagar com Boleto</label>
 							         </div>
 						         </div>
-				         <div class="payment-method">
+				         <div class="payment-method ">
 						         <div class="custom-control custom-radio">
 							         <input type="radio" class="custom-control-input"
 							            id="payment-2" name="selecioneFormadePagamento" id="selecioneFormadePagamento" value="cartao"/> 
 							            	<label class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
 						         </div>
 					         <div class="payment-content" id="payment-2-show">
-						         <div class="col-md-9">
-							         <select class="form-control" name="selecioneCartao1">
+						         <div class="col-md-9 EspacamentoInput">
+							         <select class="form-control Cartao" name="selecioneCartao1">
 								         <option selected disabled>Selecione o 1º cartão</option>
 								         <%
 								            for (CartaoCredito c : cartoes) {
@@ -401,8 +404,8 @@
 								      </select>
 							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="6" value="0" />
 						         </div>
-						         <div class="col-md-9">
-							         <select class="form-control" type="text" name="selecioneCartao2">
+						         <div class="col-md-9 EspacamentoInput">
+							         <select class="form-control Cartao" type="text" name="selecioneCartao2">
 								         <option selected disabled>Selecione o 2º cartão</option>
 								         <%
 								            for (CartaoCredito c : cartoes) {
@@ -436,7 +439,6 @@
 		         <input type="hidden" name="total_frete" id="total_frete" value="<%=total_frete%>">
 		         <!-- Total do Pedido -->
 		         <input type="hidden" name="total_pedido" id="total_pedido"value="<%=total_pedido%>">
-	         </div>
 	         </div>
 	         </div>
 	    </div>

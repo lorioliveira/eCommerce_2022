@@ -115,3 +115,91 @@ shopping-bag
 
 criando e enviando arquivos para repositorio no Git -- http://gabsferreira.com/criando-e-enviando-arquivos-para-seu-repositorio-no-github/
 MODAL -- https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
+
+
+
+
+
+
+pedidoDAO:
+/**
+	 * Metodo para CONSULTAR os 3 clientes com maiores compras - RANKING
+	 */
+	public List<Pedido> consultar3ClientesMaiorCompra () {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select id_cliente, count(id_cliente) as quantidade_comprado from pedido group by id_cliente order by count(id_cliente) desc LIMIT 3;");
+			ResultSet rs = stmt.executeQuery();
+			
+			List<Pedido> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+
+				pedidoItem.setTotalPedido(rs.getString("quantidade_comprado"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
+			rs.close();
+			stmt.close();
+			return pedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Consultar os 3 clientes com maiores compras
+	
+	
+	
+	
+	/**
+	 * Metodo para CONSULTAR (LISTAR) os Pedidos pela Pesquisa por Filtro
+	 * @param entidade
+	 * @return
+	 */
+	public List<EntidadeDominio> consultarPedidoPesquisaByFiltro (EntidadeDominio entidade, String IdCliente, String StatusPedido) {
+		openConnection();
+		try {
+			PreparedStatement stmt = connection.prepareStatement("select * from pedido where id_cliente=? and status=?");
+			stmt.setString(1, IdCliente);
+			stmt.setString(2, StatusPedido);
+			ResultSet rs = stmt.executeQuery();
+			
+			List<EntidadeDominio> pedidos = new ArrayList<>();
+			while (rs.next()) {
+				// criando o objeto Pedido
+				Pedido pedidoItem = new Pedido();
+				
+				pedidoItem.setId(rs.getString("id"));
+				pedidoItem.setTotalItens(rs.getString("total_itens"));
+				pedidoItem.setTotalFrete(rs.getString("total_frete"));
+				pedidoItem.setTotalPedido(rs.getString("total_pedido"));
+				pedidoItem.setStatus(rs.getString("status"));
+				pedidoItem.setIdCliente(rs.getString("id_cliente"));
+				pedidoItem.setIdEndereco(rs.getString("id_endereco"));
+				pedidoItem.setFormaPagamento(rs.getString("forma_pagamento"));
+				pedidoItem.setIdCartao1(rs.getString("id_cartao_1"));
+				pedidoItem.setValorCartao1(rs.getString("valor_cartao_1"));
+				pedidoItem.setIdCartao2(rs.getString("id_cartao_2"));
+				pedidoItem.setValorCartao2(rs.getString("valor_cartao_2"));
+				pedidoItem.setTotalCupons(rs.getString("total_cupons"));
+				pedidoItem.setTrocado(rs.getString("trocado"));
+				pedidoItem.setData_Cadastro(rs.getString("dt_cadastro"));
+				
+				// adicionando o objeto à lista
+				pedidos.add(pedidoItem);
+			}
+				
+			rs.close();
+			stmt.close();
+			return pedidos;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+				
+	} // Listar os Pedidos pela Pesquisa por Filtro
+	
+	

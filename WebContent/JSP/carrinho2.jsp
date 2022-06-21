@@ -315,8 +315,6 @@
             <div class="col-lg-12">
                <div class="checkout-inner">
                   <div class="billing-address">
-                  
-                    
                         <h3>Endereços</h3>
                         </br>
                         <div class="row">
@@ -341,9 +339,11 @@
                                  / CEP
                                  <%=d.getCep()%>
                               </p>
-                              <div class="radioEndereco">
-                                 <input type="radio" name="selecioneEndereco"
-                                    value="<%=d.getId()%>" class="btn" /> Selecionar
+                              <div class="radioEnd">
+	                            <label>
+                                 <input type="radio" name="selecioneEndereco" value="<%=d.getId()%>">
+                                  <span>Selecionar</span>
+                              </label>
                               </div>
                               </br> </br>
                            </div>
@@ -387,8 +387,8 @@
 							            	<label class="custom-control-label" for="payment-2" >Pagar com Cartão de Crédito</label>
 						         </div>
 					         <div class="payment-content" id="payment-2-show">
-						         <div class="col-md-9">
-							         <select class="form-control" name="selecioneCartao1">
+						         <div class="col-md-9 EspacamentoInput">
+							         <select class="form-control Cartao" name="selecioneCartao1">
 								         <option selected disabled>Selecione o 1º cartão</option>
 								         <%
 								            for (CartaoCredito c : cartoes) {
@@ -404,7 +404,7 @@
 							         <input type="text" class="form-control col-lg-4 inputCartao" placeholder="R$" name="valorCartao1" maxlength="6" value="0" />
 						         </div>
 						         <div class="col-md-9">
-							         <select class="form-control" type="text" name="selecioneCartao2">
+							         <select class="form-control Cartao" type="text" name="selecioneCartao2">
 								         <option selected disabled>Selecione o 2º cartão</option>
 								         <%
 								            for (CartaoCredito c : cartoes) {
