@@ -11,8 +11,8 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         
         <!-- Favicon -->
-        <link href="../img/favicon.ico" rel="icon">
-        <link href="../css/reset.css" rel="stylesheet">
+        <link href="./img/favicon.ico" rel="icon">
+        <link href="./css/reset.css" rel="stylesheet">
         
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -20,22 +20,26 @@
         <!-- Biblioteca CSS - Bootstrap-->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="../lib/slick/slick.css" rel="stylesheet">
-        <link href="../lib/slick/slick-theme.css" rel="stylesheet">
+        <link href="./lib/slick/slick.css" rel="stylesheet">
+        <link href="./lib/slick/slick-theme.css" rel="stylesheet">
         
         <!--- Biblioteca CSS - Principal-->
-        <link href="../css/style.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
             
     </head>
 
-		<%
-			Usuario usuarioLogado = new Usuario();
-		
-			HttpSession sessao = request.getSession();
-			usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-		%>
-
-	<body>
+	<%
+		Usuario usuarioLogado = new Usuario();
+	
+		HttpSession sessao = request.getSession();
+		usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
+	
+ 		// pega a mensagem que estava pendurado na requisição,
+    	// que foi enviado pelo arquivo "ClienteHelper"
+   		String mensagemStrategy = (String)request.getAttribute("mensagemStrategy");
+    %>
+    
+    <body onload="AtivaModal()">
         <!-- Inicio da faixa superior - Faixa preta contendo email e telefone de "suporte"-->
         <div class="top-bar">
             <div class="container-fluid">
@@ -65,14 +69,14 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="../JSP/index.jsp" class="nav-item nav-link active">Home</a>
-                        <a href="../JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
+                        <a href="./JSP/index.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="./JSP/produtos.jsp" class="nav-item nav-link">Produtos</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Minha Conta</a>
                             <div class="dropdown-menu">
-                                <a href="../JSP/login.jsp" class="dropdown-item">Logout</a>
+                                <a href="./JSP/login.jsp" class="dropdown-item">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -89,8 +93,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="../JSP/index.jsp">
-                            <img src="../img/mir.svg" alt="Logo Mirror Fashion" >
+                            <a href="./JSP/index.jsp">
+                            <img src="./img/mir.svg" alt="Logo Mirror Fashion" >
                             </a>
                         </div>
                     </div>
@@ -102,7 +106,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="user">
-                            <a href="../JSP/carrinho.jsp" class="btn cart">
+                            <a href="./JSP/carrinho.jsp" class="btn cart">
                             Minha Sacola <i class="fas fa-shopping-bag"></i>
                             </a>
                         </div>
@@ -117,8 +121,8 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../JSP/index.jsp">Home</a></li>
-                    <li class="breadcrumb-item"><a href="../JSP/minhaConta.jsp">Minha Conta</a></li>
+                    <li class="breadcrumb-item"><a href="./JSP/index.jsp">Home</a></li>
+                    <li class="breadcrumb-item"><a href="./JSP/minhaConta.jsp">Minha Conta</a></li>
                     <li class="breadcrumb-item active">Novo Cartão</li>
                 </ul>
             </div>
@@ -159,11 +163,11 @@
 	                                    </div>
 	                                    <div class="col-md-5">
 	                                        <label>Nome do títular</label>
-	                                        <input class="form-control" type="text" placeholder="digite como consta no cartão" name="nome" >
+	                                        <input class="form-control" type="text" placeholder="digite como consta no cartão" name="nome" required>
 	                                    </div>
 	                                    <div class="col-md-4">
 	                                        <label>Validade</label>
-	                                        <input class="form-control" type="month" name="validade" max="2022-01-31" >
+	                                        <input class="form-control" type="month" name="validade" max="2022-01-31" required>
 	                                    </div>
 	                                    <div class="col-md-6">
 	                                        <button type="submit" class="btn" onclick="window.history.go(-1); return false;"><i class="fa fa-ban"></i> Cancelar</button>
@@ -231,15 +235,15 @@
                     <div class="col-md-6">
                         <div class="payment-method">
                             <h2>Forma de pagamento</h2>
-                            <img src="../img/payment-method.png" alt="Forma de Pagamento" />
+                            <img src="./img/payment-method.png" alt="Forma de Pagamento" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="payment-security">
                             <h2>Compre com segurança</h2>
-                            <img src="../img/godaddy.svg" alt="segurança" />
-                            <img src="../img/norton.svg" alt="segurança" />
-                            <img src="../img/ssl.svg" alt="segurança" />
+                            <img src="./img/godaddy.svg" alt="segurança" />
+                            <img src="./img/norton.svg" alt="segurança" />
+                            <img src="./img/ssl.svg" alt="segurança" />
                         </div>
                     </div>
                 </div>
@@ -252,7 +256,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="../JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
+                        <p>Copyright &copy; <a href="./JSP/index.jsp">Mirror Fashion</a> - 2022 - Todos os direitos reservados</p>
                     </div>
                 </div>
             </div>
@@ -264,12 +268,45 @@
         
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/../js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/slick/slick.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/./js/bootstrap.bundle.min.js"></script>
+        <script src="./lib/easing/easing.min.js"></script>
+        <script src="./lib/slick/slick.min.js"></script>
         
         <!--  Javascript -->
-        <script src="../js/main.js"></script>
-        <script src="../js/all.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/all.js"></script>
+        
+           <!-- Modal -->
+	<div class="modal fade" id="modal-mensagem">
+	   <div class="modal-dialog">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+	                <h3 class="modal-titulo">Atenção</h3>
+	            </div>
+	            <div class="modal-body">
+	                <p><% out.println(mensagemStrategy); %></p>
+	            </div>
+	            <!-- <div class="modal-footer">
+	                <button type="btn" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	            </div> -->
+	        </div>
+	    </div>
+	</div>
+		
+	<!-- Botão para chamar a Modal -->
+	<button style="display: none" id="idModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
+		Exibir mensagem da modal
+	</button>
+      
+      <script>
+    // Função que irá ativar a Modal com a mensagem retornada do BackEnd,
+    // essa função é carregada junto ao carregamento da página com o evento ONLOAD, dentro da tag <body>.
+	    function AtivaModal(){
+    		// metodo para poder ativar o "onClick" sem precisar clicar no botão
+	    	document.getElementById('idModal').click();
+	    }
+    </script>
+        
     </body>
 </html>

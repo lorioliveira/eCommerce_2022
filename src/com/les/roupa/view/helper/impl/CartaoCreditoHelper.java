@@ -177,7 +177,7 @@ public class CartaoCreditoHelper implements IViewHelper {
                 // se houver, mostra as mensagens de ERRO
             	request.setAttribute("mensagemStrategy", resultado.getMensagem());
             	System.out.println("ERRO PARA SALVAR CARTAO DE CREDITO!");
-				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/novocartao2.jsp").forward(request, response);
             }
         }
             else if (("ALTERAR").equals(operacao)) {

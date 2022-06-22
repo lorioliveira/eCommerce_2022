@@ -195,7 +195,7 @@ public class EnderecoHelper implements IViewHelper {
 			else {
 				// mostra as mensagens de ERRO se houver
 				request.setAttribute("mensagemStrategy", resultado.getMensagem());
-				request.getRequestDispatcher("JSP/minhaConta2.jsp").forward(request, response);
+				request.getRequestDispatcher("JSP/novoendereco2.jsp").forward(request, response);
 				System.out.println("ERRO PARA SALVAR ENDERECO!");
 			
 			}
