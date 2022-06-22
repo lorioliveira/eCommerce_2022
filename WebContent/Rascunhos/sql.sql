@@ -34,6 +34,8 @@ select * from pedido_item;
 select * from cupom;
 select * from estoque;
 
+delete from estoque where id = 11;
+
 delete from cliente where id = 16;
 delete from endereco where id_cliente = 16;
 delete from cartaoCredito where id_cliente = 16;

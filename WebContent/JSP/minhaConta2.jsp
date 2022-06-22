@@ -278,7 +278,13 @@
                                     <td><%=pedido.getData_Cadastro() %></td>
                                     <td>R$ <%=pedido.getTotalPedido()%></td>
                                     <td><%=pedido.getStatus() %></td>
-                                    <td><a href="/eCommerce/cadastroPedido?id=<%= pedido.getId()%>&operacao=CONSULTAR"><button class="btn" class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a></td>
+                                    <td><a href="/eCommerce/cadastroPedido?id=<%= pedido.getId()%>&operacao=CONSULTAR"><button class="btn" data-tooltip="Visualizar" data-flow="top"><i class="fa fa-eye"></i></button></a>
+                                    
+                                    <%  if(pedido.getStatus().equals("EM PROCESSAMENTO")) { %>
+                                    	<a href="/eCommerce/pedidoTroca?idPedido=<%= pedido.getId()%>&alterarStatusPedido=<%="CANCELAMENTO SOLICITADO"%>&operacao=ALTERAR"><button class="btn btnCancelarPedido" data-tooltip="Cancelar Pedido" data-flow="top"><i class="fa fa-ban"></i></button></a></td>
+                                    
+                                    <% } %>
+                                    
                                  </tr>
                               </tbody>
                               <%

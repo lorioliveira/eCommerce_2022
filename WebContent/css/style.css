@@ -2489,8 +2489,8 @@ h2 {
 
 .btn_NovoEndereco{
 	margin-left: 73%;
-	position: static;
-	padding: revert;
+/* 	position: static; 
+	padding: revert;*/
 }
 
 .btn_NovoEndCarrinho{
@@ -2519,7 +2519,7 @@ h2 {
     text-align: center;
     padding-left: 0.8rem;
 	margin-left: 72%;
-	position: static;
+/* 	position: static; */
  }  
  
  .inputCartao{
@@ -3188,6 +3188,13 @@ h2 {
 	font-size:medium;
 	font-weight: 500;
 	color: #009700;
+}
+.btnCancelarPedido{
+	margin-left: 10px !important;
+}
+
+.btnCancelarPedido:hover{
+	background-color: #ff0000 !important;
 }
 
 .opcaoUtilizado{
