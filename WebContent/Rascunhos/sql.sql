@@ -42,8 +42,8 @@ delete from cartaoCredito where id_cliente = 16;
 delete from cupom where id_cliente = 15;
 
 
-delete from pedido where id = 101;
-delete from pedido_item where id = 258;
+delete from pedido where id = 102;
+delete from pedido_item where id = 259;
 
 
 update cupom set tipo = "Troca" where id = 6;

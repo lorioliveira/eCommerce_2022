@@ -3204,3 +3204,17 @@ h2 {
 	margin-top: 4% !important;
 	position: relative;
 }
+
+.categoria{
+	position: absolute;
+    transform: translate3d(109px, 36px, 0px);
+    top: 0px;
+    right: 41%;
+    width: 99%;
+    will-change: transform;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+	color: #16181b;
+    text-decoration: none;
+    background-color: #dc35457a;
+}
