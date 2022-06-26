@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/JSP/login.jsp=UTF-8
+encoding//src/com/les/roupa/core/strategy/impl/ValidarQuantidadeSelecionada.java=UTF-8
 encoding//src/com/les/roupa/view/helper/impl/ClienteHelper.java=UTF-8

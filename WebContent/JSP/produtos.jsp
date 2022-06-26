@@ -144,10 +144,6 @@
                     <div class="col-md-5">
                       <h3>Produtos</h3>
                       <div class="product-search search">
-                        <!-- 											<input type="text" placeholder="Buscar por..."> -->
-                        <!-- 											<button> -->
-                        <!-- 												<i class="fa fa-search"></i> -->
-                        <!-- 											</button> -->
                       </div>
                     </div>
                     <!-- Inicio da parte em branco usado como espaçamento entre
@@ -165,10 +161,10 @@
                           <div class="dropdown-toggle" data-toggle="dropdown">Selecione a categoria
                           </div>
                           <div class="dropdown-menu dropdown-menu-right categoria fade">
-                            <a href="../JSP/blusas.jsp" class="dropdown-item"><i class="fas fa-tshirt"></i> Blusas</a> 
-                            <a href="../JSP/calcas.jsp" class="dropdown-item"><i class="fa fa-archway"></i> Calças</a> 
-                            <a href="../JSP/vestidos.jsp" class="dropdown-item"><i class="fa fa-female"></i> Vestidos</a>
-                            <a href="../JSP/acessorios.jsp" class="dropdown-item"><i class="fa fa-gem"></i> Acessorios</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-tshirt"></i> Blusas</a> 
+                            <a href="#" class="dropdown-item"><i class="fa fa-archway"></i> Calças</a> 
+                            <a href="#" class="dropdown-item"><i class="fa fa-female"></i> Vestidos</a>
+                            <a href="#" class="dropdown-item"><i class="fa fa-gem"></i> Acessorios</a>
                           </div>
                         </div>
                       </div>
@@ -233,38 +229,38 @@
             <div class="feature">
               <div class="container-fluid">
                 <div class="row align-items-center">
-                  <div class="col-md-12 feature-col">
-                    <div class="feature-content">
-                      <i class="fab fa-cc-mastercard"></i>
-                      <h2>Secure Payment</h2>
-                      <p>Lorem ipsum dolor sit amet consectetur elit</p>
-                    </div>
-                  </div>
-                  <div class="col-lg-12"></div>
-                  <div class="col-md-12 feature-col">
-                    <div class="feature-content">
-                      <i class="fa fa-truck"></i>
-                      <h2>Worldwide Delivery</h2>
-                      <p>Lorem ipsum dolor sit amet consectetur elit</p>
-                    </div>
-                  </div>
-                  <div class="col-lg-12"></div>
-                  <div class="col-md-12 feature-col">
-                    <div class="feature-content">
-                      <i class="fa fa-sync-alt"></i>
-                      <h2>90 Days Return</h2>
-                      <p>Lorem ipsum dolor sit amet consectetur elit</p>
-                    </div>
-                  </div>
-                  <div class="col-lg-12"></div>
-                  <div class="col-md-12 feature-col">
-                    <div class="feature-content">
-                      <i class="fa fa-comments"></i>
-                      <h2>24/7 Support</h2>
-                      <p>Lorem ipsum dolor sit amet consectetur elit</p>
-                    </div>
-                  </div>
-                </div>
+					<div class="col-md-12 feature-col">
+						<div class="feature-content">
+							<i class="fab fa-cc-mastercard"></i>
+							<h2>Pagamento Seguro</h2>
+							<p>Pague com seu cartão de crédito ou no boleto</p>
+						</div>
+					</div>
+					<div class="col-lg-12"></div>
+					<div class="col-md-12 feature-col">
+						<div class="feature-content">
+							<i class="fa fa-truck"></i>
+							<h2>Entrega Rápida</h2>
+							<p>Enviamos seu pedido para qualquer lugar que deseja</p>
+						</div>
+					</div>
+					<div class="col-lg-12"></div>
+					<div class="col-md-12 feature-col">
+						<div class="feature-content">
+							<i class="fa fa-sync-alt"></i>
+							<h2>Troca Rápida em 24h</h2>
+							<p>Comprou e viu algo melhor? Entre em contato para realizar sua troca</p>
+						</div>
+					</div>
+					<div class="col-lg-12"></div>
+					<div class="col-md-12 feature-col">
+						<div class="feature-content">
+							<i class="fa fa-comments"></i>
+							<h2>Suporte 24/7</h2>
+							<p>Prestamos todo o suporte que necessite em nossos canais de atendimento</p>
+						</div>
+					</div>
+				</div>
               </div>
             </div>
           </div>

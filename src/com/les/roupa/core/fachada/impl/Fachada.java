@@ -44,6 +44,7 @@ import com.les.roupa.core.strategy.impl.ValidarCartaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarCidade;
 import com.les.roupa.core.strategy.impl.ValidarCidade_Alt;
 import com.les.roupa.core.strategy.impl.ValidarCupom;
+import com.les.roupa.core.strategy.impl.ValidarCupomBonificacaoPedido;
 import com.les.roupa.core.strategy.impl.ValidarDataEntradaSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento;
 import com.les.roupa.core.strategy.impl.ValidarDataNascimento_Alt;
@@ -72,6 +73,7 @@ import com.les.roupa.core.strategy.impl.ValidarPais;
 import com.les.roupa.core.strategy.impl.ValidarPais_Alt;
 import com.les.roupa.core.strategy.impl.ValidarProdutoEstoque;
 import com.les.roupa.core.strategy.impl.ValidarQuantidadeEstoque;
+import com.les.roupa.core.strategy.impl.ValidarQuantidadeSelecionada;
 import com.les.roupa.core.strategy.impl.ValidarSaidaEstoque;
 import com.les.roupa.core.strategy.impl.ValidarSenha;
 import com.les.roupa.core.strategy.impl.ValidarSenhaConfSenha;
@@ -141,6 +143,7 @@ public class Fachada implements IFachada {
 	ValidarFormaDePagamento vFormaDePagamentoPedido = new ValidarFormaDePagamento();
 	ValidarCartaoPedido vCartaoPedido = new ValidarCartaoPedido();
 	ValidarStatusPedido vStatusPedido = new ValidarStatusPedido();
+	ValidarCupomBonificacaoPedido vCupomBonificacaoPedido = new ValidarCupomBonificacaoPedido();
 	
 	/* ---- SALVAR/ALTERAR CARTAO DE CREDITO -----*/
 	ValidarNumCartao vNumCartao = new ValidarNumCartao();
@@ -164,6 +167,7 @@ public class Fachada implements IFachada {
 	ValidarDataEntradaSaidaEstoque vDataEntradaSaidaEstoque = new ValidarDataEntradaSaidaEstoque();
 	ValidarEntradaEstoque vEntradaEstoque = new ValidarEntradaEstoque();
 	ValidarSaidaEstoque vSaidaEstoque = new ValidarSaidaEstoque();
+	ValidarQuantidadeSelecionada vQuantidadeSelecionada = new ValidarQuantidadeSelecionada();
 	
 	
 	/* --- GRAFICO --- */
@@ -352,6 +356,7 @@ public class Fachada implements IFachada {
 		regrasSalvarPedido.add(vEnderecoPedido);
 		regrasSalvarPedido.add(vFormaDePagamentoPedido);
 		regrasSalvarPedido.add(vCartaoPedido);
+		regrasSalvarPedido.add(vCupomBonificacaoPedido);
 		regrasSalvarPedido.add(vStatusPedido); 
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
@@ -383,6 +388,13 @@ public class Fachada implements IFachada {
 		regrasConsultarGraficoAnalise.add(vDatasGraficoAnalise);
 		
 		/* --------------------------------------------------------------------------------------------------------------- */
+		
+		/* ----- Adicionando as Strategy's na lista do Carrinho ----- */
+		/* ----- SALVAR ----- */
+		regrasSalvarCarrinho.add(vQuantidadeSelecionada);
+		/* ----- ALTERAR ----- */
+		regrasAlterarCarrinho.add(vQuantidadeSelecionada);
+		/* ---------------------------------------------------------- */
 		
 		
 		/* ----- REGRAS DA ENTIDADE CLIENTE ----- */

@@ -8,7 +8,7 @@ insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha,
 values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
 
 insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
-values ('1', 'PROMOCIONAL10', '10.00', 'promocional', 'nao', null, '2022-04-11');
+values ('13', 'PROMOCIONAL40', '40.00', 'promocional', 'nao', null, '2022-04-11');
 
 insert into cupom(id, nome, valor, tipo, utilizado, id_cliente, dt_cadastro)
 values ('10', 'TROCA97', '15.00', 'promocional', 'nao', 16, '2022-06-21');
@@ -42,8 +42,8 @@ delete from cartaoCredito where id_cliente = 16;
 delete from cupom where id_cliente = 15;
 
 
-delete from pedido where id = 102;
-delete from pedido_item where id = 259;
+delete from pedido where id = 104;
+delete from pedido_item where id = 261;
 
 
 update cupom set tipo = "Troca" where id = 6;
