@@ -1,0 +1,178 @@
+create database ecommerce;
+use ecommerce;
+
+-- insert para admin 
+insert into cliente (nome, cpf, data_Nascimento, genero, telefone, email, senha, status, tipoCliente, data_Cadastro)
+values ('Admin','79628190571','1996/05/29', 'feminino', '11945758990', 'admin@mf.com.br', '12345678', 'ativo', 'admin', '2022/02/20');
+
+select * from cliente;
+select * from endereco;
+select * from cartaoCredito;
+select * from produto;
+select * from pedido;
+select * from pedido_item;
+select * from cupom;
+select * from estoque;
+  
+
+/*** CLIENTE ****/
+create table cliente (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	nome		VARCHAR(50),
+	cpf		    VARCHAR(14),
+	data_Nascimento	DATE,
+	genero		VARCHAR(10),
+	telefone	VARCHAR(16),
+	email		VARCHAR(50),
+	senha		VARCHAR(20),
+    status 		VARCHAR(10),
+    tipoCliente	VARCHAR(10),
+    data_Cadastro  DATE,
+	primary	key	(id)
+);
+
+/*** ENDEREÇO ****/
+create table endereco (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	cep		      VARCHAR(10),
+	logradouro    VARCHAR(50),
+	numero		  VARCHAR(10),
+	bairro	      VARCHAR(30),
+    cidade		  VARCHAR(50),
+    estado        VARCHAR(20),
+	pais		  VARCHAR(10),
+	tipoResidencia	  VARCHAR(20),
+	observacoes	  VARCHAR(30),
+    tipoEndereco  VARCHAR(20),
+    id_cliente BIGINT,
+    data_Cadastro DATE,
+	primary	key	(id),
+	CONSTRAINT fk_EnderecoCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
+);
+
+/***** CARTÃO DE CRÉDITO *****/
+create table cartaoCredito (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	numCartao	      VARCHAR(20),
+	bandeira	  VARCHAR(15),
+	nome		  VARCHAR(30),
+	validade      VARCHAR(10),
+    cvv			  VARCHAR(5),
+    preferencial  VARCHAR(5),
+	id_cliente BIGINT,
+    data_Cadastro	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_CartaoCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
+);
+
+/**** PEDIDO ***/
+create table pedido (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+    total_itens 	VARCHAR(10),
+    total_frete		VARCHAR(10),
+    total_pedido    VARCHAR(10),
+    status		    VARCHAR(30),
+    id_cliente	 	BIGINT,
+    id_endereco 	BIGINT,
+    forma_pagamento VARCHAR(10),
+    id_cartao_1 	BIGINT,
+    valor_cartao_1	VARCHAR(10),
+    id_cartao_2 	BIGINT,
+    valor_cartao_2	VARCHAR(10),
+	total_cupons	VARCHAR(10),
+	trocado		    VARCHAR(3),
+    dt_cadastro 	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_ClientePedido FOREIGN KEY (id_cliente) REFERENCES cliente (id),
+	CONSTRAINT fk_EnderecoPedido FOREIGN KEY (id_endereco) REFERENCES endereco (id),
+	CONSTRAINT fk_CartaoPedido_1 FOREIGN KEY (id_cartao_1) REFERENCES cartaoCredito (id),
+	CONSTRAINT fk_CartaoPedido_2 FOREIGN KEY (id_cartao_2) REFERENCES cartaoCredito (id)
+);
+
+/**** ITENS DO PEDIDO ****/
+create table pedido_item (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	id_produto	 	BIGINT,
+    nome		    VARCHAR(30),
+    valor_de_venda  VARCHAR(10),
+    quantidade      VARCHAR(10),
+    id_pedido 		BIGINT,
+    trocado		    VARCHAR(3),
+    dt_cadastro 	DATE,
+	primary	key	(id),
+	CONSTRAINT fk_ProdutoPedidoItem FOREIGN KEY (id_produto) REFERENCES produto (id),
+	CONSTRAINT fk_PedidoPedidoItem FOREIGN KEY (id_pedido) REFERENCES pedido (id)
+);
+
+/*** ESTOQUE ***/
+create table estoque (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	id_produto	  				  BIGINT,
+	tipo				    	  VARCHAR(10),
+	quantidade_entrada_saida	  VARCHAR(10),
+	valor_custo		      		  VARCHAR(10),
+	fornecedor		       		  VARCHAR(50),
+	dt_entrada  	   			  DATE,
+	quantidade_final			  VARCHAR(10),
+    dt_cadastro 	   			  DATE,
+	primary	key	(id),
+	CONSTRAINT fk_EstoqueProduto FOREIGN KEY (id_produto) REFERENCES produto (id)
+);
+
+/**** PRODUTO ****/
+create table produto (
+    id  BIGINT  NOT NULL   AUTO_INCREMENT,
+    nome              VARCHAR(40),
+    descricao         VARCHAR(300),
+    categoria         VARCHAR(20),
+    cores			  VARCHAR(50),
+    tamanho			  VARCHAR(20),
+    precoCompra       VARCHAR(10),
+    precoVenda        VARCHAR(10),
+    qtdeEstoque       VARCHAR(10),
+    foto              VARCHAR(100),
+    dt_cadastro        DATE,
+    status            VARCHAR(10),
+    grupoPrecificacao VARCHAR(30),
+    motivoStatus	VARCHAR(40),
+    primary key (id)
+);
+
+/**** CUPOM ****/
+create table cupom (
+	id	BIGINT	NOT	NULL	AUTO_INCREMENT,
+	nome		       VARCHAR(50),
+	valor		       VARCHAR(10),
+	tipo	      	   VARCHAR(20),
+	utilizado	       VARCHAR(3),
+	id_cliente         BIGINT,
+    dt_cadastro 	   DATE,
+	primary	key	(id),
+	CONSTRAINT fk_CupomCliente FOREIGN KEY (id_cliente) REFERENCES cliente (id)
+);
+
+
+--  teste grafico 
+select id_produto, sum(quantidade) as quantidade_vendido from pedido_item where
+ dt_cadastro BETWEEN ('2022-02-01') AND ('2022-05-03') group by id_produto order by sum(quantidade) desc LIMIT 3;
+
+
+-- INSERT para o Pedido
+insert into pedido(total_itens, total_frete, total_pedido, status, id_cliente, id_endereco, forma_pagamento, total_cupons, trocado, dt_cadastro)
+values ('3', '0', '0', 'ENTREGA REALIZADA', '5', '4', 'boleto', '0', 'nao', '2022/05/05');
+
+-- INSERT para o Item do Pedido
+insert into pedido_item(id_produto, nome, valor_de_venda, quantidade, id_pedido, trocado, dt_cadastro)
+values ('3', 'blusa xxx', '0', '7', '37', 'nao', '2021/10/20');
+
+
+drop table cliente;
+drop table endereco;
+drop table cartaoCredito;
+drop table produto;
+
+drop table pedido;
+drop table pedido_item;
+drop table cupom;
+drop table estoque;
+
