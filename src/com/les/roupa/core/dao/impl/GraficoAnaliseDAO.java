@@ -121,7 +121,7 @@ public class GraficoAnaliseDAO extends AbstractJdbcDAO {
 			nomeProduto3.add(produtoVazio);
 		}
 		else {
-			// busca os produtos, conforme a consulta realizada acima (os que sao mais vendidos)
+			// busca os produtos, conforme a consulta realizada acima
 			nomeProduto1 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(0).getProduto().getId());
 			nomeProduto2 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(1).getProduto().getId());
 			nomeProduto3 = produtoDAO.consultarProdutoById(produtosMaisVendidos.get(2).getProduto().getId());

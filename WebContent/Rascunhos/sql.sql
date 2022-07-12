@@ -36,14 +36,14 @@ select * from estoque;
 
 delete from estoque where id = 11;
 
-delete from cliente where id = 16;
-delete from endereco where id_cliente = 16;
-delete from cartaoCredito where id_cliente = 16;
-delete from cupom where id_cliente = 15;
+delete from cliente where id = 17;
+delete from endereco where id_cliente = 17;
+delete from cartaoCredito where id_cliente = 17;
+delete from cupom where id_cliente = 17;
 
 
-delete from pedido where id = 104;
-delete from pedido_item where id = 261;
+delete from pedido where id = 109;
+delete from pedido_item where id = 266;
 
 
 update cupom set tipo = "Troca" where id = 6;

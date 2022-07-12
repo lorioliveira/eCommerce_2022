@@ -81,25 +81,25 @@ public class GraficoAnaliseHelper implements IViewHelper {
 				// pendura o "dtFim" na requisição, para poder mandar para o arquivo .JSP
 				request.setAttribute("dtFim", graficoAnaliseEntidade.getDtFim());
 				
-				// pendura o "nomeProduto1" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "nomeProduto1" na requisição
 				request.setAttribute("nomeProduto1", graficoAnaliseEntidade.getNomeProduto1().get(0).getNome());
 				
-				// pendura o "nomeProduto2" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "nomeProduto2" na requisição
 				request.setAttribute("nomeProduto2", graficoAnaliseEntidade.getNomeProduto2().get(0).getNome());
 				
-				// pendura o "nomeProduto3" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "nomeProduto3" na requisição
 				request.setAttribute("nomeProduto3", graficoAnaliseEntidade.getNomeProduto3().get(0).getNome());
 				
-				// pendura o "totalColunas" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "totalColunas" na requisição
 				request.setAttribute("totalColunas", graficoAnaliseEntidade.getTotalColunas());
 				
-				// pendura o "totalValorProduto1" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "totalValorProduto1" na requisição
 				request.setAttribute("totalValorProduto1", graficoAnaliseEntidade.getTotalValorProduto1());
 				
-				// pendura o "totalValorProduto2" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "totalValorProduto2" na requisição
 				request.setAttribute("totalValorProduto2", graficoAnaliseEntidade.getTotalValorProduto2());
 				
-				// pendura o "totalValorProduto3" na requisição, para poder mandar para o arquivo .JSP
+				// pendura o "totalValorProduto3" na requisição
 				request.setAttribute("totalValorProduto3", graficoAnaliseEntidade.getTotalValorProduto3());
 				
 				// Redireciona para o arquivo .jsp
